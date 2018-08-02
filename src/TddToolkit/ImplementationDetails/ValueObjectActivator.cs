@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using TddEbook.TypeReflection;
+using TddXt.AnyRoot;
 
 namespace TddEbook.TddToolkit.ImplementationDetails
 {
@@ -10,19 +11,16 @@ namespace TddEbook.TddToolkit.ImplementationDetails
   {
     private readonly FallbackTypeGenerator _fallbackTypeGenerator;
     private List<object> _constructorArguments;
-    private readonly Type _type;
-    private readonly IInstanceGenerator _generator;
 
-    public ValueObjectActivator(FallbackTypeGenerator fallbackTypeGenerator, Type type, IInstanceGenerator generator)
+    public ValueObjectActivator(FallbackTypeGenerator fallbackTypeGenerator, Type type)
     {
       _fallbackTypeGenerator = fallbackTypeGenerator;
-      _type = type;
-      _generator = generator;
+      TargetType = type;
     }
 
     private object CreateInstanceWithNewConstructorArguments()
     {
-      _constructorArguments = _fallbackTypeGenerator.GenerateConstructorParameters(_generator.Instance);
+      _constructorArguments = _fallbackTypeGenerator.GenerateConstructorParameters(Root.Any.InstanceAsObject);
       return CreateInstanceWithCurrentConstructorArguments();
     }
 
@@ -31,26 +29,26 @@ namespace TddEbook.TddToolkit.ImplementationDetails
       return _fallbackTypeGenerator.GenerateInstance(_constructorArguments.ToArray());
     }
 
-    public static ValueObjectActivator FreshInstance(Type type, IInstanceGenerator generator)
+    public static ValueObjectActivator FreshInstance(Type type)
     {
-      return new ValueObjectActivator(new FallbackTypeGenerator(type), type, generator);
+      return new ValueObjectActivator(new FallbackTypeGenerator(type), type);
     }
 
     public object CreateInstanceAsValueObjectWithFreshParameters()
     {
-      var instance = DefaultValue.Of(_type);
+      var instance = DefaultValue.Of(TargetType);
       this.Invoking(_ => { instance = _.CreateInstanceWithNewConstructorArguments(); })
-        .Should().NotThrow(_type + " cannot even be created as a value object");
-      XAssert.Equal(_type, instance.GetType());
+        .Should().NotThrow(TargetType + " cannot even be created as a value object");
+      XAssert.Equal(TargetType, instance.GetType());
       return instance;
     }
 
     public object CreateInstanceAsValueObjectWithPreviousParameters()
     {
-      var instance = DefaultValue.Of(_type);
+      var instance = DefaultValue.Of(TargetType);
       this.Invoking(_ => { instance = _.CreateInstanceWithCurrentConstructorArguments(); })
-        .Should().NotThrow(_type + " cannot even be created as a value object");
-      XAssert.Equal(_type, instance.GetType());
+        .Should().NotThrow(TargetType + " cannot even be created as a value object");
+      XAssert.Equal(TargetType, instance.GetType());
       return instance;
     }
 
@@ -62,16 +60,10 @@ namespace TddEbook.TddToolkit.ImplementationDetails
     public object CreateInstanceAsValueObjectWithModifiedParameter(int i)
     {
       var modifiedArguments = _constructorArguments.ToList();
-      modifiedArguments[i] = _generator.Instance(modifiedArguments[i].GetType());
+      modifiedArguments[i] = Root.Any.InstanceAsObject(modifiedArguments[i].GetType());
       return _fallbackTypeGenerator.GenerateInstance(modifiedArguments.ToArray());
     }
 
-    public Type TargetType
-    {
-      get
-      {
-        return _type;
-      }
-    }
+    public Type TargetType { get; }
   }
 }

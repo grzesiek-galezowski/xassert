@@ -4,6 +4,8 @@ using NUnit.Framework;
 using TddEbook.TddToolkit;
 using TddEbook.TddToolkit.ImplementationDetails.Common;
 using TddEbook.TddToolkit.ImplementationDetails.ConstraintAssertions.CustomCollections;
+using TddXt.AnyRoot;
+using TddXt.AnyRoot.Strings;
 
 namespace TddEbook.TddToolkitSpecification
 {
@@ -14,7 +16,7 @@ namespace TddEbook.TddToolkitSpecification
     {
       //GIVEN
       var violations = Substitute.For<IConstraintsViolations>();
-      var message = Any.String();
+      var message = Root.Any.String();
 
       //WHEN
       RecordedAssertions.True(false, message, violations);
@@ -28,7 +30,7 @@ namespace TddEbook.TddToolkitSpecification
     {
       //GIVEN
       var violations = Substitute.For<IConstraintsViolations>();
-      var message = Any.String();
+      var message = Root.Any.String();
 
       //WHEN
       RecordedAssertions.True(true, message, violations);

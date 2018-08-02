@@ -1,6 +1,8 @@
 ﻿using NUnit.Framework;
 using TddEbook.TddToolkit;
 using TddEbook.TddToolkit.ImplementationDetails.ConstraintAssertions.CustomCollections;
+using TddXt.AnyRoot;
+using TddXt.AnyRoot.Strings;
 
 namespace TddEbook.TddToolkitSpecification
 {
@@ -21,7 +23,7 @@ namespace TddEbook.TddToolkitSpecification
     {
       //GIVEN
       var violations = new ConstraintsViolations();
-      violations.Add(Any.String());
+      violations.Add(Root.Any.String());
 
       //WHEN - THEN
       Assert.Throws<AssertionException>(violations.AssertNone);
@@ -32,9 +34,9 @@ namespace TddEbook.TddToolkitSpecification
     {
       //GIVEN
       var violations = new ConstraintsViolations();
-      var violation1 = Any.String();
-      var violation2 = Any.String();
-      var violation3 = Any.String();
+      var violation1 = Root.Any.String();
+      var violation2 = Root.Any.String();
+      var violation3 = Root.Any.String();
       violations.Add(violation1);
       violations.Add(violation2);
       violations.Add(violation3);
@@ -51,8 +53,8 @@ namespace TddEbook.TddToolkitSpecification
     {
       //WHEN
       const string seed = "xyz";
-      var violation1 = Any.String(seed);
-      var violation2 = Any.String(seed);
+      var violation1 = Root.Any.String(seed);
+      var violation2 = Root.Any.String(seed);
 
       //THEN
       StringAssert.StartsWith(seed, violation1);

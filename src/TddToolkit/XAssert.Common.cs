@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using FluentAssertions;
-using NSubstitute;
 using TddEbook.TddToolkit.Helpers.Constraints;
 using TddEbook.TddToolkit.Helpers.Constraints.EqualityOperator;
 using TddEbook.TddToolkit.Helpers.Constraints.InequalityOperator;
@@ -11,16 +10,15 @@ using TddEbook.TddToolkit.ImplementationDetails.Common;
 using TddEbook.TddToolkit.ImplementationDetails.ConstraintAssertions;
 using TddEbook.TddToolkit.ImplementationDetails;
 using TddEbook.TddToolkit.ImplementationDetails.ConstraintAssertions.CustomCollections;
-using TddEbook.TddToolkit.Subgenerators;
 using TddEbook.TypeReflection;
+using TddXt.AnyExtensibility;
+using TddXt.AnyRoot;
 using TypeReflection.Interfaces;
 
 namespace TddEbook.TddToolkit
 {
   public partial class XAssert
   {
-    private static readonly IInstanceGenerator Generator = AllGeneratorFactory.Create();
-
     public static void TypeAdheresTo(IEnumerable<IConstraint> constraints)
     {
       var violations = ConstraintsViolations.Empty();
@@ -53,7 +51,7 @@ namespace TddEbook.TddToolkit
     {
       if (!ValueObjectWhiteList.Contains<T>())
       {
-        var activator = ValueObjectActivator.FreshInstance(typeof (T), Generator);
+        var activator = ValueObjectActivator.FreshInstance(typeof (T));
         var constraints = CreateConstraintsBasedOn(typeof (T), traits, activator);
         XAssert.TypeAdheresTo(constraints);
       }
@@ -210,7 +208,7 @@ namespace TddEbook.TddToolkit
     {
       for (int i = 0; i < constructor.GetParametersCount(); ++i)
       {
-        var parameters = constructor.GenerateAnyParameterValues(Any.Instance);
+        var parameters = constructor.GenerateAnyParameterValues(Root.Any.InstanceAsObject);
         if (SmartType.ForTypeOf(parameters[i]).CanBeAssignedNullValue())
         {
           parameters[i] = null;
@@ -234,6 +232,29 @@ namespace TddEbook.TddToolkit
           }
         }
       }
+    }
+  }
+
+  static class SpecialAnyExtension
+  {
+    public static object InstanceAsObject(this BasicGenerator gen, Type type)
+    {
+      return gen.InstanceOf(new InstanceAsObjectGenerator(type));
+    }
+  }
+
+  internal class InstanceAsObjectGenerator : InlineGenerator<object>
+  {
+    private readonly Type _type;
+
+    public InstanceAsObjectGenerator(Type type)
+    {
+      _type = type;
+    }
+
+    public object GenerateInstance(InstanceGenerator instanceGenerator)
+    {
+      return instanceGenerator.Instance(_type);
     }
   }
 }

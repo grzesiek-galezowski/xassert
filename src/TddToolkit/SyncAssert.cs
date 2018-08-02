@@ -3,6 +3,8 @@ using System.Reflection;
 using FluentAssertions;
 using NSubstitute;
 using NSubstitute.Exceptions;
+using TddXt.AnyRoot;
+using static TddXt.AnyRoot.Root;
 
 namespace TddEbook.TddToolkit
 {
@@ -122,7 +124,7 @@ namespace TddEbook.TddToolkit
     {
       try
       {
-        var cannedResult = Any.Instance<TReturn>();
+        var cannedResult = Root.Any.Instance<TReturn>();
         callToCheck(wrappedObjectMock).Returns((ci) =>
         {
           lockAssertions.AssertLocked();

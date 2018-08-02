@@ -91,9 +91,8 @@
     </Reference>
     <Reference Include="System.XML" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="TddXt.AnyRoot, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Any.1.1.1\lib\net462\TddXt.AnyRoot.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="TddXt.AnyRoot, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7b96bed4fdcd799b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Any.1.1.3\lib\net462\TddXt.AnyRoot.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -109,9 +108,7 @@
     <Compile Include="ImplementationDetails\ValueObjectActivator.cs" />
     <Compile Include="ImplementationDetails\ValueObjectWhiteList.cs" />
     <Compile Include="Are.cs" />
-    <Compile Include="AutoFixtureConfiguration.cs" />
     <Compile Include="Blocking.cs" />
-    <Compile Include="Subgenerators\AllGeneratorFactory.cs" />
     <Compile Include="Helpers\Constraints\EqualityOperator\StateBasedEqualityMustBeImplementedInTermsOfEqualityOperator.cs" />
     <Compile Include="Helpers\Constraints\EqualityOperator\StateBasedEqualityShouldBeAvailableInTermsOfEqualityOperator.cs" />
     <Compile Include="Helpers\Constraints\EqualityOperator\StateBasedEqualityWithItselfMustBeImplementedInTermsOfEqualityOperator.cs" />
@@ -149,11 +146,7 @@
     <Compile Include="Helpers\Constraints\StateBasedUnEqualityMustBeImplementedInTermsOfEqualsMethod.cs" />
     <Compile Include="Helpers\Constraints\ThereMustBeNoPublicPropertySetters.cs" />
     <Compile Include="Helpers\Constraints\UnEqualityWithNullMustBeImplementedInTermsOfEqualsMethod.cs" />
-    <Compile Include="Any.Collections.cs" />
-    <Compile Include="Any.Numbers.cs" />
-    <Compile Include="Any.Strings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Any.cs" />
     <Compile Include="XAssert.Common.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
@@ -197,8 +190,7 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
-    <Error Condition="!Exists('..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets'))" />
-    <Error Condition="!Exists('..\packages\StrongNamer.0.0.7\build\StrongNamer.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\StrongNamer.0.0.7\build\StrongNamer.targets'))" />
+    <Error Condition="!Exists('..\packages\NETStandard.Library.2.0.2\build\netstandard2.0\NETStandard.Library.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NETStandard.Library.2.0.2\build\netstandard2.0\NETStandard.Library.targets'))" />
   </Target>
   <PropertyGroup>
     <PostBuildEvent>
@@ -209,6 +201,5 @@
       :end
     </PostBuildEvent>
   </PropertyGroup>
-  <Import Project="..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" />
-  <Import Project="..\packages\StrongNamer.0.0.7\build\StrongNamer.targets" Condition="Exists('..\packages\StrongNamer.0.0.7\build\StrongNamer.targets')" />
+  <Import Project="..\packages\NETStandard.Library.2.0.2\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('..\packages\NETStandard.Library.2.0.2\build\netstandard2.0\NETStandard.Library.targets')" />
 </Project>

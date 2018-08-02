@@ -5,12 +5,9 @@ using NUnit.Framework;
 using TddEbook.TddToolkit;
 using TddEbook.TddToolkit.CommonTypes;
 using TddEbook.TddToolkitSpecification.Fixtures;
-using TddEbook.TypeReflection;
 using TddXt.AnyRoot;
 using TddXt.AnyRoot.Strings;
 using TypeReflection.ImplementationDetails;
-using static TddXt.AnyRoot.Root;
-using Any = TddEbook.TddToolkit.Any;
 
 namespace TddEbook.TddToolkitSpecification.XAssertSpecifications
 {
@@ -47,14 +44,14 @@ namespace TddEbook.TddToolkitSpecification.XAssertSpecifications
     [Test]
     public void ShouldPreferInternalNonRecursiveConstructorsToPublicRecursiveOnes()
     {
-      Assert.DoesNotThrow(() => Any.Instance<DirectoryPath>());
+      Assert.DoesNotThrow(() => Root.Any.Instance<DirectoryPath>());
       Assert.DoesNotThrow(() => XAssert.IsValue<DirectoryPath>());
     }
 
     [Test]
     public void ShouldBeAbleToChooseInternalConstructorWhenThereisNoPublicOne()
     {
-      Assert.DoesNotThrow(() => Any.Instance<FileNameWithoutExtension>());
+      Assert.DoesNotThrow(() => Root.Any.Instance<FileNameWithoutExtension>());
       Assert.DoesNotThrow(() => XAssert.IsValue<FileNameWithoutExtension>());
     }
 
@@ -114,7 +111,7 @@ namespace TddEbook.TddToolkitSpecification.XAssertSpecifications
     [Test]
     public void ShouldFailUpperCaseAssertionOnLowerCaseStringAndPassOnUpperCaseString()
     {
-      var s = Any.String();
+      var s = Root.Any.String();
       Assert.Throws<AssertionException>(() => XAssert.IsUpperCase(s.ToLower()) );
       Assert.DoesNotThrow(() => XAssert.IsUpperCase(s.ToUpper()));
     }
@@ -122,7 +119,7 @@ namespace TddEbook.TddToolkitSpecification.XAssertSpecifications
     [Test]
     public void ShouldFailLowerCaseAssertionOnUpperCaseStringAndPassOnLowerCaseString()
     {
-      var s = Any.String();
+      var s = Root.Any.String();
       Assert.Throws<AssertionException>(() => XAssert.IsLowerCase(s.ToUpper()));
       Assert.DoesNotThrow(() => XAssert.IsLowerCase(s.ToLower()));
     }
