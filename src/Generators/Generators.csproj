@@ -80,12 +80,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AllGenerator.cs" />
     <Compile Include="EmptyCollectionGenerator.cs" />
     <Compile Include="GenericMethodProxyCalls.cs" />
     <Compile Include="OmniGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ProxyBasedGenerator.cs" />
     <Compile Include="ValueGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
