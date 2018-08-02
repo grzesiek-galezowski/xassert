@@ -208,6 +208,7 @@ namespace TddEbook.TddToolkitSpecification.XAssertSpecifications
         x4 = 123
       };
       var tp2 = new TwoProp();
+      tp2.X1 = 123;
       tp2.X2 = 346;
       tp2.X3 = 346;
       tp2.x4 = 346;
