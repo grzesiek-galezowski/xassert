@@ -1,0 +1,101 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2006
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TddToolkit", "TddToolkit\TddToolkit.csproj", "{A52E21F4-2301-4F4E-9361-BE954FB490A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TddToolkitSpecification", "TddToolkitSpecification\TddToolkitSpecification.csproj", "{DA7531D4-39EB-4513-9D03-E34C9C97C4F3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{8CC2BBCB-AA49-4C1B-A546-B4AB6AE0EF4D}"
+	ProjectSection(SolutionItems) = preProject
+		GCop.json = GCop.json
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SpinOffs", "SpinOffs", "{E124DF3D-6AA9-4668-94AB-30C2295B7A00}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypeReflectionSpecification", "TypeReflectionSpecification\TypeReflectionSpecification.csproj", "{89E88234-23DC-4C91-8182-ADB3826D9CF2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CI", "CI", "{E003F0DB-D5BD-456A-BD1A-A2B9806BCF60}"
+	ProjectSection(SolutionItems) = preProject
+		.travis.yml = .travis.yml
+		appveyor.yml = appveyor.yml
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TypeReflectionImplementation", "TypeReflectionImplementation", "{E83492AF-2EA9-4E27-A28E-3D887B154BA3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Generators", "Generators\Generators.csproj", "{04DEBA13-AB6F-4EF7-92D7-F5673720DA2E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommonTypes", "CommonTypes\CommonTypes.csproj", "{C71F0FEA-E0E7-4456-AA0B-CD82133E12D2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypeReflection.Interfaces", "TypeReflection.Interfaces\TypeReflection.Interfaces.csproj", "{1B4C8B73-149B-49E6-B664-8D186D16AFB7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypeReflection.ImplementationDetails", "TypeReflection.ImplementationDetails\TypeReflection.ImplementationDetails.csproj", "{840262F3-27A4-4AC9-BB55-C7181E5C8AEE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypeReflection", "TypeReflection\TypeReflection.csproj", "{720585E8-0EB0-46B2-9155-69DD2F9CA0A1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypeResolution", "TypeResolution\TypeResolution.csproj", "{84BD7210-25EB-42A3-8435-C22F42D27D2C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A52E21F4-2301-4F4E-9361-BE954FB490A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A52E21F4-2301-4F4E-9361-BE954FB490A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A52E21F4-2301-4F4E-9361-BE954FB490A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A52E21F4-2301-4F4E-9361-BE954FB490A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA7531D4-39EB-4513-9D03-E34C9C97C4F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA7531D4-39EB-4513-9D03-E34C9C97C4F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA7531D4-39EB-4513-9D03-E34C9C97C4F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA7531D4-39EB-4513-9D03-E34C9C97C4F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89E88234-23DC-4C91-8182-ADB3826D9CF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89E88234-23DC-4C91-8182-ADB3826D9CF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89E88234-23DC-4C91-8182-ADB3826D9CF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89E88234-23DC-4C91-8182-ADB3826D9CF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04DEBA13-AB6F-4EF7-92D7-F5673720DA2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04DEBA13-AB6F-4EF7-92D7-F5673720DA2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04DEBA13-AB6F-4EF7-92D7-F5673720DA2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04DEBA13-AB6F-4EF7-92D7-F5673720DA2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C71F0FEA-E0E7-4456-AA0B-CD82133E12D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C71F0FEA-E0E7-4456-AA0B-CD82133E12D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C71F0FEA-E0E7-4456-AA0B-CD82133E12D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C71F0FEA-E0E7-4456-AA0B-CD82133E12D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B4C8B73-149B-49E6-B664-8D186D16AFB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B4C8B73-149B-49E6-B664-8D186D16AFB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B4C8B73-149B-49E6-B664-8D186D16AFB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B4C8B73-149B-49E6-B664-8D186D16AFB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{840262F3-27A4-4AC9-BB55-C7181E5C8AEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{840262F3-27A4-4AC9-BB55-C7181E5C8AEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{840262F3-27A4-4AC9-BB55-C7181E5C8AEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{840262F3-27A4-4AC9-BB55-C7181E5C8AEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{720585E8-0EB0-46B2-9155-69DD2F9CA0A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{720585E8-0EB0-46B2-9155-69DD2F9CA0A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{720585E8-0EB0-46B2-9155-69DD2F9CA0A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{720585E8-0EB0-46B2-9155-69DD2F9CA0A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84BD7210-25EB-42A3-8435-C22F42D27D2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84BD7210-25EB-42A3-8435-C22F42D27D2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84BD7210-25EB-42A3-8435-C22F42D27D2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84BD7210-25EB-42A3-8435-C22F42D27D2C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{89E88234-23DC-4C91-8182-ADB3826D9CF2} = {E83492AF-2EA9-4E27-A28E-3D887B154BA3}
+		{1B4C8B73-149B-49E6-B664-8D186D16AFB7} = {E83492AF-2EA9-4E27-A28E-3D887B154BA3}
+		{840262F3-27A4-4AC9-BB55-C7181E5C8AEE} = {E83492AF-2EA9-4E27-A28E-3D887B154BA3}
+		{720585E8-0EB0-46B2-9155-69DD2F9CA0A1} = {E83492AF-2EA9-4E27-A28E-3D887B154BA3}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0EDCB828-B45B-4E92-84EB-7E1C14843EF6}
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = TddToolkit\TddToolkit.csproj
+	EndGlobalSection
+EndGlobal

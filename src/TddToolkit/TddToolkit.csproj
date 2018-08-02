@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A52E21F4-2301-4F4E-9361-BE954FB490A0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>TddEbook.TddToolkit</RootNamespace>
+    <AssemblyName>TddToolkit</AssemblyName>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>TddToolkit.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Albedo, Version=2.0.0.0, Culture=neutral, PublicKeyToken=179ef6dd03497bbd, processorArchitecture=MSIL">
+      <HintPath>..\packages\Albedo.2.0.0\lib\net35\Albedo.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoFixture, Version=4.5.0.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoFixture.4.5.0\lib\net452\AutoFixture.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoFixture.SeedExtensions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoFixture.SeedExtensions.4.5.0\lib\net452\AutoFixture.SeedExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.4.3.1\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Fare, Version=2.1.0.0, Culture=neutral, PublicKeyToken=ea68d375bf33a7c8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fare.2.1.1\lib\net35\Fare.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentAssertions, Version=5.4.1.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentAssertions.5.4.1\lib\net45\FluentAssertions.dll</HintPath>
+    </Reference>
+    <Reference Include="KellermanSoftware.Compare-NET-Objects, Version=4.55.0.0, Culture=neutral, PublicKeyToken=d970ace04cc85217, processorArchitecture=MSIL">
+      <HintPath>..\packages\CompareNETObjects.4.55.0.0\lib\net46\KellermanSoftware.Compare-NET-Objects.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MiscUtil, Version=0.2.0.0, Culture=neutral, PublicKeyToken=d3c42c4bfacf7596, processorArchitecture=MSIL">
+      <HintPath>..\packages\JonSkeet.MiscUtil.0.2.0\lib\net35\MiscUtil.dll</HintPath>
+    </Reference>
+    <Reference Include="NClone, Version=1.1.0.0, Culture=neutral, PublicKeyToken=81c60607627cc572, processorArchitecture=MSIL">
+      <HintPath>..\packages\NClone.1.1.1\lib\net45\NClone.dll</HintPath>
+    </Reference>
+    <Reference Include="NSubstitute, Version=3.1.0.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
+      <HintPath>..\packages\NSubstitute.3.1.0\lib\net46\NSubstitute.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.1\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.1\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.XML" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="TddXt.AnyRoot, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Any.1.1.1\lib\net462\TddXt.AnyRoot.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ImplementationDetails\Common\AssertionFailed.cs" />
+    <Compile Include="ImplementationDetails\Common\AssertionRecorder.cs" />
+    <Compile Include="ImplementationDetails\Common\RecordedAssertions.cs" />
+    <Compile Include="ImplementationDetails\ConstraintAssertions\CustomCollections\ConstraintsViolations.cs" />
+    <Compile Include="ImplementationDetails\ConstraintAssertions\IConstraint.cs" />
+    <Compile Include="ImplementationDetails\DummyContext.cs" />
+    <Compile Include="ImplementationDetails\FallbackTypeGenerator.cs" />
+    <Compile Include="ImplementationDetails\ObjectGraph.cs" />
+    <Compile Include="ImplementationDetails\ReflectionOrProxyComparer.cs" />
+    <Compile Include="ImplementationDetails\ValueObjectActivator.cs" />
+    <Compile Include="ImplementationDetails\ValueObjectWhiteList.cs" />
+    <Compile Include="Are.cs" />
+    <Compile Include="AutoFixtureConfiguration.cs" />
+    <Compile Include="Blocking.cs" />
+    <Compile Include="Subgenerators\AllGeneratorFactory.cs" />
+    <Compile Include="Helpers\Constraints\EqualityOperator\StateBasedEqualityMustBeImplementedInTermsOfEqualityOperator.cs" />
+    <Compile Include="Helpers\Constraints\EqualityOperator\StateBasedEqualityShouldBeAvailableInTermsOfEqualityOperator.cs" />
+    <Compile Include="Helpers\Constraints\EqualityOperator\StateBasedEqualityWithItselfMustBeImplementedInTermsOfEqualityOperator.cs" />
+    <Compile Include="Helpers\Constraints\EqualityOperator\StateBasedUnEqualityMustBeImplementedInTermsOfEqualityOperator.cs" />
+    <Compile Include="Helpers\Constraints\EqualityOperator\UnEqualityWithNullMustBeImplementedInTermsOfEqualityOperator.cs" />
+    <Compile Include="Helpers\Constraints\InequalityOperator\StateBasedEqualityMustBeImplementedInTermsOfInequalityOperator.cs" />
+    <Compile Include="Helpers\Constraints\InequalityOperator\StateBasedEqualityShouldBeAvailableInTermsOfInequalityOperator.cs" />
+    <Compile Include="Helpers\Constraints\InequalityOperator\StateBasedEqualityWithItselfMustBeImplementedInTermsOfInequalityOperator.cs" />
+    <Compile Include="Helpers\Constraints\InequalityOperator\StateBasedUnEqualityMustBeImplementedInTermsOfInequalityOperator.cs" />
+    <Compile Include="Helpers\Constraints\InequalityOperator\UnEqualityWithNullMustBeImplementedInTermsOfInequalityOperator.cs" />
+    <Compile Include="LockAssertions.cs" />
+    <Compile Include="NSubstitute\EquivalencyAssertion.cs" />
+    <Compile Include="NSubstitute\ImplementationDetails\LambdaArgumentMatcher.cs" />
+    <Compile Include="NSubstitute\ImplementationDetails\AssertionsExecutionLoop.cs" />
+    <Compile Include="NSubstitute\MultipleConditionsFailedException.cs" />
+    <Compile Include="NSubstitute\ImplementationDetails\SequenceExclusiveAssertion.cs" />
+    <Compile Include="Reflection\Metadata.cs" />
+    <Compile Include="Reflection\Method.cs" />
+    <Compile Include="LockSpecificAssertions\MonitorAssertions.cs" />
+    <Compile Include="LockSpecificAssertions\ReadLockSlimAssertions.cs" />
+    <Compile Include="NSubstitute\Extensions.cs" />
+    <Compile Include="NSubstitute\XArg.cs" />
+    <Compile Include="NSubstitute\XReceived.cs" />
+    <Compile Include="Reflection\Property.cs" />
+    <Compile Include="SyncAssert.cs" />
+    <Compile Include="ValueTypeTraits.cs" />
+    <Compile Include="LockSpecificAssertions\WriteLockSlimAssertions.cs" />
+    <Compile Include="XAssert.ObjectGraph.cs" />
+    <Compile Include="Helpers\FluentAssertions\FluentAssertionExtensions.cs" />
+    <Compile Include="XAssert.Simple.cs" />
+    <Compile Include="Helpers\Constraints\AllFieldsMustBeReadOnly.cs" />
+    <Compile Include="Helpers\Constraints\HashCodeMustBeTheSameForSameObjectsAndDifferentForDifferentObjects.cs" />
+    <Compile Include="Helpers\Constraints\StateBasedEqualityMustBeImplementedInTermsOfEqualsMethod.cs" />
+    <Compile Include="Helpers\Constraints\StateBasedEqualityWithItselfMustBeImplementedInTermsOfEqualsMethod.cs" />
+    <Compile Include="Helpers\Constraints\StateBasedUnEqualityMustBeImplementedInTermsOfEqualsMethod.cs" />
+    <Compile Include="Helpers\Constraints\ThereMustBeNoPublicPropertySetters.cs" />
+    <Compile Include="Helpers\Constraints\UnEqualityWithNullMustBeImplementedInTermsOfEqualsMethod.cs" />
+    <Compile Include="Any.Collections.cs" />
+    <Compile Include="Any.Numbers.cs" />
+    <Compile Include="Any.Strings.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Any.cs" />
+    <Compile Include="XAssert.Common.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="TddToolkit.snk" />
+    <Compile Include="XAssert.Reflection.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CommonTypes\CommonTypes.csproj">
+      <Project>{c71f0fea-e0e7-4456-aa0b-cd82133e12d2}</Project>
+      <Name>CommonTypes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Generators\Generators.csproj">
+      <Project>{04deba13-ab6f-4ef7-92d7-f5673720da2e}</Project>
+      <Name>Generators</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TypeReflection.Interfaces\TypeReflection.Interfaces.csproj">
+      <Project>{1b4c8b73-149b-49e6-b664-8d186d16afb7}</Project>
+      <Name>TypeReflection.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TypeReflection\TypeReflection.csproj">
+      <Project>{720585e8-0eb0-46b2-9155-69dd2f9ca0a1}</Project>
+      <Name>TypeReflection</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TypeResolution\TypeResolution.csproj">
+      <Project>{84bd7210-25eb-42a3-8435-c22f42d27d2c}</Project>
+      <Name>TypeResolution</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ChainedAssertions\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Readme\Compare-NET-Objects-Help.txt" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+    <Error Condition="!Exists('..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets'))" />
+    <Error Condition="!Exists('..\packages\StrongNamer.0.0.7\build\StrongNamer.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\StrongNamer.0.0.7\build\StrongNamer.targets'))" />
+  </Target>
+  <PropertyGroup>
+    <PostBuildEvent>
+      if DEFINED APPVEYOR GOTO end
+      if $(ConfigurationName) == Debug GOTO end
+      set LIBZ=$(SolutionDir)packages\LibZ.Tool.1.2.0.0\tools\libz.exe
+      %25LIBZ%25 inject-dll --assembly TddToolkit.dll --include *.dll --exclude TddToolkit.dll --move --key $(ProjectDir)TddToolkit.snk
+      :end
+    </PostBuildEvent>
+  </PropertyGroup>
+  <Import Project="..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" />
+  <Import Project="..\packages\StrongNamer.0.0.7\build\StrongNamer.targets" Condition="Exists('..\packages\StrongNamer.0.0.7\build\StrongNamer.targets')" />
+</Project>
