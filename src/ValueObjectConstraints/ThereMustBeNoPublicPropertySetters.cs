@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using AssertionConstraints;
-using TddEbook.TypeReflection;
+using TypeReflection;
 
 namespace TddEbook.TddToolkit.Helpers.Constraints
 {

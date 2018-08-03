@@ -8,9 +8,9 @@ using EqualsAssertions.EqualityOperator;
 using EqualsAssertions.InequalityOperator;
 using FluentAssertions;
 using TddEbook.TddToolkit.Helpers.Constraints;
-using TddEbook.TddToolkit.ImplementationDetails.Common;
 using TddEbook.TddToolkit.ImplementationDetails;
-using TddEbook.TypeReflection;
+using TypeReflection;
+using ValueActivation;
 
 namespace TddEbook.TddToolkit
 {

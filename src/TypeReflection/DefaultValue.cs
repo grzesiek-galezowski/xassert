@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TddEbook.TypeReflection
+namespace TypeReflection
 {
   public static class DefaultValue
   {

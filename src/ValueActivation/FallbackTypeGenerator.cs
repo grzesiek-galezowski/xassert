@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using TypeReflection.Interfaces;
 
-namespace TddEbook.TddToolkit.ImplementationDetails
+namespace ValueActivation
 {
   public class FallbackTypeGenerator
   {

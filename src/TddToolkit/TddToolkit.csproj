@@ -97,10 +97,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConstructorsMustBeNullProtected.cs" />
-    <Compile Include="HasToBeAConcreteClass.cs" />
-    <Compile Include="ImplementationDetails\ObjectGraph.cs" />
-    <Compile Include="ImplementationDetails\ReflectionOrProxyComparer.cs" />
-    <Compile Include="ImplementationDetails\ValueObjectWhiteList.cs" />
     <Compile Include="Are.cs" />
     <Compile Include="Blocking.cs" />
     <Compile Include="LockAssertions.cs" />
@@ -123,9 +119,6 @@
     <Compile Include="XAssert.ObjectGraph.cs" />
     <Compile Include="Helpers\FluentAssertions\FluentAssertionExtensions.cs" />
     <Compile Include="XAssert.Simple.cs" />
-    <Compile Include="Helpers\Constraints\AllFieldsMustBeReadOnly.cs" />
-    <Compile Include="Helpers\Constraints\HashCodeMustBeTheSameForSameObjectsAndDifferentForDifferentObjects.cs" />
-    <Compile Include="Helpers\Constraints\ThereMustBeNoPublicPropertySetters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XAssert.Common.cs" />
   </ItemGroup>
@@ -149,6 +142,10 @@
       <Project>{1A986A1A-A8EF-46A8-BB38-F4F0A9A58EF4}</Project>
       <Name>EqualsAssertions</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GraphAssertions\GraphAssertions.csproj">
+      <Project>{FAEA6B32-964D-49C9-9A94-536999E7CC47}</Project>
+      <Name>GraphAssertions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TypeReflection.Interfaces\TypeReflection.Interfaces.csproj">
       <Project>{1b4c8b73-149b-49e6-b664-8d186d16afb7}</Project>
       <Name>TypeReflection.Interfaces</Name>
@@ -161,9 +158,13 @@
       <Project>{D6F0E12E-1699-440B-B48C-9FA722E38054}</Project>
       <Name>ValueActivation</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ValueObjectConstraints\ValueObjectConstraints.csproj">
+      <Project>{39A44591-A8E9-4AAB-B106-E839B6BDF86C}</Project>
+      <Name>ValueObjectConstraints</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ImplementationDetails\Common\" />
+    <Folder Include="ImplementationDetails\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Readme\Compare-NET-Objects-Help.txt" />

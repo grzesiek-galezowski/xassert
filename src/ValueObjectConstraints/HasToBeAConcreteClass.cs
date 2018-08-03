@@ -3,7 +3,7 @@ using AssertionConstraints;
 
 namespace TddEbook.TddToolkit
 {
-  class HasToBeAConcreteClass : IConstraint
+  public class HasToBeAConcreteClass : IConstraint
   {
     private readonly Type _type;
 

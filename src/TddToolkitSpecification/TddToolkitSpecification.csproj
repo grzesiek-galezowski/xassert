@@ -91,7 +91,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CircularListSpecification.cs" />
     <Compile Include="Fixtures\ComplexObjectWithFactoryMethodAndRecursiveConstructor.cs" />
     <Compile Include="Fixtures\ConcreteDataStructure2.cs" />
     <Compile Include="ConstraintsViolationsSpecification.cs" />

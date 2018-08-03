@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using TddEbook.TddToolkit.CommonTypes;
+using CommonTypes;
 using TypeReflection.ImplementationDetails;
 using TypeReflection.ImplementationDetails.ConstructorRetrievals;
 using TypeReflection.Interfaces;
-using static TypeReflection.ImplementationDetails.ConstructorWrapper;
 
-namespace TddEbook.TypeReflection
+namespace TypeReflection
 {
   public interface ISmartType : IType, IConstructorQueries
   {
@@ -257,16 +256,16 @@ namespace TddEbook.TypeReflection
     private List<IConstructorWrapper> TryToObtainInternalConstructors()
     {
       var constructorInfos = _typeInfo.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic);
-      var enumerable = constructorInfos.Where(IsInternal);
+      var enumerable = constructorInfos.Where(ConstructorWrapper.IsInternal);
 
-      var wrappers = enumerable.Select(c => (IConstructorWrapper) (FromConstructorInfo(c))).ToList();
+      var wrappers = enumerable.Select(c => (IConstructorWrapper) (ConstructorWrapper.FromConstructorInfo(c))).ToList();
       return wrappers;
     }
 
     public List<ConstructorWrapper> TryToObtainPublicConstructors()
     {
       return _typeInfo.GetConstructors(BindingFlags.Public | BindingFlags.Instance)
-        .Select(c => FromConstructorInfo(c)).ToList();
+        .Select(c => ConstructorWrapper.FromConstructorInfo(c)).ToList();
     }
 
     public IEnumerable<IConstructorWrapper> TryToObtainPublicConstructorsWithoutRecursiveArguments()
@@ -295,7 +294,7 @@ namespace TddEbook.TypeReflection
         .Where(m => !m.IsSpecialName)
         .Where(IsNotImplicitCast)
         .Where(IsNotExplicitCast)
-        .Select(FromStaticMethodInfo)
+        .Select(ConstructorWrapper.FromStaticMethodInfo)
         .Where(c => c.IsFactoryMethod());
     }
 

@@ -2,8 +2,8 @@
 using System.Reflection;
 using AssertionConstraints;
 using TddEbook.TddToolkit.ImplementationDetails;
-using TddEbook.TypeReflection;
 using TddXt.AnyRoot;
+using TypeReflection;
 using TypeReflection.Interfaces;
 using ValueActivation;
 

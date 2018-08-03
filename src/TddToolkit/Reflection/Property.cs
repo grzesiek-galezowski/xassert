@@ -1,7 +1,7 @@
 using System;
 using System.Linq.Expressions;
 using System.Reflection;
-using TddEbook.TddToolkit.CommonTypes;
+using CommonTypes;
 
 namespace TddEbook.TddToolkit.Reflection
 {

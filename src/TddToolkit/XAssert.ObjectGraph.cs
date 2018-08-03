@@ -5,12 +5,11 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using Albedo;
+using CommonTypes;
 using FluentAssertions;
 using KellermanSoftware.CompareNetObjects;
-using TddEbook.TddToolkit.CommonTypes;
 using TddEbook.TddToolkit.ImplementationDetails;
 using TddEbook.TddToolkit.Reflection;
-using TddEbook.TypeReflection;
 
 namespace TddEbook.TddToolkit
 {
@@ -104,6 +103,7 @@ namespace TddEbook.TddToolkit
 
   }
 
+  //bug this is unfinished and does not work yet!!
   public class SearchVisitor : ReflectionVisitor<Boolean>
   {
     private readonly object target;

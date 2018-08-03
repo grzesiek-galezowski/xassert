@@ -2,7 +2,7 @@ using System;
 using TypeReflection.ImplementationDetails;
 using TypeReflection.Interfaces;
 
-namespace TddEbook.TypeReflection
+namespace TypeReflection
 {
   public static class TypeOf<T>
   {

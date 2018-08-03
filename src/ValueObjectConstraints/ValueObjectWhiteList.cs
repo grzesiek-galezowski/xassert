@@ -2,7 +2,7 @@ using System;
 
 namespace TddEbook.TddToolkit.ImplementationDetails
 {
-  internal static class ValueObjectWhiteList
+  public static class ValueObjectWhiteList
   {
     public static bool Contains<T>()
     {

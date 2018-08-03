@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Linq;
 using AssertionConstraints;
-using TddEbook.TddToolkit.ImplementationDetails;
-using TddEbook.TddToolkit.ImplementationDetails.Common;
+using ValueActivation;
 
 namespace EqualsAssertions.EqualityOperator
 {

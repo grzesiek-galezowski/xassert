@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using FluentAssertions;
 using TddEbook.TddToolkit.Reflection;
-using TddEbook.TypeReflection;
+using TypeReflection;
 using TypeReflection.Interfaces;
 
 namespace TddEbook.TddToolkit

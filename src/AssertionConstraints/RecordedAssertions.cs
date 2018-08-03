@@ -1,7 +1,6 @@
 ﻿using System;
-using AssertionConstraints;
 
-namespace TddEbook.TddToolkit.ImplementationDetails.Common
+namespace AssertionConstraints
 {
   public class RecordedAssertions
   {

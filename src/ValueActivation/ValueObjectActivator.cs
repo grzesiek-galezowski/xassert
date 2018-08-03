@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using NUnit.Framework;
-using TddEbook.TypeReflection;
 using TddXt.AnyRoot;
-using ValueActivation;
+using TypeReflection;
 
-namespace TddEbook.TddToolkit.ImplementationDetails
+namespace ValueActivation
 {
   public class ValueObjectActivator
   {

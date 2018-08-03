@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using CommonTypes;
 using NUnit.Framework;
 using TddEbook.TddToolkit;
-using TddEbook.TddToolkit.CommonTypes;
 using TddEbook.TddToolkitSpecification.Fixtures;
 using TddXt.AnyRoot;
 using TddXt.AnyRoot.Strings;

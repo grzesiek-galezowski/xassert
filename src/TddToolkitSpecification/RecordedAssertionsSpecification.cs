@@ -3,7 +3,6 @@ using AssertionConstraints;
 using NSubstitute;
 using NUnit.Framework;
 using TddEbook.TddToolkit;
-using TddEbook.TddToolkit.ImplementationDetails.Common;
 using TddXt.AnyRoot;
 using TddXt.AnyRoot.Strings;
 

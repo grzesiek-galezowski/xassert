@@ -40,6 +40,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssertionConstraints", "Ass
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValueActivation", "ValueActivation\ValueActivation.csproj", "{D6F0E12E-1699-440B-B48C-9FA722E38054}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValueObjectConstraints", "ValueObjectConstraints\ValueObjectConstraints.csproj", "{39A44591-A8E9-4AAB-B106-E839B6BDF86C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphAssertions", "GraphAssertions\GraphAssertions.csproj", "{FAEA6B32-964D-49C9-9A94-536999E7CC47}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -86,6 +90,14 @@ Global
 		{D6F0E12E-1699-440B-B48C-9FA722E38054}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6F0E12E-1699-440B-B48C-9FA722E38054}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6F0E12E-1699-440B-B48C-9FA722E38054}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39A44591-A8E9-4AAB-B106-E839B6BDF86C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39A44591-A8E9-4AAB-B106-E839B6BDF86C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39A44591-A8E9-4AAB-B106-E839B6BDF86C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39A44591-A8E9-4AAB-B106-E839B6BDF86C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAEA6B32-964D-49C9-9A94-536999E7CC47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAEA6B32-964D-49C9-9A94-536999E7CC47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAEA6B32-964D-49C9-9A94-536999E7CC47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAEA6B32-964D-49C9-9A94-536999E7CC47}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

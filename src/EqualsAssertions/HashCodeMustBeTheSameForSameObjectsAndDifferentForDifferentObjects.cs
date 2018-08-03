@@ -1,9 +1,8 @@
-﻿using TddEbook.TddToolkit.ImplementationDetails;
-using TddEbook.TddToolkit.ImplementationDetails.Common;
-using System.Linq;
+﻿using System.Linq;
 using AssertionConstraints;
+using ValueActivation;
 
-namespace TddEbook.TddToolkit.Helpers.Constraints
+namespace EqualsAssertions
 {
   public class HashCodeMustBeTheSameForSameObjectsAndDifferentForDifferentObjects : IConstraint
   {
