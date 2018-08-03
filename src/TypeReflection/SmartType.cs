@@ -67,11 +67,6 @@ namespace TddEbook.TypeReflection
         ifaceType => IsOpenGeneric(ifaceType, openGenericType));
     }
 
-    public bool IsOpenGeneric(Type openGenericType)
-    {
-      return IsOpenGeneric(_typeInfo, openGenericType);
-    }
-
     private static bool IsOpenGeneric(Type checkedType, Type openGenericType)
     {
       return checkedType.GetTypeInfo().IsGenericType && 

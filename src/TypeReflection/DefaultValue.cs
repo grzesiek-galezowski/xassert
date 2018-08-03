@@ -2,7 +2,7 @@
 
 namespace TddEbook.TypeReflection
 {
-  public class DefaultValue
+  public static class DefaultValue
   {
     public static object Of(Type t)
     {

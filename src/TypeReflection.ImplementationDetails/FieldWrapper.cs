@@ -69,7 +69,7 @@ namespace TypeReflection.ImplementationDetails
           AddNameTo(builder);
           builder.Append(" is a duplicate of ");
           otherConstant.AddNameTo(builder);
-          throw new DuplicateConstantException2(builder.ToString());
+          throw new DuplicateConstantException(builder.ToString());
         }
       }
     }

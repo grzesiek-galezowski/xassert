@@ -12,20 +12,6 @@ namespace TddEbook.TddToolkit.Reflection
       return new Method((expression.Body as MethodCallExpression).Method);
     }
 
-    public bool HasAttribute<T>()
-    {
-      return Attribute.IsDefined(_methodInfo, typeof(T));
-    }
-
-    public bool HasAttribute<T>(T expectedAttribute) where T : Attribute
-    {
-      var attrs = Attribute.GetCustomAttributes(_methodInfo, typeof(T));
-      var any = attrs.Any(
-        currentAttribute => Are.Alike(expectedAttribute, currentAttribute)
-        );
-      return any;
-    }
-
     public bool HasAttribute(Type attributeType, Attribute expectedAttribute)
     {
       var attrs = Attribute.GetCustomAttributes(_methodInfo, attributeType);
@@ -34,8 +20,6 @@ namespace TddEbook.TddToolkit.Reflection
         );
       return any;
     }
-
-    public string Name { get { return _methodInfo.Name; } }
 
     private Method(MethodInfo method)
     {

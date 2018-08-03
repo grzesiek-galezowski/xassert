@@ -181,7 +181,7 @@ namespace TddEbook.TddToolkitSpecification.XAssertSpecifications
     {
       XAssert.HasUniqueConstants<ConstsWithUniqueValues>();
 
-      var exception = Assert.Throws<DuplicateConstantException2>(XAssert.HasUniqueConstants<ConstsWithRepeatingValues>);
+      var exception = Assert.Throws<DuplicateConstantException>(XAssert.HasUniqueConstants<ConstsWithRepeatingValues>);
       XAssert.Equal("Val1 <0> is a duplicate of Val3 <0>", exception.Message);
     }
   }

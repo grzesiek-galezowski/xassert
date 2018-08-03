@@ -8,12 +8,10 @@ namespace TddEbook.TddToolkit.ImplementationDetails
   public class FallbackTypeGenerator
   {
     private readonly IType _smartType;
-    private readonly Type _type;
 
-    public FallbackTypeGenerator(Type type)
+    public FallbackTypeGenerator(IType smartType)
     {
-      _smartType = SmartType.For(type);
-      _type = type;
+      _smartType = smartType;
     }
 
     public int GetConstructorParametersCount()
@@ -26,7 +24,7 @@ namespace TddEbook.TddToolkit.ImplementationDetails
     {
       var instance = _smartType.PickConstructorWithLeastNonPointersParameters().Value  //bug backward compatibility (for now)
         .InvokeWith(constructorParameters);
-      XAssert.Equal(_type, instance.GetType());
+      XAssert.Equal(_smartType.ToClrType(), instance.GetType());
       return instance;
     }
 

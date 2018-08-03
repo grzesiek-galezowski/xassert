@@ -110,7 +110,6 @@
     <Compile Include="SynchronizationSpecification.cs" />
     <Compile Include="RecordedAssertionsSpecification.cs" />
     <Compile Include="Fixtures\SynchronizedMyService.cs" />
-    <Compile Include="TypeOfTypeSpecification.cs" />
     <Compile Include="NSubstituteSpecifications\XArgSpecification.cs" />
     <Compile Include="XAssertSpecifications\DirectoryPath.cs" />
     <Compile Include="XAssertSpecifications\FileExtension.cs" />

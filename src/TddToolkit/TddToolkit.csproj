@@ -96,6 +96,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConstructorsMustBeNullProtected.cs" />
+    <Compile Include="HasToBeAConcreteClass.cs" />
     <Compile Include="ImplementationDetails\Common\AssertionFailed.cs" />
     <Compile Include="ImplementationDetails\Common\RecordedAssertions.cs" />
     <Compile Include="ImplementationDetails\ConstraintAssertions\CustomCollections\ConstraintsViolations.cs" />
@@ -117,13 +119,14 @@
     <Compile Include="Helpers\Constraints\InequalityOperator\StateBasedEqualityWithItselfMustBeImplementedInTermsOfInequalityOperator.cs" />
     <Compile Include="Helpers\Constraints\InequalityOperator\StateBasedUnEqualityMustBeImplementedInTermsOfInequalityOperator.cs" />
     <Compile Include="Helpers\Constraints\InequalityOperator\UnEqualityWithNullMustBeImplementedInTermsOfInequalityOperator.cs" />
+    <Compile Include="InstanceAsObjectGenerator.cs" />
     <Compile Include="LockAssertions.cs" />
     <Compile Include="NSubstitute\EquivalencyAssertion.cs" />
     <Compile Include="NSubstitute\ImplementationDetails\LambdaArgumentMatcher.cs" />
     <Compile Include="NSubstitute\ImplementationDetails\AssertionsExecutionLoop.cs" />
     <Compile Include="NSubstitute\MultipleConditionsFailedException.cs" />
     <Compile Include="NSubstitute\ImplementationDetails\SequenceExclusiveAssertion.cs" />
-    <Compile Include="Reflection\Metadata.cs" />
+    <Compile Include="Reflection\Field.cs" />
     <Compile Include="Reflection\Method.cs" />
     <Compile Include="LockSpecificAssertions\MonitorAssertions.cs" />
     <Compile Include="LockSpecificAssertions\ReadLockSlimAssertions.cs" />
@@ -131,6 +134,7 @@
     <Compile Include="NSubstitute\XArg.cs" />
     <Compile Include="NSubstitute\XReceived.cs" />
     <Compile Include="Reflection\Property.cs" />
+    <Compile Include="SpecialAnyExtension.cs" />
     <Compile Include="SyncAssert.cs" />
     <Compile Include="ValueTypeTraits.cs" />
     <Compile Include="LockSpecificAssertions\WriteLockSlimAssertions.cs" />

@@ -31,7 +31,7 @@ namespace TddEbook.TddToolkit.ImplementationDetails
 
     public static ValueObjectActivator FreshInstance(Type type)
     {
-      return new ValueObjectActivator(new FallbackTypeGenerator(type), type);
+      return new ValueObjectActivator(new FallbackTypeGenerator(SmartType.For(type)), type);
     }
 
     public object CreateInstanceAsValueObjectWithFreshParameters()

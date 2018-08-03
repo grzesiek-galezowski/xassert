@@ -19,12 +19,6 @@ namespace TddEbook.TddToolkit
         method.HasAttribute(attr.GetType(), attr).Should().BeTrue();
       }
 
-      public static void AttributeExistsOnMethodOf<T, TAttr>(Expression<Action<T>> methodExpression)
-      {
-        var method = Method.Of(methodExpression);
-        method.HasAttribute<TAttr>().Should().BeTrue();
-      }
-
       public static void NoStaticFields(Type type)
       {
         var staticFields = new List<IFieldWrapper>(SmartType.For(type).GetAllStaticFields());
@@ -33,7 +27,6 @@ namespace TddEbook.TddToolkit
                     .BeEmpty("SmartType " + type + " should not contain static fields, but: " + Environment.NewLine +
                              StringFrom(staticFields));
       }
-
 
       public static void NoStaticFields(Assembly assembly)
       {
