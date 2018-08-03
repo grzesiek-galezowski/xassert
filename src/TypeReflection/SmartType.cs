@@ -299,13 +299,6 @@ namespace TddEbook.TypeReflection
         .Where(c => c.IsFactoryMethod());
     }
 
-    public IEnumerable<IPropertyWrapper> GetPublicInstanceWritableProperties()
-    {
-      return _typeInfo.GetProperties(BindingFlags.Public | BindingFlags.Instance)
-        .Where(p => p.CanWrite)
-        .Select(p => new PropertyWrapper(p));
-    }
-
     public bool HasConstructorWithParameters()
     {
       return _typeInfo.IsPrimitive;
@@ -325,11 +318,6 @@ namespace TddEbook.TypeReflection
     {
       return _type == typeof(Exception) ||
         _typeInfo.IsSubclassOf(typeof(Exception));
-    }
-
-    public bool HasPublicConstructorCountOfAtMost(int i)
-    {
-      return GetAllPublicConstructors().Count() <= i;
     }
 
     private static bool IsNotExplicitCast(MethodInfo mi)

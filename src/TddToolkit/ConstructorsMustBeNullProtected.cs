@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Reflection;
+using AssertionConstraints;
 using TddEbook.TddToolkit.ImplementationDetails;
-using TddEbook.TddToolkit.ImplementationDetails.ConstraintAssertions;
-using TddEbook.TddToolkit.ImplementationDetails.ConstraintAssertions.CustomCollections;
 using TddEbook.TypeReflection;
 using TddXt.AnyRoot;
 using TypeReflection.Interfaces;
+using ValueActivation;
 
 namespace TddEbook.TddToolkit
 {

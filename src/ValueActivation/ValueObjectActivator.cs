@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
+using NUnit.Framework;
 using TddEbook.TypeReflection;
 using TddXt.AnyRoot;
+using ValueActivation;
 
 namespace TddEbook.TddToolkit.ImplementationDetails
 {
@@ -39,7 +41,7 @@ namespace TddEbook.TddToolkit.ImplementationDetails
       var instance = DefaultValue.Of(TargetType);
       this.Invoking(_ => { instance = _.CreateInstanceWithNewConstructorArguments(); })
         .Should().NotThrow(TargetType + " cannot even be created as a value object");
-      XAssert.Equal(TargetType, instance.GetType());
+      Assert.AreEqual(TargetType, instance.GetType());
       return instance;
     }
 
@@ -48,7 +50,7 @@ namespace TddEbook.TddToolkit.ImplementationDetails
       var instance = DefaultValue.Of(TargetType);
       this.Invoking(_ => { instance = _.CreateInstanceWithCurrentConstructorArguments(); })
         .Should().NotThrow(TargetType + " cannot even be created as a value object");
-      XAssert.Equal(TargetType, instance.GetType());
+      Assert.AreEqual(TargetType, instance.GetType());
       return instance;
     }
 
@@ -66,4 +68,6 @@ namespace TddEbook.TddToolkit.ImplementationDetails
 
     public Type TargetType { get; }
   }
+
+
 }

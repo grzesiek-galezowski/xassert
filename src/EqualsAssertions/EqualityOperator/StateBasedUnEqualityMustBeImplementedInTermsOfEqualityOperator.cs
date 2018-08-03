@@ -1,8 +1,8 @@
-﻿using TddEbook.TddToolkit.ImplementationDetails;
+﻿using System;
+using TddEbook.TddToolkit.ImplementationDetails;
 using TddEbook.TddToolkit.ImplementationDetails.Common;
-using TddEbook.TddToolkit.ImplementationDetails.ConstraintAssertions;
 using System.Linq;
-using TddEbook.TddToolkit.ImplementationDetails.ConstraintAssertions.CustomCollections;
+using AssertionConstraints;
 
 namespace TddEbook.TddToolkit.Helpers.Constraints.EqualityOperator
 {
@@ -11,12 +11,15 @@ namespace TddEbook.TddToolkit.Helpers.Constraints.EqualityOperator
   {
     private readonly ValueObjectActivator _activator;
     private readonly int[] _indexesOfConstructorArgumentsToSkip;
+    private readonly Func<Type, object, object, bool> _equalInTermsOfEqualityOperator;
 
     public StateBasedUnEqualityMustBeImplementedInTermsOfEqualityOperator(
-      ValueObjectActivator activator, int[] indexesOfConstructorArgumentsToSkip)
+      ValueObjectActivator activator, int[] indexesOfConstructorArgumentsToSkip, 
+      Func<Type, object, object, bool> equalInTermsOfEqualityOperator)
     {
       _activator = activator;
       _indexesOfConstructorArgumentsToSkip = indexesOfConstructorArgumentsToSkip;
+      _equalInTermsOfEqualityOperator = equalInTermsOfEqualityOperator;
     }
 
     public void CheckAndRecord(ConstraintsViolations violations)
@@ -30,11 +33,11 @@ namespace TddEbook.TddToolkit.Helpers.Constraints.EqualityOperator
           var instance2 = _activator.CreateInstanceAsValueObjectWithModifiedParameter(i);
           
           RecordedAssertions.DoesNotThrow(() =>
-            RecordedAssertions.False(Are.EqualInTermsOfEqualityOperator(_activator.TargetType, instance1, instance2), "a == b should return false if both are created with different argument" + currentParamIndex, violations),
+            RecordedAssertions.False(_equalInTermsOfEqualityOperator(_activator.TargetType, instance1, instance2), "a == b should return false if both are created with different argument" + currentParamIndex, violations),
             "a == b should return false if both are created with different argument" + currentParamIndex, violations
           );
           RecordedAssertions.DoesNotThrow(() =>
-            RecordedAssertions.False(Are.EqualInTermsOfEqualityOperator(_activator.TargetType, instance1, instance2), "b == a should return false if both are created with different argument" + currentParamIndex, violations),
+            RecordedAssertions.False(_equalInTermsOfEqualityOperator(_activator.TargetType, instance1, instance2), "b == a should return false if both are created with different argument" + currentParamIndex, violations),
             "b == a should return false if both are created with different argument" + currentParamIndex, violations
           );
         }

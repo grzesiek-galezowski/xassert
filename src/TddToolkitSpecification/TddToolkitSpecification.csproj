@@ -134,6 +134,10 @@
     <None Include="TddToolkit.snk" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AssertionConstraints\AssertionConstraints.csproj">
+      <Project>{BC1B5566-207F-47EB-8AD2-E7AE08894E77}</Project>
+      <Name>AssertionConstraints</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CommonTypes\CommonTypes.csproj">
       <Project>{c71f0fea-e0e7-4456-aa0b-cd82133e12d2}</Project>
       <Name>CommonTypes</Name>

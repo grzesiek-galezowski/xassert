@@ -1,9 +1,9 @@
 ﻿using System;
+using AssertionConstraints;
 using NSubstitute;
 using NUnit.Framework;
 using TddEbook.TddToolkit;
 using TddEbook.TddToolkit.ImplementationDetails.Common;
-using TddEbook.TddToolkit.ImplementationDetails.ConstraintAssertions.CustomCollections;
 using TddXt.AnyRoot;
 using TddXt.AnyRoot.Strings;
 

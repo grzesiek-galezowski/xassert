@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 
-namespace TddEbook.TddToolkit.ImplementationDetails.ConstraintAssertions.CustomCollections
+namespace AssertionConstraints
 {
   public class ConstraintsViolations : IConstraintsViolations
   {
@@ -29,11 +29,5 @@ namespace TddEbook.TddToolkit.ImplementationDetails.ConstraintAssertions.CustomC
     {
       _violations.Add(violationDetails);
     }
-  }
-
-  public interface IConstraintsViolations
-  {
-    void AssertNone();
-    void Add(string violationDetails);
   }
 }

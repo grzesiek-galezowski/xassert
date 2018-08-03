@@ -2,6 +2,7 @@ using System;
 
 namespace TddEbook.TddToolkit.ImplementationDetails.Common
 {
+  //bug remove this class??
   public class AssertionFailed
   {
     private readonly Exception _e;

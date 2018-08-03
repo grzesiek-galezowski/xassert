@@ -1,8 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using AssertionConstraints;
 using TddEbook.TddToolkit.ImplementationDetails;
 using TddEbook.TddToolkit.ImplementationDetails.Common;
-using TddEbook.TddToolkit.ImplementationDetails.ConstraintAssertions;
-using TddEbook.TddToolkit.ImplementationDetails.ConstraintAssertions.CustomCollections;
 
 namespace TddEbook.TddToolkit.Helpers.Constraints.InequalityOperator
 {
@@ -11,12 +11,15 @@ namespace TddEbook.TddToolkit.Helpers.Constraints.InequalityOperator
   {
     private readonly ValueObjectActivator _activator;
     private readonly int[] _indexesOfConstructorArgumentsToSkip;
+    private Func<Type, object, object, bool> _areNotEqualInTermsOfInEqualityOperator;
 
     public StateBasedUnEqualityMustBeImplementedInTermsOfInequalityOperator(
-      ValueObjectActivator activator, int[] indexesOfConstructorArgumentsToSkip)
+      ValueObjectActivator activator, int[] indexesOfConstructorArgumentsToSkip, 
+      Func<Type, object, object, bool> areNotEqualInTermsOfInEqualityOperator)
     {
       _activator = activator;
       _indexesOfConstructorArgumentsToSkip = indexesOfConstructorArgumentsToSkip;
+      _areNotEqualInTermsOfInEqualityOperator = areNotEqualInTermsOfInEqualityOperator;
     }
 
     public void CheckAndRecord(ConstraintsViolations violations)
@@ -29,11 +32,11 @@ namespace TddEbook.TddToolkit.Helpers.Constraints.InequalityOperator
           var instance2 = _activator.CreateInstanceAsValueObjectWithModifiedParameter(i);
 
           RecordedAssertions.DoesNotThrow(() =>
-            RecordedAssertions.True(Are.NotEqualInTermsOfInEqualityOperator(_activator.TargetType, instance1, instance2), 
+            RecordedAssertions.True(_areNotEqualInTermsOfInEqualityOperator(_activator.TargetType, instance1, instance2), 
               "a != b should return true if both are created with different argument" + i, violations),
               "a != b should return true if both are created with different argument" + i, violations);
           RecordedAssertions.DoesNotThrow(() =>
-            RecordedAssertions.True(Are.NotEqualInTermsOfInEqualityOperator(_activator.TargetType, instance1, instance2), 
+            RecordedAssertions.True(_areNotEqualInTermsOfInEqualityOperator(_activator.TargetType, instance1, instance2), 
               "b != a should return true if both are created with different argument" + i, violations),
               "b != a should return true if both are created with different argument" + i, violations);
         }

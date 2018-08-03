@@ -18,11 +18,9 @@ namespace TypeReflection.Interfaces
     IBinaryOperator Inequality();
     IEnumerable<IEventWrapper2> GetAllNonPublicEventsWithoutExplicitlyImplemented();
     IEnumerable<IConstructorWrapper> GetAllPublicConstructors();
-    IEnumerable<IPropertyWrapper> GetPublicInstanceWritableProperties();
     bool HasConstructorWithParameters();
     bool CanBeAssignedNullValue();
     Type ToClrType();
     bool IsException();
-    bool HasPublicConstructorCountOfAtMost(int i);
   }
 }

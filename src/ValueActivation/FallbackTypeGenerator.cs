@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using TddEbook.TypeReflection;
+using NUnit.Framework;
 using TypeReflection.Interfaces;
 
 namespace TddEbook.TddToolkit.ImplementationDetails
@@ -24,7 +24,7 @@ namespace TddEbook.TddToolkit.ImplementationDetails
     {
       var instance = _smartType.PickConstructorWithLeastNonPointersParameters().Value  //bug backward compatibility (for now)
         .InvokeWith(constructorParameters);
-      XAssert.Equal(_smartType.ToClrType(), instance.GetType());
+      Assert.AreEqual(_smartType.ToClrType(), instance.GetType());
       return instance;
     }
 

@@ -99,27 +99,11 @@
     <Compile Include="ConstructorsMustBeNullProtected.cs" />
     <Compile Include="HasToBeAConcreteClass.cs" />
     <Compile Include="ImplementationDetails\Common\AssertionFailed.cs" />
-    <Compile Include="ImplementationDetails\Common\RecordedAssertions.cs" />
-    <Compile Include="ImplementationDetails\ConstraintAssertions\CustomCollections\ConstraintsViolations.cs" />
-    <Compile Include="ImplementationDetails\ConstraintAssertions\IConstraint.cs" />
-    <Compile Include="ImplementationDetails\FallbackTypeGenerator.cs" />
     <Compile Include="ImplementationDetails\ObjectGraph.cs" />
     <Compile Include="ImplementationDetails\ReflectionOrProxyComparer.cs" />
-    <Compile Include="ImplementationDetails\ValueObjectActivator.cs" />
     <Compile Include="ImplementationDetails\ValueObjectWhiteList.cs" />
     <Compile Include="Are.cs" />
     <Compile Include="Blocking.cs" />
-    <Compile Include="Helpers\Constraints\EqualityOperator\StateBasedEqualityMustBeImplementedInTermsOfEqualityOperator.cs" />
-    <Compile Include="Helpers\Constraints\EqualityOperator\StateBasedEqualityShouldBeAvailableInTermsOfEqualityOperator.cs" />
-    <Compile Include="Helpers\Constraints\EqualityOperator\StateBasedEqualityWithItselfMustBeImplementedInTermsOfEqualityOperator.cs" />
-    <Compile Include="Helpers\Constraints\EqualityOperator\StateBasedUnEqualityMustBeImplementedInTermsOfEqualityOperator.cs" />
-    <Compile Include="Helpers\Constraints\EqualityOperator\UnEqualityWithNullMustBeImplementedInTermsOfEqualityOperator.cs" />
-    <Compile Include="Helpers\Constraints\InequalityOperator\StateBasedEqualityMustBeImplementedInTermsOfInequalityOperator.cs" />
-    <Compile Include="Helpers\Constraints\InequalityOperator\StateBasedEqualityShouldBeAvailableInTermsOfInequalityOperator.cs" />
-    <Compile Include="Helpers\Constraints\InequalityOperator\StateBasedEqualityWithItselfMustBeImplementedInTermsOfInequalityOperator.cs" />
-    <Compile Include="Helpers\Constraints\InequalityOperator\StateBasedUnEqualityMustBeImplementedInTermsOfInequalityOperator.cs" />
-    <Compile Include="Helpers\Constraints\InequalityOperator\UnEqualityWithNullMustBeImplementedInTermsOfInequalityOperator.cs" />
-    <Compile Include="InstanceAsObjectGenerator.cs" />
     <Compile Include="LockAssertions.cs" />
     <Compile Include="NSubstitute\EquivalencyAssertion.cs" />
     <Compile Include="NSubstitute\ImplementationDetails\LambdaArgumentMatcher.cs" />
@@ -134,7 +118,6 @@
     <Compile Include="NSubstitute\XArg.cs" />
     <Compile Include="NSubstitute\XReceived.cs" />
     <Compile Include="Reflection\Property.cs" />
-    <Compile Include="SpecialAnyExtension.cs" />
     <Compile Include="SyncAssert.cs" />
     <Compile Include="ValueTypeTraits.cs" />
     <Compile Include="LockSpecificAssertions\WriteLockSlimAssertions.cs" />
@@ -159,9 +142,17 @@
     <Compile Include="XAssert.Reflection.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AssertionConstraints\AssertionConstraints.csproj">
+      <Project>{BC1B5566-207F-47EB-8AD2-E7AE08894E77}</Project>
+      <Name>AssertionConstraints</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CommonTypes\CommonTypes.csproj">
       <Project>{c71f0fea-e0e7-4456-aa0b-cd82133e12d2}</Project>
       <Name>CommonTypes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EqualsAssertions\EqualsAssertions.csproj">
+      <Project>{1A986A1A-A8EF-46A8-BB38-F4F0A9A58EF4}</Project>
+      <Name>EqualsAssertions</Name>
     </ProjectReference>
     <ProjectReference Include="..\TypeReflection.Interfaces\TypeReflection.Interfaces.csproj">
       <Project>{1b4c8b73-149b-49e6-b664-8d186d16afb7}</Project>
@@ -170,6 +161,10 @@
     <ProjectReference Include="..\TypeReflection\TypeReflection.csproj">
       <Project>{720585e8-0eb0-46b2-9155-69dd2f9ca0a1}</Project>
       <Name>TypeReflection</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ValueActivation\ValueActivation.csproj">
+      <Project>{D6F0E12E-1699-440B-B48C-9FA722E38054}</Project>
+      <Name>ValueActivation</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

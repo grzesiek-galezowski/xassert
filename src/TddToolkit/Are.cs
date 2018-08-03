@@ -48,6 +48,7 @@ namespace TddEbook.TddToolkit
       return TypeOf<T>.Inequality().Evaluate(instance1, instance2);
     }
 
+    //bug move the two methods to more common assembly - they are not really needed by public...
     public static bool EqualInTermsOfEqualityOperator(Type type, object instance1, object instance2)
     {
       return (bool)SmartType.For(type).Equality().Evaluate(instance1, instance2);

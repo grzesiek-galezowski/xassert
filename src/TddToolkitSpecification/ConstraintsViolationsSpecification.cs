@@ -1,6 +1,5 @@
-﻿using NUnit.Framework;
-using TddEbook.TddToolkit;
-using TddEbook.TddToolkit.ImplementationDetails.ConstraintAssertions.CustomCollections;
+﻿using AssertionConstraints;
+using NUnit.Framework;
 using TddXt.AnyRoot;
 using TddXt.AnyRoot.Strings;
 

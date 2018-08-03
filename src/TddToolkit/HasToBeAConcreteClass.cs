@@ -1,6 +1,5 @@
 ﻿using System;
-using TddEbook.TddToolkit.ImplementationDetails.ConstraintAssertions;
-using TddEbook.TddToolkit.ImplementationDetails.ConstraintAssertions.CustomCollections;
+using AssertionConstraints;
 
 namespace TddEbook.TddToolkit
 {

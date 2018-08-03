@@ -22,13 +22,5 @@ namespace TypeReflectionSpecification
       Assert.False(SmartType.For(typeof(string)).IsException());
     }
 
-    [TestCase(8, true)]
-    [TestCase(7, false)]
-    public void ShouldReportWhetherTypeHasAtMostGivenConstructorCount(
-      int maxCount, bool expectedResult)
-    {
-      var type = SmartType.For(typeof(string));
-      XAssert.Equal(expectedResult, type.HasPublicConstructorCountOfAtMost(maxCount));
-    }
   }
 }

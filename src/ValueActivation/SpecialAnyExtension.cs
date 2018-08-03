@@ -1,7 +1,7 @@
 ﻿using System;
 using TddXt.AnyExtensibility;
 
-namespace TddEbook.TddToolkit
+namespace ValueActivation
 {
   public static class SpecialAnyExtension
   {

@@ -1,7 +1,7 @@
 ﻿using System;
 using TddXt.AnyExtensibility;
 
-namespace TddEbook.TddToolkit
+namespace ValueActivation
 {
   internal class InstanceAsObjectGenerator : InlineGenerator<object>
   {
