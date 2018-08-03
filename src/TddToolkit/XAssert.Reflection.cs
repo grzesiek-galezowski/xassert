@@ -4,7 +4,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using FluentAssertions;
-using TddEbook.TddToolkit.Reflection;
 using TypeReflection;
 using TypeReflection.Interfaces;
 
@@ -12,13 +11,6 @@ namespace TddEbook.TddToolkit
 {
     public partial class XAssert
     {
-      public static void AttributeExistsOnMethodOf<T>(
-        Attribute attr, Expression<Action<T>> methodExpression)
-      {
-        var method = Method.Of(methodExpression);
-        method.HasAttribute(attr.GetType(), attr).Should().BeTrue();
-      }
-
       public static void NoStaticFields(Type type)
       {
         var staticFields = new List<IFieldWrapper>(SmartType.For(type).GetAllStaticFields());

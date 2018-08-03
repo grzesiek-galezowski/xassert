@@ -7,10 +7,9 @@ using EqualsAssertions;
 using EqualsAssertions.EqualityOperator;
 using EqualsAssertions.InequalityOperator;
 using FluentAssertions;
-using TddEbook.TddToolkit.Helpers.Constraints;
-using TddEbook.TddToolkit.ImplementationDetails;
 using TypeReflection;
 using ValueActivation;
+using ValueObjectConstraints;
 
 namespace TddEbook.TddToolkit
 {

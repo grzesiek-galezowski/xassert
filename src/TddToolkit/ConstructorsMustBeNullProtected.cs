@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Reflection;
 using AssertionConstraints;
-using TddEbook.TddToolkit.ImplementationDetails;
-using TddXt.AnyRoot;
 using TypeReflection;
 using TypeReflection.Interfaces;
 using ValueActivation;
+using static TddXt.AnyRoot.Root;
 
 namespace TddEbook.TddToolkit
 {
@@ -35,7 +34,7 @@ namespace TddEbook.TddToolkit
     {
       for (int i = 0; i < constructor.GetParametersCount(); ++i)
       {
-        var parameters = constructor.GenerateAnyParameterValues(Root.Any.InstanceAsObject);
+        var parameters = constructor.GenerateAnyParameterValues(Any.InstanceAsObject);
         if (SmartType.ForTypeOf(parameters[i]).CanBeAssignedNullValue())
         {
           parameters[i] = null;

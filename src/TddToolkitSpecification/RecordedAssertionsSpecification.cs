@@ -3,8 +3,8 @@ using AssertionConstraints;
 using NSubstitute;
 using NUnit.Framework;
 using TddEbook.TddToolkit;
-using TddXt.AnyRoot;
 using TddXt.AnyRoot.Strings;
+using static TddXt.AnyRoot.Root;
 
 namespace TddEbook.TddToolkitSpecification
 {
@@ -15,7 +15,7 @@ namespace TddEbook.TddToolkitSpecification
     {
       //GIVEN
       var violations = Substitute.For<IConstraintsViolations>();
-      var message = Root.Any.String();
+      var message = Any.String();
 
       //WHEN
       RecordedAssertions.True(false, message, violations);
@@ -29,7 +29,7 @@ namespace TddEbook.TddToolkitSpecification
     {
       //GIVEN
       var violations = Substitute.For<IConstraintsViolations>();
-      var message = Root.Any.String();
+      var message = Any.String();
 
       //WHEN
       RecordedAssertions.True(true, message, violations);

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using NUnit.Framework;
-using TddXt.AnyRoot;
 using TypeReflection;
+using static TddXt.AnyRoot.Root;
 
 namespace ValueActivation
 {
@@ -21,7 +21,7 @@ namespace ValueActivation
 
     private object CreateInstanceWithNewConstructorArguments()
     {
-      _constructorArguments = _fallbackTypeGenerator.GenerateConstructorParameters(Root.Any.InstanceAsObject);
+      _constructorArguments = _fallbackTypeGenerator.GenerateConstructorParameters(Any.InstanceAsObject);
       return CreateInstanceWithCurrentConstructorArguments();
     }
 
@@ -61,7 +61,7 @@ namespace ValueActivation
     public object CreateInstanceAsValueObjectWithModifiedParameter(int i)
     {
       var modifiedArguments = _constructorArguments.ToList();
-      modifiedArguments[i] = Root.Any.InstanceAsObject(modifiedArguments[i].GetType());
+      modifiedArguments[i] = Any.InstanceAsObject(modifiedArguments[i].GetType());
       return _fallbackTypeGenerator.GenerateInstance(modifiedArguments.ToArray());
     }
 

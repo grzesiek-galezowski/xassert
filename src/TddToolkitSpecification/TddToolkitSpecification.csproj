@@ -141,6 +141,10 @@
       <Project>{c71f0fea-e0e7-4456-aa0b-cd82133e12d2}</Project>
       <Name>CommonTypes</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LockAssertions\LockAssertions.csproj">
+      <Project>{C1DBE00B-C113-40F6-A407-0ACCF334BDCF}</Project>
+      <Name>LockAssertions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TddToolkit\TddToolkit.csproj">
       <Project>{a52e21f4-2301-4f4e-9361-be954fb490a0}</Project>
       <Name>TddToolkit</Name>

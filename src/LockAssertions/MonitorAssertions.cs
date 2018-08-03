@@ -1,7 +1,7 @@
 using System;
 using System.Threading;
 
-namespace TddEbook.TddToolkit.LockSpecificAssertions
+namespace LockAssertions
 {
   public class MonitorAssertions : LockAssertions
   {

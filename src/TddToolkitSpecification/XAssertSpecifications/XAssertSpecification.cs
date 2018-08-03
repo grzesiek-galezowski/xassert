@@ -5,9 +5,9 @@ using CommonTypes;
 using NUnit.Framework;
 using TddEbook.TddToolkit;
 using TddEbook.TddToolkitSpecification.Fixtures;
-using TddXt.AnyRoot;
 using TddXt.AnyRoot.Strings;
 using TypeReflection.ImplementationDetails;
+using static TddXt.AnyRoot.Root;
 
 namespace TddEbook.TddToolkitSpecification.XAssertSpecifications
 {
@@ -44,14 +44,14 @@ namespace TddEbook.TddToolkitSpecification.XAssertSpecifications
     [Test]
     public void ShouldPreferInternalNonRecursiveConstructorsToPublicRecursiveOnes()
     {
-      Assert.DoesNotThrow(() => Root.Any.Instance<DirectoryPath>());
+      Assert.DoesNotThrow(() => Any.Instance<DirectoryPath>());
       Assert.DoesNotThrow(() => XAssert.IsValue<DirectoryPath>());
     }
 
     [Test]
     public void ShouldBeAbleToChooseInternalConstructorWhenThereisNoPublicOne()
     {
-      Assert.DoesNotThrow(() => Root.Any.Instance<FileNameWithoutExtension>());
+      Assert.DoesNotThrow(() => Any.Instance<FileNameWithoutExtension>());
       Assert.DoesNotThrow(() => XAssert.IsValue<FileNameWithoutExtension>());
     }
 
@@ -86,7 +86,7 @@ namespace TddEbook.TddToolkitSpecification.XAssertSpecifications
     [Test]
     public void ShouldFailUpperCaseAssertionOnLowerCaseStringAndPassOnUpperCaseString()
     {
-      var s = Root.Any.String();
+      var s = Any.String();
       Assert.Throws<AssertionException>(() => XAssert.IsUpperCase(s.ToLower()) );
       Assert.DoesNotThrow(() => XAssert.IsUpperCase(s.ToUpper()));
     }
@@ -94,7 +94,7 @@ namespace TddEbook.TddToolkitSpecification.XAssertSpecifications
     [Test]
     public void ShouldFailLowerCaseAssertionOnUpperCaseStringAndPassOnLowerCaseString()
     {
-      var s = Root.Any.String();
+      var s = Any.String();
       Assert.Throws<AssertionException>(() => XAssert.IsLowerCase(s.ToUpper()));
       Assert.DoesNotThrow(() => XAssert.IsLowerCase(s.ToLower()));
     }
@@ -102,7 +102,7 @@ namespace TddEbook.TddToolkitSpecification.XAssertSpecifications
     [Test]
     public void ShouldFailUpperCaseAssertionOnLowerCaseCharAndPassOnUpperCaseChar()
     {
-      var c = Root.Any.AlphaChar();
+      var c = Any.AlphaChar();
       Assert.Throws<AssertionException>(() => XAssert.IsUpperCase(char.ToLower(c)));
       Assert.DoesNotThrow(() => XAssert.IsUpperCase(char.ToUpper(c)));
     }
@@ -110,31 +110,9 @@ namespace TddEbook.TddToolkitSpecification.XAssertSpecifications
     [Test]
     public void ShouldFailLowerCaseAssertionOnUpperCaseCharAndPassOnLowerCaseChar()
     {
-      var c = Root.Any.AlphaChar();
+      var c = Any.AlphaChar();
       Assert.Throws<AssertionException>(() => XAssert.IsLowerCase(char.ToUpper(c)));
       Assert.DoesNotThrow(() => XAssert.IsLowerCase(char.ToLower(c)));
-    }
-
-    [Test]
-    public void ShouldThrowExceptionWhenAttributeIsNotOnMethod()
-    {
-      Assert.Throws<AssertionException>(() =>
-        XAssert.AttributeExistsOnMethodOf<AttributeFixture>(
-          new CultureAttribute("AnyCulture"),
-          o => o.NonDecoratedMethod(0, 0)
-          )
-        );
-    }
-
-    [Test]
-    public void ShouldNotThrowExceptionWhenAttributeIsOnMethod()
-    {
-      Assert.DoesNotThrow(() =>
-        XAssert.AttributeExistsOnMethodOf<AttributeFixture>(
-          new CultureAttribute("AnyCulture"),
-          o => o.DecoratedMethod(0, 0)
-          )
-        );
     }
 
     [Test]

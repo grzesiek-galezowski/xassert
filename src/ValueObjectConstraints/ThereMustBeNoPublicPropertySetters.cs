@@ -3,7 +3,7 @@ using System.Linq;
 using AssertionConstraints;
 using TypeReflection;
 
-namespace TddEbook.TddToolkit.Helpers.Constraints
+namespace ValueObjectConstraints
 {
   public class ThereMustBeNoPublicPropertySetters : IConstraint
   {

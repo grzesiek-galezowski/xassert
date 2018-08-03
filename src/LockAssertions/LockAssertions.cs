@@ -1,4 +1,4 @@
-namespace TddEbook.TddToolkit
+namespace LockAssertions
 {
   public interface LockAssertions
   {

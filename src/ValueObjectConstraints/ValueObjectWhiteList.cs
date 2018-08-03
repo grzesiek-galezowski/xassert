@@ -1,6 +1,6 @@
 using System;
 
-namespace TddEbook.TddToolkit.ImplementationDetails
+namespace ValueObjectConstraints
 {
   public static class ValueObjectWhiteList
   {

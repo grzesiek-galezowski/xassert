@@ -44,6 +44,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValueObjectConstraints", "V
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphAssertions", "GraphAssertions\GraphAssertions.csproj", "{FAEA6B32-964D-49C9-9A94-536999E7CC47}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LockAssertions", "LockAssertions\LockAssertions.csproj", "{C1DBE00B-C113-40F6-A407-0ACCF334BDCF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -98,6 +100,10 @@ Global
 		{FAEA6B32-964D-49C9-9A94-536999E7CC47}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FAEA6B32-964D-49C9-9A94-536999E7CC47}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FAEA6B32-964D-49C9-9A94-536999E7CC47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1DBE00B-C113-40F6-A407-0ACCF334BDCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1DBE00B-C113-40F6-A407-0ACCF334BDCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1DBE00B-C113-40F6-A407-0ACCF334BDCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1DBE00B-C113-40F6-A407-0ACCF334BDCF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

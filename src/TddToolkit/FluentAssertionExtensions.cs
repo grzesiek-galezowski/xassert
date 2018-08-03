@@ -1,11 +1,8 @@
-﻿using System;
-using FluentAssertions;
-using FluentAssertions.Equivalency;
+﻿using FluentAssertions;
 using FluentAssertions.Primitives;
 using FluentAssertions.Types;
-using TddEbook.TddToolkit.NSubstitute;
 
-namespace TddEbook.TddToolkit.Helpers.FluentAssertions
+namespace TddEbook.TddToolkit
 {
   public static class FluentAssertionExtensions
   {

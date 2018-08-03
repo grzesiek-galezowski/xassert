@@ -1,7 +1,7 @@
 using System.Threading;
 using FluentAssertions;
 
-namespace TddEbook.TddToolkit.LockSpecificAssertions
+namespace LockAssertions
 {
   public class WriteLockSlimAssertions : LockAssertions
   {

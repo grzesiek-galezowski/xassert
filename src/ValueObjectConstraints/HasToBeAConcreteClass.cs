@@ -1,7 +1,7 @@
 ﻿using System;
 using AssertionConstraints;
 
-namespace TddEbook.TddToolkit
+namespace ValueObjectConstraints
 {
   public class HasToBeAConcreteClass : IConstraint
   {

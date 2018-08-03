@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using CommonTypes;
 
-namespace TddEbook.TddToolkit.Reflection
+namespace TypeReflection
 {
   public class Field
   {

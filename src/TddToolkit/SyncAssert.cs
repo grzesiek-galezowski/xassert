@@ -10,7 +10,7 @@ namespace TddEbook.TddToolkit
 {
   public partial class XAssert
   {
-    public static void Synchronizes<T>(T wrappingObject, Action<T> callToCheck, LockAssertions lockAssertions,
+    public static void Synchronizes<T>(T wrappingObject, Action<T> callToCheck, LockAssertions.LockAssertions lockAssertions,
                                              T wrappedObjectMock) where T : class
     {
       NSubstituteIsInCorrectVersion(wrappedObjectMock);
@@ -18,7 +18,7 @@ namespace TddEbook.TddToolkit
       LockShouldBeReleasedWhenCallThrowsException(lockAssertions, wrappingObject, wrappedObjectMock, callToCheck);
     }
 
-    public static void Synchronizes<T, TReturn>(T wrappingObject, Func<T, TReturn> callToCheck, LockAssertions lockAssertions, T wrappedObjectMock) where T : class
+    public static void Synchronizes<T, TReturn>(T wrappingObject, Func<T, TReturn> callToCheck, LockAssertions.LockAssertions lockAssertions, T wrappedObjectMock) where T : class
     {
       NSubstituteIsInCorrectVersion(wrappedObjectMock);
       LockShouldBeReleasedAfterACall(wrappingObject, wrappedObjectMock, callToCheck, lockAssertions);
@@ -72,7 +72,7 @@ namespace TddEbook.TddToolkit
       }
     }
 
-    private static void LockShouldBeReleasedWhenCallThrowsException<T>(LockAssertions lockAssertions,
+    private static void LockShouldBeReleasedWhenCallThrowsException<T>(LockAssertions.LockAssertions lockAssertions,
                                                                        T wrappingObject, T wrappedObjectMock,
                                                                        Action<T> callToCheck) where T : class
     {
@@ -99,7 +99,7 @@ namespace TddEbook.TddToolkit
     }
 
     private static void LockShouldBeReleasedAfterACall<T>(T wrappingObject, T wrappedObjectMock, Action<T> callToCheck,
-                                                          LockAssertions lockAssertions)
+                                                          LockAssertions.LockAssertions lockAssertions)
       where T : class
     {
       try
@@ -119,12 +119,12 @@ namespace TddEbook.TddToolkit
 
     private static void LockShouldBeReleasedAfterACall<T, TReturn>(T wrappingObject, T wrappedObjectMock,
                                                                    Func<T, TReturn> callToCheck,
-                                                                   LockAssertions lockAssertions)
+                                                                   LockAssertions.LockAssertions lockAssertions)
       where T : class
     {
       try
       {
-        var cannedResult = Root.Any.Instance<TReturn>();
+        var cannedResult = Any.Instance<TReturn>();
         callToCheck(wrappedObjectMock).Returns((ci) =>
         {
           lockAssertions.AssertLocked();
@@ -146,12 +146,12 @@ namespace TddEbook.TddToolkit
 
   public static class SyncAssert
   {
-    public static void AssertSynchronizes<T>(this T wrappingObject, T wrappedObjectMock, Action<T> callToCheck, LockAssertions lockAssertions) where T : class
+    public static void AssertSynchronizes<T>(this T wrappingObject, T wrappedObjectMock, Action<T> callToCheck, LockAssertions.LockAssertions lockAssertions) where T : class
     {
       XAssert.Synchronizes(wrappingObject, callToCheck, lockAssertions, wrappedObjectMock);
     }
 
-    public static void AssertSynchronizes<T, TReturn>(this T wrappingObject, Func<T, TReturn> callToCheck, LockAssertions lockAssertions, T wrappedObjectMock) where T : class
+    public static void AssertSynchronizes<T, TReturn>(this T wrappingObject, Func<T, TReturn> callToCheck, LockAssertions.LockAssertions lockAssertions, T wrappedObjectMock) where T : class
     {
       XAssert.Synchronizes(wrappingObject, callToCheck, lockAssertions, wrappedObjectMock);
     }

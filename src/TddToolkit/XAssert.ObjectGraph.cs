@@ -7,9 +7,9 @@ using System.Reflection;
 using Albedo;
 using CommonTypes;
 using FluentAssertions;
+using GraphAssertions;
 using KellermanSoftware.CompareNetObjects;
-using TddEbook.TddToolkit.ImplementationDetails;
-using TddEbook.TddToolkit.Reflection;
+using TypeReflection;
 
 namespace TddEbook.TddToolkit
 {
