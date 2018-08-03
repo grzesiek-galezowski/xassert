@@ -1,18 +1,10 @@
-using System;
-
 namespace TddEbook.TddToolkit.CommonTypes
 {
   public static class CircularList
   {
-    private static readonly Random _random = new Random(DateTime.UtcNow.Millisecond);
-
     public static CircularList<T> CreateStartingFrom0<T>(params T[] items)
     {
       return new CircularList<T>(0, items);
-    }
-    public static CircularList<T> CreateStartingFromRandom<T>(params T[] items)
-    {
-      return new CircularList<T>(_random.Next(0,items.Length - 1), items);
     }
   }
 

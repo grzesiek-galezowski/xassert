@@ -16,12 +16,10 @@ namespace TypeReflection.Interfaces
     Maybe<IConstructorWrapper2> PickConstructorWithLeastNonPointersParameters();
     IBinaryOperator Equality();
     IBinaryOperator Inequality();
-    bool IsInterface();
     IEnumerable<IEventWrapper2> GetAllNonPublicEventsWithoutExplicitlyImplemented();
     IEnumerable<IConstructorWrapper2> GetAllPublicConstructors();
     IEnumerable<IFieldWrapper2> GetAllPublicInstanceFields();
     IEnumerable<IPropertyWrapper> GetPublicInstanceWritableProperties();
-    IEnumerable<IMethod> GetAllPublicInstanceMethodsWithReturnValue();
     bool HasConstructorWithParameters();
     bool CanBeAssignedNullValue();
     Type ToClrType();

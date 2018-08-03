@@ -156,7 +156,7 @@ namespace TddEbook.TypeReflection
     private Maybe<MethodInfo> ValueTypeEqualityMethod()
     {
       return _typeInfo.IsValueType ?
-               Maybe.Wrap(GetType().GetTypeInfo().GetMethod("ValuesEqual"))
+               Maybe.Wrap(GetType().GetTypeInfo().GetMethod(nameof(ValuesEqual)))
                : Maybe<MethodInfo>.Not;
 
     }
@@ -164,8 +164,18 @@ namespace TddEbook.TypeReflection
     private Maybe<MethodInfo> ValueTypeInequalityMethod()
     {
       return _typeInfo.IsValueType ?
-               Maybe.Wrap(GetType().GetTypeInfo().GetMethod("ValuesNotEqual")) 
+               Maybe.Wrap(GetType().GetTypeInfo().GetMethod(nameof(ValuesNotEqual))) 
                : Maybe<MethodInfo>.Not;
+    }
+
+    public static bool ValuesEqual(object instance1, object instance2)
+    {
+      return Equals(instance1, instance2);
+    }
+
+    public static bool ValuesNotEqual(object instance1, object instance2)
+    {
+      return !Equals(instance1, instance2);
     }
 
     public IBinaryOperator Equality()
@@ -186,21 +196,6 @@ namespace TddEbook.TypeReflection
     public static ISmartType ForTypeOf(object obj)
     {
       return new SmartType(obj.GetType(), new ConstructorRetrievalFactory().Create());
-    }
-
-    public static bool ValuesEqual(object instance1, object instance2)
-    {
-      return Equals(instance1, instance2);
-    }
-
-    public static bool ValuesNotEqual(object instance1, object instance2)
-    {
-      return !Equals(instance1, instance2);
-    }
-
-    public bool IsInterface()
-    {
-      return _typeInfo.IsInterface;
     }
 
     private static bool IsCompilerGenerated(FieldInfo fieldInfo) //?? should it be defined on a type?
@@ -322,12 +317,6 @@ namespace TddEbook.TypeReflection
         .Select(p => new PropertyWrapper(p));
     }
 
-    public IEnumerable<IMethod> GetAllPublicInstanceMethodsWithReturnValue()
-    {
-      return _typeInfo.GetMethods(BindingFlags.Public | BindingFlags.Instance)
-        .Where(p => p.ReturnType != typeof(void)).
-        Select(p => new SmartMethod(p));
-    }
     //TODO even strict mocks can be done this way...
 
     public bool HasConstructorWithParameters()

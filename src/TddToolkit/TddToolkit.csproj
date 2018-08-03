@@ -101,7 +101,6 @@
     <Compile Include="ImplementationDetails\Common\RecordedAssertions.cs" />
     <Compile Include="ImplementationDetails\ConstraintAssertions\CustomCollections\ConstraintsViolations.cs" />
     <Compile Include="ImplementationDetails\ConstraintAssertions\IConstraint.cs" />
-    <Compile Include="ImplementationDetails\DummyContext.cs" />
     <Compile Include="ImplementationDetails\FallbackTypeGenerator.cs" />
     <Compile Include="ImplementationDetails\ObjectGraph.cs" />
     <Compile Include="ImplementationDetails\ReflectionOrProxyComparer.cs" />
@@ -161,10 +160,6 @@
       <Project>{c71f0fea-e0e7-4456-aa0b-cd82133e12d2}</Project>
       <Name>CommonTypes</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Generators\Generators.csproj">
-      <Project>{04deba13-ab6f-4ef7-92d7-f5673720da2e}</Project>
-      <Name>Generators</Name>
-    </ProjectReference>
     <ProjectReference Include="..\TypeReflection.Interfaces\TypeReflection.Interfaces.csproj">
       <Project>{1b4c8b73-149b-49e6-b664-8d186d16afb7}</Project>
       <Name>TypeReflection.Interfaces</Name>
@@ -178,9 +173,7 @@
       <Name>TypeResolution</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ChainedAssertions\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="App_Readme\Compare-NET-Objects-Help.txt" />
   </ItemGroup>
