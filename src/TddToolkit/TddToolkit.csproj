@@ -98,7 +98,6 @@
   <ItemGroup>
     <Compile Include="ConstructorsMustBeNullProtected.cs" />
     <Compile Include="HasToBeAConcreteClass.cs" />
-    <Compile Include="ImplementationDetails\Common\AssertionFailed.cs" />
     <Compile Include="ImplementationDetails\ObjectGraph.cs" />
     <Compile Include="ImplementationDetails\ReflectionOrProxyComparer.cs" />
     <Compile Include="ImplementationDetails\ValueObjectWhiteList.cs" />
@@ -126,11 +125,7 @@
     <Compile Include="XAssert.Simple.cs" />
     <Compile Include="Helpers\Constraints\AllFieldsMustBeReadOnly.cs" />
     <Compile Include="Helpers\Constraints\HashCodeMustBeTheSameForSameObjectsAndDifferentForDifferentObjects.cs" />
-    <Compile Include="Helpers\Constraints\StateBasedEqualityMustBeImplementedInTermsOfEqualsMethod.cs" />
-    <Compile Include="Helpers\Constraints\StateBasedEqualityWithItselfMustBeImplementedInTermsOfEqualsMethod.cs" />
-    <Compile Include="Helpers\Constraints\StateBasedUnEqualityMustBeImplementedInTermsOfEqualsMethod.cs" />
     <Compile Include="Helpers\Constraints\ThereMustBeNoPublicPropertySetters.cs" />
-    <Compile Include="Helpers\Constraints\UnEqualityWithNullMustBeImplementedInTermsOfEqualsMethod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XAssert.Common.cs" />
   </ItemGroup>
@@ -167,7 +162,9 @@
       <Name>ValueActivation</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ImplementationDetails\Common\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="App_Readme\Compare-NET-Objects-Help.txt" />
   </ItemGroup>

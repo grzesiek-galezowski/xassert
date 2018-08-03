@@ -1,9 +1,9 @@
-﻿using TddEbook.TddToolkit.ImplementationDetails;
-using TddEbook.TddToolkit.ImplementationDetails.Common;
-using System.Linq;
+﻿using System.Linq;
 using AssertionConstraints;
+using TddEbook.TddToolkit.ImplementationDetails;
+using TddEbook.TddToolkit.ImplementationDetails.Common;
 
-namespace TddEbook.TddToolkit.Helpers.Constraints
+namespace EqualsAssertions
 {
   public class StateBasedUnEqualityMustBeImplementedInTermsOfEqualsMethod : IConstraint
   {

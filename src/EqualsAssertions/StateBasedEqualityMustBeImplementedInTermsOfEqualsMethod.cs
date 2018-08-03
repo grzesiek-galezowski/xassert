@@ -2,7 +2,7 @@
 using TddEbook.TddToolkit.ImplementationDetails;
 using TddEbook.TddToolkit.ImplementationDetails.Common;
 
-namespace TddEbook.TddToolkit.Helpers.Constraints
+namespace EqualsAssertions
 {
   public class StateBasedEqualityMustBeImplementedInTermsOfEqualsMethod : IConstraint
   {

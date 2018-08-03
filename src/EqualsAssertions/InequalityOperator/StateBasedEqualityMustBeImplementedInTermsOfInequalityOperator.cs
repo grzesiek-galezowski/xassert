@@ -3,7 +3,7 @@ using AssertionConstraints;
 using TddEbook.TddToolkit.ImplementationDetails;
 using TddEbook.TddToolkit.ImplementationDetails.Common;
 
-namespace TddEbook.TddToolkit.Helpers.Constraints.InequalityOperator
+namespace EqualsAssertions.InequalityOperator
 {
   public class StateBasedEqualityMustBeImplementedInTermsOfInequalityOperator : IConstraint
   {

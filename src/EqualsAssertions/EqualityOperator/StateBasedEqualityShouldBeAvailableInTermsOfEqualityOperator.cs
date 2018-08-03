@@ -1,7 +1,7 @@
 ﻿using System;
 using AssertionConstraints;
 
-namespace TddEbook.TddToolkit.Helpers.Constraints.EqualityOperator
+namespace EqualsAssertions.EqualityOperator
 {
   public class StateBasedEqualityShouldBeAvailableInTermsOfEqualityOperator
     : IConstraint
