@@ -91,34 +91,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Fixtures\AbstractObjectWithInterfaceInConstructor.cs" />
-    <Compile Include="Fixtures\AbstractObjectWithVirtualMethods.cs" />
-    <Compile Include="Fixtures\AreaEntity.cs" />
     <Compile Include="CircularListSpecification.cs" />
     <Compile Include="Fixtures\ComplexObjectWithFactoryMethodAndRecursiveConstructor.cs" />
-    <Compile Include="Fixtures\ConcreteDataStructure.cs" />
     <Compile Include="Fixtures\ConcreteDataStructure2.cs" />
     <Compile Include="ConstraintsViolationsSpecification.cs" />
     <Compile Include="Fixtures\Feature.cs" />
-    <Compile Include="Fixtures\IncrementalType.cs" />
     <Compile Include="Fixtures\MyService.cs" />
     <Compile Include="Fixtures\ObjectWithAttributeOnMethod.cs" />
     <Compile Include="Fixtures\IGeometry.cs" />
     <Compile Include="Fixtures\IObservableConcurrentDictionary.cs" />
-    <Compile Include="Fixtures\MyOwnCollection.cs" />
-    <Compile Include="Fixtures\ObjectWithCopyConstructor.cs" />
-    <Compile Include="Fixtures\GetSettable.cs" />
-    <Compile Include="Fixtures\IGetSettable.cs" />
-    <Compile Include="Fixtures\ISettable.cs" />
     <Compile Include="Fixtures\ISimple.cs" />
     <Compile Include="Fixtures\ObjectWithInterfaceInConstructor.cs" />
-    <Compile Include="Fixtures\ThrowingInConstructor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReceivedNothingSpecification.cs" />
     <Compile Include="Fixtures\RecursiveClass.cs" />
     <Compile Include="Fixtures\RecursiveClass2.cs" />
-    <Compile Include="Fixtures\RecursiveInterface.cs" />
-    <Compile Include="Fixtures\Settable.cs" />
     <Compile Include="SequenceEqualsMatcher.cs" />
     <Compile Include="SynchronizationSpecification.cs" />
     <Compile Include="RecordedAssertionsSpecification.cs" />
@@ -167,10 +154,6 @@
     <ProjectReference Include="..\TypeReflection\TypeReflection.csproj">
       <Project>{720585e8-0eb0-46b2-9155-69dd2f9ca0a1}</Project>
       <Name>TypeReflection</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TypeResolution\TypeResolution.csproj">
-      <Project>{84bd7210-25eb-42a3-8435-c22f42d27d2c}</Project>
-      <Name>TypeResolution</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

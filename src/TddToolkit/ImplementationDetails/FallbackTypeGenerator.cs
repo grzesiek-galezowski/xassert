@@ -7,7 +7,7 @@ namespace TddEbook.TddToolkit.ImplementationDetails
 {
   public class FallbackTypeGenerator
   {
-    private readonly IType2 _smartType;
+    private readonly IType _smartType;
     private readonly Type _type;
 
     public FallbackTypeGenerator(Type type)

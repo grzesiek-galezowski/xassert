@@ -34,8 +34,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypeReflection.Implementati
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypeReflection", "TypeReflection\TypeReflection.csproj", "{720585E8-0EB0-46B2-9155-69DD2F9CA0A1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypeResolution", "TypeResolution\TypeResolution.csproj", "{84BD7210-25EB-42A3-8435-C22F42D27D2C}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -70,10 +68,6 @@ Global
 		{720585E8-0EB0-46B2-9155-69DD2F9CA0A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{720585E8-0EB0-46B2-9155-69DD2F9CA0A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{720585E8-0EB0-46B2-9155-69DD2F9CA0A1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{84BD7210-25EB-42A3-8435-C22F42D27D2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{84BD7210-25EB-42A3-8435-C22F42D27D2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{84BD7210-25EB-42A3-8435-C22F42D27D2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{84BD7210-25EB-42A3-8435-C22F42D27D2C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

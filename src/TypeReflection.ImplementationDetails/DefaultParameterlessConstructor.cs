@@ -5,7 +5,7 @@ using TypeReflection.Interfaces;
 
 namespace TypeReflection.ImplementationDetails
 {
-  public class DefaultParameterlessConstructor : IConstructorWrapper2
+  public class DefaultParameterlessConstructor : IConstructorWrapper
   {
     private readonly Func<object> _creation;
 
@@ -39,11 +39,6 @@ namespace TypeReflection.ImplementationDetails
       return new List<object>();
     }
 
-    public bool IsParameterless()
-    {
-      return true;
-    }
-
     public string GetDescriptionForParameter(int i)
     {
       return string.Empty;
@@ -59,22 +54,17 @@ namespace TypeReflection.ImplementationDetails
       return _creation.Invoke();
     }
 
-    public bool HasAnyArgumentOfType(Type type)
-    {
-      return false;
-    }
-
     public bool IsInternal()
     {
       return false; //?? actually, this is not right...
     }
 
-    public static IConstructorWrapper2 ForOrdinaryType(ConstructorInfo constructorInfo)
+    public static IConstructorWrapper ForOrdinaryType(ConstructorInfo constructorInfo)
     {
       return new DefaultParameterlessConstructor(() => constructorInfo.Invoke(new object[]{}));
     }
 
-    public static IEnumerable<IConstructorWrapper2> ForValue(Type type)
+    public static IEnumerable<IConstructorWrapper> ForValue(Type type)
     {
       return new [] { new DefaultParameterlessConstructor(() => Activator.CreateInstance(type))};
     }
@@ -88,12 +78,5 @@ namespace TypeReflection.ImplementationDetails
     {
       return false;
     }
-
-    public object Invoke(IEnumerable<object> parameters)
-    {
-      return InvokeWith(parameters);
-    }
-
-    public IEnumerable<ParameterInfo> Parameters { get; } = new List<ParameterInfo>();
   }
 }

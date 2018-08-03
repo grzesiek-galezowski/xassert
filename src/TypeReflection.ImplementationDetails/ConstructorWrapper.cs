@@ -6,16 +6,16 @@ using TypeReflection.Interfaces;
 
 namespace TypeReflection.ImplementationDetails
 {
-  public class ConstructorWrapper2 : IConstructorWrapper2
+  public class ConstructorWrapper : IConstructorWrapper
   {
-    public static ConstructorWrapper2 FromConstructorInfo(ConstructorInfo constructor)
+    public static ConstructorWrapper FromConstructorInfo(ConstructorInfo constructor)
     {
-      return new ConstructorWrapper2(constructor, constructor.Invoke, constructor.GetParameters(), constructor.DeclaringType);
+      return new ConstructorWrapper(constructor, constructor.Invoke, constructor.GetParameters(), constructor.DeclaringType);
     }
 
-    public static ConstructorWrapper2 FromStaticMethodInfo(MethodInfo m)
+    public static ConstructorWrapper FromStaticMethodInfo(MethodInfo m)
     {
-      return new ConstructorWrapper2(m, args => m.Invoke(null, args), m.GetParameters(), m.ReturnType);
+      return new ConstructorWrapper(m, args => m.Invoke(null, args), m.GetParameters(), m.ReturnType);
     }
 
 
@@ -26,7 +26,7 @@ namespace TypeReflection.ImplementationDetails
     private readonly Func<object[], object> _invocation;
     private readonly IEnumerable<TypeInfo> _parameterTypes;
 
-    public ConstructorWrapper2(
+    public ConstructorWrapper(
       MethodBase constructor, 
       Func<object[], object> invocation, 
       ParameterInfo[] parameters, 
@@ -84,11 +84,6 @@ namespace TypeReflection.ImplementationDetails
         constructorValues.Add(instanceGenerator(constructorParam));
       }
       return constructorValues;
-    }
-
-    public bool IsParameterless()
-    {
-      return GetParametersCount() == 0;
     }
 
     public string GetDescriptionForParameter(int i)
@@ -160,12 +155,5 @@ namespace TypeReflection.ImplementationDetails
     {
       return !IsNotRecursive();
     }
-
-    public object Invoke(IEnumerable<object> parameters)
-    {
-      return InvokeWith(parameters);
-    }
-
-    public IEnumerable<ParameterInfo> Parameters => _parameters;
   }
 }

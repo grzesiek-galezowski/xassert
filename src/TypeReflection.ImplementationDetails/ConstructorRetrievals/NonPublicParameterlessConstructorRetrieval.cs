@@ -12,12 +12,12 @@ namespace TypeReflection.ImplementationDetails.ConstructorRetrievals
       _next = next;
     }
 
-    public IEnumerable<IConstructorWrapper2> RetrieveFrom(IConstructorQueries constructors)
+    public IEnumerable<IConstructorWrapper> RetrieveFrom(IConstructorQueries constructors)
     {
       var constructor = constructors.GetNonPublicParameterlessConstructorInfo();
       if (constructor.HasValue)
       {
-        return new List<IConstructorWrapper2> { constructor.Value };
+        return new List<IConstructorWrapper> { constructor.Value };
       }
       else
       {

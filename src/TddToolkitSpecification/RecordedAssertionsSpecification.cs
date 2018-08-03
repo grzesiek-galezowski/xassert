@@ -46,9 +46,9 @@ namespace TddEbook.TddToolkitSpecification
       var assembly = typeof (RecordedAssertionsSpecification).Assembly;
       
       var e = Assert.Throws<AssertionException>(() => XAssert.NoStaticFields(assembly));
-      StringAssert.Contains("_lolek", e.Message);
-      StringAssert.Contains("_gieniek", e.Message);
-      StringAssert.Contains("StaticProperty", e.Message);
+      StringAssert.Contains(nameof(_lolek), e.Message);
+      StringAssert.Contains(nameof(Lol2._gieniek), e.Message);
+      StringAssert.Contains(nameof(StaticProperty), e.Message);
     }
 
     [Test]
@@ -80,7 +80,7 @@ namespace TddEbook.TddToolkitSpecification
     public class Lol2
     {
 #pragma warning disable 169
-      private static int _gieniek = 123;
+      public static int _gieniek = 123;
 #pragma warning restore 169
     }
 

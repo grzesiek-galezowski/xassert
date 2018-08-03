@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace TypeReflection.Interfaces
 {
-  public interface IConstructorWrapper2 ///: AutoFixture.Kernel.IMethod //todo remove
+  public interface IConstructorWrapper
   {
     bool HasNonPointerArgumentsOnly();
     bool HasLessParametersThan(int numberOfParams);

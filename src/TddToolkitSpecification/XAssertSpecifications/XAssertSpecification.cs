@@ -56,31 +56,6 @@ namespace TddEbook.TddToolkitSpecification.XAssertSpecifications
     }
 
     [Test]
-    public void ShouldCorrectlyCompareCollectionsInAssertAll()
-    {
-      // GIVEN
-      var x1 = new List<string> { "aaa", "bbb" };
-      var x2 = new List<string> { "aaa", "bbb" };
-
-      var exception = Assert.Throws<AssertionException>(
-        () => XAssert.All(recorder => recorder.Equal(x1, x2))
-      );
-
-      StringAssert.Contains(
-        "Expected actual to be {\"aaa\", \"bbb\"}, but found {\"aaa\", \"bbb\"}", 
-        exception.ToString());
-
-      XAssert.All(assert => assert.CollectionsEqual(x1, x2));
-
-      Assert.Throws<AssertionException>(
-        () => XAssert.All(recorder => 
-        recorder.CollectionsEqual(
-          x1, 
-          new List<string>() {"bbb", "aaa"}))
-      );
-    }
-
-    [Test]
     public void ShouldAllowSpecifyingConstructorArgumentsNotTakenIntoAccountDuringValueBehaviorCheck()
     {
       XAssert.IsValue<ProperValueTypeWithOneArgumentIdentity>(
@@ -141,31 +116,6 @@ namespace TddEbook.TddToolkitSpecification.XAssertSpecifications
     }
 
     [Test]
-    public void ShouldAggregateMultipleAssertionsWhenAssertionAll()
-    {
-      var exception = Assert.Throws<AssertionException>(() =>
-        XAssert.All(assert =>
-        {
-          assert.Equal(1, 3);
-          assert.Equal(2, 44);
-          assert.Equal("aa", "123");
-          assert.True(true);
-          assert.Contains("bb", "aa");
-        })
-        );
-
-      StringAssert.Contains("Assertion no. 1 failed: Expected actual to be 1, but found 3",
-        exception.ToString());
-      StringAssert.Contains("Assertion no. 2 failed: Expected actual to be 2, but found 44",
-        exception.ToString());
-      StringAssert.Contains("Assertion no. 3 failed: Expected actual to be \"aa\", but found \"123\"",
-        exception.ToString());
-      StringAssert.DoesNotContain("Assertion no. 4 failed", exception.ToString());
-      StringAssert.Contains("Assertion no. 5 failed: Expected expected \"bb\" to contain \"aa\"",
-        exception.ToString());
-    }
-
-    [Test]
     public void ShouldThrowExceptionWhenAttributeIsNotOnMethod()
     {
       Assert.Throws<AssertionException>(() =>
@@ -218,7 +168,6 @@ namespace TddEbook.TddToolkitSpecification.XAssertSpecifications
       XAssert.NotAlike(tp2, tp1, "X2", "<X2>k__BackingField", "X3", "<X3>k__BackingField", "x4");
       XAssert.NotAlike(tp2, tp1, tp => tp.X2, tp => tp.X3, tp => tp.x4);
     }
-
 
     [Test]
     public void AllowAssertingWhetherEnumHasUniqueValues()

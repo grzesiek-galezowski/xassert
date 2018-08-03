@@ -1,12 +1,11 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using TypeReflection.Interfaces;
 
 namespace TypeReflection.ImplementationDetails
 {
-  public class FieldWrapper : IFieldWrapper2
+  public class FieldWrapper : IFieldWrapper
   {
     private readonly FieldInfo _fieldInfo;
 
@@ -40,13 +39,7 @@ namespace TypeReflection.ImplementationDetails
 
     }
 
-    public void SetValue(object result, object instance)
-    {
-      _fieldInfo.SetValue(result, instance);
-    }
-
-    public Type FieldType { get { return _fieldInfo.FieldType; } }
-    public bool HasTheSameNameAs(IFieldWrapper2 otherConstant)
+    private bool HasTheSameNameAs(IFieldWrapper otherConstant)
     {
       return otherConstant.HasName(_fieldInfo.Name);
     }
@@ -56,7 +49,7 @@ namespace TypeReflection.ImplementationDetails
       return _fieldInfo.Name == name;
     }
 
-    public bool HasTheSameValueAs(IFieldWrapper2 otherConstant)
+    private bool HasTheSameValueAs(IFieldWrapper otherConstant)
     {
       return otherConstant.HasValue(_fieldInfo.GetValue(null));
     }
@@ -66,7 +59,7 @@ namespace TypeReflection.ImplementationDetails
       return _fieldInfo.GetValue(null).Equals(name);
     }
 
-    public void AssertNotDuplicateOf(IFieldWrapper2 otherConstant)
+    public void AssertNotDuplicateOf(IFieldWrapper otherConstant)
     {
       if (!HasTheSameNameAs(otherConstant))
       {
@@ -84,14 +77,6 @@ namespace TypeReflection.ImplementationDetails
     public void AddNameTo(StringBuilder builder)
     {
       builder.Append(_fieldInfo.Name + " <" + _fieldInfo.GetValue(null) + ">");
-    }
-  }
-
-  public class DuplicateConstantException2 : Exception
-  {
-    public DuplicateConstantException2(string message) : base(message)
-    {
-      
     }
   }
 }

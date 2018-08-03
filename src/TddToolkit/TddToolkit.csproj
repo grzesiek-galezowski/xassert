@@ -97,7 +97,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ImplementationDetails\Common\AssertionFailed.cs" />
-    <Compile Include="ImplementationDetails\Common\AssertionRecorder.cs" />
     <Compile Include="ImplementationDetails\Common\RecordedAssertions.cs" />
     <Compile Include="ImplementationDetails\ConstraintAssertions\CustomCollections\ConstraintsViolations.cs" />
     <Compile Include="ImplementationDetails\ConstraintAssertions\IConstraint.cs" />
@@ -167,10 +166,6 @@
     <ProjectReference Include="..\TypeReflection\TypeReflection.csproj">
       <Project>{720585e8-0eb0-46b2-9155-69dd2f9ca0a1}</Project>
       <Name>TypeReflection</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TypeResolution\TypeResolution.csproj">
-      <Project>{84bd7210-25eb-42a3-8435-c22f42d27d2c}</Project>
-      <Name>TypeResolution</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

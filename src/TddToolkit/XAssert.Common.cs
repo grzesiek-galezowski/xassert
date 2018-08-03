@@ -42,7 +42,7 @@ namespace TddEbook.TddToolkit
       
       if (!type.HasConstructorWithParameters())
       {
-        var constraints = new List<IConstraint> { new ConstructorsMustBeNullProtected(type.ToClrType())};
+        var constraints = new List<IConstraint> { new ConstructorsMustBeNullProtected(type.ToClrType(), type)};
         TypeAdheresTo(constraints);
       }
     }
@@ -134,14 +134,6 @@ namespace TddEbook.TddToolkit
       ExecutionOf(() => TypeOf<T>.Inequality()).Should().NotThrow<Exception>();
     }
 
-    public static void All(Action<AssertionRecorder> asserts)
-    {
-      var recorder = new AssertionRecorder();
-      asserts.Invoke(recorder);
-
-      recorder.AssertTrue();
-    }
-
     private static Action ExecutionOf(Action func)
     {
       return func;
@@ -185,15 +177,17 @@ namespace TddEbook.TddToolkit
   public class ConstructorsMustBeNullProtected : IConstraint
   {
     private readonly Type _type;
+    private readonly ISmartType _smartType;
 
-    public ConstructorsMustBeNullProtected(Type type)
+    public ConstructorsMustBeNullProtected(Type type, ISmartType smartType)
     {
       _type = type;
+      _smartType = smartType;
     }
 
     public void CheckAndRecord(ConstraintsViolations violations)
     {
-      var constructors = SmartType.For(_type).GetAllPublicConstructors();
+      var constructors = _smartType.GetAllPublicConstructors();
       var fallbackTypeGenerator = new FallbackTypeGenerator(_type);
 
       foreach (var constructor in constructors)
@@ -203,7 +197,7 @@ namespace TddEbook.TddToolkit
     }
 
     private static void AssertNullCheckForEveryPossibleArgumentOf(IConstraintsViolations violations,
-                                                                  IConstructorWrapper2 constructor,
+                                                                  IConstructorWrapper constructor,
                                                                   FallbackTypeGenerator fallbackTypeGenerator)
     {
       for (int i = 0; i < constructor.GetParametersCount(); ++i)

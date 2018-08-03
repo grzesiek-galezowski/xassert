@@ -6,7 +6,7 @@ namespace TddEbook.TypeReflection
 {
   public static class TypeOf<T>
   {
-    private static readonly IType2 Type;
+    private static readonly IType Type;
 
     static TypeOf()
     {
@@ -42,11 +42,6 @@ namespace TddEbook.TypeReflection
     public static bool Is<T1>()
     {
       return typeof (T) == typeof (T1);
-    }
-
-    public static bool IsOpenGeneric(Type type)
-    {
-      return Type.IsOpenGeneric(type);
     }
   }
 }

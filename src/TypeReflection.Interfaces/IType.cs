@@ -4,27 +4,25 @@ using TddEbook.TddToolkit.CommonTypes;
 
 namespace TypeReflection.Interfaces
 {
-  public interface IType2
+  public interface IType
   {
     bool HasPublicParameterlessConstructor();
     bool IsImplementationOfOpenGeneric(Type openGenericType);
     bool IsConcrete();
-    IEnumerable<IFieldWrapper2> GetAllInstanceFields();
-    IEnumerable<IFieldWrapper2> GetAllStaticFields();
-    IEnumerable<IFieldWrapper2> GetAllConstants();
+    IEnumerable<IFieldWrapper> GetAllInstanceFields();
+    IEnumerable<IFieldWrapper> GetAllStaticFields();
+    IEnumerable<IFieldWrapper> GetAllConstants();
     IEnumerable<IPropertyWrapper> GetAllPublicInstanceProperties();
-    Maybe<IConstructorWrapper2> PickConstructorWithLeastNonPointersParameters();
+    Maybe<IConstructorWrapper> PickConstructorWithLeastNonPointersParameters();
     IBinaryOperator Equality();
     IBinaryOperator Inequality();
     IEnumerable<IEventWrapper2> GetAllNonPublicEventsWithoutExplicitlyImplemented();
-    IEnumerable<IConstructorWrapper2> GetAllPublicConstructors();
-    IEnumerable<IFieldWrapper2> GetAllPublicInstanceFields();
+    IEnumerable<IConstructorWrapper> GetAllPublicConstructors();
     IEnumerable<IPropertyWrapper> GetPublicInstanceWritableProperties();
     bool HasConstructorWithParameters();
     bool CanBeAssignedNullValue();
     Type ToClrType();
     bool IsException();
     bool HasPublicConstructorCountOfAtMost(int i);
-    bool IsOpenGeneric(Type type);
   }
 }

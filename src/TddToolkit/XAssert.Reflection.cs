@@ -27,7 +27,7 @@ namespace TddEbook.TddToolkit
 
       public static void NoStaticFields(Type type)
       {
-        var staticFields = new List<IFieldWrapper2>(SmartType.For(type).GetAllStaticFields());
+        var staticFields = new List<IFieldWrapper>(SmartType.For(type).GetAllStaticFields());
 
         staticFields.Should()
                     .BeEmpty("SmartType " + type + " should not contain static fields, but: " + Environment.NewLine +
@@ -37,7 +37,7 @@ namespace TddEbook.TddToolkit
 
       public static void NoStaticFields(Assembly assembly)
       {
-        var staticFields = new List<IFieldWrapper2>();
+        var staticFields = new List<IFieldWrapper>();
         foreach (var type in assembly.GetTypes())
         {
           staticFields.AddRange(SmartType.For(type).GetAllStaticFields());
@@ -93,7 +93,7 @@ namespace TddEbook.TddToolkit
                                           StringFrom(constructorLimitsExceeded));
       }
 
-      private static string StringFrom(IEnumerable<IFieldWrapper2> staticFields)
+      private static string StringFrom(IEnumerable<IFieldWrapper> staticFields)
       {
         var result = new HashSet<string>(staticFields.Select(f => f.GenerateExistenceMessage()));
         return String.Join(Environment.NewLine, result);

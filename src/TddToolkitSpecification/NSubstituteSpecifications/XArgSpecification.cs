@@ -4,7 +4,6 @@ using NSubstitute;
 using NSubstitute.Exceptions;
 using NUnit.Framework;
 using TddEbook.TddToolkit.NSubstitute;
-using TddEbook.TddToolkit.NSubstitute.ImplementationDetails;
 
 namespace TddEbook.TddToolkitSpecification.NSubstituteSpecifications
 {

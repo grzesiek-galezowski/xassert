@@ -7,11 +7,11 @@ using TddEbook.TddToolkit.CommonTypes;
 using TypeReflection.ImplementationDetails;
 using TypeReflection.ImplementationDetails.ConstructorRetrievals;
 using TypeReflection.Interfaces;
-using static TypeReflection.ImplementationDetails.ConstructorWrapper2;
+using static TypeReflection.ImplementationDetails.ConstructorWrapper;
 
 namespace TddEbook.TypeReflection
 {
-  public interface ISmartType : IType2, IConstructorQueries
+  public interface ISmartType : IType, IConstructorQueries
   {
   }
 
@@ -33,7 +33,7 @@ namespace TddEbook.TypeReflection
       return GetPublicParameterlessConstructor().HasValue || _typeInfo.IsPrimitive || _typeInfo.IsAbstract;
     }
 
-    public Maybe<IConstructorWrapper2> GetNonPublicParameterlessConstructorInfo()
+    public Maybe<IConstructorWrapper> GetNonPublicParameterlessConstructorInfo()
     {
       var constructorInfo = _type.GetConstructor(BindingFlags.NonPublic | BindingFlags.Instance, null, Type.EmptyTypes, null);
       if (constructorInfo != null)
@@ -42,18 +42,18 @@ namespace TddEbook.TypeReflection
       }
       else
       {
-        return Maybe<IConstructorWrapper2>.Not;
+        return Maybe<IConstructorWrapper>.Not;
       }
     }
 
-    public Maybe<IConstructorWrapper2> GetPublicParameterlessConstructor()
+    public Maybe<IConstructorWrapper> GetPublicParameterlessConstructor()
     {
 
       var constructorInfo = _type.GetConstructor(
         BindingFlags.Public | BindingFlags.Instance, null, Type.EmptyTypes, null);
       if (constructorInfo == null)
       {
-        return Maybe<IConstructorWrapper2>.Not;
+        return Maybe<IConstructorWrapper>.Not;
       }
       else
       {
@@ -83,7 +83,7 @@ namespace TddEbook.TypeReflection
       return !_typeInfo.IsAbstract && !_typeInfo.IsInterface;
     }
 
-    public IEnumerable<IFieldWrapper2> GetAllInstanceFields()
+    public IEnumerable<IFieldWrapper> GetAllInstanceFields()
     {
       var fields = _typeInfo.GetFields(
         BindingFlags.Instance 
@@ -92,7 +92,7 @@ namespace TddEbook.TypeReflection
       return fields.Select(f => new FieldWrapper(f));
     }
 
-    public IEnumerable<IFieldWrapper2> GetAllStaticFields()
+    public IEnumerable<IFieldWrapper> GetAllStaticFields()
     {
       //bug first convert to field wrappers and then ask questions, not the other way round.
       //bug GetAllFields() should return field wrappers
@@ -104,7 +104,7 @@ namespace TddEbook.TypeReflection
                                 .Select(f => new FieldWrapper(f));
     }
 
-    public IEnumerable<IFieldWrapper2> GetAllConstants()
+    public IEnumerable<IFieldWrapper> GetAllConstants()
     {
       return GetAllFields(_type).Select(f => new FieldWrapper(f)).Where(f => f.IsConstant());
     }
@@ -115,9 +115,9 @@ namespace TddEbook.TypeReflection
       return properties.Select(p => new PropertyWrapper(p));
     }
 
-    public Maybe<IConstructorWrapper2> PickConstructorWithLeastNonPointersParameters()
+    public Maybe<IConstructorWrapper> PickConstructorWithLeastNonPointersParameters()
     {
-      IConstructorWrapper2 leastParamsConstructor = null;
+      IConstructorWrapper leastParamsConstructor = null;
 
       var constructors = For(_type).GetAllPublicConstructors();
       var numberOfParams = int.MaxValue;
@@ -249,52 +249,52 @@ namespace TddEbook.TypeReflection
       return true;
     }
 
-    public IEnumerable<IConstructorWrapper2> GetAllPublicConstructors()
+    public IEnumerable<IConstructorWrapper> GetAllPublicConstructors()
     {
       return _constructorRetrieval.RetrieveFrom(this);
     }
 
-    public List<IConstructorWrapper2> TryToObtainInternalConstructorsWithoutRecursiveArguments()
+    public List<IConstructorWrapper> TryToObtainInternalConstructorsWithoutRecursiveArguments()
     {
       return TryToObtainInternalConstructors().Where(c => c.IsNotRecursive()).ToList();
     }
 
-    private List<IConstructorWrapper2> TryToObtainInternalConstructors()
+    private List<IConstructorWrapper> TryToObtainInternalConstructors()
     {
       var constructorInfos = _typeInfo.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic);
       var enumerable = constructorInfos.Where(IsInternal);
 
-      var wrappers = enumerable.Select(c => (IConstructorWrapper2) (FromConstructorInfo(c))).ToList();
+      var wrappers = enumerable.Select(c => (IConstructorWrapper) (FromConstructorInfo(c))).ToList();
       return wrappers;
     }
 
-    public List<ConstructorWrapper2> TryToObtainPublicConstructors()
+    public List<ConstructorWrapper> TryToObtainPublicConstructors()
     {
       return _typeInfo.GetConstructors(BindingFlags.Public | BindingFlags.Instance)
         .Select(c => FromConstructorInfo(c)).ToList();
     }
 
-    public IEnumerable<IConstructorWrapper2> TryToObtainPublicConstructorsWithoutRecursiveArguments()
+    public IEnumerable<IConstructorWrapper> TryToObtainPublicConstructorsWithoutRecursiveArguments()
     {
       return TryToObtainPublicConstructors().Where(c => c.IsNotRecursive());
     }
 
-    public IEnumerable<IConstructorWrapper2> TryToObtainPublicConstructorsWithRecursiveArguments()
+    public IEnumerable<IConstructorWrapper> TryToObtainPublicConstructorsWithRecursiveArguments()
     {
       return TryToObtainPublicConstructors().Where(c => c.IsRecursive());
     }
 
-    public IEnumerable<IConstructorWrapper2> TryToObtainInternalConstructorsWithRecursiveArguments()
+    public IEnumerable<IConstructorWrapper> TryToObtainInternalConstructorsWithRecursiveArguments()
     {
       return TryToObtainInternalConstructors().Where(c => c.IsRecursive()).ToList();
     }
 
-    public IEnumerable<IConstructorWrapper2> TryToObtainPrimitiveTypeConstructor()
+    public IEnumerable<IConstructorWrapper> TryToObtainPrimitiveTypeConstructor()
     {
       return DefaultParameterlessConstructor.ForValue(_type);
     }
 
-    public IEnumerable<IConstructorWrapper2> TryToObtainPublicStaticFactoryMethodWithoutRecursion()
+    public IEnumerable<IConstructorWrapper> TryToObtainPublicStaticFactoryMethodWithoutRecursion()
     {
       return _typeInfo.GetMethods(BindingFlags.Static | BindingFlags.Public)
         .Where(m => !m.IsSpecialName)
@@ -304,20 +304,12 @@ namespace TddEbook.TypeReflection
         .Where(c => c.IsFactoryMethod());
     }
 
-    public IEnumerable<IFieldWrapper2> GetAllPublicInstanceFields()
-    {
-      return _typeInfo.GetFields(
-        BindingFlags.Public | BindingFlags.Instance).Select(f => new FieldWrapper(f));
-    }
-
     public IEnumerable<IPropertyWrapper> GetPublicInstanceWritableProperties()
     {
       return _typeInfo.GetProperties(BindingFlags.Public | BindingFlags.Instance)
         .Where(p => p.CanWrite)
         .Select(p => new PropertyWrapper(p));
     }
-
-    //TODO even strict mocks can be done this way...
 
     public bool HasConstructorWithParameters()
     {
