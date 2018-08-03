@@ -213,7 +213,7 @@ namespace TypeReflection
         type.GetTypeInfo().BaseType);
     }
 
-    public IEnumerable<IEventWrapper2> GetAllNonPublicEventsWithoutExplicitlyImplemented()
+    public IEnumerable<IEventWrapper> GetAllNonPublicEventsWithoutExplicitlyImplemented()
     {
       return _typeInfo.GetEvents(
         BindingFlags.NonPublic 

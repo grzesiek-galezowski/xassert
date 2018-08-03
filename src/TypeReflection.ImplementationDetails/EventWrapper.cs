@@ -3,7 +3,7 @@ using TypeReflection.Interfaces;
 
 namespace TypeReflection.ImplementationDetails
 {
-  public class EventWrapper : IEventWrapper2
+  public class EventWrapper : IEventWrapper
   {
     private readonly EventInfo _eventInfo;
 

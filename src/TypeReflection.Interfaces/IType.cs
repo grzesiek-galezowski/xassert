@@ -16,7 +16,7 @@ namespace TypeReflection.Interfaces
     Maybe<IConstructorWrapper> PickConstructorWithLeastNonPointersParameters();
     IBinaryOperator Equality();
     IBinaryOperator Inequality();
-    IEnumerable<IEventWrapper2> GetAllNonPublicEventsWithoutExplicitlyImplemented();
+    IEnumerable<IEventWrapper> GetAllNonPublicEventsWithoutExplicitlyImplemented();
     IEnumerable<IConstructorWrapper> GetAllPublicConstructors();
     bool HasConstructorWithParameters();
     bool CanBeAssignedNullValue();

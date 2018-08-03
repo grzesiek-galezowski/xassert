@@ -44,6 +44,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ConstructorRetrieval\ConstructorRetrieval.csproj">
+      <Project>{DF177708-C9A4-4367-8D93-0DD9BBDD6E33}</Project>
+      <Name>ConstructorRetrieval</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TddToolkit\TddToolkit.csproj">
       <Project>{A52E21F4-2301-4F4E-9361-BE954FB490A0}</Project>
       <Name>TddToolkit</Name>

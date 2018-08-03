@@ -131,6 +131,10 @@
       <Project>{c71f0fea-e0e7-4456-aa0b-cd82133e12d2}</Project>
       <Name>CommonTypes</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ConstructorRetrieval\ConstructorRetrieval.csproj">
+      <Project>{DF177708-C9A4-4367-8D93-0DD9BBDD6E33}</Project>
+      <Name>ConstructorRetrieval</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EqualsAssertions\EqualsAssertions.csproj">
       <Project>{1A986A1A-A8EF-46A8-BB38-F4F0A9A58EF4}</Project>
       <Name>EqualsAssertions</Name>

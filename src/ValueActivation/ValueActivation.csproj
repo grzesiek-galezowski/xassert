@@ -10,10 +10,11 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ValueActivation</RootNamespace>
     <AssemblyName>ValueActivation</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -91,6 +92,10 @@
     <ProjectReference Include="..\CommonTypes\CommonTypes.csproj">
       <Project>{C71F0FEA-E0E7-4456-AA0B-CD82133E12D2}</Project>
       <Name>CommonTypes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ConstructorRetrieval\ConstructorRetrieval.csproj">
+      <Project>{DF177708-C9A4-4367-8D93-0DD9BBDD6E33}</Project>
+      <Name>ConstructorRetrieval</Name>
     </ProjectReference>
     <ProjectReference Include="..\TypeReflection.Interfaces\TypeReflection.Interfaces.csproj">
       <Project>{1B4C8B73-149B-49E6-B664-8D186D16AFB7}</Project>

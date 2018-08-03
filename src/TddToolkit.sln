@@ -46,6 +46,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphAssertions", "GraphAss
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LockAssertions", "LockAssertions\LockAssertions.csproj", "{C1DBE00B-C113-40F6-A407-0ACCF334BDCF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConstructorRetrieval", "ConstructorRetrieval\ConstructorRetrieval.csproj", "{DF177708-C9A4-4367-8D93-0DD9BBDD6E33}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -104,6 +106,10 @@ Global
 		{C1DBE00B-C113-40F6-A407-0ACCF334BDCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C1DBE00B-C113-40F6-A407-0ACCF334BDCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C1DBE00B-C113-40F6-A407-0ACCF334BDCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF177708-C9A4-4367-8D93-0DD9BBDD6E33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF177708-C9A4-4367-8D93-0DD9BBDD6E33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF177708-C9A4-4367-8D93-0DD9BBDD6E33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF177708-C9A4-4367-8D93-0DD9BBDD6E33}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

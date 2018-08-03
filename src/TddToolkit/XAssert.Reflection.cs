@@ -46,7 +46,7 @@ namespace TddEbook.TddToolkit
 
       public static void NoNonPublicEvents(Assembly assembly)
       {
-        var nonPublicEvents = new List<IEventWrapper2>();
+        var nonPublicEvents = new List<IEventWrapper>();
         
         foreach (var type in assembly.GetTypes())
         {
@@ -84,7 +84,7 @@ namespace TddEbook.TddToolkit
         return String.Join(Environment.NewLine, result);
       }
 
-      private static string StringFrom(IEnumerable<IEventWrapper2> nonPublicEvents)
+      private static string StringFrom(IEnumerable<IEventWrapper> nonPublicEvents)
       {
         var result = new HashSet<string>(nonPublicEvents.Select(eventWrapper => eventWrapper.GenerateNonPublicExistenceMessage()));
         return String.Join(Environment.NewLine, result);
