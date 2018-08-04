@@ -1,9 +1,10 @@
 ﻿using System.Reflection;
+using System.Text;
 using TypeReflection.Interfaces;
 
 namespace TypeReflection.ImplementationDetails
 {
-  public class Event : IEventWrapper
+  public class Event : IAmEvent
   {
     private readonly EventInfo _eventInfo;
 
@@ -14,9 +15,12 @@ namespace TypeReflection.ImplementationDetails
 
     public string GenerateNonPublicExistenceMessage()
     {
-      return "SmartType: " + _eventInfo.DeclaringType +
-             " contains non public event " + _eventInfo.Name +
-             " of type " + _eventInfo.EventHandlerType;
+      return new StringBuilder("SmartType: ")
+        .Append(_eventInfo.DeclaringType)
+        .Append(" contains non public event ")
+        .Append(_eventInfo.Name)
+        .Append(" of type ")
+        .Append(_eventInfo.EventHandlerType).ToString();
 
     }
   }

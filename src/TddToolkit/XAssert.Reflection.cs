@@ -13,7 +13,7 @@ namespace TddEbook.TddToolkit
     {
       public static void NoStaticFields(Type type)
       {
-        var staticFields = new List<IFieldWrapper>(SmartType.For(type).GetAllStaticFields());
+        var staticFields = new List<IAmField>(SmartType.For(type).GetAllStaticFields());
 
         staticFields.Should()
                     .BeEmpty("SmartType " + type + " should not contain static fields, but: " + Environment.NewLine +
@@ -22,7 +22,7 @@ namespace TddEbook.TddToolkit
 
       public static void NoStaticFields(Assembly assembly)
       {
-        var staticFields = new List<IFieldWrapper>();
+        var staticFields = new List<IAmField>();
         foreach (var type in assembly.GetTypes())
         {
           staticFields.AddRange(SmartType.For(type).GetAllStaticFields());
@@ -46,7 +46,7 @@ namespace TddEbook.TddToolkit
 
       public static void NoNonPublicEvents(Assembly assembly)
       {
-        var nonPublicEvents = new List<IEventWrapper>();
+        var nonPublicEvents = new List<IAmEvent>();
         
         foreach (var type in assembly.GetTypes())
         {
@@ -78,13 +78,13 @@ namespace TddEbook.TddToolkit
                                           StringFrom(constructorLimitsExceeded));
       }
 
-      private static string StringFrom(IEnumerable<IFieldWrapper> staticFields)
+      private static string StringFrom(IEnumerable<IAmField> staticFields)
       {
         var result = new HashSet<string>(staticFields.Select(f => f.GenerateExistenceMessage()));
         return String.Join(Environment.NewLine, result);
       }
 
-      private static string StringFrom(IEnumerable<IEventWrapper> nonPublicEvents)
+      private static string StringFrom(IEnumerable<IAmEvent> nonPublicEvents)
       {
         var result = new HashSet<string>(nonPublicEvents.Select(eventWrapper => eventWrapper.GenerateNonPublicExistenceMessage()));
         return String.Join(Environment.NewLine, result);

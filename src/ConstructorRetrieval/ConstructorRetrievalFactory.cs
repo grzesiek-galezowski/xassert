@@ -1,6 +1,4 @@
-using TypeReflection.ImplementationDetails.ConstructorRetrievals;
-
-namespace TypeReflection
+namespace ConstructorRetrieval
 {
   public class ConstructorRetrievalFactory
   {

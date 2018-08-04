@@ -1,14 +1,13 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
 using TypeReflection.Interfaces;
 
 namespace TypeReflection.ImplementationDetails
 {
-  public class PropertyWrapper : IPropertyWrapper
+  public class Property : IAmProperty
   {
     private readonly PropertyInfo _propertyInfo;
 
-    public PropertyWrapper(PropertyInfo propertyInfo)
+    public Property(PropertyInfo propertyInfo)
     {
       _propertyInfo = propertyInfo;
     }
@@ -23,18 +22,6 @@ namespace TypeReflection.ImplementationDetails
       return "Value objects are immutable by design, but Property "
              + _propertyInfo.Name
              + " is mutable. Declare property setter as private to pass this check";
-    }
-
-    public bool HasAbstractGetter()
-    {
-      return _propertyInfo.GetGetMethod().IsAbstract;
-    }
-
-    public Type PropertyType { get { return _propertyInfo.PropertyType; } }
-
-    public void SetValue(object result, object value)
-    {
-      _propertyInfo.SetValue(result, value, null);
     }
   }
 }

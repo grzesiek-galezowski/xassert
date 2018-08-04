@@ -4,8 +4,8 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using CommonTypes;
+using ConstructorRetrieval;
 using TypeReflection.ImplementationDetails;
-using TypeReflection.ImplementationDetails.ConstructorRetrievals;
 using TypeReflection.Interfaces;
 
 namespace TypeReflection
@@ -17,10 +17,10 @@ namespace TypeReflection
   public class SmartType : ISmartType
   {
     private readonly Type _type;
-    private readonly ConstructorRetrieval _constructorRetrieval;
+    private readonly ConstructorRetrieval.ConstructorRetrieval _constructorRetrieval;
     private readonly TypeInfo _typeInfo;
 
-    public SmartType(Type type, ConstructorRetrieval constructorRetrieval)
+    public SmartType(Type type, ConstructorRetrieval.ConstructorRetrieval constructorRetrieval)
     {
       _type = type;
       _constructorRetrieval = constructorRetrieval;
@@ -77,7 +77,7 @@ namespace TypeReflection
       return !_typeInfo.IsAbstract && !_typeInfo.IsInterface;
     }
 
-    public IEnumerable<IFieldWrapper> GetAllInstanceFields()
+    public IEnumerable<IAmField> GetAllInstanceFields()
     {
       var fields = _typeInfo.GetFields(
         BindingFlags.Instance 
@@ -86,7 +86,7 @@ namespace TypeReflection
       return fields.Select(f => new Field(f));
     }
 
-    public IEnumerable<IFieldWrapper> GetAllStaticFields()
+    public IEnumerable<IAmField> GetAllStaticFields()
     {
       //bug first convert to field wrappers and then ask questions, not the other way round.
       //bug GetAllFields() should return field wrappers
@@ -98,15 +98,15 @@ namespace TypeReflection
                                 .Select(f => new Field(f));
     }
 
-    public IEnumerable<IFieldWrapper> GetAllConstants()
+    public IEnumerable<IAmField> GetAllConstants()
     {
       return GetAllFields(_type).Select(f => new Field(f)).Where(f => f.IsConstant());
     }
 
-    public IEnumerable<IPropertyWrapper> GetAllPublicInstanceProperties()
+    public IEnumerable<IAmProperty> GetAllPublicInstanceProperties()
     {
       var properties = _typeInfo.GetProperties(BindingFlags.Instance | BindingFlags.Public);
-      return properties.Select(p => new PropertyWrapper(p));
+      return properties.Select(p => new ImplementationDetails.Property(p));
     }
 
     public Maybe<ICreateObjects> PickConstructorWithLeastNonPointersParameters()
@@ -213,7 +213,7 @@ namespace TypeReflection
         type.GetTypeInfo().BaseType);
     }
 
-    public IEnumerable<IEventWrapper> GetAllNonPublicEventsWithoutExplicitlyImplemented()
+    public IEnumerable<IAmEvent> GetAllNonPublicEventsWithoutExplicitlyImplemented()
     {
       return _typeInfo.GetEvents(
         BindingFlags.NonPublic 

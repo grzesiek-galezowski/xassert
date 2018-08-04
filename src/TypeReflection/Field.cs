@@ -9,7 +9,7 @@ using TypeReflection.Interfaces;
 
 namespace TypeReflection
 {
-  public class Field : IFieldWrapper
+  public class Field : IAmField
   {
     private readonly FieldInfo _fieldInfo;
 
@@ -63,7 +63,7 @@ namespace TypeReflection
 
     }
 
-    private bool HasTheSameNameAs(IFieldWrapper otherConstant)
+    private bool HasTheSameNameAs(IAmField otherConstant)
     {
       return otherConstant.HasName(_fieldInfo.Name);
     }
@@ -73,7 +73,7 @@ namespace TypeReflection
       return _fieldInfo.Name == name;
     }
 
-    private bool HasTheSameValueAs(IFieldWrapper otherConstant)
+    private bool HasTheSameValueAs(IAmField otherConstant)
     {
       return otherConstant.HasValue(_fieldInfo.GetValue(null));
     }
@@ -83,7 +83,7 @@ namespace TypeReflection
       return _fieldInfo.GetValue(null).Equals(name);
     }
 
-    public void AssertNotDuplicateOf(IFieldWrapper otherConstant)
+    public void AssertNotDuplicateOf(IAmField otherConstant)
     {
       if (!HasTheSameNameAs(otherConstant))
       {

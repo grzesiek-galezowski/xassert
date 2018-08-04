@@ -1,6 +1,6 @@
 ﻿namespace TypeReflection.Interfaces
 {
-  public interface IEventWrapper
+  public interface IAmEvent
   {
     string GenerateNonPublicExistenceMessage();
   }

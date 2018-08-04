@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConstructorRetrieval.cs" />
+    <Compile Include="ConstructorRetrievalFactory.cs" />
     <Compile Include="IConstructorQueries.cs" />
     <Compile Include="InternalConstructorWithoutRecursionRetrieval.cs" />
     <Compile Include="InternalRecursiveConstructorRetrieval.cs" />

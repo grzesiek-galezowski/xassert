@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using TypeReflection.Interfaces;
 
-namespace TypeReflection.ImplementationDetails.ConstructorRetrievals
+namespace ConstructorRetrieval
 {
   public interface ConstructorRetrieval
   {

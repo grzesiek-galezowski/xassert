@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using CommonTypes;
+using TypeReflection.Interfaces;
 
-namespace TypeReflection.Interfaces
+namespace ConstructorRetrieval
 {
   public interface IConstructorQueries
   {
