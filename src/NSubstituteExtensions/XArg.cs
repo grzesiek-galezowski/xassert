@@ -6,9 +6,10 @@ using FluentAssertions;
 using NSubstitute;
 using NSubstitute.Core;
 using NSubstitute.Core.Arguments;
-using TddEbook.TddToolkit.NSubstitute.ImplementationDetails;
+using NSubstituteExtensions.ImplementationDetails;
+using TddEbook.TddToolkit;
 
-namespace TddEbook.TddToolkit.NSubstitute
+namespace NSubstituteExtensions
 {
   public static class XArg
   {

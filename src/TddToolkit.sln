@@ -48,6 +48,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LockAssertions", "LockAsser
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConstructorRetrieval", "ConstructorRetrieval\ConstructorRetrieval.csproj", "{DF177708-C9A4-4367-8D93-0DD9BBDD6E33}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NSubstituteExtensions", "NSubstituteExtensions\NSubstituteExtensions.csproj", "{0C8A8629-5E4C-4C02-AA9F-54F9401FF0F2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -110,6 +112,10 @@ Global
 		{DF177708-C9A4-4367-8D93-0DD9BBDD6E33}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF177708-C9A4-4367-8D93-0DD9BBDD6E33}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF177708-C9A4-4367-8D93-0DD9BBDD6E33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C8A8629-5E4C-4C02-AA9F-54F9401FF0F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C8A8629-5E4C-4C02-AA9F-54F9401FF0F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C8A8629-5E4C-4C02-AA9F-54F9401FF0F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C8A8629-5E4C-4C02-AA9F-54F9401FF0F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

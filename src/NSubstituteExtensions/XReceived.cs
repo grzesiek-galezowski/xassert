@@ -1,8 +1,8 @@
 ﻿using System;
 using NSubstitute.Core;
-using TddEbook.TddToolkit.NSubstitute.ImplementationDetails;
+using NSubstituteExtensions.ImplementationDetails;
 
-namespace TddEbook.TddToolkit.NSubstitute
+namespace NSubstituteExtensions
 {
   public class XReceived
   {

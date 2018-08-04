@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace TddEbook.TddToolkit.NSubstitute
+namespace NSubstituteExtensions
 {
   public class MultipleConditionsFailedException : Exception
   {

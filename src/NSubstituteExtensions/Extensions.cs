@@ -1,11 +1,10 @@
 ﻿using System.Linq;
-using System.Text;
 using NSubstitute;
 using NSubstitute.Core;
 using NSubstitute.Core.SequenceChecking;
 using NSubstitute.Exceptions;
 
-namespace TddEbook.TddToolkit.NSubstitute
+namespace NSubstituteExtensions
 {
   public static class Extensions
   {

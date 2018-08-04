@@ -7,7 +7,7 @@ using NSubstitute.Core;
 using NSubstitute.Core.SequenceChecking;
 using NSubstitute.Exceptions;
 
-namespace TddEbook.TddToolkit.NSubstitute.ImplementationDetails
+namespace NSubstituteExtensions.ImplementationDetails
 {
   public class SequenceExclusiveAssertion
   {

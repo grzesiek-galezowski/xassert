@@ -99,14 +99,6 @@
     <Compile Include="ConstructorsMustBeNullProtected.cs" />
     <Compile Include="Are.cs" />
     <Compile Include="Blocking.cs" />
-    <Compile Include="NSubstitute\EquivalencyAssertion.cs" />
-    <Compile Include="NSubstitute\ImplementationDetails\LambdaArgumentMatcher.cs" />
-    <Compile Include="NSubstitute\ImplementationDetails\AssertionsExecutionLoop.cs" />
-    <Compile Include="NSubstitute\MultipleConditionsFailedException.cs" />
-    <Compile Include="NSubstitute\ImplementationDetails\SequenceExclusiveAssertion.cs" />
-    <Compile Include="NSubstitute\Extensions.cs" />
-    <Compile Include="NSubstitute\XArg.cs" />
-    <Compile Include="NSubstitute\XReceived.cs" />
     <Compile Include="SyncAssert.cs" />
     <Compile Include="ValueTypeTraits.cs" />
     <Compile Include="XAssert.ObjectGraph.cs" />

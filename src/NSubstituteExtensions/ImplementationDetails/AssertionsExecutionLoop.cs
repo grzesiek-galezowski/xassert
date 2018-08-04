@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace TddEbook.TddToolkit.NSubstitute.ImplementationDetails
+namespace NSubstituteExtensions.ImplementationDetails
 {
   internal static class AssertionsExecutionLoop
   {

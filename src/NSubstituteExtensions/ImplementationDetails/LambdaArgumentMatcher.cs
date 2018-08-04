@@ -2,7 +2,7 @@ using System;
 using NSubstitute.Core;
 using NSubstitute.Core.Arguments;
 
-namespace TddEbook.TddToolkit.NSubstitute.ImplementationDetails
+namespace NSubstituteExtensions.ImplementationDetails
 {
   public class LambdaArgumentMatcher<T> : IArgumentMatcher, IDescribeNonMatches
   {

@@ -1,8 +1,8 @@
 ﻿using System;
 using NSubstitute;
 using NSubstitute.Exceptions;
+using NSubstituteExtensions;
 using NUnit.Framework;
-using TddEbook.TddToolkit.NSubstitute;
 
 namespace TddEbook.TddToolkitSpecification.NSubstituteSpecifications
 {
