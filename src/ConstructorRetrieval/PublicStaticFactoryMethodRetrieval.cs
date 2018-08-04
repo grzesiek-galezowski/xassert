@@ -13,7 +13,7 @@ namespace TypeReflection.ImplementationDetails.ConstructorRetrievals
       _next = next;
     }
 
-    public IEnumerable<IConstructorWrapper> RetrieveFrom(IConstructorQueries constructors)
+    public IEnumerable<ICreateObjects> RetrieveFrom(IConstructorQueries constructors)
     {
       var methods = constructors.TryToObtainPublicStaticFactoryMethodWithoutRecursion();
       if (methods.Count() == 0)

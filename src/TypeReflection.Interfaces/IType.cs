@@ -13,11 +13,11 @@ namespace TypeReflection.Interfaces
     IEnumerable<IFieldWrapper> GetAllStaticFields();
     IEnumerable<IFieldWrapper> GetAllConstants();
     IEnumerable<IPropertyWrapper> GetAllPublicInstanceProperties();
-    Maybe<IConstructorWrapper> PickConstructorWithLeastNonPointersParameters();
-    IBinaryOperator Equality();
-    IBinaryOperator Inequality();
+    Maybe<ICreateObjects> PickConstructorWithLeastNonPointersParameters();
+    IAmBinaryOperator Equality();
+    IAmBinaryOperator Inequality();
     IEnumerable<IEventWrapper> GetAllNonPublicEventsWithoutExplicitlyImplemented();
-    IEnumerable<IConstructorWrapper> GetAllPublicConstructors();
+    IEnumerable<ICreateObjects> GetAllPublicConstructors();
     bool HasConstructorWithParameters();
     bool CanBeAssignedNullValue();
     Type ToClrType();

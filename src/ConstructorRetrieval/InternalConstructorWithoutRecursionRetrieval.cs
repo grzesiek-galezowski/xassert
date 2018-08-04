@@ -13,9 +13,9 @@ namespace TypeReflection.ImplementationDetails.ConstructorRetrievals
       _next = next;
     }
 
-    public IEnumerable<IConstructorWrapper> RetrieveFrom(IConstructorQueries constructors)
+    public IEnumerable<ICreateObjects> RetrieveFrom(IConstructorQueries constructors)
     {
-      var internalConstructors = constructors.TryToObtainInternalConstructorsWithoutRecursiveArguments();
+      var internalConstructors = constructors.GetInternalConstructorsWithoutRecursiveParameters();
 
       if (internalConstructors.Any())
       {

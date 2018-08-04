@@ -5,6 +5,6 @@ namespace TypeReflection.ImplementationDetails.ConstructorRetrievals
 {
   public interface ConstructorRetrieval
   {
-    IEnumerable<IConstructorWrapper> RetrieveFrom(IConstructorQueries constructors);
+    IEnumerable<ICreateObjects> RetrieveFrom(IConstructorQueries constructors);
   }
 }

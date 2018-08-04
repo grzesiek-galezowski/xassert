@@ -3,11 +3,11 @@ using TypeReflection.Interfaces;
 
 namespace TypeReflection.ImplementationDetails
 {
-  public class EventWrapper : IEventWrapper
+  public class Event : IEventWrapper
   {
     private readonly EventInfo _eventInfo;
 
-    public EventWrapper(EventInfo eventInfo)
+    public Event(EventInfo eventInfo)
     {
       _eventInfo = eventInfo;
     }

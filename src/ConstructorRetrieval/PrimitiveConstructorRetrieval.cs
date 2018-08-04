@@ -5,7 +5,7 @@ namespace TypeReflection.ImplementationDetails.ConstructorRetrievals
 {
   public class PrimitiveConstructorRetrieval : ConstructorRetrieval
   {
-    public IEnumerable<IConstructorWrapper> RetrieveFrom(IConstructorQueries constructors)
+    public IEnumerable<ICreateObjects> RetrieveFrom(IConstructorQueries constructors)
     {
       return constructors.TryToObtainPrimitiveTypeConstructor();
     }

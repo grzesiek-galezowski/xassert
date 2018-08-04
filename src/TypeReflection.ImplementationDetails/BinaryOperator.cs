@@ -6,11 +6,11 @@ using TypeReflection.Interfaces.Exceptions;
 namespace TypeReflection.ImplementationDetails
 {
 
-  public class BinaryOperator<T, TResult> : IBinaryOperator<T,TResult>
+  public class BinaryOperator<T, TResult> : IAmBinaryOperator<T,TResult>
   {
-    private readonly IBinaryOperator _method;
+    private readonly IAmBinaryOperator _method;
 
-    private BinaryOperator(IBinaryOperator binaryOperator)
+    private BinaryOperator(IAmBinaryOperator binaryOperator)
     {
       _method = binaryOperator;
     }
@@ -20,13 +20,13 @@ namespace TypeReflection.ImplementationDetails
       return (TResult)_method.Evaluate(instance1, instance2);
     }
 
-    public static IBinaryOperator<T, bool> Wrap(IBinaryOperator binaryOperator)
+    public static IAmBinaryOperator<T, bool> Wrap(IAmBinaryOperator binaryOperator)
     {
       return new BinaryOperator<T, bool>(binaryOperator);
     }
   }
 
-  public class BinaryOperator : IBinaryOperator
+  public class BinaryOperator : IAmBinaryOperator
   {
     private readonly MethodInfo _method;
 
@@ -40,7 +40,7 @@ namespace TypeReflection.ImplementationDetails
       return _method.Invoke(null, new[] { instance1, instance2 });
     }
 
-    public static IBinaryOperator Wrap(
+    public static IAmBinaryOperator Wrap(
       Maybe<MethodInfo> maybeOperator, 
       Maybe<MethodInfo> maybeFallbackOperator, 
       string op)

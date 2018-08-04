@@ -5,13 +5,13 @@ namespace TypeReflection.Interfaces
 {
   public interface IConstructorQueries
   {
-    Maybe<IConstructorWrapper> GetNonPublicParameterlessConstructorInfo();
-    Maybe<IConstructorWrapper> GetPublicParameterlessConstructor();
-    List<IConstructorWrapper> TryToObtainInternalConstructorsWithoutRecursiveArguments();
-    IEnumerable<IConstructorWrapper> TryToObtainPublicConstructorsWithoutRecursiveArguments();
-    IEnumerable<IConstructorWrapper> TryToObtainPublicConstructorsWithRecursiveArguments();
-    IEnumerable<IConstructorWrapper> TryToObtainInternalConstructorsWithRecursiveArguments();
-    IEnumerable<IConstructorWrapper> TryToObtainPrimitiveTypeConstructor();
-    IEnumerable<IConstructorWrapper> TryToObtainPublicStaticFactoryMethodWithoutRecursion();
+    Maybe<ICreateObjects> GetNonPublicParameterlessConstructorInfo();
+    Maybe<ICreateObjects> GetPublicParameterlessConstructor();
+    List<ICreateObjects> GetInternalConstructorsWithoutRecursiveParameters();
+    IEnumerable<ICreateObjects> TryToObtainPublicConstructorsWithoutRecursiveArguments();
+    IEnumerable<ICreateObjects> TryToObtainPublicConstructorsWithRecursiveArguments();
+    IEnumerable<ICreateObjects> TryToObtainInternalConstructorsWithRecursiveArguments();
+    IEnumerable<ICreateObjects> TryToObtainPrimitiveTypeConstructor();
+    IEnumerable<ICreateObjects> TryToObtainPublicStaticFactoryMethodWithoutRecursion();
   }
 }

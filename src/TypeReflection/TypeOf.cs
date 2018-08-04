@@ -28,13 +28,13 @@ namespace TypeReflection
       return Type.IsConcrete();
     }
 
-    public static IBinaryOperator<T, bool> Equality()
+    public static IAmBinaryOperator<T, bool> Equality()
     {
 
       return BinaryOperator<T, bool>.Wrap(Type.Equality());
     }
 
-    public static IBinaryOperator<T, bool> Inequality()
+    public static IAmBinaryOperator<T, bool> Inequality()
     {
       return BinaryOperator<T, bool>.Wrap(Type.Inequality());
     }

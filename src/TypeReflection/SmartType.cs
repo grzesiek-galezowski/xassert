@@ -32,7 +32,7 @@ namespace TypeReflection
       return GetPublicParameterlessConstructor().HasValue || _typeInfo.IsPrimitive || _typeInfo.IsAbstract;
     }
 
-    public Maybe<IConstructorWrapper> GetNonPublicParameterlessConstructorInfo()
+    public Maybe<ICreateObjects> GetNonPublicParameterlessConstructorInfo()
     {
       var constructorInfo = _type.GetConstructor(BindingFlags.NonPublic | BindingFlags.Instance, null, Type.EmptyTypes, null);
       if (constructorInfo != null)
@@ -41,18 +41,18 @@ namespace TypeReflection
       }
       else
       {
-        return Maybe<IConstructorWrapper>.Not;
+        return Maybe<ICreateObjects>.Not;
       }
     }
 
-    public Maybe<IConstructorWrapper> GetPublicParameterlessConstructor()
+    public Maybe<ICreateObjects> GetPublicParameterlessConstructor()
     {
 
       var constructorInfo = _type.GetConstructor(
         BindingFlags.Public | BindingFlags.Instance, null, Type.EmptyTypes, null);
       if (constructorInfo == null)
       {
-        return Maybe<IConstructorWrapper>.Not;
+        return Maybe<ICreateObjects>.Not;
       }
       else
       {
@@ -83,7 +83,7 @@ namespace TypeReflection
         BindingFlags.Instance 
         | BindingFlags.Public 
         | BindingFlags.NonPublic);
-      return fields.Select(f => new FieldWrapper(f));
+      return fields.Select(f => new Field(f));
     }
 
     public IEnumerable<IFieldWrapper> GetAllStaticFields()
@@ -92,15 +92,15 @@ namespace TypeReflection
       //bug GetAllFields() should return field wrappers
       return GetAllFields(_type).Where(fieldInfo =>
                                        fieldInfo.IsStatic &&
-                                       !new FieldWrapper(fieldInfo).IsConstant() &&
+                                       !new Field(fieldInfo).IsConstant() &&
                                        !IsCompilerGenerated(fieldInfo) &&
                                        !IsDelegate(fieldInfo.FieldType))
-                                .Select(f => new FieldWrapper(f));
+                                .Select(f => new Field(f));
     }
 
     public IEnumerable<IFieldWrapper> GetAllConstants()
     {
-      return GetAllFields(_type).Select(f => new FieldWrapper(f)).Where(f => f.IsConstant());
+      return GetAllFields(_type).Select(f => new Field(f)).Where(f => f.IsConstant());
     }
 
     public IEnumerable<IPropertyWrapper> GetAllPublicInstanceProperties()
@@ -109,9 +109,9 @@ namespace TypeReflection
       return properties.Select(p => new PropertyWrapper(p));
     }
 
-    public Maybe<IConstructorWrapper> PickConstructorWithLeastNonPointersParameters()
+    public Maybe<ICreateObjects> PickConstructorWithLeastNonPointersParameters()
     {
-      IConstructorWrapper leastParamsConstructor = null;
+      ICreateObjects leastParamsConstructor = null;
 
       var constructors = For(_type).GetAllPublicConstructors();
       var numberOfParams = int.MaxValue;
@@ -172,12 +172,12 @@ namespace TypeReflection
       return !Equals(instance1, instance2);
     }
 
-    public IBinaryOperator Equality()
+    public IAmBinaryOperator Equality()
     {
       return BinaryOperator.Wrap(EqualityMethod(), ValueTypeEqualityMethod(), "operator ==");
     }
 
-    public IBinaryOperator Inequality()
+    public IAmBinaryOperator Inequality()
     {
       return BinaryOperator.Wrap(InequalityMethod(), ValueTypeInequalityMethod(), "operator !=");
     }
@@ -220,7 +220,7 @@ namespace TypeReflection
         | BindingFlags.Instance
         | BindingFlags.DeclaredOnly)
                   .Where(IsNotExplicitlyImplemented)
-                  .Select(e => new EventWrapper(e));
+                  .Select(e => new Event(e));
     }
 
     private static bool IsNotExplicitlyImplemented(EventInfo eventInfo)
@@ -243,58 +243,58 @@ namespace TypeReflection
       return true;
     }
 
-    public IEnumerable<IConstructorWrapper> GetAllPublicConstructors()
+    public IEnumerable<ICreateObjects> GetAllPublicConstructors()
     {
       return _constructorRetrieval.RetrieveFrom(this);
     }
 
-    public List<IConstructorWrapper> TryToObtainInternalConstructorsWithoutRecursiveArguments()
+    public List<ICreateObjects> GetInternalConstructorsWithoutRecursiveParameters()
     {
-      return TryToObtainInternalConstructors().Where(c => c.IsNotRecursive()).ToList();
+      return GetInternalConstructors().Where(c => c.IsNotRecursive()).ToList();
     }
 
-    private List<IConstructorWrapper> TryToObtainInternalConstructors()
+    private List<ICreateObjects> GetInternalConstructors()
     {
       var constructorInfos = _typeInfo.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic);
-      var enumerable = constructorInfos.Where(ConstructorWrapper.IsInternal);
+      var enumerable = constructorInfos.Where(CreationMethod.IsInternal);
 
-      var wrappers = enumerable.Select(c => (IConstructorWrapper) (ConstructorWrapper.FromConstructorInfo(c))).ToList();
+      var wrappers = enumerable.Select(c => (ICreateObjects) CreationMethod.FromConstructorInfo(c)).ToList();
       return wrappers;
     }
 
-    public List<ConstructorWrapper> TryToObtainPublicConstructors()
+    public List<CreationMethod> TryToObtainPublicConstructors()
     {
       return _typeInfo.GetConstructors(BindingFlags.Public | BindingFlags.Instance)
-        .Select(c => ConstructorWrapper.FromConstructorInfo(c)).ToList();
+        .Select(c => CreationMethod.FromConstructorInfo(c)).ToList();
     }
 
-    public IEnumerable<IConstructorWrapper> TryToObtainPublicConstructorsWithoutRecursiveArguments()
+    public IEnumerable<ICreateObjects> TryToObtainPublicConstructorsWithoutRecursiveArguments()
     {
       return TryToObtainPublicConstructors().Where(c => c.IsNotRecursive());
     }
 
-    public IEnumerable<IConstructorWrapper> TryToObtainPublicConstructorsWithRecursiveArguments()
+    public IEnumerable<ICreateObjects> TryToObtainPublicConstructorsWithRecursiveArguments()
     {
       return TryToObtainPublicConstructors().Where(c => c.IsRecursive());
     }
 
-    public IEnumerable<IConstructorWrapper> TryToObtainInternalConstructorsWithRecursiveArguments()
+    public IEnumerable<ICreateObjects> TryToObtainInternalConstructorsWithRecursiveArguments()
     {
-      return TryToObtainInternalConstructors().Where(c => c.IsRecursive()).ToList();
+      return GetInternalConstructors().Where(c => c.IsRecursive()).ToList();
     }
 
-    public IEnumerable<IConstructorWrapper> TryToObtainPrimitiveTypeConstructor()
+    public IEnumerable<ICreateObjects> TryToObtainPrimitiveTypeConstructor()
     {
       return DefaultParameterlessConstructor.ForValue(_type);
     }
 
-    public IEnumerable<IConstructorWrapper> TryToObtainPublicStaticFactoryMethodWithoutRecursion()
+    public IEnumerable<ICreateObjects> TryToObtainPublicStaticFactoryMethodWithoutRecursion()
     {
       return _typeInfo.GetMethods(BindingFlags.Static | BindingFlags.Public)
         .Where(m => !m.IsSpecialName)
         .Where(IsNotImplicitCast)
         .Where(IsNotExplicitCast)
-        .Select(ConstructorWrapper.FromStaticMethodInfo)
+        .Select(CreationMethod.FromStaticMethodInfo)
         .Where(c => c.IsFactoryMethod());
     }
 

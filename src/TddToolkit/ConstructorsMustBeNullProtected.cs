@@ -29,7 +29,7 @@ namespace TddEbook.TddToolkit
     }
 
     private static void AssertNullCheckForEveryPossibleArgumentOf(IConstraintsViolations violations,
-      IConstructorWrapper constructor,
+      ICreateObjects constructor,
       FallbackTypeGenerator fallbackTypeGenerator)
     {
       for (int i = 0; i < constructor.GetParametersCount(); ++i)

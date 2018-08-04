@@ -13,7 +13,7 @@ namespace TypeReflection.ImplementationDetails.ConstructorRetrievals
       _next = next;
     }
 
-    public IEnumerable<IConstructorWrapper> RetrieveFrom(IConstructorQueries constructors)
+    public IEnumerable<ICreateObjects> RetrieveFrom(IConstructorQueries constructors)
     {
       var foundConstructors = constructors.TryToObtainInternalConstructorsWithRecursiveArguments();
       if (foundConstructors.Any())

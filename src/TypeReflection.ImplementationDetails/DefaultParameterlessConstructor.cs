@@ -5,7 +5,7 @@ using TypeReflection.Interfaces;
 
 namespace TypeReflection.ImplementationDetails
 {
-  public class DefaultParameterlessConstructor : IConstructorWrapper
+  public class DefaultParameterlessConstructor : ICreateObjects
   {
     private readonly Func<object> _creation;
 
@@ -59,12 +59,12 @@ namespace TypeReflection.ImplementationDetails
       return false; //?? actually, this is not right...
     }
 
-    public static IConstructorWrapper ForOrdinaryType(ConstructorInfo constructorInfo)
+    public static ICreateObjects ForOrdinaryType(ConstructorInfo constructorInfo)
     {
       return new DefaultParameterlessConstructor(() => constructorInfo.Invoke(new object[]{}));
     }
 
-    public static IEnumerable<IConstructorWrapper> ForValue(Type type)
+    public static IEnumerable<ICreateObjects> ForValue(Type type)
     {
       return new [] { new DefaultParameterlessConstructor(() => Activator.CreateInstance(type))};
     }

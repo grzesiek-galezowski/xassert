@@ -6,44 +6,41 @@ using TypeReflection.Interfaces;
 
 namespace TypeReflection.ImplementationDetails
 {
-  public class ConstructorWrapper : IConstructorWrapper
+  public class CreationMethod : ICreateObjects
   {
-    public static ConstructorWrapper FromConstructorInfo(ConstructorInfo constructor)
+    public static CreationMethod FromConstructorInfo(ConstructorInfo constructor)
     {
-      return new ConstructorWrapper(constructor, constructor.Invoke, constructor.GetParameters(), constructor.DeclaringType);
+      return new CreationMethod(constructor, constructor.Invoke, 
+        constructor.DeclaringType, 
+        new CreationMethodParameters(constructor.GetParameters()));
     }
 
-    public static ConstructorWrapper FromStaticMethodInfo(MethodInfo m)
+    public static CreationMethod FromStaticMethodInfo(MethodInfo m)
     {
-      return new ConstructorWrapper(m, args => m.Invoke(null, args), m.GetParameters(), m.ReturnType);
+      return new CreationMethod(m, args => m.Invoke(null, args), 
+        m.ReturnType, 
+        new CreationMethodParameters(m.GetParameters()));
     }
-
 
     private readonly MethodBase _constructor;
-    private readonly ParameterInfo[] _parameters;
     private readonly Type _returnType;
-    private readonly bool _hasAbstractOrInterfaceArguments;
     private readonly Func<object[], object> _invocation;
-    private readonly IEnumerable<TypeInfo> _parameterTypes;
+    private readonly CreationMethodParameters _creationMethodParameters;
 
-    public ConstructorWrapper(
+    private CreationMethod(
       MethodBase constructor, 
       Func<object[], object> invocation, 
-      ParameterInfo[] parameters, 
-      Type returnType)
+      Type returnType, CreationMethodParameters creationMethodParameters)
     {
       _constructor = constructor;
-      _parameters = parameters;
+      _creationMethodParameters = creationMethodParameters;
       _returnType = returnType;
-      _parameterTypes = _parameters.Select(p => p.ParameterType.GetTypeInfo());
-      _hasAbstractOrInterfaceArguments =
-        _parameterTypes.Any(type => type.IsAbstract || type.IsInterface);
       _invocation = invocation;
     }
 
     public bool HasNonPointerArgumentsOnly()
     {
-      if(!_parameterTypes.Any(type => type.IsPointer))
+      if(!_creationMethodParameters.ContainAnyPointer())
       {
         return true;
       }
@@ -55,7 +52,7 @@ namespace TypeReflection.ImplementationDetails
 
     public bool HasLessParametersThan(int numberOfParams)
     {
-      if (_parameters.Count() < numberOfParams)
+      if (_creationMethodParameters.AreLessThan(numberOfParams))
       {
         return true;
       }
@@ -67,28 +64,25 @@ namespace TypeReflection.ImplementationDetails
 
     public int GetParametersCount()
     {
-      return _parameters.Count();
+      return _creationMethodParameters.Count();
     }
 
     public bool HasAbstractOrInterfaceArguments()
     {
-      return _hasAbstractOrInterfaceArguments;
+
+      return _creationMethodParameters.IsAnyAbstractInterface();
     }
 
     public List<object> GenerateAnyParameterValues(Func<Type, object> instanceGenerator)
     {
       var constructorValues = new List<object>();
-
-      foreach (var constructorParam in _parameterTypes)
-      {
-        constructorValues.Add(instanceGenerator(constructorParam));
-      }
+      _creationMethodParameters.FillWithGeneratedValues(instanceGenerator, constructorValues);
       return constructorValues;
     }
 
     public string GetDescriptionForParameter(int i)
     {
-      return GetDescriptionFor(_parameters[i]);
+      return _creationMethodParameters.GetDescriptionFor(i);
     }
 
     public object InvokeWithParametersCreatedBy(Func<Type, object> instanceGenerator)
@@ -104,31 +98,8 @@ namespace TypeReflection.ImplementationDetails
     public override string ToString()
     {
       var description = _constructor.DeclaringType.Name + "(";
-
-      int parametersCount = GetParametersCount();
-      for (int i = 0; i < parametersCount; ++i)
-      {
-        description += GetDescriptionFor(_parameters[i]) + Separator(i, parametersCount);
-      }
-
-      description += ")";
-
+      description += _creationMethodParameters + ")";
       return description;
-    }
-
-    private static string Separator(int i, int parametersCount)
-    {
-      return ((i == parametersCount - 1) ? "" : ", ");
-    }
-
-    private static string GetDescriptionFor(ParameterInfo parameter)
-    {
-      return parameter.ParameterType.Name + " " + parameter.Name;
-    }
-
-    public bool HasAnyArgumentOfType(Type type)
-    {
-      return _parameters.Any(p => p.ParameterType == type);
     }
 
     public bool IsInternal()
@@ -148,12 +119,12 @@ namespace TypeReflection.ImplementationDetails
 
     public bool IsNotRecursive()
     {
-      return !HasAnyArgumentOfType(_returnType);
+      return !IsRecursive();
     }
 
     public bool IsRecursive()
     {
-      return !IsNotRecursive();
+      return _creationMethodParameters.IsAnyOfType(_returnType);
     }
   }
 }
