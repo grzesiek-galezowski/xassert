@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssertionConstraintsEngine.cs" />
     <Compile Include="ConstraintsViolations.cs" />
     <Compile Include="IConstraintsViolations.cs" />
     <Compile Include="IConstraint.cs" />

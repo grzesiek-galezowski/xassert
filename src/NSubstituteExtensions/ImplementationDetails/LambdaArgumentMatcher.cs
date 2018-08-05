@@ -17,7 +17,7 @@ namespace NSubstituteExtensions.ImplementationDetails
     {
       try
       {
-        AssertionsExecutionLoop.Execute(_assertionActions, (T) actual);
+        InMatcherAssertionsEngine.Execute(_assertionActions, (T) actual);
         return true;
       }
       catch (Exception)
@@ -30,7 +30,7 @@ namespace NSubstituteExtensions.ImplementationDetails
     {
       try
       {
-        AssertionsExecutionLoop.Execute(_assertionActions, (T) actual);
+        InMatcherAssertionsEngine.Execute(_assertionActions, (T) actual);
         return string.Empty;
       }
       catch (Exception e)

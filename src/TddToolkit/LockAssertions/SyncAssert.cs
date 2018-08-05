@@ -48,7 +48,7 @@ namespace TddEbook.TddToolkit
     {
       foreach (var assemblyName in Assembly.GetExecutingAssembly().GetReferencedAssemblies())
       {
-        if (assemblyName.Name.StartsWith(checkedAssemblyName))
+        if (assemblyName.Name.StartsWith(checkedAssemblyName, StringComparison.InvariantCulture))
         {
           var referencedAssemblyInfo = Assembly.Load(assemblyName).GetName();
           var referencedAssemblyShortName = referencedAssemblyInfo.Name;
@@ -72,20 +72,23 @@ namespace TddEbook.TddToolkit
       }
     }
 
-    private static void LockShouldBeReleasedWhenCallThrowsException<T>(LockAssertions.LockAssertions lockAssertions,
-                                                                       T wrappingObject, T wrappedObjectMock,
-                                                                       Action<T> callToCheck) where T : class
+    private static void LockShouldBeReleasedWhenCallThrowsException<T>(
+      LockAssertions.LockAssertions lockAssertions,
+      T wrappingObject, 
+      T wrappedObjectMock,
+      Action<T> callToCheck) where T : class
     {
       try
       {
         wrappedObjectMock.When(callToCheck).Do(_ =>
         {
           lockAssertions.AssertLocked();
-          throw new Exception();
+          throw new Exception(); // todo more specific exception
         });
 
         callToCheck(wrappingObject);
-        throw new Exception(
+
+        throw new Exception( // todo more specific exception
           "The specified method was probably not called by the proxy with exactly the same arguments it received");
       }
       catch
@@ -98,9 +101,11 @@ namespace TddEbook.TddToolkit
       }
     }
 
-    private static void LockShouldBeReleasedAfterACall<T>(T wrappingObject, T wrappedObjectMock, Action<T> callToCheck,
-                                                          LockAssertions.LockAssertions lockAssertions)
-      where T : class
+    private static void LockShouldBeReleasedAfterACall<T>(
+      T wrappingObject, 
+      T wrappedObjectMock, 
+      Action<T> callToCheck,
+      LockAssertions.LockAssertions lockAssertions) where T : class
     {
       try
       {
@@ -117,15 +122,17 @@ namespace TddEbook.TddToolkit
       }
     }
 
-    private static void LockShouldBeReleasedAfterACall<T, TReturn>(T wrappingObject, T wrappedObjectMock,
-                                                                   Func<T, TReturn> callToCheck,
-                                                                   LockAssertions.LockAssertions lockAssertions)
+    private static void LockShouldBeReleasedAfterACall<T, TReturn>(
+      T wrappingObject, 
+      T wrappedObjectMock,
+      Func<T, TReturn> callToCheck,
+      LockAssertions.LockAssertions lockAssertions)
       where T : class
     {
       try
       {
         var cannedResult = Any.Instance<TReturn>();
-        callToCheck(wrappedObjectMock).Returns((ci) =>
+        callToCheck(wrappedObjectMock).Returns(ci =>
         {
           lockAssertions.AssertLocked();
           return cannedResult;
@@ -134,8 +141,10 @@ namespace TddEbook.TddToolkit
         lockAssertions.AssertUnlocked();
         var actualResult = callToCheck(wrappingObject);
         lockAssertions.AssertUnlocked();
-        Equal(cannedResult, actualResult,
-              "The specified method was probably not called by the proxy with exactly the same arguments it received or it did not return the value obtained from wrapped call");
+        actualResult.Should().Be(
+          cannedResult, 
+          "{0}", 
+          "The specified method was probably not called by the proxy with exactly the same arguments it received or it did not return the value obtained from wrapped call");
       }
       finally
       { 

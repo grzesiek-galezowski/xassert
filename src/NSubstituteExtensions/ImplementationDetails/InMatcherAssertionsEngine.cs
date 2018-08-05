@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace NSubstituteExtensions.ImplementationDetails
 {
-  internal static class AssertionsExecutionLoop
+  internal static class InMatcherAssertionsEngine
   {
     private static void ExecuteMultiple<T>(IReadOnlyList<Action<T>> assertionActions, T actual)
     {

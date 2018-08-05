@@ -98,9 +98,9 @@
   <ItemGroup>
     <Compile Include="ConstructorsMustBeNullProtected.cs" />
     <Compile Include="Are.cs" />
-    <Compile Include="Blocking.cs" />
-    <Compile Include="SyncAssert.cs" />
-    <Compile Include="ValueTypeTraits.cs" />
+    <Compile Include="LockAssertions\Blocking.cs" />
+    <Compile Include="LockAssertions\SyncAssert.cs" />
+    <Compile Include="ValueAssertions\ValueTypeTraits.cs" />
     <Compile Include="XAssert.ObjectGraph.cs" />
     <Compile Include="FluentAssertionExtensions.cs" />
     <Compile Include="XAssert.Simple.cs" />
@@ -156,9 +156,7 @@
       <Name>ValueObjectConstraints</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="LockSpecificAssertions\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

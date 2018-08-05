@@ -76,12 +76,12 @@ namespace NSubstituteExtensions.ImplementationDetails
         , "*** Note: calls to property getters are not considered part of the query. ***");
     }
 
-    private static ICall[] GetCallsReceivedButNotExpected(CallSpecAndTarget[] expectedCalls, ICall[] receivedCalls)
+    private static ICall[] GetCallsReceivedButNotExpected(IEnumerable<CallSpecAndTarget> expectedCalls, ICall[] receivedCalls)
     {
       return DifferenceBetween(receivedCalls, expectedCalls, Matches);
     }
 
-    private static CallSpecAndTarget[] GetCallsExpectedButNoReceived(CallSpecAndTarget[] expectedCalls, ICall[] receivedCalls)
+    private static CallSpecAndTarget[] GetCallsExpectedButNoReceived(IEnumerable<CallSpecAndTarget> expectedCalls, ICall[] receivedCalls)
     {
       return DifferenceBetween(expectedCalls, receivedCalls, (call, spec) => Matches(spec, call));
     }

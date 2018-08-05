@@ -15,18 +15,6 @@ namespace TddEbook.TddToolkit
 {
   public partial class XAssert
   {
-    public static void TypeAdheresTo(IEnumerable<IConstraint> constraints)
-    {
-      var violations = ConstraintsViolations.Empty();
-      foreach (var constraint in constraints)
-      {
-        RecordedAssertions.DoesNotThrow(() => constraint.CheckAndRecord(violations),
-        "Did not expect exception", violations);
-      }
-
-      violations.AssertNone();
-    }
-
     public static void IsValue<T>()
     {
       IsValue<T>(ValueTypeTraits.Default());
@@ -39,7 +27,7 @@ namespace TddEbook.TddToolkit
       if (!type.HasConstructorWithParameters())
       {
         var constraints = new List<IConstraint> { new ConstructorsMustBeNullProtected(type)};
-        TypeAdheresTo(constraints);
+        AssertionConstraintsEngine.TypeAdheresTo(constraints);
       }
     }
 
@@ -49,7 +37,7 @@ namespace TddEbook.TddToolkit
       {
         var activator = ValueObjectActivator.FreshInstance(typeof (T));
         var constraints = CreateConstraintsBasedOn(typeof (T), traits, activator);
-        XAssert.TypeAdheresTo(constraints);
+        AssertionConstraintsEngine.TypeAdheresTo(constraints);
       }
     }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using CommonTypes;
+using FluentAssertions;
 using NUnit.Framework;
 using TddEbook.TddToolkit;
 using TddEbook.TddToolkitSpecification.Fixtures;
@@ -116,13 +117,6 @@ namespace TddEbook.TddToolkitSpecification.XAssertSpecifications
     }
 
     [Test]
-    public void ShouldWriteFirstArgumentAsExpectedInEqualityAssertionErrorMessage()
-    {
-      var exception = Assert.Catch<Exception>(() => XAssert.Equal(1, 2));
-      StringAssert.Contains("Expected actual to be 1, but found 2", exception.ToString());
-    }
-
-    [Test]
     public void ShouldAllowToSkipSomePropertiesWhenComparingLikeness()
     {
       var tp1 = new TwoProp()
@@ -157,10 +151,12 @@ namespace TddEbook.TddToolkitSpecification.XAssertSpecifications
     [Test]
     public void AllowAssertingWhetherConstClassHasUniqueValues()
     {
-      XAssert.HasUniqueConstants<ConstsWithUniqueValues>();
+      new Action(() => XAssert.HasUniqueConstants<ConstsWithUniqueValues>())
+        .Should().NotThrow();
 
-      var exception = Assert.Throws<DuplicateConstantException>(XAssert.HasUniqueConstants<ConstsWithRepeatingValues>);
-      XAssert.Equal("Val1 <0> is a duplicate of Val3 <0>", exception.Message);
+      new Action(() => XAssert.HasUniqueConstants<ConstsWithRepeatingValues>())
+        .Should().ThrowExactly<DuplicateConstantException>()
+        .WithMessage("Val1 <0> is a duplicate of Val3 <0>");
     }
   }
 

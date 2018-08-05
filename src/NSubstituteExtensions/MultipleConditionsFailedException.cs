@@ -9,7 +9,7 @@ namespace NSubstituteExtensions
 
     public MultipleConditionsFailedException(Dictionary<int, Exception> exceptions)
       : base(exceptions.Count + " assertion(s) failed:" +
-             Environment.NewLine + ShortExceptionsMessage(exceptions) + 
+          Environment.NewLine + ShortExceptionsMessage(exceptions) + 
           Environment.NewLine + LongExceptionsMessage(exceptions))
     {
       Exceptions = exceptions;

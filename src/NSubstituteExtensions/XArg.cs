@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using FluentAssertions;
-using NSubstitute;
 using NSubstitute.Core;
 using NSubstitute.Core.Arguments;
 using NSubstituteExtensions.ImplementationDetails;
@@ -21,11 +18,6 @@ namespace NSubstituteExtensions
     public static T IsNotLike<T>(T expected)
     {
       return Passing<T>(actual => XAssert.NotAlike(expected, actual));
-    }
-
-    public static T[] IsNot<T>(IEnumerable<T> unexpected)
-    {
-      return Arg.Is<T[]>(arg => !arg.SequenceEqual(unexpected));
     }
 
     public static T Passing<T>(params Action<T>[] assertions)
