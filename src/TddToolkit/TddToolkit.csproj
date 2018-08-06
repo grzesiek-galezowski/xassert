@@ -96,7 +96,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConstructorsMustBeNullProtected.cs" />
+    <Compile Include="ConstraintsAssertions\ConstructorsMustBeNullProtected.cs" />
     <Compile Include="Conditions\Are.cs" />
     <Compile Include="LockAssertions\Blocking.cs" />
     <Compile Include="LockAssertions\SyncAssert.cs" />
