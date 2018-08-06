@@ -4,7 +4,7 @@ using TypeReflection;
 
 namespace TddEbook.TddToolkit
 {
-  public class Are
+  public class Are // todo with XArg.Passing this is actually redundant!!
   {
     public static bool Alike<T>(T expected, T actual)
     {

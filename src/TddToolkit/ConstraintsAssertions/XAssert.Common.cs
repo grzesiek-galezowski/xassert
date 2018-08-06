@@ -129,13 +129,12 @@ namespace TddEbook.TddToolkit
       return func;
     }
 
-
-    public static void EqualityOperatorIsDefinedFor(Type type)
+    private static void EqualityOperatorIsDefinedFor(Type type)
     {
       ExecutionOf(() => SmartType.For(type).Equality()).Should().NotThrow<Exception>();
     }
 
-    public static void InequalityOperatorIsDefinedFor(Type type)
+    private static void InequalityOperatorIsDefinedFor(Type type)
     {
       ExecutionOf(() => SmartType.For(type).Inequality()).Should().NotThrow<Exception>();
     }

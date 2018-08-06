@@ -3,9 +3,11 @@ using System.Collections.Generic;
 
 namespace NSubstituteExtensions
 {
+  using System.Runtime.Serialization;
+
+  [Serializable]
   public class MultipleConditionsFailedException : Exception
   {
-    public Dictionary<int, Exception> Exceptions { get; }
 
     public MultipleConditionsFailedException(Dictionary<int, Exception> exceptions)
       : base(exceptions.Count + " assertion(s) failed:" +
@@ -14,6 +16,14 @@ namespace NSubstituteExtensions
     {
       Exceptions = exceptions;
     }
+
+    protected MultipleConditionsFailedException(SerializationInfo info, StreamingContext context)
+      : base(info, context)
+    {
+    }
+
+    public Dictionary<int, Exception> Exceptions { get; }
+
 
     private static string ShortExceptionsMessage(Dictionary<int, Exception> exceptions)
     {

@@ -5,19 +5,19 @@ namespace TddEbook.TddToolkit
 {
   public static class Blocking
   {
-    public static LockAssertions.LockAssertions ReadOn(ReaderWriterLockSlim aLock)
+    public static LockAssertions.LockAssertions ReadOn(ReaderWriterLockSlim @lock)
     {
-      return new ReadLockSlimAssertions(aLock);
+      return new ReadLockSlimAssertions(@lock);
     }
 
-    public static LockAssertions.LockAssertions WriteOn(ReaderWriterLockSlim aLock)
+    public static LockAssertions.LockAssertions WriteOn(ReaderWriterLockSlim @lock)
     {
-      return new WriteLockSlimAssertions(aLock);
+      return new WriteLockSlimAssertions(@lock);
     }
 
-    public static LockAssertions.LockAssertions MonitorOn(object aLock)
+    public static LockAssertions.LockAssertions MonitorOn(object @lock)
     {
-      return new MonitorAssertions(aLock);
+      return new MonitorAssertions(@lock);
     }
   }
 }
