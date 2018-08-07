@@ -4,16 +4,25 @@ namespace CommonTypes
 {
   public static class Maybe
   {
-    public static Maybe<T> Wrap<T>(T instance) where T : class
+    public static Maybe<T> FromNullable<T>(T instance) where T : class
     {
       return new Maybe<T>(instance);
     }
+
+    public static Maybe<T> Just<T>(T instance) where T : class
+    {
+      if (instance == null)
+      {
+        throw new Exception("No instance of type " + typeof(T));
+      }
+      return new Maybe<T>(instance);
+    }
+
   }
 
   public struct Maybe<T> where T : class
   {
     private readonly T _value;
-    private static readonly Maybe<T> _not = new Maybe<T>();
 
     public Maybe(T instance)
       : this()
@@ -25,7 +34,7 @@ namespace CommonTypes
       }
     }
 
-    public bool HasValue { get; private set; }
+    public bool HasValue { get; }
 
     public T Value
     {
@@ -42,15 +51,7 @@ namespace CommonTypes
       }
     }
 
-    public static Maybe<T> Not
-    {
-      get { return _not; }
-    }
-
-    public T ValueOr(T alternativeValue)
-    {
-      return HasValue ? Value : alternativeValue;
-    }
+    public static Maybe<T> Not { get; } = new Maybe<T>();
 
     public Maybe<T> Otherwise(Maybe<T> alternative)
     {
@@ -59,24 +60,12 @@ namespace CommonTypes
 
     public static implicit operator Maybe<T>(T instance)
     {
-      return Maybe.Wrap(instance);
+      return Maybe.FromNullable(instance);
     }
 
     public override string ToString()
     {
       return HasValue ? Value.ToString() : "<Nothing>";
-    }
-
-    public Maybe<U> To<U>() where U : class
-    {
-      if (!HasValue)
-      {
-        return Maybe<U>.Not;
-      }
-      else
-      {
-        return Maybe.Wrap(Value as U);
-      }
     }
   }
 

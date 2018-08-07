@@ -37,7 +37,7 @@ namespace TypeReflection
       var constructorInfo = _type.GetConstructor(BindingFlags.NonPublic | BindingFlags.Instance, null, Type.EmptyTypes, null);
       if (constructorInfo != null)
       {
-        return Maybe.Wrap(DefaultParameterlessConstructor.ForOrdinaryType(constructorInfo));
+        return Maybe.Just(DefaultParameterlessConstructor.ForOrdinaryType(constructorInfo));
       }
       else
       {
@@ -56,7 +56,7 @@ namespace TypeReflection
       }
       else
       {
-        return Maybe.Wrap(DefaultParameterlessConstructor.ForOrdinaryType(constructorInfo));
+        return Maybe.Just(DefaultParameterlessConstructor.ForOrdinaryType(constructorInfo));
       }
     }
 
@@ -127,7 +127,7 @@ namespace TypeReflection
         }
       }
 
-      return Maybe.Wrap(leastParamsConstructor);
+      return Maybe.FromNullable(leastParamsConstructor);
     }
 
     private const string OpEquality = "op_Equality";
@@ -150,7 +150,7 @@ namespace TypeReflection
     private Maybe<MethodInfo> ValueTypeEqualityMethod()
     {
       return _typeInfo.IsValueType ?
-               Maybe.Wrap(GetType().GetTypeInfo().GetMethod(nameof(ValuesEqual)))
+               Maybe.Just(GetType().GetTypeInfo().GetMethod(nameof(ValuesEqual)))
                : Maybe<MethodInfo>.Not;
 
     }
@@ -158,7 +158,7 @@ namespace TypeReflection
     private Maybe<MethodInfo> ValueTypeInequalityMethod()
     {
       return _typeInfo.IsValueType ?
-               Maybe.Wrap(GetType().GetTypeInfo().GetMethod(nameof(ValuesNotEqual))) 
+               Maybe.Just(GetType().GetTypeInfo().GetMethod(nameof(ValuesNotEqual))) 
                : Maybe<MethodInfo>.Not;
     }
 

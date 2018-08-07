@@ -17,16 +17,12 @@ namespace TddEbook.TddToolkit
   {
     public static void Alike<T>(T expected, T actual)
     {
-      var comparison = ObjectGraph.Comparison();
-      var result = comparison.Compare(expected, actual);
-      result.ExceededDifferences.Should().BeFalse(result.DifferencesString);
+      actual.Should().BeLike(expected);
     }
 
     public static void NotAlike<T>(T expected, T actual)
     {
-      var comparison = ObjectGraph.Comparison();
-      var result = comparison.Compare(expected, actual);
-      result.ExceededDifferences.Should().BeTrue(result.DifferencesString);
+      actual.Should().NotBeLike(expected);
     }
 
     public static void Alike<T>(T expected, T actual, params Expression<Func<T, object>>[] skippedPropertiesOrFields)
