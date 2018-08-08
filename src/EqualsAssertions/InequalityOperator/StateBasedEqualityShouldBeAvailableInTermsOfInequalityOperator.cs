@@ -1,22 +1,21 @@
 ﻿using System;
 using AssertionConstraints;
+using TddEbook.TddToolkit;
 
 namespace EqualsAssertions.InequalityOperator
 {
   public class StateBasedEqualityShouldBeAvailableInTermsOfInequalityOperator : IConstraint
   {
     private readonly Type _type;
-    private Action<Type> _assertIsInequalityOperatorDefinedFor;
 
-    public StateBasedEqualityShouldBeAvailableInTermsOfInequalityOperator(Type type, Action<Type> assertIsInequalityOperatorDefinedFor)
+    public StateBasedEqualityShouldBeAvailableInTermsOfInequalityOperator(Type type)
     {
       _type = type;
-      _assertIsInequalityOperatorDefinedFor = assertIsInequalityOperatorDefinedFor;
     }
 
     public void CheckAndRecord(ConstraintsViolations violations)
     {
- 	    _assertIsInequalityOperatorDefinedFor(_type);
+ 	    EqualityExistenceAssertions.AssertInequalityOperatorIsDefinedFor(_type);
     }
 }
 }

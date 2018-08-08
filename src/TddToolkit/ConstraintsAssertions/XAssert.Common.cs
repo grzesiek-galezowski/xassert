@@ -6,7 +6,6 @@ using AssertionConstraints;
 using EqualsAssertions;
 using EqualsAssertions.EqualityOperator;
 using EqualsAssertions.InequalityOperator;
-using FluentAssertions;
 using TypeReflection;
 using ValueActivation;
 using ValueObjectConstraints;
@@ -73,26 +72,26 @@ namespace TddEbook.TddToolkit
       if (traits.RequireEqualityAndUnequalityOperatorImplementation)
       {
         //equality operator
-        constraints.Add(new StateBasedEqualityShouldBeAvailableInTermsOfEqualityOperator(type, EqualityOperatorIsDefinedFor));
-        constraints.Add(new StateBasedEqualityMustBeImplementedInTermsOfEqualityOperator(activator, Are.EqualInTermsOfEqualityOperator));
-        constraints.Add(new StateBasedEqualityWithItselfMustBeImplementedInTermsOfEqualityOperator(activator, Are.EqualInTermsOfEqualityOperator));
+        constraints.Add(new StateBasedEqualityShouldBeAvailableInTermsOfEqualityOperator(type));
+        constraints.Add(new StateBasedEqualityMustBeImplementedInTermsOfEqualityOperator(activator));
+        constraints.Add(new StateBasedEqualityWithItselfMustBeImplementedInTermsOfEqualityOperator(activator));
         constraints.Add(new StateBasedUnEqualityMustBeImplementedInTermsOfEqualityOperator(activator,
-          traits.IndexesOfConstructorArgumentsIndexesThatDoNotContituteAValueIdentify.ToArray(),
-          Are.EqualInTermsOfEqualityOperator));
-        constraints.Add(new UnEqualityWithNullMustBeImplementedInTermsOfEqualityOperator(
-          activator, 
-          Are.EqualInTermsOfEqualityOperator));
+          traits.IndexesOfConstructorArgumentsIndexesThatDoNotContituteAValueIdentify.ToArray()));
+        constraints.Add(new InequalityWithNullMustBeImplementedInTermsOfEqualityOperator(
+          activator));
 
         //inequality operator
-        constraints.Add(new StateBasedEqualityShouldBeAvailableInTermsOfInequalityOperator(type, InequalityOperatorIsDefinedFor));
-        constraints.Add(new StateBasedEqualityMustBeImplementedInTermsOfInequalityOperator(activator, Are.NotEqualInTermsOfInEqualityOperator));
-        constraints.Add(new StateBasedEqualityWithItselfMustBeImplementedInTermsOfInequalityOperator(activator, Are.NotEqualInTermsOfInEqualityOperator));
-        constraints.Add(new StateBasedUnEqualityMustBeImplementedInTermsOfInequalityOperator(activator,
-          traits.IndexesOfConstructorArgumentsIndexesThatDoNotContituteAValueIdentify.ToArray(),
-          Are.NotEqualInTermsOfInEqualityOperator));
+        constraints.Add(new StateBasedEqualityShouldBeAvailableInTermsOfInequalityOperator(
+          type));
+        constraints.Add(new StateBasedEqualityMustBeImplementedInTermsOfInequalityOperator(
+          activator));
+        constraints.Add(new StateBasedEqualityWithItselfMustBeImplementedInTermsOfInequalityOperator(
+          activator));
+        constraints.Add(new StateBasedUnEqualityMustBeImplementedInTermsOfInequalityOperator(
+          activator,
+          traits.IndexesOfConstructorArgumentsIndexesThatDoNotContituteAValueIdentify.ToArray()));
         constraints.Add(new InequalityWithNullMustBeImplementedInTermsOfInequalityOperator(
-          activator, 
-          Are.NotEqualInTermsOfInEqualityOperator));
+          activator));
       
 
       }
@@ -109,34 +108,8 @@ namespace TddEbook.TddToolkit
       var methodInfos = typeof(XAssert).GetMethods();
       var methodsByGivenName = methodInfos.Where(m => m.Name == name);
       var firstParameterlessVersion = methodsByGivenName.First(m => m.GetParameters().Length == 0);
-      var genericMethod = firstParameterlessVersion.MakeGenericMethod(new[] { type });
+      var genericMethod = firstParameterlessVersion.MakeGenericMethod(type);
       genericMethod.Invoke(null, null);
-    }
-
-    public static void EqualityOperatorIsDefinedFor<T>()
-    {
-      ExecutionOf(() => TypeOf<T>.Equality()).Should().NotThrow<Exception>();
-    }
-
-
-    public static void InequalityOperatorIsDefinedFor<T>()
-    {
-      ExecutionOf(() => TypeOf<T>.Inequality()).Should().NotThrow<Exception>();
-    }
-
-    private static Action ExecutionOf(Action func)
-    {
-      return func;
-    }
-
-    private static void EqualityOperatorIsDefinedFor(Type type)
-    {
-      ExecutionOf(() => SmartType.For(type).Equality()).Should().NotThrow<Exception>();
-    }
-
-    private static void InequalityOperatorIsDefinedFor(Type type)
-    {
-      ExecutionOf(() => SmartType.For(type).Inequality()).Should().NotThrow<Exception>();
     }
   }
 }

@@ -96,7 +96,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Conditions\Are.cs" />
     <Compile Include="ConstraintsAssertions\ConstructorsMustBeNullProtected.cs" />
     <Compile Include="LockAssertions\Blocking.cs" />
     <Compile Include="LockAssertions\SyncAssert.cs" />
@@ -156,7 +155,9 @@
       <Name>ValueObjectConstraints</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Conditions\" />
+  </ItemGroup>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

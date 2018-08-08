@@ -1,6 +1,6 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using AssertionConstraints;
+using TddEbook.TddToolkit;
 using ValueActivation;
 
 namespace EqualsAssertions.InequalityOperator
@@ -10,15 +10,12 @@ namespace EqualsAssertions.InequalityOperator
   {
     private readonly ValueObjectActivator _activator;
     private readonly int[] _indexesOfConstructorArgumentsToSkip;
-    private Func<Type, object, object, bool> _areNotEqualInTermsOfInEqualityOperator;
 
     public StateBasedUnEqualityMustBeImplementedInTermsOfInequalityOperator(
-      ValueObjectActivator activator, int[] indexesOfConstructorArgumentsToSkip, 
-      Func<Type, object, object, bool> areNotEqualInTermsOfInEqualityOperator)
+      ValueObjectActivator activator, int[] indexesOfConstructorArgumentsToSkip)
     {
       _activator = activator;
       _indexesOfConstructorArgumentsToSkip = indexesOfConstructorArgumentsToSkip;
-      _areNotEqualInTermsOfInEqualityOperator = areNotEqualInTermsOfInEqualityOperator;
     }
 
     public void CheckAndRecord(ConstraintsViolations violations)
@@ -31,11 +28,11 @@ namespace EqualsAssertions.InequalityOperator
           var instance2 = _activator.CreateInstanceAsValueObjectWithModifiedParameter(i);
 
           RecordedAssertions.DoesNotThrow(() =>
-            RecordedAssertions.True(_areNotEqualInTermsOfInEqualityOperator(_activator.TargetType, instance1, instance2), 
+            RecordedAssertions.True(Are.NotEqualInTermsOfInEqualityOperator(_activator.TargetType, instance1, instance2), 
               "a != b should return true if both are created with different argument" + i, violations),
               "a != b should return true if both are created with different argument" + i, violations);
           RecordedAssertions.DoesNotThrow(() =>
-            RecordedAssertions.True(_areNotEqualInTermsOfInEqualityOperator(_activator.TargetType, instance1, instance2), 
+            RecordedAssertions.True(Are.NotEqualInTermsOfInEqualityOperator(_activator.TargetType, instance1, instance2), 
               "b != a should return true if both are created with different argument" + i, violations),
               "b != a should return true if both are created with different argument" + i, violations);
         }

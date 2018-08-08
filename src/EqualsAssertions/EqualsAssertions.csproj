@@ -37,8 +37,16 @@
     <AssemblyOriginatorKeyFile>TddToolkit.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentAssertions, Version=5.4.1.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentAssertions.5.4.1\lib\net45\FluentAssertions.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\net461\System.ValueTuple.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,11 +55,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Are.cs" />
     <Compile Include="EqualityOperator\StateBasedEqualityMustBeImplementedInTermsOfEqualityOperator.cs" />
     <Compile Include="EqualityOperator\StateBasedEqualityShouldBeAvailableInTermsOfEqualityOperator.cs" />
     <Compile Include="EqualityOperator\StateBasedEqualityWithItselfMustBeImplementedInTermsOfEqualityOperator.cs" />
     <Compile Include="EqualityOperator\StateBasedUnEqualityMustBeImplementedInTermsOfEqualityOperator.cs" />
-    <Compile Include="EqualityOperator\UnEqualityWithNullMustBeImplementedInTermsOfEqualityOperator.cs" />
+    <Compile Include="EqualityOperator\InequalityWithNullMustBeImplementedInTermsOfEqualityOperator.cs" />
     <Compile Include="HashCodeMustBeTheSameForSameObjectsAndDifferentForDifferentObjects.cs" />
     <Compile Include="InequalityOperator\StateBasedEqualityMustBeImplementedInTermsOfInequalityOperator.cs" />
     <Compile Include="InequalityOperator\StateBasedEqualityShouldBeAvailableInTermsOfInequalityOperator.cs" />
@@ -69,6 +78,18 @@
       <Project>{BC1B5566-207F-47EB-8AD2-E7AE08894E77}</Project>
       <Name>AssertionConstraints</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ConstructorRetrieval\ConstructorRetrieval.csproj">
+      <Project>{DF177708-C9A4-4367-8D93-0DD9BBDD6E33}</Project>
+      <Name>ConstructorRetrieval</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TypeReflection.Interfaces\TypeReflection.Interfaces.csproj">
+      <Project>{1B4C8B73-149B-49E6-B664-8D186D16AFB7}</Project>
+      <Name>TypeReflection.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TypeReflection\TypeReflection.csproj">
+      <Project>{720585E8-0EB0-46B2-9155-69DD2F9CA0A1}</Project>
+      <Name>TypeReflection</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ValueActivation\ValueActivation.csproj">
       <Project>{D6F0E12E-1699-440B-B48C-9FA722E38054}</Project>
       <Name>ValueActivation</Name>
@@ -76,6 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="packages.config" />
     <None Include="TddToolkit.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

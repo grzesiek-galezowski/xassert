@@ -1,5 +1,5 @@
-﻿using System;
-using AssertionConstraints;
+﻿using AssertionConstraints;
+using TddEbook.TddToolkit;
 using ValueActivation;
 
 namespace EqualsAssertions.EqualityOperator
@@ -8,21 +8,18 @@ namespace EqualsAssertions.EqualityOperator
     : IConstraint
   {
     private readonly ValueObjectActivator _activator;
-    private readonly Func<Type, object, object, bool> _assertEqualInTermsOfEqualityOperator;
 
     public StateBasedEqualityWithItselfMustBeImplementedInTermsOfEqualityOperator(
-      ValueObjectActivator activator, 
-      Func<Type, object, object, bool> assertEqualInTermsOfEqualityOperator)
+      ValueObjectActivator activator)
     {
       _activator = activator;
-      _assertEqualInTermsOfEqualityOperator = assertEqualInTermsOfEqualityOperator;
     }
 
     public void CheckAndRecord(ConstraintsViolations violations)
     {
       var instance1 = _activator.CreateInstanceAsValueObjectWithFreshParameters();
       RecordedAssertions.DoesNotThrow(() =>
-        RecordedAssertions.True(_assertEqualInTermsOfEqualityOperator(
+        RecordedAssertions.True(Are.EqualInTermsOfEqualityOperator(
             _activator.TargetType, 
             instance1, 
             instance1),
