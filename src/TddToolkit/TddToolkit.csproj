@@ -98,7 +98,6 @@
   <ItemGroup>
     <Compile Include="ConstraintsAssertions\ConstructorsMustBeNullProtected.cs" />
     <Compile Include="LockAssertions\Blocking.cs" />
-    <Compile Include="LockAssertions\SynchronizationAssertions.cs" />
     <Compile Include="LockAssertions\SyncAssert.cs" />
     <Compile Include="ValueAssertions\ValueTypeTraits.cs" />
     <Compile Include="XAssert.ObjectGraph.cs" />

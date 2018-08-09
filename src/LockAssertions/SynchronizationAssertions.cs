@@ -3,14 +3,14 @@ using System.Reflection;
 using FluentAssertions;
 using NSubstitute;
 using NSubstitute.Exceptions;
-using TddXt.AnyRoot;
+using static TddXt.AnyRoot.Root;
 
-namespace TddEbook.TddToolkit
+namespace LockAssertions
 {
   public class SynchronizationAssertions
   {
     public static void LockShouldBeReleasedWhenCallThrowsException<T>(
-      LockAssertions.LockAssertions lockAssertions,
+      global::LockAssertions.LockAssertions lockAssertions,
       T wrappingObject, 
       T wrappedObjectMock,
       Action<T> callToCheck) where T : class
@@ -42,7 +42,7 @@ namespace TddEbook.TddToolkit
       T wrappingObject, 
       T wrappedObjectMock, 
       Action<T> callToCheck,
-      LockAssertions.LockAssertions lockAssertions) where T : class
+      LockAssertions lockAssertions) where T : class
     {
       try
       {
@@ -63,12 +63,12 @@ namespace TddEbook.TddToolkit
       T wrappingObject, 
       T wrappedObjectMock,
       Func<T, TReturn> callToCheck,
-      LockAssertions.LockAssertions lockAssertions)
+      LockAssertions lockAssertions)
       where T : class
     {
       try
       {
-        var cannedResult = Root.Any.Instance<TReturn>();
+        var cannedResult = Any.Instance<TReturn>();
         callToCheck(wrappedObjectMock).Returns(ci =>
         {
           lockAssertions.AssertLocked();
@@ -89,7 +89,7 @@ namespace TddEbook.TddToolkit
       }
     }
 
-    public static void Synchronizes<T>(T wrappingObject, Action<T> callToCheck, LockAssertions.LockAssertions lockAssertions,
+    public static void Synchronizes<T>(T wrappingObject, Action<T> callToCheck, global::LockAssertions.LockAssertions lockAssertions,
       T wrappedObjectMock) where T : class
     {
       NSubstituteIsInCorrectVersion(wrappedObjectMock);
@@ -97,7 +97,7 @@ namespace TddEbook.TddToolkit
       SynchronizationAssertions.LockShouldBeReleasedWhenCallThrowsException(lockAssertions, wrappingObject, wrappedObjectMock, callToCheck);
     }
 
-    public static void Synchronizes<T, TReturn>(T wrappingObject, Func<T, TReturn> callToCheck, LockAssertions.LockAssertions lockAssertions, T wrappedObjectMock) where T : class
+    public static void Synchronizes<T, TReturn>(T wrappingObject, Func<T, TReturn> callToCheck, global::LockAssertions.LockAssertions lockAssertions, T wrappedObjectMock) where T : class
     {
       NSubstituteIsInCorrectVersion(wrappedObjectMock);
       SynchronizationAssertions.LockShouldBeReleasedAfterACall(wrappingObject, wrappedObjectMock, callToCheck, lockAssertions);
@@ -149,6 +149,15 @@ namespace TddEbook.TddToolkit
           }
         }
       }
+    }
+  }
+
+  internal class LockNotReleasedWhenExceptionOccurs : Exception
+  {
+    public LockNotReleasedWhenExceptionOccurs()
+      : base("Although the synchronized object threw an exception, the lock was not released. "
+             + "There's probably a try-finally missing in your synchronizing proxy where the lock would be released in the `finally` block")
+    {
     }
   }
 }

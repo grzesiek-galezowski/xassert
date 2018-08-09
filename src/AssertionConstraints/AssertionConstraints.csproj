@@ -46,10 +46,7 @@
       <HintPath>..\packages\System.ValueTuple.4.4.0\lib\net461\System.ValueTuple.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -63,20 +60,6 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="TddToolkit.snk" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\TypeReflection.Interfaces\TypeReflection.Interfaces.csproj">
-      <Project>{1B4C8B73-149B-49E6-B664-8D186D16AFB7}</Project>
-      <Name>TypeReflection.Interfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TypeReflection\TypeReflection.csproj">
-      <Project>{720585E8-0EB0-46B2-9155-69DD2F9CA0A1}</Project>
-      <Name>TypeReflection</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ValueActivation\ValueActivation.csproj">
-      <Project>{D6F0E12E-1699-440B-B48C-9FA722E38054}</Project>
-      <Name>ValueActivation</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

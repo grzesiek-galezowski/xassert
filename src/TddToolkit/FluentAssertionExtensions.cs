@@ -4,6 +4,7 @@ using FluentAssertions;
 using FluentAssertions.Primitives;
 using FluentAssertions.Types;
 using GraphAssertions;
+using LockAssertions;
 
 namespace TddEbook.TddToolkit
 {
