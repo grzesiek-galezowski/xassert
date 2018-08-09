@@ -61,5 +61,15 @@
   <ItemGroup>
     <Content Include="App_Readme\Compare-NET-Objects-Help.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CommonTypes\CommonTypes.csproj">
+      <Project>{C71F0FEA-E0E7-4456-AA0B-CD82133E12D2}</Project>
+      <Name>CommonTypes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TypeReflection\TypeReflection.csproj">
+      <Project>{720585E8-0EB0-46B2-9155-69DD2F9CA0A1}</Project>
+      <Name>TypeReflection</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
