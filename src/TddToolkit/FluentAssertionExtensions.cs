@@ -39,5 +39,33 @@ namespace TddEbook.TddToolkit
       XAssert.IsValue(o.Subject);
       return new AndConstraint<TypeAssertions>(o);
     }
+
+
+    public static void SynchronizeAccessTo<T>(this ObjectAssertions assertions,
+      Action<T> callToCheck,
+      LockAssertions.LockAssertions lockAssertions,
+      T wrappedObjectMock) 
+      where T : class
+    {
+      SynchronizationAssertions.Synchronizes(
+        (T)assertions.Subject, 
+        callToCheck, 
+        lockAssertions, 
+        wrappedObjectMock);
+    }
+
+    public static void SynchronizeAccessTo<T, TReturn>(this ObjectAssertions assertions,
+      Func<T, TReturn> callToCheck,
+      LockAssertions.LockAssertions lockAssertions,
+      T wrappedObjectMock)
+      where T : class
+    {
+      SynchronizationAssertions.Synchronizes(
+        (T)assertions.Subject,
+        callToCheck,
+        lockAssertions,
+        wrappedObjectMock);
+    }
+
   }
 }
