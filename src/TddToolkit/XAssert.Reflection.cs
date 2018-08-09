@@ -104,7 +104,6 @@ namespace TddEbook.TddToolkit
 
       public static void HasUniqueConstants<T>()
       {
-        string errors = "";
         var constants = SmartType.For(typeof(T)).GetAllConstants();
         foreach (var constant in constants)
         {

@@ -7,10 +7,10 @@ using static TddXt.AnyRoot.Root;
 
 namespace LockAssertions
 {
-  public class SynchronizationAssertions
+  public static class SynchronizationAssertions
   {
-    public static void LockShouldBeReleasedWhenCallThrowsException<T>(
-      global::LockAssertions.LockAssertions lockAssertions,
+    private static void LockShouldBeReleasedWhenCallThrowsException<T>(
+      LockAssertions lockAssertions,
       T wrappingObject, 
       T wrappedObjectMock,
       Action<T> callToCheck) where T : class
@@ -38,7 +38,7 @@ namespace LockAssertions
       }
     }
 
-    public static void LockShouldBeReleasedAfterACall<T>(
+    private static void LockShouldBeReleasedAfterACall<T>(
       T wrappingObject, 
       T wrappedObjectMock, 
       Action<T> callToCheck,
@@ -59,7 +59,7 @@ namespace LockAssertions
       }
     }
 
-    public static void LockShouldBeReleasedAfterACall<T, TReturn>(
+    private static void LockShouldBeReleasedAfterACall<T, TReturn>(
       T wrappingObject, 
       T wrappedObjectMock,
       Func<T, TReturn> callToCheck,
@@ -123,7 +123,7 @@ namespace LockAssertions
       ReferencedAndLoadedAssemblyVersionsAreTheSame(checkedAssemblyName);
     }
 
-    public static void ReferencedAndLoadedAssemblyVersionsAreTheSame(string checkedAssemblyName)
+    private static void ReferencedAndLoadedAssemblyVersionsAreTheSame(string checkedAssemblyName)
     {
       foreach (var assemblyName in Assembly.GetExecutingAssembly().GetReferencedAssemblies())
       {
