@@ -12,12 +12,12 @@ namespace NSubstituteExtensions
   {
     public static T IsLike<T>(T expected)
     {
-      return Passing<T>(actual => XAssert.Alike(expected, actual));
+      return Passing<T>(actual => actual.Should().BeLike(expected));
     }
 
     public static T IsNotLike<T>(T expected)
     {
-      return Passing<T>(actual => XAssert.NotAlike(expected, actual));
+      return Passing<T>(actual => actual.Should().NotBeLike(expected));
     }
 
     public static T Passing<T>(params Action<T>[] assertions)

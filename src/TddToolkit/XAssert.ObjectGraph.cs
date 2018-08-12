@@ -1,67 +1,18 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
-using Albedo;
-using CommonTypes;
-using FluentAssertions;
-using GraphAssertions;
-using KellermanSoftware.CompareNetObjects;
-using TypeReflection;
-
-namespace TddEbook.TddToolkit
+﻿namespace TddEbook.TddToolkit
 {
-  public partial class XAssert
+  using System;
+  using System.Reflection;
+
+  using Albedo;
+
+  public partial class XAssert //bug remove this class or move to experimental
   {
-    public static void Alike<T>(T expected, T actual)
-    {
-      actual.Should().BeLike(expected);
-    }
-
-    public static void NotAlike<T>(T expected, T actual)
-    {
-      actual.Should().NotBeLike(expected);
-    }
-
-    public static void Alike<T>(T expected, T actual, params Expression<Func<T, object>>[] skippedPropertiesOrFields)
-    {
-      var result = ObjectGraph.Compare(expected, actual, skippedPropertiesOrFields);
-      result.ExceededDifferences.Should().BeFalse(result.DifferencesString);
-    }
-
-    public static void NotAlike<T>(T expected, T actual, params Expression<Func<T, object>>[] skippedPropertiesOrFields)
-    {
-      var result = ObjectGraph.Compare(expected, actual, skippedPropertiesOrFields);
-      result.ExceededDifferences.Should().BeTrue(result.DifferencesString);
-    }
-
-    public static void Alike<T>(T expected, T actual, params string[] skippedPropertiesOrFields)
-    {
-      var result = ObjectGraph.Compare(expected, actual, skippedPropertiesOrFields);
-      result.ExceededDifferences.Should().BeFalse(result.DifferencesString);
-    }
-
-    public static void NotAlike<T>(T expected, T actual, params string[] skippedPropertiesOrFields)
-    {
-      var result = ObjectGraph.Compare(expected, actual, skippedPropertiesOrFields);
-      result.ExceededDifferences.Should().BeTrue(result.DifferencesString);
-    }
-
     public static void Contains(Object o, Type t) // todo this is unfinished!!!!
     {
       var propertiesAndFields = o.GetType().GetPropertiesAndFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.NonPublic);
       new SearchVisitor(o, t);
     }
 
-    //todo move to separate class in ObjectGraph assembly
-
-    // todo same as above
-
-    // todo same as above
-
-    // todo same as above
   }
 
   //bug this is unfinished and does not work yet!!
