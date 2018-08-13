@@ -1,13 +1,13 @@
-﻿using System;
+﻿
+namespace TddEbook.TddToolkit
+{
+using System;
 using System.Linq.Expressions;
 using FluentAssertions;
 using FluentAssertions.Primitives;
 using FluentAssertions.Types;
 using GraphAssertions;
 using LockAssertions;
-
-namespace TddEbook.TddToolkit
-{
   public static class FluentAssertionExtensions
   {
     public static AndConstraint<ObjectAssertions> BeLike<T>(this ObjectAssertions o, T expected,
@@ -17,16 +17,7 @@ namespace TddEbook.TddToolkit
       result.ExceededDifferences.Should().BeFalse(result.DifferencesString);
       return new AndConstraint<ObjectAssertions>(o);
     }
-
-    public static AndConstraint<ObjectAssertions> NotBeLike<T>(this ObjectAssertions o, T expected,
-      params Expression<Func<T, object>>[] skippedPropertiesOrFields)
-    {
-      var result = ObjectGraph.Compare(expected, (T)o.Subject, skippedPropertiesOrFields);
-      result.ExceededDifferences.Should().BeTrue(result.DifferencesString);
-      return new AndConstraint<ObjectAssertions>(o);
-    }
-
-    public static AndConstraint<ObjectAssertions> BeLike(this ObjectAssertions o, object expected)
+    public static AndConstraint<ObjectAssertions> BeLike<T>(this ObjectAssertions o, T expected)
     {
       var comparison = ObjectGraph.Comparison();
       var result = comparison.Compare(expected, o.Subject);
@@ -34,7 +25,7 @@ namespace TddEbook.TddToolkit
       return new AndConstraint<ObjectAssertions>(o);
     }
 
-    public static AndConstraint<ObjectAssertions> NotBeLike(this ObjectAssertions o, object expected)
+    public static AndConstraint<ObjectAssertions> NotBeLike<T>(this ObjectAssertions o, T expected)
     {
       var comparison = ObjectGraph.Comparison();
       var result = comparison.Compare(expected, o.Subject);
@@ -42,12 +33,23 @@ namespace TddEbook.TddToolkit
       return new AndConstraint<ObjectAssertions>(o);
     }
 
-    public static AndConstraint<ObjectAssertions> BeLike<T>(
+    public static AndConstraint<ObjectAssertions> NotBeLike<T>(
       this ObjectAssertions o,
-      object expected, 
+      T expected,
       params Expression<Func<T, object>>[] skippedPropertiesOrFields)
     {
-      XAssert.Alike(expected, o.Subject);
+      var result = ObjectGraph.Compare(expected, (T)o.Subject, skippedPropertiesOrFields);
+      result.ExceededDifferences.Should().BeTrue(result.DifferencesString);
+      return new AndConstraint<ObjectAssertions>(o);
+    }
+
+    public static AndConstraint<ObjectAssertions> BeLike<T>(
+      this ObjectAssertions o,
+      T expected, 
+      params Expression<Func<T, object>>[] skippedPropertiesOrFields)
+    {
+      var result = ObjectGraph.Compare(expected, (T)o.Subject, skippedPropertiesOrFields);
+      result.ExceededDifferences.Should().BeFalse(result.DifferencesString);
       return new AndConstraint<ObjectAssertions>(o);
     }
 
@@ -60,7 +62,7 @@ namespace TddEbook.TddToolkit
 
     public static void SynchronizeAccessTo<T>(this ObjectAssertions assertions,
       Action<T> callToCheck,
-      LockAssertions.LockAssertions lockAssertions,
+      LockAssertions lockAssertions,
       T wrappedObjectMock) 
       where T : class
     {
@@ -73,7 +75,7 @@ namespace TddEbook.TddToolkit
 
     public static void SynchronizeAccessTo<T, TReturn>(this ObjectAssertions assertions,
       Func<T, TReturn> callToCheck,
-      LockAssertions.LockAssertions lockAssertions,
+      LockAssertions lockAssertions,
       T wrappedObjectMock)
       where T : class
     {
