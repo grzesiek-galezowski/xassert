@@ -1,17 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using CommonTypes;
-using FluentAssertions;
-using NUnit.Framework;
-using TddEbook.TddToolkit;
-using TddEbook.TddToolkitSpecification.Fixtures;
-using TddXt.AnyRoot.Strings;
-using TypeReflection.ImplementationDetails;
-using static TddXt.AnyRoot.Root;
-
-namespace TddEbook.TddToolkitSpecification.XAssertSpecifications
+﻿namespace TddEbook.TddToolkitSpecification.XAssertSpecifications
 {
+  using System;
+  using System.Diagnostics.CodeAnalysis;
+
+  using CommonTypes;
+
+  using FluentAssertions;
+
+  using NUnit.Framework;
+
+  using TddEbook.TddToolkit;
+
+  using TddXt.AnyRoot.Strings;
+
+  using TypeReflection.ImplementationDetails;
+
+  using static TddXt.AnyRoot.Root;
+
   public class XAssertSpecification
   {
 
@@ -88,32 +93,32 @@ namespace TddEbook.TddToolkitSpecification.XAssertSpecifications
     public void ShouldFailUpperCaseAssertionOnLowerCaseStringAndPassOnUpperCaseString()
     {
       var s = Any.String();
-      Assert.Throws<AssertionException>(() => XAssert.IsUpperCase(s.ToLower()) );
-      Assert.DoesNotThrow(() => XAssert.IsUpperCase(s.ToUpper()));
+      Assert.Throws<AssertionException>(() => s.ToLower().Should().BeUppercase() );
+      Assert.DoesNotThrow(() => s.ToUpper().Should().BeUppercase());
     }
 
     [Test]
     public void ShouldFailLowerCaseAssertionOnUpperCaseStringAndPassOnLowerCaseString()
     {
       var s = Any.String();
-      Assert.Throws<AssertionException>(() => XAssert.IsLowerCase(s.ToUpper()));
-      Assert.DoesNotThrow(() => XAssert.IsLowerCase(s.ToLower()));
+      Assert.Throws<AssertionException>(() => s.ToUpper().Should().BeLowercase());
+      Assert.DoesNotThrow(() => s.ToLower().Should().BeLowercase());
     }
 
     [Test]
     public void ShouldFailUpperCaseAssertionOnLowerCaseCharAndPassOnUpperCaseChar()
     {
       var c = Any.AlphaChar();
-      Assert.Throws<AssertionException>(() => XAssert.IsUpperCase(char.ToLower(c)));
-      Assert.DoesNotThrow(() => XAssert.IsUpperCase(char.ToUpper(c)));
+      Assert.Throws<AssertionException>(() => char.ToLower(c).Should().BeUppercase());
+      Assert.DoesNotThrow(() => char.ToUpper(c).Should().BeUppercase());
     }
 
     [Test]
     public void ShouldFailLowerCaseAssertionOnUpperCaseCharAndPassOnLowerCaseChar()
     {
       var c = Any.AlphaChar();
-      Assert.Throws<AssertionException>(() => XAssert.IsLowerCase(char.ToUpper(c)));
-      Assert.DoesNotThrow(() => XAssert.IsLowerCase(char.ToLower(c)));
+      Assert.Throws<AssertionException>(() => char.ToUpper(c).Should().BeLowercase());
+      Assert.DoesNotThrow(() => char.ToLower(c).Should().BeLowercase());
     }
 
     [Test]
@@ -165,6 +170,34 @@ namespace TddEbook.TddToolkitSpecification.XAssertSpecifications
           typeof(TypeWithNoStaticField).Should().NotHaveStaticFields())
         .Should().NotThrow<Exception>();
     }
+
+    [Test]
+    public void ShouldPassUppercaseAssertionOnUppercaseString()
+    {
+       Any.UpperCaseString().Should().BeUppercase();
+    }
+
+    [Test]
+    public void ShouldFailUppercaseAssertionOnLowercaseString()
+    {
+
+      new Action(() => (Any.UpperCaseString() + "a").Should().BeUppercase())
+        .Should().Throw<AssertionException>();
+    }
+    [Test]
+    public void ShouldPassLowercaseAssertionOnLowercaseString()
+    {
+      Any.LowerCaseString().Should().BeLowercase();
+    }
+
+    [Test]
+    public void ShouldFailLowercaseAssertionOnUppercaseString()
+    {
+
+      new Action(() => (Any.LowerCaseString() + "A").Should().BeLowercase())
+        .Should().Throw<AssertionException>();
+    }
+
 
   }
 

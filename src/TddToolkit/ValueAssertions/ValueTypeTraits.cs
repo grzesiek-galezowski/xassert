@@ -4,12 +4,21 @@ namespace TddEbook.TddToolkit
 {
   public class ValueTypeTraits
   {
+    public static ValueTypeTraits Full()
+    {
+      var result = new ValueTypeTraits
+                     {
+                       RequireEqualityAndInequalityOperatorImplementation = true
+                     };
+      return result;
+    }
+
     protected ValueTypeTraits()
     {
-      IndexesOfConstructorArgumentsIndexesThatDoNotContituteAValueIdentify = new List<int>();
+      this.IndexesOfConstructorArgumentsIndexesThatDoNotConstituteAValueIdentify = new List<int>();
       RequireAllFieldsReadOnly = true;
-      RequireSafeUnequalityToNull = true;
-      RequireEqualityAndUnequalityOperatorImplementation = true;
+      this.RequireSafeInequalityToNull = true;
+      this.RequireEqualityAndInequalityOperatorImplementation = true;
     }
 
     public static ValueTypeTraits Custom
@@ -20,19 +29,19 @@ namespace TddEbook.TddToolkit
       }
     }
 
-    public List<int> IndexesOfConstructorArgumentsIndexesThatDoNotContituteAValueIdentify
+    public List<int> IndexesOfConstructorArgumentsIndexesThatDoNotConstituteAValueIdentify
     {
       get;
       set;
     }
 
-    public bool RequireEqualityAndUnequalityOperatorImplementation
+    public bool RequireEqualityAndInequalityOperatorImplementation
     {
       get; 
       set;
     }
 
-    public bool RequireSafeUnequalityToNull
+    public bool RequireSafeInequalityToNull
     {
       get;
       set;
@@ -50,17 +59,9 @@ namespace TddEbook.TddToolkit
 
     public ValueTypeTraits SkipConstructorArgument(int constructorArgumentIndex)
     {
-      IndexesOfConstructorArgumentsIndexesThatDoNotContituteAValueIdentify.Add(constructorArgumentIndex);
+      this.IndexesOfConstructorArgumentsIndexesThatDoNotConstituteAValueIdentify.Add(constructorArgumentIndex);
       return this;
     }
 
-    public static ValueTypeTraits Full()
-    {
-      var result = new ValueTypeTraits
-      {
-        RequireEqualityAndUnequalityOperatorImplementation = true
-      };
-      return result;
-    }
   }
 }

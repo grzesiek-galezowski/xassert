@@ -1,23 +1,54 @@
-﻿
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using FluentAssertions.Reflection;
-using TypeReflection;
-using TypeReflection.Interfaces;
-
-namespace TddEbook.TddToolkit
+﻿namespace TddEbook.TddToolkit
 {
   using System;
+  using System.Collections.Generic;
+  using System.Linq;
   using System.Linq.Expressions;
+  using System.Reflection;
+
   using FluentAssertions;
   using FluentAssertions.Primitives;
+  using FluentAssertions.Reflection;
   using FluentAssertions.Types;
+
   using GraphAssertions;
+
   using LockAssertions;
+
+  using TypeReflection;
+  using TypeReflection.Interfaces;
 
   public static class FluentAssertionExtensions
   {
+
+    public static AndConstraint<CharAssertions> BeUppercase(this CharAssertions assertions)
+    {
+      char c = assertions.CharSubject;
+      CharExtensions.Should(c).Be(char.ToUpperInvariant(c));
+      return new AndConstraint<CharAssertions>(assertions);
+    }
+
+    public static AndConstraint<CharAssertions> BeLowercase(this CharAssertions assertions)
+    {
+      char c = assertions.CharSubject;
+      CharExtensions.Should(c).Be(char.ToLowerInvariant(c));
+      return new AndConstraint<CharAssertions>(assertions);
+    }
+
+
+    public static AndConstraint<StringAssertions> BeUppercase(this StringAssertions assertions)
+    {
+      string str = assertions.Subject;
+      str.Should().Be(str.ToUpperInvariant());
+      return new AndConstraint<StringAssertions>(assertions);
+    }
+
+    public static AndConstraint<StringAssertions> BeLowercase(this StringAssertions assertions)
+    {
+      string str = assertions.Subject;
+      str.Should().Be(str.ToLowerInvariant());
+      return new AndConstraint<StringAssertions>(assertions);
+    }
 
     public static AndConstraint<TypeAssertions> HaveUniqueConstants(this TypeAssertions assertions)
     {

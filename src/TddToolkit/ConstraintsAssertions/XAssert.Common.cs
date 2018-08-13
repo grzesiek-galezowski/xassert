@@ -1,17 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using AssertionConstraints;
-using EqualsAssertions;
-using EqualsAssertions.EqualityOperator;
-using EqualsAssertions.InequalityOperator;
-using TypeReflection;
-using ValueActivation;
-using ValueObjectConstraints;
-
-namespace TddEbook.TddToolkit
+﻿namespace TddEbook.TddToolkit
 {
+  using System;
+  using System.Collections.Generic;
+  using System.Linq;
+  using System.Reflection;
+
+  using AssertionConstraints;
+
+  using EqualsAssertions;
+  using EqualsAssertions.EqualityOperator;
+  using EqualsAssertions.InequalityOperator;
+
+  using TypeReflection;
+
+  using ValueActivation;
+
+  using ValueObjectConstraints;
+
   public partial class XAssert
   {
     public static void IsValue<T>()
@@ -58,25 +63,25 @@ namespace TddEbook.TddToolkit
       constraints.Add(new StateBasedEqualityMustBeImplementedInTermsOfEqualsMethod(activator));
 
       constraints.Add(new StateBasedUnEqualityMustBeImplementedInTermsOfEqualsMethod(activator, 
-        traits.IndexesOfConstructorArgumentsIndexesThatDoNotContituteAValueIdentify.ToArray()));
+        traits.IndexesOfConstructorArgumentsIndexesThatDoNotConstituteAValueIdentify.ToArray()));
       
       constraints.Add(new HashCodeMustBeTheSameForSameObjectsAndDifferentForDifferentObjects(activator,
-        traits.IndexesOfConstructorArgumentsIndexesThatDoNotContituteAValueIdentify.ToArray()));
+        traits.IndexesOfConstructorArgumentsIndexesThatDoNotConstituteAValueIdentify.ToArray()));
 
-      if(traits.RequireSafeUnequalityToNull)
+      if(traits.RequireSafeInequalityToNull)
       {
         constraints.Add(new UnEqualityWithNullMustBeImplementedInTermsOfEqualsMethod(activator));
       }
 
 
-      if (traits.RequireEqualityAndUnequalityOperatorImplementation)
+      if (traits.RequireEqualityAndInequalityOperatorImplementation)
       {
         //equality operator
         constraints.Add(new StateBasedEqualityShouldBeAvailableInTermsOfEqualityOperator(type));
         constraints.Add(new StateBasedEqualityMustBeImplementedInTermsOfEqualityOperator(activator));
         constraints.Add(new StateBasedEqualityWithItselfMustBeImplementedInTermsOfEqualityOperator(activator));
         constraints.Add(new StateBasedUnEqualityMustBeImplementedInTermsOfEqualityOperator(activator,
-          traits.IndexesOfConstructorArgumentsIndexesThatDoNotContituteAValueIdentify.ToArray()));
+          traits.IndexesOfConstructorArgumentsIndexesThatDoNotConstituteAValueIdentify.ToArray()));
         constraints.Add(new InequalityWithNullMustBeImplementedInTermsOfEqualityOperator(
           activator));
 
@@ -89,7 +94,7 @@ namespace TddEbook.TddToolkit
           activator));
         constraints.Add(new StateBasedUnEqualityMustBeImplementedInTermsOfInequalityOperator(
           activator,
-          traits.IndexesOfConstructorArgumentsIndexesThatDoNotContituteAValueIdentify.ToArray()));
+          traits.IndexesOfConstructorArgumentsIndexesThatDoNotConstituteAValueIdentify.ToArray()));
         constraints.Add(new InequalityWithNullMustBeImplementedInTermsOfInequalityOperator(
           activator));
       
