@@ -43,9 +43,6 @@
     <AssemblyOriginatorKeyFile>TddToolkit.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Albedo, Version=2.0.0.0, Culture=neutral, PublicKeyToken=179ef6dd03497bbd, processorArchitecture=MSIL">
-      <HintPath>..\packages\Albedo.2.0.0\lib\net35\Albedo.dll</HintPath>
-    </Reference>
     <Reference Include="AutoFixture, Version=4.5.0.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoFixture.4.5.0\lib\net452\AutoFixture.dll</HintPath>
     </Reference>
@@ -65,12 +62,6 @@
       <HintPath>..\packages\CompareNETObjects.4.55.0.0\lib\net46\KellermanSoftware.Compare-NET-Objects.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="MiscUtil, Version=0.2.0.0, Culture=neutral, PublicKeyToken=d3c42c4bfacf7596, processorArchitecture=MSIL">
-      <HintPath>..\packages\JonSkeet.MiscUtil.0.2.0\lib\net35\MiscUtil.dll</HintPath>
-    </Reference>
-    <Reference Include="NClone, Version=1.1.0.0, Culture=neutral, PublicKeyToken=81c60607627cc572, processorArchitecture=MSIL">
-      <HintPath>..\packages\NClone.1.1.1\lib\net45\NClone.dll</HintPath>
-    </Reference>
     <Reference Include="NSubstitute, Version=3.1.0.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
       <HintPath>..\packages\NSubstitute.3.1.0\lib\net46\NSubstitute.dll</HintPath>
     </Reference>
@@ -115,10 +106,6 @@
     <ProjectReference Include="..\AssertionConstraints\AssertionConstraints.csproj">
       <Project>{BC1B5566-207F-47EB-8AD2-E7AE08894E77}</Project>
       <Name>AssertionConstraints</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CommonTypes\CommonTypes.csproj">
-      <Project>{c71f0fea-e0e7-4456-aa0b-cd82133e12d2}</Project>
-      <Name>CommonTypes</Name>
     </ProjectReference>
     <ProjectReference Include="..\ConstructorRetrieval\ConstructorRetrieval.csproj">
       <Project>{DF177708-C9A4-4367-8D93-0DD9BBDD6E33}</Project>
