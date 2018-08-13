@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using Albedo;
-using CommonTypes;
 using FluentAssertions;
 using GraphAssertions;
-using KellermanSoftware.CompareNetObjects;
-using TypeReflection;
 
 namespace TddEbook.TddToolkit
 {
@@ -55,13 +49,6 @@ namespace TddEbook.TddToolkit
       new SearchVisitor(o, t);
     }
 
-    //todo move to separate class in ObjectGraph assembly
-
-    // todo same as above
-
-    // todo same as above
-
-    // todo same as above
   }
 
   //bug this is unfinished and does not work yet!!

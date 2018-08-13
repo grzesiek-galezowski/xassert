@@ -10,6 +10,22 @@ namespace TddEbook.TddToolkit
 {
   public static class FluentAssertionExtensions
   {
+    public static AndConstraint<ObjectAssertions> BeLike<T>(this ObjectAssertions o, T expected,
+      params Expression<Func<T, object>>[] skippedPropertiesOrFields)
+    {
+      var result = ObjectGraph.Compare(expected, (T)o.Subject, skippedPropertiesOrFields);
+      result.ExceededDifferences.Should().BeFalse(result.DifferencesString);
+      return new AndConstraint<ObjectAssertions>(o);
+    }
+
+    public static AndConstraint<ObjectAssertions> NotBeLike<T>(this ObjectAssertions o, T expected,
+      params Expression<Func<T, object>>[] skippedPropertiesOrFields)
+    {
+      var result = ObjectGraph.Compare(expected, (T)o.Subject, skippedPropertiesOrFields);
+      result.ExceededDifferences.Should().BeTrue(result.DifferencesString);
+      return new AndConstraint<ObjectAssertions>(o);
+    }
+
     public static AndConstraint<ObjectAssertions> BeLike(this ObjectAssertions o, object expected)
     {
       var comparison = ObjectGraph.Comparison();
