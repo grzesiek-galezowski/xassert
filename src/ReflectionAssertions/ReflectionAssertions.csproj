@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FAEA6B32-964D-49C9-9A94-536999E7CC47}</ProjectGuid>
+    <ProjectGuid>{59D28E26-1F55-4B5C-A62D-CEAD84E7247C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GraphAssertions</RootNamespace>
-    <AssemblyName>GraphAssertions</AssemblyName>
+    <RootNamespace>ReflectionAssertions</RootNamespace>
+    <AssemblyName>ReflectionAssertions</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -37,36 +36,26 @@
     <AssemblyOriginatorKeyFile>TddToolkit.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Albedo, Version=2.0.0.0, Culture=neutral, PublicKeyToken=179ef6dd03497bbd, processorArchitecture=MSIL">
-      <HintPath>..\packages\Albedo.2.0.0\lib\net35\Albedo.dll</HintPath>
-    </Reference>
-    <Reference Include="KellermanSoftware.Compare-NET-Objects, Version=4.55.0.0, Culture=neutral, PublicKeyToken=d970ace04cc85217, processorArchitecture=MSIL">
-      <HintPath>..\packages\CompareNETObjects.4.55.0.0\lib\net46\KellermanSoftware.Compare-NET-Objects.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ObjectGraph.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReflectionOrProxyComparer.cs" />
-    <Compile Include="Experimental\XAssert.ObjectGraph.cs" />
+    <Compile Include="ReflectionElementsList.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
     <None Include="TddToolkit.snk" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CommonTypes\CommonTypes.csproj">
-      <Project>{C71F0FEA-E0E7-4456-AA0B-CD82133E12D2}</Project>
-      <Name>CommonTypes</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TypeReflection\TypeReflection.csproj">
-      <Project>{720585E8-0EB0-46B2-9155-69DD2F9CA0A1}</Project>
-      <Name>TypeReflection</Name>
+    <ProjectReference Include="..\TypeReflection.Interfaces\TypeReflection.Interfaces.csproj">
+      <Project>{1B4C8B73-149B-49E6-B664-8D186D16AFB7}</Project>
+      <Name>TypeReflection.Interfaces</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

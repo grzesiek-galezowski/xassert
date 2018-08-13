@@ -101,7 +101,6 @@
     <Compile Include="LockAssertions\SyncAssert.cs" />
     <Compile Include="ValueAssertions\ValueTypeTraits.cs" />
     <Compile Include="FluentAssertionExtensions.cs" />
-    <Compile Include="XAssert.ObjectGraph.cs" />
     <Compile Include="XAssert.Simple.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ConstraintsAssertions\XAssert.Common.cs" />
@@ -111,7 +110,6 @@
     <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="TddToolkit.snk" />
-    <Compile Include="XAssert.Reflection.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AssertionConstraints\AssertionConstraints.csproj">
@@ -137,6 +135,10 @@
     <ProjectReference Include="..\LockAssertions\LockAssertions.csproj">
       <Project>{C1DBE00B-C113-40F6-A407-0ACCF334BDCF}</Project>
       <Name>LockAssertions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ReflectionAssertions\ReflectionAssertions.csproj">
+      <Project>{59D28E26-1F55-4B5C-A62D-CEAD84E7247C}</Project>
+      <Name>ReflectionAssertions</Name>
     </ProjectReference>
     <ProjectReference Include="..\TypeReflection.Interfaces\TypeReflection.Interfaces.csproj">
       <Project>{1b4c8b73-149b-49e6-b664-8d186d16afb7}</Project>

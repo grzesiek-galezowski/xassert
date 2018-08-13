@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Reflection;
 using AssertionConstraints;
+using FluentAssertions;
 using NSubstitute;
 using NUnit.Framework;
 using TddEbook.TddToolkit;
@@ -44,7 +46,7 @@ namespace TddEbook.TddToolkitSpecification
     {
       var assembly = typeof (RecordedAssertionsSpecification).Assembly;
       
-      var e = Assert.Throws<AssertionException>(() => XAssert.NoStaticFields(assembly));
+      var e = Assert.Throws<AssertionException>(() => assembly.Should().NotHaveStaticFields());
       StringAssert.Contains(nameof(_lolek), e.Message);
       StringAssert.Contains(nameof(Lol2._gieniek), e.Message);
       StringAssert.Contains(nameof(StaticProperty), e.Message);
@@ -54,7 +56,8 @@ namespace TddEbook.TddToolkitSpecification
     public void ShouldFailReferenceAssertionWhenAssemblyReferencesOtherAssembly()
     {
       var assembly1 = typeof(RecordedAssertionsSpecification).Assembly;
-      Assert.Throws<AssertionException>(() => XAssert.NoReference(assembly1, typeof(TestAttribute)));
+      Assert.Throws<AssertionException>(() => 
+        assembly1.Should().NotReferenceAssemblyWith(typeof(TestAttribute)));
     }
 
 
@@ -62,7 +65,7 @@ namespace TddEbook.TddToolkitSpecification
     public void ShouldFailNonPublicEventsAssertionWhenAssemblyContainsAtLeastOneNonPublicEvent()
     {
       var assembly = typeof (RecordedAssertionsSpecification).Assembly;
-      var ex = Assert.Throws<AssertionException>(() => XAssert.NoNonPublicEvents(assembly));
+      var ex = Assert.Throws<AssertionException>(() => assembly.Should().NotHaveHiddenEvents());
       StringAssert.DoesNotContain("explicitlyImplementedEvent", ex.Message);
     }
 
@@ -70,7 +73,7 @@ namespace TddEbook.TddToolkitSpecification
     public void ShouldFailConstructorLimitAssertionWhenAnyClassContainsAtLeastOneConstructor()
     {
       var assembly = typeof (RecordedAssertionsSpecification).Assembly;
-      var exception = Assert.Throws<AssertionException>(() => XAssert.SingleConstructor(assembly));
+      var exception = Assert.Throws<AssertionException>(() => assembly.Should().HaveOnlyTypesWithSingleConstructor());
       StringAssert.DoesNotContain("MyException", exception.Message);
     }
 

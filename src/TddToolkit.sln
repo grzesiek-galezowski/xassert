@@ -50,6 +50,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConstructorRetrieval", "Con
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NSubstituteExtensions", "NSubstituteExtensions\NSubstituteExtensions.csproj", "{0C8A8629-5E4C-4C02-AA9F-54F9401FF0F2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReflectionAssertions", "ReflectionAssertions\ReflectionAssertions.csproj", "{59D28E26-1F55-4B5C-A62D-CEAD84E7247C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -116,6 +118,10 @@ Global
 		{0C8A8629-5E4C-4C02-AA9F-54F9401FF0F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C8A8629-5E4C-4C02-AA9F-54F9401FF0F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C8A8629-5E4C-4C02-AA9F-54F9401FF0F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59D28E26-1F55-4B5C-A62D-CEAD84E7247C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59D28E26-1F55-4B5C-A62D-CEAD84E7247C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59D28E26-1F55-4B5C-A62D-CEAD84E7247C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59D28E26-1F55-4B5C-A62D-CEAD84E7247C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

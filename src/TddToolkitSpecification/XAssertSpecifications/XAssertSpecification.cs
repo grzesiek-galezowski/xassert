@@ -140,22 +140,41 @@ namespace TddEbook.TddToolkitSpecification.XAssertSpecifications
     }
 
     [Test]
-    public void AllowAssertingWhetherEnumHasUniqueValues()
-    {
-      XAssert.EnumHasUniqueValues<EnumWithUniqueValues>();
-      Assert.Throws<AssertionException>(XAssert.EnumHasUniqueValues<EnumWithRepeatingValues>);
-    }
-
-    [Test]
     public void AllowAssertingWhetherConstClassHasUniqueValues()
     {
-      new Action(() => XAssert.HasUniqueConstants<ConstsWithUniqueValues>())
+      new Action(() => typeof(ConstsWithUniqueValues).Should().HaveUniqueConstants())
         .Should().NotThrow();
 
-      new Action(() => XAssert.HasUniqueConstants<ConstsWithRepeatingValues>())
+      new Action(() => typeof(ConstsWithRepeatingValues).Should().HaveUniqueConstants())
         .Should().ThrowExactly<DuplicateConstantException>()
         .WithMessage("Val1 <0> is a duplicate of Val3 <0>");
     }
+
+    [Test]
+    public void ShouldFailNoStaticFieldsAssertionWhenTypeHasStaticFields()
+    {
+      new Action(() =>
+          typeof(TypeWithStaticField).Should().NotHaveStaticFields())
+        .Should().Throw<Exception>();
+    }
+
+    [Test]
+    public void ShouldPassNoStaticFieldsAssertionWhenTypeHasStaticFields()
+    {
+      new Action(() =>
+          typeof(TypeWithNoStaticField).Should().NotHaveStaticFields())
+        .Should().NotThrow<Exception>();
+    }
+
+  }
+
+  class TypeWithStaticField
+  {
+    private static readonly int a = 1;
+  }
+  class TypeWithNoStaticField
+  {
+    private readonly int a = 1;
   }
 
   [SuppressMessage("ReSharper", "UnusedMember.Global")]
