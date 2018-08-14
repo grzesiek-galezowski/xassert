@@ -89,13 +89,12 @@
   <ItemGroup>
     <Compile Include="CharAssertions.cs" />
     <Compile Include="CharExtensions.cs" />
+    <Compile Include="ConstraintsAssertions\AssertionConstraints.cs" />
     <Compile Include="ConstraintsAssertions\ConstructorsMustBeNullProtected.cs" />
     <Compile Include="LockAssertions\Blocking.cs" />
-    <Compile Include="LockAssertions\SyncAssert.cs" />
     <Compile Include="ValueAssertions\ValueTypeTraits.cs" />
     <Compile Include="FluentAssertionExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ConstraintsAssertions\XAssert.Common.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -23,7 +23,7 @@
     [Test]
     public void ShouldThrowAssertionExceptionWhenTypeIsNotGuardedAgainstNullConstructorParameters()
     {
-      var exception = Assert.Throws<AssertionException>(XAssert.HasNullProtectedConstructors<NotGuardedObject>);
+      var exception = Assert.Throws<AssertionException>(() => typeof(NotGuardedObject).Should().HaveNullProtectedConstructors());
       StringAssert.Contains("Not guarded parameter: String b", exception.Message);
       StringAssert.Contains("Not guarded parameter: String dede", exception.Message);
       StringAssert.DoesNotContain("Not guarded parameter: Int32 a", exception.Message);
@@ -32,7 +32,7 @@
     [Test]
     public void ShouldNotThrowAssertionExceptionWhenTypeIsGuardedAgainstNullConstructorParameters()
     {
-      Assert.DoesNotThrow(XAssert.HasNullProtectedConstructors<GuardedObject>);
+      Assert.DoesNotThrow(() => typeof(GuardedObject).Should().HaveNullProtectedConstructors());
     }
 
     [Test]

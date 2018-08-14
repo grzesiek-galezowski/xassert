@@ -6,7 +6,7 @@
   using System.Linq.Expressions;
   using System.Reflection;
 
-  using AssertionConstraints;
+  using global::AssertionConstraints;
 
   using FluentAssertions;
   using FluentAssertions.Primitives;
@@ -180,13 +180,26 @@
       return new AndConstraint<TypeAssertions>(o);
     }
 
+    public static AndConstraint<TypeAssertions> HaveNullProtectedConstructors(
+      this TypeAssertions o)
+    {
+      var smartType = SmartType.For(o.Subject);
+
+      if (!smartType.HasConstructorWithParameters())
+      {
+        AssertionConstraintsEngine.TypeAdheresTo(new List<IConstraint> { new ConstructorsMustBeNullProtected(smartType) });
+      }
+
+      return new AndConstraint<TypeAssertions>(o);
+    }
+
     public static AndConstraint<TypeAssertions> HaveValueSemantics(this TypeAssertions o, ValueTypeTraits traits)
     {
       Type type = o.Subject;
       if (!ValueObjectWhiteList.Contains(type))
       {
         var activator = ValueObjectActivator.FreshInstance(type);
-        var constraints = XAssert.CreateConstraintsBasedOn(type, traits, activator);
+        var constraints = AssertionConstraints.ForValueSemantics(type, traits, activator);
         AssertionConstraintsEngine.TypeAdheresTo(constraints);
       }
 

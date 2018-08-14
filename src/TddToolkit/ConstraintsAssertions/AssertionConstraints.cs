@@ -2,35 +2,21 @@
 {
   using System;
   using System.Collections.Generic;
-  using System.Reflection;
 
-  using AssertionConstraints;
+  using global::AssertionConstraints;
 
   using EqualsAssertions;
   using EqualsAssertions.EqualityOperator;
   using EqualsAssertions.InequalityOperator;
 
-  using TypeReflection;
-
   using ValueActivation;
 
   using ValueObjectConstraints;
 
-  public partial class XAssert
+  public partial class AssertionConstraints
   {
-    public static void HasNullProtectedConstructors<T>()
-    {
-      var type = SmartType.For(typeof(T));
-      
-      if (!type.HasConstructorWithParameters())
-      {
-        AssertionConstraintsEngine.TypeAdheresTo(
-          new List<IConstraint> { new ConstructorsMustBeNullProtected(type) });
-      }
-    }
-
     //bug move elsewhere
-    public static IEnumerable<IConstraint> CreateConstraintsBasedOn(
+    public static IEnumerable<IConstraint> ForValueSemantics(
       Type type, ValueTypeTraits traits, ValueObjectActivator activator)
     {
 
