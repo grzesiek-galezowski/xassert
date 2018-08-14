@@ -1,11 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using TypeReflection.Interfaces;
-
-namespace TypeReflection.ImplementationDetails
+namespace TddXt.XAssert.TypeReflection.ImplementationDetails
 {
+  using System;
+  using System.Collections.Generic;
+  using System.Linq;
+  using System.Reflection;
+
+  using TddXt.XAssert.TypeReflection.Interfaces;
+
   public class CreationMethod : ICreateObjects
   {
     public static CreationMethod FromConstructorInfo(ConstructorInfo constructor)
@@ -32,15 +33,15 @@ namespace TypeReflection.ImplementationDetails
       Func<object[], object> invocation, 
       Type returnType, CreationMethodParameters creationMethodParameters)
     {
-      _constructor = constructor;
-      _creationMethodParameters = creationMethodParameters;
-      _returnType = returnType;
-      _invocation = invocation;
+      this._constructor = constructor;
+      this._creationMethodParameters = creationMethodParameters;
+      this._returnType = returnType;
+      this._invocation = invocation;
     }
 
     public bool HasNonPointerArgumentsOnly()
     {
-      if(!_creationMethodParameters.ContainAnyPointer())
+      if(!this._creationMethodParameters.ContainAnyPointer())
       {
         return true;
       }
@@ -52,7 +53,7 @@ namespace TypeReflection.ImplementationDetails
 
     public bool HasLessParametersThan(int numberOfParams)
     {
-      if (_creationMethodParameters.AreLessThan(numberOfParams))
+      if (this._creationMethodParameters.AreLessThan(numberOfParams))
       {
         return true;
       }
@@ -64,47 +65,47 @@ namespace TypeReflection.ImplementationDetails
 
     public int GetParametersCount()
     {
-      return _creationMethodParameters.Count();
+      return this._creationMethodParameters.Count();
     }
 
     public bool HasAbstractOrInterfaceArguments()
     {
 
-      return _creationMethodParameters.IsAnyAbstractInterface();
+      return this._creationMethodParameters.IsAnyAbstractInterface();
     }
 
     public List<object> GenerateAnyParameterValues(Func<Type, object> instanceGenerator)
     {
       var constructorValues = new List<object>();
-      _creationMethodParameters.FillWithGeneratedValues(instanceGenerator, constructorValues);
+      this._creationMethodParameters.FillWithGeneratedValues(instanceGenerator, constructorValues);
       return constructorValues;
     }
 
     public string GetDescriptionForParameter(int i)
     {
-      return _creationMethodParameters.GetDescriptionFor(i);
+      return this._creationMethodParameters.GetDescriptionFor(i);
     }
 
     public object InvokeWithParametersCreatedBy(Func<Type, object> instanceGenerator)
     {
-      return _invocation(this.GenerateAnyParameterValues(instanceGenerator).ToArray());
+      return this._invocation(this.GenerateAnyParameterValues(instanceGenerator).ToArray());
     }
 
     public object InvokeWith(IEnumerable<object> constructorParameters)
     {
-      return _invocation(constructorParameters.ToArray());
+      return this._invocation(constructorParameters.ToArray());
     }
 
     public override string ToString()
     {
-      var description = _constructor.DeclaringType.Name + "(";
-      description += _creationMethodParameters + ")";
+      var description = this._constructor.DeclaringType.Name + "(";
+      description += this._creationMethodParameters + ")";
       return description;
     }
 
     public bool IsInternal()
     {
-      return IsInternal(_constructor);
+      return IsInternal(this._constructor);
     }
 
     public static bool IsInternal(MethodBase c)
@@ -114,17 +115,17 @@ namespace TypeReflection.ImplementationDetails
 
     public bool IsFactoryMethod()
     {
-      return _constructor.DeclaringType == _returnType;
+      return this._constructor.DeclaringType == this._returnType;
     }
 
     public bool IsNotRecursive()
     {
-      return !IsRecursive();
+      return !this.IsRecursive();
     }
 
     public bool IsRecursive()
     {
-      return _creationMethodParameters.IsAnyOfType(_returnType);
+      return this._creationMethodParameters.IsAnyOfType(this._returnType);
     }
   }
 }

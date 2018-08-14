@@ -1,9 +1,10 @@
 using System;
-using TypeReflection.ImplementationDetails;
-using TypeReflection.Interfaces;
 
 namespace TypeReflection
 {
+  using TddXt.XAssert.TypeReflection.ImplementationDetails;
+  using TddXt.XAssert.TypeReflection.Interfaces;
+
   public static class TypeOf<T>
   {
     private static readonly IType Type;

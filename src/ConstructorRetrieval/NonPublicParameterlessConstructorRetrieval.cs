@@ -1,8 +1,9 @@
 using System.Collections.Generic;
-using TypeReflection.Interfaces;
 
 namespace ConstructorRetrieval
 {
+  using TddXt.XAssert.TypeReflection.Interfaces;
+
   public class NonPublicParameterlessConstructorRetrieval : ConstructorRetrieval
   {
     private readonly ConstructorRetrieval _next;

@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using NUnit.Framework;
-using TypeReflection.Interfaces;
 
 namespace ValueActivation
 {
+  using TddXt.XAssert.TypeReflection.Interfaces;
+
   public class FallbackTypeGenerator
   {
     private readonly IType _smartType;

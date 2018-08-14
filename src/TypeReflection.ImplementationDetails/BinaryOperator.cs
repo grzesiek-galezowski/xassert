@@ -1,10 +1,11 @@
-﻿using System.Reflection;
-using CommonTypes;
-using TypeReflection.Interfaces;
-using TypeReflection.Interfaces.Exceptions;
-
-namespace TypeReflection.ImplementationDetails
+﻿namespace TddXt.XAssert.TypeReflection.ImplementationDetails
 {
+  using System.Reflection;
+
+  using CommonTypes;
+
+  using TddXt.XAssert.TypeReflection.Interfaces;
+  using TddXt.XAssert.TypeReflection.Interfaces.Exceptions;
 
   public class BinaryOperator<T, TResult> : IAmBinaryOperator<T,TResult>
   {
@@ -12,12 +13,12 @@ namespace TypeReflection.ImplementationDetails
 
     private BinaryOperator(IAmBinaryOperator binaryOperator)
     {
-      _method = binaryOperator;
+      this._method = binaryOperator;
     }
 
     public TResult Evaluate(T instance1, T instance2)
     {
-      return (TResult)_method.Evaluate(instance1, instance2);
+      return (TResult)this._method.Evaluate(instance1, instance2);
     }
 
     public static IAmBinaryOperator<T, bool> Wrap(IAmBinaryOperator binaryOperator)
@@ -32,12 +33,12 @@ namespace TypeReflection.ImplementationDetails
 
     public BinaryOperator(MethodInfo method)
     {
-      _method = method;
+      this._method = method;
     }
 
     public object Evaluate(object instance1, object instance2)
     {
-      return _method.Invoke(null, new[] { instance1, instance2 });
+      return this._method.Invoke(null, new[] { instance1, instance2 });
     }
 
     public static IAmBinaryOperator Wrap(

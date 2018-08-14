@@ -1,8 +1,7 @@
-﻿using System;
-using System.Text;
-
-namespace TypeReflection.Interfaces
+﻿namespace TddXt.XAssert.TypeReflection.Interfaces
 {
+  using System.Text;
+
   public interface IAmField
   {
     bool IsNotDeveloperDefinedReadOnlyField();

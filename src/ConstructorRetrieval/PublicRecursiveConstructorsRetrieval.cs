@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
-using TypeReflection.Interfaces;
 
 namespace ConstructorRetrieval
 {
+  using TddXt.XAssert.TypeReflection.Interfaces;
+
   public class PublicRecursiveConstructorsRetrieval : ConstructorRetrieval
   {
     private readonly ConstructorRetrieval _next;

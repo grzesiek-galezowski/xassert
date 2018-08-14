@@ -2,12 +2,14 @@
 using System.Reflection;
 using AssertionConstraints;
 using TypeReflection;
-using TypeReflection.Interfaces;
+
 using ValueActivation;
 using static TddXt.AnyRoot.Root;
 
 namespace TddEbook.TddToolkit
 {
+  using TddXt.XAssert.TypeReflection.Interfaces;
+
   public class ConstructorsMustBeNullProtected : IConstraint
   {
     private readonly ISmartType _smartType;

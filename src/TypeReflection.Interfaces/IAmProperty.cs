@@ -1,4 +1,4 @@
-﻿namespace TypeReflection.Interfaces
+﻿namespace TddXt.XAssert.TypeReflection.Interfaces
 {
   public interface IAmProperty
   {

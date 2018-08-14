@@ -5,11 +5,12 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using CommonTypes;
 using ConstructorRetrieval;
-using TypeReflection.ImplementationDetails;
-using TypeReflection.Interfaces;
 
 namespace TypeReflection
 {
+  using TddXt.XAssert.TypeReflection.ImplementationDetails;
+  using TddXt.XAssert.TypeReflection.Interfaces;
+
   public interface ISmartType : IType, IConstructorQueries
   {
   }
@@ -106,7 +107,7 @@ namespace TypeReflection
     public IEnumerable<IAmProperty> GetAllPublicInstanceProperties()
     {
       var properties = _typeInfo.GetProperties(BindingFlags.Instance | BindingFlags.Public);
-      return properties.Select(p => new ImplementationDetails.Property(p));
+      return properties.Select(p => new TddXt.XAssert.TypeReflection.ImplementationDetails.Property(p));
     }
 
     public Maybe<ICreateObjects> PickConstructorWithLeastNonPointersParameters()

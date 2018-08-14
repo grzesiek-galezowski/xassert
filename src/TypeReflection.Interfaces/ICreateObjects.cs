@@ -1,8 +1,8 @@
-using System;
-using System.Collections.Generic;
-
-namespace TypeReflection.Interfaces
+namespace TddXt.XAssert.TypeReflection.Interfaces
 {
+  using System;
+  using System.Collections.Generic;
+
   public interface ICreateObjects
   {
     bool HasNonPointerArgumentsOnly();

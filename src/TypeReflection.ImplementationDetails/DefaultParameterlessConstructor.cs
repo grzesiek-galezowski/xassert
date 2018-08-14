@@ -1,17 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Reflection;
-using TypeReflection.Interfaces;
-
-namespace TypeReflection.ImplementationDetails
+namespace TddXt.XAssert.TypeReflection.ImplementationDetails
 {
+  using System;
+  using System.Collections.Generic;
+  using System.Reflection;
+
+  using TddXt.XAssert.TypeReflection.Interfaces;
+
   public class DefaultParameterlessConstructor : ICreateObjects
   {
     private readonly Func<object> _creation;
 
     public DefaultParameterlessConstructor(Func<object> creation)
     {
-      _creation = creation;
+      this._creation = creation;
     }
 
     public bool HasNonPointerArgumentsOnly()
@@ -46,12 +47,12 @@ namespace TypeReflection.ImplementationDetails
 
     public object InvokeWithParametersCreatedBy(Func<Type, object> instanceGenerator)
     {
-      return _creation.Invoke();
+      return this._creation.Invoke();
     }
 
     public object InvokeWith(IEnumerable<object> constructorParameters)
     {
-      return _creation.Invoke();
+      return this._creation.Invoke();
     }
 
     public bool IsInternal()

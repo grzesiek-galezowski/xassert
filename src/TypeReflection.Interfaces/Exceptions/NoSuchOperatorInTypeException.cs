@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace TypeReflection.Interfaces.Exceptions
+﻿namespace TddXt.XAssert.TypeReflection.Interfaces.Exceptions
 {
+  using System;
+
   public class NoSuchOperatorInTypeException : Exception
   {
     public NoSuchOperatorInTypeException(string s)

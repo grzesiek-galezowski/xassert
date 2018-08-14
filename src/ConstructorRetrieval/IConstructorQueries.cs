@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using CommonTypes;
-using TypeReflection.Interfaces;
 
 namespace ConstructorRetrieval
 {
+  using TddXt.XAssert.TypeReflection.Interfaces;
+
   public interface IConstructorQueries
   {
     Maybe<ICreateObjects> GetNonPublicParameterlessConstructorInfo();

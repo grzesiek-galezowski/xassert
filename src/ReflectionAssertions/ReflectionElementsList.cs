@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TypeReflection.Interfaces;
 
 namespace TddEbook.TddToolkit
 {
+  using TddXt.XAssert.TypeReflection.Interfaces;
+
   public class ReflectionElementsList
   {
     public static string Format(IEnumerable<IAmField> staticFields)

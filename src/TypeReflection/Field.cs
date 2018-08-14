@@ -4,11 +4,12 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using CommonTypes;
-using TypeReflection.ImplementationDetails;
-using TypeReflection.Interfaces;
 
 namespace TypeReflection
 {
+  using TddXt.XAssert.TypeReflection.ImplementationDetails;
+  using TddXt.XAssert.TypeReflection.Interfaces;
+
   public class Field : IAmField
   {
     private readonly FieldInfo _fieldInfo;

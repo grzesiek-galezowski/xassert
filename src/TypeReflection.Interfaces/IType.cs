@@ -1,9 +1,10 @@
-using System;
-using System.Collections.Generic;
-using CommonTypes;
-
-namespace TypeReflection.Interfaces
+namespace TddXt.XAssert.TypeReflection.Interfaces
 {
+  using System;
+  using System.Collections.Generic;
+
+  using CommonTypes;
+
   public interface IType
   {
     bool HasPublicParameterlessConstructor();

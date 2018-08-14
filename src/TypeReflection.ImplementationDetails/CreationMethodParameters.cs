@@ -1,10 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-
-namespace TypeReflection.ImplementationDetails
+namespace TddXt.XAssert.TypeReflection.ImplementationDetails
 {
+  using System;
+  using System.Collections.Generic;
+  using System.Linq;
+  using System.Reflection;
+
   public class CreationMethodParameters
   {
     private readonly ParameterInfo[] _parameters;
@@ -13,37 +13,37 @@ namespace TypeReflection.ImplementationDetails
 
     public CreationMethodParameters(ParameterInfo[] parameters)
     {
-      _parameters = parameters;
-      _parameterTypes = 
+      this._parameters = parameters;
+      this._parameterTypes = 
         parameters.Select(p => IntrospectionExtensions.GetTypeInfo(p.ParameterType));
-      _hasAbstractOrInterfaceArguments = 
+      this._hasAbstractOrInterfaceArguments = 
         parameters.Select(p => p.ParameterType.GetTypeInfo())
           .Any(type => type.IsAbstract || type.IsInterface);
     }
 
     public bool ContainAnyPointer()
     {
-      return _parameterTypes.Any(type => type.IsPointer);
+      return this._parameterTypes.Any(type => type.IsPointer);
     }
 
     public bool AreLessThan(int numberOfParams)
     {
-      return _parameters.Length < numberOfParams;
+      return this._parameters.Length < numberOfParams;
     }
 
     public int Count()
     {
-      return _parameters.Length;
+      return this._parameters.Length;
     }
 
     public bool IsAnyAbstractInterface()
     {
-      return _hasAbstractOrInterfaceArguments;
+      return this._hasAbstractOrInterfaceArguments;
     }
 
     public void FillWithGeneratedValues(Func<Type, object> instanceGenerator, List<object> constructorValues)
     {
-      foreach (var constructorParam in _parameterTypes)
+      foreach (var constructorParam in this._parameterTypes)
       {
         constructorValues.Add(instanceGenerator(constructorParam));
       }
@@ -51,17 +51,17 @@ namespace TypeReflection.ImplementationDetails
 
     public string GetDescriptionFor(int i)
     {
-      ParameterInfo parameter = _parameters[i];
+      ParameterInfo parameter = this._parameters[i];
       return parameter.ParameterType.Name + " " + parameter.Name;
     }
 
     public override string ToString()
     {
-      int parametersCount = Count();
+      int parametersCount = this.Count();
       string argsDescription = "";
       for (int i = 0; i < parametersCount; ++i)
       {
-        argsDescription += GetDescriptionFor(i) + Separator(i, parametersCount);
+        argsDescription += this.GetDescriptionFor(i) + Separator(i, parametersCount);
       }
 
       return argsDescription;
@@ -74,7 +74,7 @@ namespace TypeReflection.ImplementationDetails
 
     public bool IsAnyOfType(Type type)
     {
-      return _parameters.Any(p => p.ParameterType == type);
+      return this._parameters.Any(p => p.ParameterType == type);
     }
   }
 }

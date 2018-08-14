@@ -12,8 +12,7 @@
   using TddEbook.TddToolkit;
 
   using TddXt.AnyRoot.Strings;
-
-  using TypeReflection.ImplementationDetails;
+  using TddXt.XAssert.TypeReflection.ImplementationDetails;
 
   using static TddXt.AnyRoot.Root;
 
@@ -51,10 +50,7 @@
     public void ShouldPreferInternalNonRecursiveConstructorsToPublicRecursiveOnes()
     {
       Assert.DoesNotThrow(() => Any.Instance<DirectoryPath>());
-      Assert.DoesNotThrow(() =>
-        {
-          typeof(DirectoryPath).Should().HaveValueSemantics();
-        });
+      Assert.DoesNotThrow(() => typeof(DirectoryPath).Should().HaveValueSemantics());
     }
 
     [Test]
