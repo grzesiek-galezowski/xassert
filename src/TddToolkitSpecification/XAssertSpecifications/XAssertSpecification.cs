@@ -38,55 +38,58 @@
     [Test]
     public void ShouldPassValueTypeAssertionForProperValueType()
     {
-      XAssert.IsValue<ProperValueType>();
+      typeof(ProperValueType).Should().HaveValueSemantics();
     }
 
     [Test]
     public void ShouldPassValueTypeAssertionForProperValueTypeWithInternalConstructor()
     {
-      XAssert.IsValue<FileExtension>();
+      typeof(FileExtension).Should().HaveValueSemantics();
     }
 
     [Test]
     public void ShouldPreferInternalNonRecursiveConstructorsToPublicRecursiveOnes()
     {
       Assert.DoesNotThrow(() => Any.Instance<DirectoryPath>());
-      Assert.DoesNotThrow(() => XAssert.IsValue<DirectoryPath>());
+      Assert.DoesNotThrow(() =>
+        {
+          typeof(DirectoryPath).Should().HaveValueSemantics();
+        });
     }
 
     [Test]
     public void ShouldBeAbleToChooseInternalConstructorWhenThereisNoPublicOne()
     {
       Assert.DoesNotThrow(() => Any.Instance<FileNameWithoutExtension>());
-      Assert.DoesNotThrow(() => XAssert.IsValue<FileNameWithoutExtension>());
+      Assert.DoesNotThrow(() => typeof(FileNameWithoutExtension).Should().HaveValueSemantics());
     }
 
     [Test]
     public void ShouldAllowSpecifyingConstructorArgumentsNotTakenIntoAccountDuringValueBehaviorCheck()
     {
-      XAssert.IsValue<ProperValueTypeWithOneArgumentIdentity>(
-        ValueTypeTraits.Custom.SkipConstructorArgument(0));
+      typeof(ProperValueTypeWithOneArgumentIdentity)
+        .Should().HaveValueSemantics(ValueTypeTraits.Custom.SkipConstructorArgument(0));
 
-      Assert.Throws<AssertionException>(XAssert.IsValue<ProperValueTypeWithOneArgumentIdentity>);
+      Assert.Throws<AssertionException>(() => typeof(ProperValueTypeWithOneArgumentIdentity).Should().HaveValueSemantics());
     }
 
     [Test]
     public void ShouldAcceptProperFullValueTypesAndRejectBadOnes()
     {
-      XAssert.IsValue<ProperValueType>();
-      Assert.Throws<AssertionException>(XAssert.IsValue<ProperValueTypeWithoutEqualityOperator>);
+      typeof(ProperValueType).Should().HaveValueSemantics();
+      Assert.Throws<AssertionException>(() => typeof(ProperValueTypeWithoutEqualityOperator).Should().HaveValueSemantics());
     }
 
     [Test]
     public void ShouldWorkForStructuresWithDefaultEquality()
     {
-      XAssert.IsValue<Maybe<string>>();
+      typeof(Maybe<string>).Should().HaveValueSemantics();
     }
 
     [Test]
     public void ShouldWorkForPrimitves()
     {
-      XAssert.IsValue<int>();
+      typeof(int).Should().HaveValueSemantics();
     }
 
     [Test]

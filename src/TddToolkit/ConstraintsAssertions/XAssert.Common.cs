@@ -2,7 +2,6 @@
 {
   using System;
   using System.Collections.Generic;
-  using System.Linq;
   using System.Reflection;
 
   using AssertionConstraints;
@@ -19,33 +18,19 @@
 
   public partial class XAssert
   {
-    public static void IsValue<T>()
-    {
-      IsValue<T>(ValueTypeTraits.Default());
-    }
-
     public static void HasNullProtectedConstructors<T>()
     {
       var type = SmartType.For(typeof(T));
       
       if (!type.HasConstructorWithParameters())
       {
-        var constraints = new List<IConstraint> { new ConstructorsMustBeNullProtected(type)};
-        AssertionConstraintsEngine.TypeAdheresTo(constraints);
+        AssertionConstraintsEngine.TypeAdheresTo(
+          new List<IConstraint> { new ConstructorsMustBeNullProtected(type) });
       }
     }
 
-    public static void IsValue<T>(ValueTypeTraits traits)
-    {
-      if (!ValueObjectWhiteList.Contains<T>())
-      {
-        var activator = ValueObjectActivator.FreshInstance(typeof (T));
-        var constraints = CreateConstraintsBasedOn(typeof (T), traits, activator);
-        AssertionConstraintsEngine.TypeAdheresTo(constraints);
-      }
-    }
-
-    private static IEnumerable<IConstraint> CreateConstraintsBasedOn(
+    //bug move elsewhere
+    public static IEnumerable<IConstraint> CreateConstraintsBasedOn(
       Type type, ValueTypeTraits traits, ValueObjectActivator activator)
     {
 
@@ -101,20 +86,6 @@
 
       }
       return constraints;
-    }
-
-    public static void IsValue(Type type)
-    {
-      InvokeGenericVersionOfMethod(type, MethodBase.GetCurrentMethod().Name);
-    }
-
-    private static void InvokeGenericVersionOfMethod(Type type, string name)
-    {
-      var methodInfos = typeof(XAssert).GetMethods();
-      var methodsByGivenName = methodInfos.Where(m => m.Name == name);
-      var firstParameterlessVersion = methodsByGivenName.First(m => m.GetParameters().Length == 0);
-      var genericMethod = firstParameterlessVersion.MakeGenericMethod(type);
-      genericMethod.Invoke(null, null);
     }
   }
 }

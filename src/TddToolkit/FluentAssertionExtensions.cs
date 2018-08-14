@@ -6,6 +6,8 @@
   using System.Linq.Expressions;
   using System.Reflection;
 
+  using AssertionConstraints;
+
   using FluentAssertions;
   using FluentAssertions.Primitives;
   using FluentAssertions.Reflection;
@@ -17,6 +19,10 @@
 
   using TypeReflection;
   using TypeReflection.Interfaces;
+
+  using ValueActivation;
+
+  using ValueObjectConstraints;
 
   public static class FluentAssertionExtensions
   {
@@ -168,9 +174,22 @@
       return new AndConstraint<ObjectAssertions>(o);
     }
 
-    public static AndConstraint<TypeAssertions> BehaveLikeValue(this TypeAssertions o)
+    public static AndConstraint<TypeAssertions> HaveValueSemantics(this TypeAssertions o)
     {
-      XAssert.IsValue(o.Subject);
+      o.Subject.Should().HaveValueSemantics(ValueTypeTraits.Default());
+      return new AndConstraint<TypeAssertions>(o);
+    }
+
+    public static AndConstraint<TypeAssertions> HaveValueSemantics(this TypeAssertions o, ValueTypeTraits traits)
+    {
+      Type type = o.Subject;
+      if (!ValueObjectWhiteList.Contains(type))
+      {
+        var activator = ValueObjectActivator.FreshInstance(type);
+        var constraints = XAssert.CreateConstraintsBasedOn(type, traits, activator);
+        AssertionConstraintsEngine.TypeAdheresTo(constraints);
+      }
+
       return new AndConstraint<TypeAssertions>(o);
     }
 

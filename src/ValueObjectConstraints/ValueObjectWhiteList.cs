@@ -1,23 +1,20 @@
-using System;
-
 namespace ValueObjectConstraints
 {
+  using System;
+  using System.Linq;
+
   public static class ValueObjectWhiteList
   {
-    public static bool Contains<T>()
+    private static readonly Type[] WellKnownValueTypesList =
+      {
+        typeof(object),
+        typeof(string),
+        typeof(Guid)
+      };
+
+    public static bool Contains(Type type)
     {
-      var type = typeof(T);
-      if (type == typeof(object))
-      {
-        return true;
-      }
-
-      if (type == typeof(string))
-      {
-        return true;
-      }
-
-      if (type == typeof(Guid))
+      if (WellKnownValueTypesList.Contains(type))
       {
         return true;
       }
