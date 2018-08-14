@@ -6,8 +6,7 @@ namespace TddXt.XAssert.TypeReflection
   using System.Runtime.CompilerServices;
   using System.Text;
 
-  using CommonTypes;
-
+  using TddXt.XAssert.CommonTypes;
   using TddXt.XAssert.TypeReflection.ImplementationDetails;
   using TddXt.XAssert.TypeReflection.Interfaces;
 

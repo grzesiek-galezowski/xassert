@@ -6,8 +6,7 @@ namespace GraphAssertions
   using System.Collections.Generic;
   using System.Linq.Expressions;
 
-  using CommonTypes;
-
+  using TddXt.XAssert.CommonTypes;
   using TddXt.XAssert.TypeReflection;
 
   public static class ObjectGraph

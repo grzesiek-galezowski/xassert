@@ -3,7 +3,7 @@ namespace TddXt.XAssert.TypeReflection.Interfaces
   using System;
   using System.Collections.Generic;
 
-  using CommonTypes;
+  using TddXt.XAssert.CommonTypes;
 
   public interface IType
   {

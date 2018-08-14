@@ -2,8 +2,7 @@
 {
   using System.Reflection;
 
-  using CommonTypes;
-
+  using TddXt.XAssert.CommonTypes;
   using TddXt.XAssert.TypeReflection.Interfaces;
   using TddXt.XAssert.TypeReflection.Interfaces.Exceptions;
 

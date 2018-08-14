@@ -3,8 +3,6 @@
   using System;
   using System.Diagnostics.CodeAnalysis;
 
-  using CommonTypes;
-
   using FluentAssertions;
 
   using NUnit.Framework;
@@ -12,6 +10,7 @@
   using TddEbook.TddToolkit;
 
   using TddXt.AnyRoot.Strings;
+  using TddXt.XAssert.CommonTypes;
   using TddXt.XAssert.TypeReflection.ImplementationDetails;
 
   using static TddXt.AnyRoot.Root;

@@ -4,7 +4,7 @@ namespace TddXt.XAssert.TypeReflection
   using System.Linq.Expressions;
   using System.Reflection;
 
-  using CommonTypes;
+  using TddXt.XAssert.CommonTypes;
 
   public class Property
   {

@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace CommonTypes
+﻿namespace TddXt.XAssert.CommonTypes
 {
+  using System;
+
   public static class Maybe
   {
     public static Maybe<T> FromNullable<T>(T instance) where T : class
@@ -29,8 +29,8 @@ namespace CommonTypes
     {
       if (instance != null)
       {
-        HasValue = true;
-        _value = instance;
+        this.HasValue = true;
+        this._value = instance;
       }
     }
 
@@ -40,9 +40,9 @@ namespace CommonTypes
     {
       get
       {
-        if (HasValue)
+        if (this.HasValue)
         {
-          return _value;
+          return this._value;
         }
         else
         {
@@ -55,7 +55,7 @@ namespace CommonTypes
 
     public Maybe<T> Otherwise(Maybe<T> alternative)
     {
-      return HasValue ? this : alternative;
+      return this.HasValue ? this : alternative;
     }
 
     public static implicit operator Maybe<T>(T instance)
@@ -65,7 +65,7 @@ namespace CommonTypes
 
     public override string ToString()
     {
-      return HasValue ? Value.ToString() : "<Nothing>";
+      return this.HasValue ? this.Value.ToString() : "<Nothing>";
     }
   }
 

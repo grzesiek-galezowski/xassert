@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using CommonTypes;
 
 namespace ConstructorRetrieval
 {
+  using TddXt.XAssert.CommonTypes;
   using TddXt.XAssert.TypeReflection.Interfaces;
 
   public interface IConstructorQueries
