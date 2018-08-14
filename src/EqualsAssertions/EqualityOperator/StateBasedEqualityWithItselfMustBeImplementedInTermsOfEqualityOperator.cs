@@ -1,9 +1,7 @@
-﻿using TddEbook.TddToolkit;
-using ValueActivation;
-
-namespace EqualsAssertions.EqualityOperator
+﻿namespace TddXt.XAssert.EqualsAssertions.EqualityOperator
 {
   using TddXt.XAssert.AssertionConstraints;
+  using TddXt.XAssert.ValueActivation;
 
   public class StateBasedEqualityWithItselfMustBeImplementedInTermsOfEqualityOperator
     : IConstraint

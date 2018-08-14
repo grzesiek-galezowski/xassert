@@ -1,10 +1,9 @@
-﻿using System.Linq;
-
-using ValueActivation;
-
-namespace EqualsAssertions
+﻿namespace TddXt.XAssert.EqualsAssertions
 {
+  using System.Linq;
+
   using TddXt.XAssert.AssertionConstraints;
+  using TddXt.XAssert.ValueActivation;
 
   public class StateBasedUnEqualityMustBeImplementedInTermsOfEqualsMethod : IConstraint
   {

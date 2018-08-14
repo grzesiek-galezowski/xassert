@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Reflection;
 
-using TypeReflection;
-
-using ValueActivation;
 using static TddXt.AnyRoot.Root;
 
 namespace TddEbook.TddToolkit
@@ -11,6 +8,7 @@ namespace TddEbook.TddToolkit
   using TddXt.XAssert.AssertionConstraints;
   using TddXt.XAssert.TypeReflection;
   using TddXt.XAssert.TypeReflection.Interfaces;
+  using TddXt.XAssert.ValueActivation;
 
   public class ConstructorsMustBeNullProtected : IConstraint
   {

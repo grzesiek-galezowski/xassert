@@ -1,8 +1,7 @@
-﻿using ValueActivation;
-
-namespace EqualsAssertions
+﻿namespace TddXt.XAssert.EqualsAssertions
 {
   using TddXt.XAssert.AssertionConstraints;
+  using TddXt.XAssert.ValueActivation;
 
   public class StateBasedEqualityMustBeImplementedInTermsOfEqualsMethod : IConstraint
   {

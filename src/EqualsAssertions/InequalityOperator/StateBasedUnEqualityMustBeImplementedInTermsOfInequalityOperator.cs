@@ -1,11 +1,9 @@
-﻿using System.Linq;
-
-using TddEbook.TddToolkit;
-using ValueActivation;
-
-namespace EqualsAssertions.InequalityOperator
+﻿namespace TddXt.XAssert.EqualsAssertions.InequalityOperator
 {
+  using System.Linq;
+
   using TddXt.XAssert.AssertionConstraints;
+  using TddXt.XAssert.ValueActivation;
 
   public class StateBasedUnEqualityMustBeImplementedInTermsOfInequalityOperator
     : IConstraint

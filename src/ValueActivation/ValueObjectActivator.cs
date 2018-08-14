@@ -1,4 +1,4 @@
-﻿namespace ValueActivation
+﻿namespace TddXt.XAssert.ValueActivation
 {
   using System;
   using System.Collections.Generic;
@@ -8,11 +8,8 @@
 
   using NUnit.Framework;
 
+  using TddXt.AnyRoot;
   using TddXt.XAssert.TypeReflection;
-
-  using TypeReflection;
-
-  using static TddXt.AnyRoot.Root;
 
   public class ValueObjectActivator
   {
@@ -57,7 +54,7 @@
     public object CreateInstanceAsValueObjectWithModifiedParameter(int i)
     {
       var modifiedArguments = _constructorArguments.ToList();
-      modifiedArguments[i] = Any.InstanceAsObject(modifiedArguments[i].GetType());
+      modifiedArguments[i] = Root.Any.InstanceAsObject(modifiedArguments[i].GetType());
       return _fallbackTypeGenerator.GenerateInstance(modifiedArguments.ToArray());
     }
 
@@ -65,7 +62,7 @@
 
     private object CreateInstanceWithNewConstructorArguments()
     {
-      _constructorArguments = _fallbackTypeGenerator.GenerateConstructorParameters(Any.InstanceAsObject);
+      _constructorArguments = _fallbackTypeGenerator.GenerateConstructorParameters(Root.Any.InstanceAsObject);
       return CreateInstanceWithCurrentConstructorArguments();
     }
 

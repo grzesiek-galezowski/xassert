@@ -1,9 +1,9 @@
-﻿using System;
-using FluentAssertions;
-using TypeReflection;
-
-namespace TddEbook.TddToolkit
+﻿namespace TddXt.XAssert.EqualsAssertions
 {
+  using System;
+
+  using FluentAssertions;
+
   using TddXt.XAssert.TypeReflection;
 
   public static class Are

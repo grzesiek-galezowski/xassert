@@ -1,9 +1,7 @@
-﻿using System;
-
-using TddEbook.TddToolkit;
-
-namespace EqualsAssertions.InequalityOperator
+﻿namespace TddXt.XAssert.EqualsAssertions.InequalityOperator
 {
+  using System;
+
   using TddXt.XAssert.AssertionConstraints;
 
   public class StateBasedEqualityShouldBeAvailableInTermsOfInequalityOperator : IConstraint

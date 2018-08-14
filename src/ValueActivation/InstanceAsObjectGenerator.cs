@@ -1,8 +1,9 @@
-﻿using System;
-using TddXt.AnyExtensibility;
-
-namespace ValueActivation
+﻿namespace TddXt.XAssert.ValueActivation
 {
+  using System;
+
+  using TddXt.AnyExtensibility;
+
   internal class InstanceAsObjectGenerator : InlineGenerator<object>
   {
     private readonly Type _type;

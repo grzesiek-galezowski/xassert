@@ -1,8 +1,9 @@
-﻿using System;
-using TddXt.AnyExtensibility;
-
-namespace ValueActivation
+﻿namespace TddXt.XAssert.ValueActivation
 {
+  using System;
+
+  using TddXt.AnyExtensibility;
+
   public static class SpecialAnyExtension
   {
     public static object InstanceAsObject(this BasicGenerator gen, Type type)

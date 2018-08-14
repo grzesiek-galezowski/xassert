@@ -3,13 +3,11 @@
   using System;
   using System.Collections.Generic;
 
-  using EqualsAssertions;
-  using EqualsAssertions.EqualityOperator;
-  using EqualsAssertions.InequalityOperator;
-
   using TddXt.XAssert.AssertionConstraints;
-
-  using ValueActivation;
+  using TddXt.XAssert.EqualsAssertions;
+  using TddXt.XAssert.EqualsAssertions.EqualityOperator;
+  using TddXt.XAssert.EqualsAssertions.InequalityOperator;
+  using TddXt.XAssert.ValueActivation;
 
   using ValueObjectConstraints;
 

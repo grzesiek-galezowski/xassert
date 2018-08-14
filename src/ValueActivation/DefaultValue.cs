@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace TypeReflection
+﻿namespace TddXt.XAssert.ValueActivation
 {
+  using System;
+
   public static class DefaultValue
   {
     public static object Of(Type t)

@@ -1,9 +1,10 @@
-using System;
-using System.Collections.Generic;
-using NUnit.Framework;
-
-namespace ValueActivation
+namespace TddXt.XAssert.ValueActivation
 {
+  using System;
+  using System.Collections.Generic;
+
+  using NUnit.Framework;
+
   using TddXt.XAssert.TypeReflection.Interfaces;
 
   public class FallbackTypeGenerator

@@ -18,10 +18,7 @@
   using TddXt.XAssert.AssertionConstraints;
   using TddXt.XAssert.TypeReflection;
   using TddXt.XAssert.TypeReflection.Interfaces;
-
-  using TypeReflection;
-
-  using ValueActivation;
+  using TddXt.XAssert.ValueActivation;
 
   using ValueObjectConstraints;
 
