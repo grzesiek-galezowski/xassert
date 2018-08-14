@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace TddEbook.TddToolkit
+﻿namespace TddXt.XAssert.ReflectionAssertions
 {
+  using System;
+  using System.Collections.Generic;
+  using System.Linq;
+
   using TddXt.XAssert.TypeReflection.Interfaces;
 
   public class ReflectionElementsList

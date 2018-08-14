@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace TddEbook.TddToolkit
+﻿namespace TddXt.XAssert.TddEbook.TddToolkit.ValueAssertions
 {
+  using System.Collections.Generic;
+
   public class ValueTypeTraits
   {
     public static ValueTypeTraits Full()

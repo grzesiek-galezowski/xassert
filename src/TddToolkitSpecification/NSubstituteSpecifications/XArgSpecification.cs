@@ -2,11 +2,13 @@
 using FluentAssertions;
 using NSubstitute;
 using NSubstitute.Exceptions;
-using NSubstituteExtensions;
+
 using NUnit.Framework;
 
 namespace TddEbook.TddToolkitSpecification.NSubstituteSpecifications
 {
+  using TddXt.XAssert.NSubstituteExtensions;
+
   public class XArgSpecification
   {
     [Test]

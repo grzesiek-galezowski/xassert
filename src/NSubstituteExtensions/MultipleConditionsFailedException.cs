@@ -1,8 +1,7 @@
-using System;
-using System.Collections.Generic;
-
-namespace NSubstituteExtensions
+namespace TddXt.XAssert.NSubstituteExtensions
 {
+  using System;
+  using System.Collections.Generic;
   using System.Runtime.Serialization;
 
   [Serializable]

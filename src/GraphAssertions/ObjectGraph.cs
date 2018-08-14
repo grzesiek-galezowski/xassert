@@ -1,10 +1,10 @@
-﻿using KellermanSoftware.CompareNetObjects;
-
-namespace GraphAssertions
+﻿namespace TddXt.XAssert.GraphAssertions
 {
   using System;
   using System.Collections.Generic;
   using System.Linq.Expressions;
+
+  using KellermanSoftware.CompareNetObjects;
 
   using TddXt.XAssert.CommonTypes;
   using TddXt.XAssert.TypeReflection;

@@ -1,12 +1,15 @@
-using System;
-using System.Reflection;
-using FluentAssertions;
-using NSubstitute;
-using NSubstitute.Exceptions;
-using static TddXt.AnyRoot.Root;
-
-namespace LockAssertions
+namespace TddXt.XAssert.LockAssertions
 {
+  using System;
+  using System.Reflection;
+
+  using FluentAssertions;
+
+  using NSubstitute;
+  using NSubstitute.Exceptions;
+
+  using TddXt.AnyRoot;
+
   public static class SynchronizationAssertions
   {
     private static void LockShouldBeReleasedWhenCallThrowsException<T>(
@@ -68,7 +71,7 @@ namespace LockAssertions
     {
       try
       {
-        var cannedResult = Any.Instance<TReturn>();
+        var cannedResult = Root.Any.Instance<TReturn>();
         callToCheck(wrappedObjectMock).Returns(ci =>
         {
           lockAssertions.AssertLocked();

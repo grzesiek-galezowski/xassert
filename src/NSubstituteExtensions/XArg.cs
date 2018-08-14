@@ -1,13 +1,16 @@
-﻿using System;
-using System.Collections;
-using FluentAssertions;
-using NSubstitute.Core;
-using NSubstitute.Core.Arguments;
-using NSubstituteExtensions.ImplementationDetails;
-using TddEbook.TddToolkit;
-
-namespace NSubstituteExtensions
+﻿namespace TddXt.XAssert.NSubstituteExtensions
 {
+  using System;
+  using System.Collections;
+
+  using FluentAssertions;
+
+  using NSubstitute.Core;
+  using NSubstitute.Core.Arguments;
+
+  using TddXt.XAssert.NSubstituteExtensions.ImplementationDetails;
+  using TddXt.XAssert.TddEbook.TddToolkit;
+
   public static class XArg
   {
     public static T IsLike<T>(T expected)

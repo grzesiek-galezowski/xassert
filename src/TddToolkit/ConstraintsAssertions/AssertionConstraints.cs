@@ -1,4 +1,4 @@
-﻿namespace TddEbook.TddToolkit
+﻿namespace TddXt.XAssert.TddEbook.TddToolkit.ConstraintsAssertions
 {
   using System;
   using System.Collections.Generic;
@@ -7,6 +7,7 @@
   using TddXt.XAssert.EqualsAssertions;
   using TddXt.XAssert.EqualsAssertions.EqualityOperator;
   using TddXt.XAssert.EqualsAssertions.InequalityOperator;
+  using TddXt.XAssert.TddEbook.TddToolkit.ValueAssertions;
   using TddXt.XAssert.ValueActivation;
   using TddXt.XAssert.ValueObjectConstraints;
 

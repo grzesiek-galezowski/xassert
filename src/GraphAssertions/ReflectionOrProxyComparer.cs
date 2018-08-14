@@ -1,9 +1,10 @@
-﻿using System;
-using KellermanSoftware.CompareNetObjects;
-using KellermanSoftware.CompareNetObjects.TypeComparers;
-
-namespace GraphAssertions
+﻿namespace TddXt.XAssert.GraphAssertions
 {
+  using System;
+
+  using KellermanSoftware.CompareNetObjects;
+  using KellermanSoftware.CompareNetObjects.TypeComparers;
+
   public class ReflectionOrProxyComparer : BaseTypeComparer
   {
     public ReflectionOrProxyComparer()

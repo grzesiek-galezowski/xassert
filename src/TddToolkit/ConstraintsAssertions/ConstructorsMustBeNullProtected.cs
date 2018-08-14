@@ -1,10 +1,9 @@
-﻿using System;
-using System.Reflection;
-
-using static TddXt.AnyRoot.Root;
-
-namespace TddEbook.TddToolkit
+﻿namespace TddXt.XAssert.TddEbook.TddToolkit.ConstraintsAssertions
 {
+  using System;
+  using System.Reflection;
+
+  using TddXt.AnyRoot;
   using TddXt.XAssert.AssertionConstraints;
   using TddXt.XAssert.TypeReflection;
   using TddXt.XAssert.TypeReflection.Interfaces;
@@ -36,7 +35,7 @@ namespace TddEbook.TddToolkit
     {
       for (int i = 0; i < constructor.GetParametersCount(); ++i)
       {
-        var parameters = constructor.GenerateAnyParameterValues(Any.InstanceAsObject);
+        var parameters = constructor.GenerateAnyParameterValues(Root.Any.InstanceAsObject);
         if (SmartType.ForTypeOf(parameters[i]).CanBeAssignedNullValue())
         {
           parameters[i] = null;

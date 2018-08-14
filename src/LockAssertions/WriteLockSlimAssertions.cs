@@ -1,8 +1,9 @@
-using System.Threading;
-using FluentAssertions;
-
-namespace LockAssertions
+namespace TddXt.XAssert.LockAssertions
 {
+  using System.Threading;
+
+  using FluentAssertions;
+
   public class WriteLockSlimAssertions : LockAssertions
   {
     private readonly ReaderWriterLockSlim _aLock;

@@ -3,12 +3,15 @@ using System.Threading;
 using FluentAssertions;
 using NSubstitute;
 using NUnit.Framework;
-using TddEbook.TddToolkit;
+
 using TddEbook.TddToolkitSpecification.Fixtures;
 
 namespace TddEbook.TddToolkitSpecification
 {
-    public class SynchronizationSpecification
+  using TddXt.XAssert.TddEbook.TddToolkit;
+  using TddXt.XAssert.TddEbook.TddToolkit.LockAssertions;
+
+  public class SynchronizationSpecification
     {
       [Test]
       public void ShouldNotThrowWhenVoidMethodIsReadSynchronizedCorrectly()

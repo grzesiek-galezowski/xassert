@@ -1,14 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using NSubstitute;
-using NSubstitute.Core;
-using NSubstitute.Core.SequenceChecking;
-using NSubstitute.Exceptions;
-
-namespace NSubstituteExtensions.ImplementationDetails
+namespace TddXt.XAssert.NSubstituteExtensions.ImplementationDetails
 {
+  using System;
+  using System.Collections.Generic;
+  using System.Linq;
+  using System.Reflection;
+
+  using NSubstitute;
+  using NSubstitute.Core;
+  using NSubstitute.Core.SequenceChecking;
+  using NSubstitute.Exceptions;
+
   public class SequenceExclusiveAssertion
   {
     public void Assert(IQueryResults queryResult)

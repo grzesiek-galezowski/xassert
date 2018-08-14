@@ -4,13 +4,14 @@ using System.Reflection;
 using FluentAssertions;
 using NSubstitute;
 using NUnit.Framework;
-using TddEbook.TddToolkit;
+
 using TddXt.AnyRoot.Strings;
 using static TddXt.AnyRoot.Root;
 
 namespace TddEbook.TddToolkitSpecification
 {
   using TddXt.XAssert.AssertionConstraints;
+  using TddXt.XAssert.TddEbook.TddToolkit;
 
   class RecordedAssertionsSpecification
   {

@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using NSubstitute;
 using NSubstitute.Exceptions;
-using NSubstituteExtensions;
+
 using NUnit.Framework;
 
 namespace TddEbook.TddToolkitSpecification
 {
+  using TddXt.XAssert.NSubstituteExtensions;
+
   public class ReceivedNothingSpecification
   {
     [Test]

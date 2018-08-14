@@ -1,21 +1,22 @@
-using System.Threading;
-using LockAssertions;
-
-namespace TddEbook.TddToolkit
+namespace TddXt.XAssert.TddEbook.TddToolkit.LockAssertions
 {
+  using System.Threading;
+
+  using TddXt.XAssert.LockAssertions;
+
   public static class Blocking
   {
-    public static LockAssertions.LockAssertions ReadOn(ReaderWriterLockSlim @lock)
+    public static LockAssertions ReadOn(ReaderWriterLockSlim @lock)
     {
       return new ReadLockSlimAssertions(@lock);
     }
 
-    public static LockAssertions.LockAssertions WriteOn(ReaderWriterLockSlim @lock)
+    public static LockAssertions WriteOn(ReaderWriterLockSlim @lock)
     {
       return new WriteLockSlimAssertions(@lock);
     }
 
-    public static LockAssertions.LockAssertions MonitorOn(object @lock)
+    public static LockAssertions MonitorOn(object @lock)
     {
       return new MonitorAssertions(@lock);
     }

@@ -1,9 +1,10 @@
 ﻿
-namespace TddEbook.TddToolkit
+namespace TddXt.XAssert.GraphAssertions.Experimental
 {
-using System;
-using System.Reflection;
-using Albedo;
+  using System;
+  using System.Reflection;
+
+  using Albedo;
 
   public partial class XAssert //bug remove this class or move to experimental
   {

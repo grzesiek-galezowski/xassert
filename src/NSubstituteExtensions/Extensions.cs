@@ -1,11 +1,12 @@
-﻿using System.Linq;
-using NSubstitute;
-using NSubstitute.Core;
-using NSubstitute.Core.SequenceChecking;
-using NSubstitute.Exceptions;
-
-namespace NSubstituteExtensions
+﻿namespace TddXt.XAssert.NSubstituteExtensions
 {
+  using System.Linq;
+
+  using NSubstitute;
+  using NSubstitute.Core;
+  using NSubstitute.Core.SequenceChecking;
+  using NSubstitute.Exceptions;
+
   public static class Extensions
   {
     public static T ReceivedNothing<T>(this T substitute) where T : class

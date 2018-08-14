@@ -1,4 +1,4 @@
-﻿namespace TddEbook.TddToolkit
+﻿namespace TddXt.XAssert.TddEbook.TddToolkit
 {
   public static class CharExtensions
   {

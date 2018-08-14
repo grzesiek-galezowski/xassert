@@ -1,9 +1,10 @@
-using System;
-using NSubstitute.Core;
-using NSubstitute.Core.Arguments;
-
-namespace NSubstituteExtensions.ImplementationDetails
+namespace TddXt.XAssert.NSubstituteExtensions.ImplementationDetails
 {
+  using System;
+
+  using NSubstitute.Core;
+  using NSubstitute.Core.Arguments;
+
   public class LambdaArgumentMatcher<T> : IArgumentMatcher, IDescribeNonMatches
   {
     private readonly Action<T>[] _assertionActions;

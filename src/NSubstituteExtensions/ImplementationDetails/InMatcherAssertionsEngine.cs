@@ -1,9 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace NSubstituteExtensions.ImplementationDetails
+namespace TddXt.XAssert.NSubstituteExtensions.ImplementationDetails
 {
+  using System;
+  using System.Collections.Generic;
+  using System.Linq;
+
   internal static class InMatcherAssertionsEngine
   {
     private static void ExecuteMultiple<T>(IReadOnlyList<Action<T>> assertionActions, T actual)

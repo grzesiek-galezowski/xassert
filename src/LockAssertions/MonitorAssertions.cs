@@ -1,8 +1,8 @@
-using System;
-using System.Threading;
-
-namespace LockAssertions
+namespace TddXt.XAssert.LockAssertions
 {
+  using System;
+  using System.Threading;
+
   public class MonitorAssertions : LockAssertions
   {
     private readonly object _aLock;

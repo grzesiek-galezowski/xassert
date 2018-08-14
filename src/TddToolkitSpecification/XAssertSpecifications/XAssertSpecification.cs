@@ -7,10 +7,10 @@
 
   using NUnit.Framework;
 
-  using TddEbook.TddToolkit;
-
   using TddXt.AnyRoot.Strings;
   using TddXt.XAssert.CommonTypes;
+  using TddXt.XAssert.TddEbook.TddToolkit;
+  using TddXt.XAssert.TddEbook.TddToolkit.ValueAssertions;
   using TddXt.XAssert.TypeReflection.ImplementationDetails;
 
   using static TddXt.AnyRoot.Root;

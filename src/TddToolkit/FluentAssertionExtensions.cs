@@ -1,4 +1,4 @@
-﻿namespace TddEbook.TddToolkit
+﻿namespace TddXt.XAssert.TddEbook.TddToolkit
 {
   using System;
   using System.Collections.Generic;
@@ -11,11 +11,12 @@
   using FluentAssertions.Reflection;
   using FluentAssertions.Types;
 
-  using GraphAssertions;
-
-  using LockAssertions;
-
   using TddXt.XAssert.AssertionConstraints;
+  using TddXt.XAssert.GraphAssertions;
+  using TddXt.XAssert.LockAssertions;
+  using TddXt.XAssert.ReflectionAssertions;
+  using TddXt.XAssert.TddEbook.TddToolkit.ConstraintsAssertions;
+  using TddXt.XAssert.TddEbook.TddToolkit.ValueAssertions;
   using TddXt.XAssert.TypeReflection;
   using TddXt.XAssert.TypeReflection.Interfaces;
   using TddXt.XAssert.ValueActivation;
@@ -206,7 +207,7 @@
 
     public static void SynchronizeAccessTo<T>(this ObjectAssertions assertions,
       Action<T> callToCheck,
-      LockAssertions lockAssertions,
+      XAssert.LockAssertions.LockAssertions lockAssertions,
       T wrappedObjectMock) 
       where T : class
     {
@@ -219,7 +220,7 @@
 
     public static void SynchronizeAccessTo<T, TReturn>(this ObjectAssertions assertions,
       Func<T, TReturn> callToCheck,
-      LockAssertions lockAssertions,
+      XAssert.LockAssertions.LockAssertions lockAssertions,
       T wrappedObjectMock)
       where T : class
     {
