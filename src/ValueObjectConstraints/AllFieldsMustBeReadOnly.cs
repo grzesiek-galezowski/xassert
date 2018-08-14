@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Linq;
 using AssertionConstraints;
-using TypeReflection;
 
 namespace ValueObjectConstraints
 {
+  using TddXt.XAssert.TypeReflection;
+
   public class AllFieldsMustBeReadOnly : IConstraint
   {
     private readonly Type _type;

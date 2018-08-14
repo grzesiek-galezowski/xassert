@@ -8,6 +8,7 @@ using static TddXt.AnyRoot.Root;
 
 namespace TddEbook.TddToolkit
 {
+  using TddXt.XAssert.TypeReflection;
   using TddXt.XAssert.TypeReflection.Interfaces;
 
   public class ConstructorsMustBeNullProtected : IConstraint

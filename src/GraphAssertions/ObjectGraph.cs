@@ -8,7 +8,7 @@ namespace GraphAssertions
 
   using CommonTypes;
 
-  using TypeReflection;
+  using TddXt.XAssert.TypeReflection;
 
   public static class ObjectGraph
   {

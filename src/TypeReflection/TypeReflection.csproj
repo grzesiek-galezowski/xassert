@@ -5,6 +5,7 @@
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>TypeReflection.snk</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
+    <RootNamespace>TddXt.XAssert.TypeReflection</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

@@ -4,6 +4,8 @@ using TypeReflection;
 
 namespace TddEbook.TddToolkit
 {
+  using TddXt.XAssert.TypeReflection;
+
   public static class Are
   {
     public static bool EqualInTermsOfEqualityOperator<T>(T instance1, T instance2) where T : class

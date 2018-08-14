@@ -5,6 +5,7 @@
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>CommonTypes.snk</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
+    <RootNamespace>TddXt.XAssert.CommonTypes</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

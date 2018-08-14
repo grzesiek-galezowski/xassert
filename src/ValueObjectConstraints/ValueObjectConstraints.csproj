@@ -7,7 +7,7 @@
     <ProjectGuid>{39A44591-A8E9-4AAB-B106-E839B6BDF86C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ValueObjectConstraints</RootNamespace>
+    <RootNamespace>TddXt.XAssert.ValueObjectConstraints</RootNamespace>
     <AssemblyName>ValueObjectConstraints</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -51,6 +51,7 @@
     <Compile Include="ValueObjectWhiteList.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="TddToolkit.snk" />
   </ItemGroup>
   <ItemGroup>

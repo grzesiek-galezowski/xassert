@@ -7,7 +7,7 @@
     <ProjectGuid>{FAEA6B32-964D-49C9-9A94-536999E7CC47}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GraphAssertions</RootNamespace>
+    <RootNamespace>TddXt.XAssert.GraphAssertions</RootNamespace>
     <AssemblyName>GraphAssertions</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

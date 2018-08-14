@@ -1,13 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using CommonTypes;
-using ConstructorRetrieval;
-
-namespace TypeReflection
+namespace TddXt.XAssert.TypeReflection
 {
+  using System;
+  using System.Collections.Generic;
+  using System.Linq;
+  using System.Reflection;
+  using System.Runtime.CompilerServices;
+
+  using CommonTypes;
+
+  using ConstructorRetrieval;
+
   using TddXt.XAssert.TypeReflection.ImplementationDetails;
   using TddXt.XAssert.TypeReflection.Interfaces;
 
@@ -18,24 +20,24 @@ namespace TypeReflection
   public class SmartType : ISmartType
   {
     private readonly Type _type;
-    private readonly ConstructorRetrieval.ConstructorRetrieval _constructorRetrieval;
+    private readonly global::ConstructorRetrieval.ConstructorRetrieval _constructorRetrieval;
     private readonly TypeInfo _typeInfo;
 
-    public SmartType(Type type, ConstructorRetrieval.ConstructorRetrieval constructorRetrieval)
+    public SmartType(Type type, global::ConstructorRetrieval.ConstructorRetrieval constructorRetrieval)
     {
-      _type = type;
-      _constructorRetrieval = constructorRetrieval;
-      _typeInfo = _type.GetTypeInfo();
+      this._type = type;
+      this._constructorRetrieval = constructorRetrieval;
+      this._typeInfo = this._type.GetTypeInfo();
     }
 
     public bool HasPublicParameterlessConstructor()
     {
-      return GetPublicParameterlessConstructor().HasValue || _typeInfo.IsPrimitive || _typeInfo.IsAbstract;
+      return this.GetPublicParameterlessConstructor().HasValue || this._typeInfo.IsPrimitive || this._typeInfo.IsAbstract;
     }
 
     public Maybe<ICreateObjects> GetNonPublicParameterlessConstructorInfo()
     {
-      var constructorInfo = _type.GetConstructor(BindingFlags.NonPublic | BindingFlags.Instance, null, Type.EmptyTypes, null);
+      var constructorInfo = this._type.GetConstructor(BindingFlags.NonPublic | BindingFlags.Instance, null, Type.EmptyTypes, null);
       if (constructorInfo != null)
       {
         return Maybe.Just(DefaultParameterlessConstructor.ForOrdinaryType(constructorInfo));
@@ -49,7 +51,7 @@ namespace TypeReflection
     public Maybe<ICreateObjects> GetPublicParameterlessConstructor()
     {
 
-      var constructorInfo = _type.GetConstructor(
+      var constructorInfo = this._type.GetConstructor(
         BindingFlags.Public | BindingFlags.Instance, null, Type.EmptyTypes, null);
       if (constructorInfo == null)
       {
@@ -63,7 +65,7 @@ namespace TypeReflection
 
     public bool IsImplementationOfOpenGeneric(Type openGenericType)
     {
-      return _typeInfo.GetInterfaces().Any(
+      return this._typeInfo.GetInterfaces().Any(
         ifaceType => IsOpenGeneric(ifaceType, openGenericType));
     }
 
@@ -75,12 +77,12 @@ namespace TypeReflection
 
     public bool IsConcrete()
     {
-      return !_typeInfo.IsAbstract && !_typeInfo.IsInterface;
+      return !this._typeInfo.IsAbstract && !this._typeInfo.IsInterface;
     }
 
     public IEnumerable<IAmField> GetAllInstanceFields()
     {
-      var fields = _typeInfo.GetFields(
+      var fields = this._typeInfo.GetFields(
         BindingFlags.Instance 
         | BindingFlags.Public 
         | BindingFlags.NonPublic);
@@ -91,7 +93,7 @@ namespace TypeReflection
     {
       //bug first convert to field wrappers and then ask questions, not the other way round.
       //bug GetAllFields() should return field wrappers
-      return GetAllFields(_type).Where(fieldInfo =>
+      return GetAllFields(this._type).Where(fieldInfo =>
                                        fieldInfo.IsStatic &&
                                        !new Field(fieldInfo).IsConstant() &&
                                        !IsCompilerGenerated(fieldInfo) &&
@@ -101,12 +103,12 @@ namespace TypeReflection
 
     public IEnumerable<IAmField> GetAllConstants()
     {
-      return GetAllFields(_type).Select(f => new Field(f)).Where(f => f.IsConstant());
+      return GetAllFields(this._type).Select(f => new Field(f)).Where(f => f.IsConstant());
     }
 
     public IEnumerable<IAmProperty> GetAllPublicInstanceProperties()
     {
-      var properties = _typeInfo.GetProperties(BindingFlags.Instance | BindingFlags.Public);
+      var properties = this._typeInfo.GetProperties(BindingFlags.Instance | BindingFlags.Public);
       return properties.Select(p => new TddXt.XAssert.TypeReflection.ImplementationDetails.Property(p));
     }
 
@@ -114,7 +116,7 @@ namespace TypeReflection
     {
       ICreateObjects leastParamsConstructor = null;
 
-      var constructors = For(_type).GetAllPublicConstructors();
+      var constructors = For(this._type).GetAllPublicConstructors();
       var numberOfParams = int.MaxValue;
 
       foreach (var typeConstructor in constructors)
@@ -136,30 +138,30 @@ namespace TypeReflection
 
     private Maybe<MethodInfo> EqualityMethod()
     {
-      var equality = _typeInfo.GetMethod(OpEquality);
+      var equality = this._typeInfo.GetMethod(OpEquality);
 
       return equality == null ? Maybe<MethodInfo>.Not : new Maybe<MethodInfo>(equality);
     }
 
     private Maybe<MethodInfo> InequalityMethod()
     {
-      var inequality = _typeInfo.GetMethod(OpInequality);
+      var inequality = this._typeInfo.GetMethod(OpInequality);
 
       return inequality == null ? Maybe<MethodInfo>.Not : new Maybe<MethodInfo>(inequality);
     }
 
     private Maybe<MethodInfo> ValueTypeEqualityMethod()
     {
-      return _typeInfo.IsValueType ?
-               Maybe.Just(GetType().GetTypeInfo().GetMethod(nameof(ValuesEqual)))
+      return this._typeInfo.IsValueType ?
+               Maybe.Just(this.GetType().GetTypeInfo().GetMethod(nameof(ValuesEqual)))
                : Maybe<MethodInfo>.Not;
 
     }
 
     private Maybe<MethodInfo> ValueTypeInequalityMethod()
     {
-      return _typeInfo.IsValueType ?
-               Maybe.Just(GetType().GetTypeInfo().GetMethod(nameof(ValuesNotEqual))) 
+      return this._typeInfo.IsValueType ?
+               Maybe.Just(this.GetType().GetTypeInfo().GetMethod(nameof(ValuesNotEqual))) 
                : Maybe<MethodInfo>.Not;
     }
 
@@ -175,12 +177,12 @@ namespace TypeReflection
 
     public IAmBinaryOperator Equality()
     {
-      return BinaryOperator.Wrap(EqualityMethod(), ValueTypeEqualityMethod(), "operator ==");
+      return BinaryOperator.Wrap(this.EqualityMethod(), this.ValueTypeEqualityMethod(), "operator ==");
     }
 
     public IAmBinaryOperator Inequality()
     {
-      return BinaryOperator.Wrap(InequalityMethod(), ValueTypeInequalityMethod(), "operator !=");
+      return BinaryOperator.Wrap(this.InequalityMethod(), this.ValueTypeInequalityMethod(), "operator !=");
     }
 
     public static ISmartType For(Type type)
@@ -216,7 +218,7 @@ namespace TypeReflection
 
     public IEnumerable<IAmEvent> GetAllNonPublicEventsWithoutExplicitlyImplemented()
     {
-      return _typeInfo.GetEvents(
+      return this._typeInfo.GetEvents(
         BindingFlags.NonPublic 
         | BindingFlags.Instance
         | BindingFlags.DeclaredOnly)
@@ -246,17 +248,17 @@ namespace TypeReflection
 
     public IEnumerable<ICreateObjects> GetAllPublicConstructors()
     {
-      return _constructorRetrieval.RetrieveFrom(this);
+      return this._constructorRetrieval.RetrieveFrom(this);
     }
 
     public List<ICreateObjects> GetInternalConstructorsWithoutRecursiveParameters()
     {
-      return GetInternalConstructors().Where(c => c.IsNotRecursive()).ToList();
+      return this.GetInternalConstructors().Where(c => c.IsNotRecursive()).ToList();
     }
 
     private List<ICreateObjects> GetInternalConstructors()
     {
-      var constructorInfos = _typeInfo.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic);
+      var constructorInfos = this._typeInfo.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic);
       var enumerable = constructorInfos.Where(CreationMethod.IsInternal);
 
       var wrappers = enumerable.Select(c => (ICreateObjects) CreationMethod.FromConstructorInfo(c)).ToList();
@@ -265,33 +267,33 @@ namespace TypeReflection
 
     public List<CreationMethod> TryToObtainPublicConstructors()
     {
-      return _typeInfo.GetConstructors(BindingFlags.Public | BindingFlags.Instance)
+      return this._typeInfo.GetConstructors(BindingFlags.Public | BindingFlags.Instance)
         .Select(c => CreationMethod.FromConstructorInfo(c)).ToList();
     }
 
     public IEnumerable<ICreateObjects> TryToObtainPublicConstructorsWithoutRecursiveArguments()
     {
-      return TryToObtainPublicConstructors().Where(c => c.IsNotRecursive());
+      return this.TryToObtainPublicConstructors().Where(c => c.IsNotRecursive());
     }
 
     public IEnumerable<ICreateObjects> TryToObtainPublicConstructorsWithRecursiveArguments()
     {
-      return TryToObtainPublicConstructors().Where(c => c.IsRecursive());
+      return this.TryToObtainPublicConstructors().Where(c => c.IsRecursive());
     }
 
     public IEnumerable<ICreateObjects> TryToObtainInternalConstructorsWithRecursiveArguments()
     {
-      return GetInternalConstructors().Where(c => c.IsRecursive()).ToList();
+      return this.GetInternalConstructors().Where(c => c.IsRecursive()).ToList();
     }
 
     public IEnumerable<ICreateObjects> TryToObtainPrimitiveTypeConstructor()
     {
-      return DefaultParameterlessConstructor.ForValue(_type);
+      return DefaultParameterlessConstructor.ForValue(this._type);
     }
 
     public IEnumerable<ICreateObjects> TryToObtainPublicStaticFactoryMethodWithoutRecursion()
     {
-      return _typeInfo.GetMethods(BindingFlags.Static | BindingFlags.Public)
+      return this._typeInfo.GetMethods(BindingFlags.Static | BindingFlags.Public)
         .Where(m => !m.IsSpecialName)
         .Where(IsNotImplicitCast)
         .Where(IsNotExplicitCast)
@@ -301,23 +303,23 @@ namespace TypeReflection
 
     public bool HasConstructorWithParameters()
     {
-      return _typeInfo.IsPrimitive;
+      return this._typeInfo.IsPrimitive;
     }
 
     public bool CanBeAssignedNullValue()
     {
-      return !_typeInfo.IsValueType && !_typeInfo.IsPrimitive;
+      return !this._typeInfo.IsValueType && !this._typeInfo.IsPrimitive;
     }
 
     public Type ToClrType()
     {
-      return _type; //todo at the very end, this should be removed
+      return this._type; //todo at the very end, this should be removed
     }
 
     public bool IsException()
     {
-      return _type == typeof(Exception) ||
-        _typeInfo.IsSubclassOf(typeof(Exception));
+      return this._type == typeof(Exception) ||
+        this._typeInfo.IsSubclassOf(typeof(Exception));
     }
 
     private static bool IsNotExplicitCast(MethodInfo mi)

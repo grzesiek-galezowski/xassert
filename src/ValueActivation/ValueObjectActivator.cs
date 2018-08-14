@@ -1,33 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using FluentAssertions;
-using NUnit.Framework;
-using TypeReflection;
-using static TddXt.AnyRoot.Root;
-
-namespace ValueActivation
+﻿namespace ValueActivation
 {
+  using System;
+  using System.Collections.Generic;
+  using System.Linq;
+
+  using FluentAssertions;
+
+  using NUnit.Framework;
+
+  using TddXt.XAssert.TypeReflection;
+
+  using TypeReflection;
+
+  using static TddXt.AnyRoot.Root;
+
   public class ValueObjectActivator
   {
     private readonly FallbackTypeGenerator _fallbackTypeGenerator;
+
     private List<object> _constructorArguments;
 
     public ValueObjectActivator(FallbackTypeGenerator fallbackTypeGenerator, Type type)
     {
       _fallbackTypeGenerator = fallbackTypeGenerator;
       TargetType = type;
-    }
-
-    private object CreateInstanceWithNewConstructorArguments()
-    {
-      _constructorArguments = _fallbackTypeGenerator.GenerateConstructorParameters(Any.InstanceAsObject);
-      return CreateInstanceWithCurrentConstructorArguments();
-    }
-
-    private object CreateInstanceWithCurrentConstructorArguments()
-    {
-      return _fallbackTypeGenerator.GenerateInstance(_constructorArguments.ToArray());
     }
 
     public static ValueObjectActivator FreshInstance(Type type)
@@ -38,8 +34,8 @@ namespace ValueActivation
     public object CreateInstanceAsValueObjectWithFreshParameters()
     {
       var instance = DefaultValue.Of(TargetType);
-      this.Invoking(_ => { instance = _.CreateInstanceWithNewConstructorArguments(); })
-        .Should().NotThrow(TargetType + " cannot even be created as a value object");
+      this.Invoking(_ => { instance = _.CreateInstanceWithNewConstructorArguments(); }).Should()
+        .NotThrow(TargetType + " cannot even be created as a value object");
       Assert.AreEqual(TargetType, instance.GetType());
       return instance;
     }
@@ -47,8 +43,8 @@ namespace ValueActivation
     public object CreateInstanceAsValueObjectWithPreviousParameters()
     {
       var instance = DefaultValue.Of(TargetType);
-      this.Invoking(_ => { instance = _.CreateInstanceWithCurrentConstructorArguments(); })
-        .Should().NotThrow(TargetType + " cannot even be created as a value object");
+      this.Invoking(_ => { instance = _.CreateInstanceWithCurrentConstructorArguments(); }).Should()
+        .NotThrow(TargetType + " cannot even be created as a value object");
       Assert.AreEqual(TargetType, instance.GetType());
       return instance;
     }
@@ -66,7 +62,17 @@ namespace ValueActivation
     }
 
     public Type TargetType { get; }
+
+    private object CreateInstanceWithNewConstructorArguments()
+    {
+      _constructorArguments = _fallbackTypeGenerator.GenerateConstructorParameters(Any.InstanceAsObject);
+      return CreateInstanceWithCurrentConstructorArguments();
+    }
+
+    private object CreateInstanceWithCurrentConstructorArguments()
+    {
+      return _fallbackTypeGenerator.GenerateInstance(_constructorArguments.ToArray());
+    }
+
   }
-
-
 }

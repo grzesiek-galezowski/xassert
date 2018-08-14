@@ -7,7 +7,7 @@
     <ProjectGuid>{59D28E26-1F55-4B5C-A62D-CEAD84E7247C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ReflectionAssertions</RootNamespace>
+    <RootNamespace>TddXt.XAssert.ReflectionAssertions</RootNamespace>
     <AssemblyName>ReflectionAssertions</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

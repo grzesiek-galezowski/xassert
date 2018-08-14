@@ -1,7 +1,7 @@
-using System;
-
-namespace TypeReflection
+namespace TddXt.XAssert.TypeReflection
 {
+  using System;
+
   using TddXt.XAssert.TypeReflection.ImplementationDetails;
   using TddXt.XAssert.TypeReflection.Interfaces;
 

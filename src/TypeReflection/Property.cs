@@ -1,10 +1,11 @@
-using System;
-using System.Linq.Expressions;
-using System.Reflection;
-using CommonTypes;
-
-namespace TypeReflection
+namespace TddXt.XAssert.TypeReflection
 {
+  using System;
+  using System.Linq.Expressions;
+  using System.Reflection;
+
+  using CommonTypes;
+
   public class Property
   {
     public static Property ObjectOf<T>(Expression<Func<T, object>> expression)
@@ -54,12 +55,12 @@ namespace TypeReflection
 
     public string Name
     {
-      get { return _propertyInfo.Name; }
+      get { return this._propertyInfo.Name; }
     }
 
     private Property(PropertyInfo property)
     {
-      _propertyInfo = property;
+      this._propertyInfo = property;
     }
 
     private readonly PropertyInfo _propertyInfo;

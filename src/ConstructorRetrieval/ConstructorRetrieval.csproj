@@ -7,7 +7,7 @@
     <ProjectGuid>{DF177708-C9A4-4367-8D93-0DD9BBDD6E33}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ConstructorRetrieval</RootNamespace>
+    <RootNamespace>TddXt.XAssert.ConstructorRetrieval</RootNamespace>
     <AssemblyName>ConstructorRetrieval</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

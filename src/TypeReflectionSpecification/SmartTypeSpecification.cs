@@ -1,10 +1,11 @@
 ﻿using System;
 using NUnit.Framework;
 using TddEbook.TddToolkit;
-using TypeReflection;
 
 namespace TypeReflectionSpecification
 {
+  using TddXt.XAssert.TypeReflection;
+
   public class SmartTypeSpecification
   {
     [TestCase(typeof(Exception))]

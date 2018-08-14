@@ -7,7 +7,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{A52E21F4-2301-4F4E-9361-BE954FB490A0}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>TddEbook.TddToolkit</RootNamespace>
+    <RootNamespace>TddXt.XAssert.TddEbook.TddToolkit</RootNamespace>
     <AssemblyName>TddToolkit</AssemblyName>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>

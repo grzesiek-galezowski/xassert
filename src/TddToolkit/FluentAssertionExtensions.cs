@@ -17,6 +17,7 @@
 
   using LockAssertions;
 
+  using TddXt.XAssert.TypeReflection;
   using TddXt.XAssert.TypeReflection.Interfaces;
 
   using TypeReflection;
