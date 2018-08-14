@@ -1,4 +1,4 @@
-﻿namespace AssertionConstraints
+﻿namespace TddXt.XAssert.AssertionConstraints
 {
   public interface IConstraintsViolations
   {

@@ -1,7 +1,7 @@
-using System.Collections.Generic;
-
-namespace ConstructorRetrieval
+namespace TddXt.XAssert.ConstructorRetrieval
 {
+  using System.Collections.Generic;
+
   using TddXt.XAssert.TypeReflection.Interfaces;
 
   public interface ConstructorRetrieval

@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using FluentAssertions;
-
-namespace AssertionConstraints
+﻿namespace TddXt.XAssert.AssertionConstraints
 {
+  using System;
+  using System.Collections.Generic;
+  using System.Linq;
+
+  using FluentAssertions;
+
   public class ConstraintsViolations : IConstraintsViolations
   {
     private readonly List<string> _violations = new List<string>();

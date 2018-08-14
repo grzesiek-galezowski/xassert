@@ -6,8 +6,6 @@
   using System.Linq.Expressions;
   using System.Reflection;
 
-  using global::AssertionConstraints;
-
   using FluentAssertions;
   using FluentAssertions.Primitives;
   using FluentAssertions.Reflection;
@@ -17,6 +15,7 @@
 
   using LockAssertions;
 
+  using TddXt.XAssert.AssertionConstraints;
   using TddXt.XAssert.TypeReflection;
   using TddXt.XAssert.TypeReflection.Interfaces;
 

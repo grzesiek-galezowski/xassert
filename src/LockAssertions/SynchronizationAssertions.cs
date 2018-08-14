@@ -89,7 +89,7 @@ namespace LockAssertions
       }
     }
 
-    public static void Synchronizes<T>(T wrappingObject, Action<T> callToCheck, global::LockAssertions.LockAssertions lockAssertions,
+    public static void Synchronizes<T>(T wrappingObject, Action<T> callToCheck, LockAssertions lockAssertions,
       T wrappedObjectMock) where T : class
     {
       NSubstituteIsInCorrectVersion(wrappedObjectMock);
@@ -97,7 +97,7 @@ namespace LockAssertions
       SynchronizationAssertions.LockShouldBeReleasedWhenCallThrowsException(lockAssertions, wrappingObject, wrappedObjectMock, callToCheck);
     }
 
-    public static void Synchronizes<T, TReturn>(T wrappingObject, Func<T, TReturn> callToCheck, global::LockAssertions.LockAssertions lockAssertions, T wrappedObjectMock) where T : class
+    public static void Synchronizes<T, TReturn>(T wrappingObject, Func<T, TReturn> callToCheck, LockAssertions lockAssertions, T wrappedObjectMock) where T : class
     {
       NSubstituteIsInCorrectVersion(wrappedObjectMock);
       SynchronizationAssertions.LockShouldBeReleasedAfterACall(wrappingObject, wrappedObjectMock, callToCheck, lockAssertions);

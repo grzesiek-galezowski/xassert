@@ -1,7 +1,7 @@
-using System.Collections.Generic;
-
-namespace ConstructorRetrieval
+namespace TddXt.XAssert.ConstructorRetrieval
 {
+  using System.Collections.Generic;
+
   using TddXt.XAssert.TypeReflection.Interfaces;
 
   public class NonPublicParameterlessConstructorRetrieval : ConstructorRetrieval
@@ -10,7 +10,7 @@ namespace ConstructorRetrieval
 
     public NonPublicParameterlessConstructorRetrieval(ConstructorRetrieval next)
     {
-      _next = next;
+      this._next = next;
     }
 
     public IEnumerable<ICreateObjects> RetrieveFrom(IConstructorQueries constructors)
@@ -22,7 +22,7 @@ namespace ConstructorRetrieval
       }
       else
       {
-        return _next.RetrieveFrom(constructors);
+        return this._next.RetrieveFrom(constructors);
       }
     }
   }

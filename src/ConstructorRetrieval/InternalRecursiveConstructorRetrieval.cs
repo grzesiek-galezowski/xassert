@@ -1,8 +1,8 @@
-using System.Collections.Generic;
-using System.Linq;
-
-namespace ConstructorRetrieval
+namespace TddXt.XAssert.ConstructorRetrieval
 {
+  using System.Collections.Generic;
+  using System.Linq;
+
   using TddXt.XAssert.TypeReflection.Interfaces;
 
   public class InternalRecursiveConstructorRetrieval : ConstructorRetrieval
@@ -11,7 +11,7 @@ namespace ConstructorRetrieval
 
     public InternalRecursiveConstructorRetrieval(ConstructorRetrieval next)
     {
-      _next = next;
+      this._next = next;
     }
 
     public IEnumerable<ICreateObjects> RetrieveFrom(IConstructorQueries constructors)
@@ -23,7 +23,7 @@ namespace ConstructorRetrieval
       }
       else
       {
-        return _next.RetrieveFrom(constructors);
+        return this._next.RetrieveFrom(constructors);
       }
     }
   }

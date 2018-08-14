@@ -1,8 +1,9 @@
-﻿using AssertionConstraints;
-using ValueActivation;
+﻿using ValueActivation;
 
 namespace EqualsAssertions
 {
+  using TddXt.XAssert.AssertionConstraints;
+
   public class UnEqualityWithNullMustBeImplementedInTermsOfEqualsMethod : IConstraint
   {
     private readonly ValueObjectActivator _activator;

@@ -1,10 +1,12 @@
 ﻿using System.Linq;
-using AssertionConstraints;
+
 using TddEbook.TddToolkit;
 using ValueActivation;
 
 namespace EqualsAssertions.EqualityOperator
 {
+  using TddXt.XAssert.AssertionConstraints;
+
   public class StateBasedUnEqualityMustBeImplementedInTermsOfEqualityOperator
     : IConstraint
   {

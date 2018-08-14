@@ -1,10 +1,11 @@
-﻿using AssertionConstraints;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using TddXt.AnyRoot.Strings;
 using static TddXt.AnyRoot.Root;
 
 namespace TddEbook.TddToolkitSpecification
 {
+  using TddXt.XAssert.AssertionConstraints;
+
   public class ConstraintsViolationsSpecification
   {
     [Test]

@@ -1,7 +1,7 @@
-using System.Collections.Generic;
-
-namespace AssertionConstraints
+namespace TddXt.XAssert.AssertionConstraints
 {
+  using System.Collections.Generic;
+
   public static class AssertionConstraintsEngine
   {
     public static void TypeAdheresTo(IEnumerable<IConstraint> constraints)

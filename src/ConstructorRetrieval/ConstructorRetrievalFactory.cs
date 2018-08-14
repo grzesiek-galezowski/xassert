@@ -1,4 +1,4 @@
-namespace ConstructorRetrieval
+namespace TddXt.XAssert.ConstructorRetrieval
 {
   public class ConstructorRetrievalFactory
   {
@@ -6,15 +6,15 @@ namespace ConstructorRetrieval
 
     public ConstructorRetrievalFactory()
     {
-      _constructorQuery = 
+      this._constructorQuery = 
         PublicNonRecursiveConstructors(
           PublicParameterlessConstructors(
             InternalNonRecursiveConstructors(
               InternalParameterlessConstructors(
-                PublicStaticNonRecursiveFactoryMethod(
+                this.PublicStaticNonRecursiveFactoryMethod(
                   PublicRecursiveConstructors(
                     InternalRecursiveConstructors(
-                      PrimitiveConstructor()
+                      this.PrimitiveConstructor()
                     )))))));
     }
 
@@ -30,7 +30,7 @@ namespace ConstructorRetrieval
 
     public ConstructorRetrieval Create()
     {
-      return _constructorQuery;
+      return this._constructorQuery;
     }
 
     private static ConstructorRetrieval PublicRecursiveConstructors(ConstructorRetrieval next)

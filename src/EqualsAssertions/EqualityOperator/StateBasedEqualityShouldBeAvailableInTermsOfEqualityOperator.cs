@@ -1,9 +1,11 @@
 ﻿using System;
-using AssertionConstraints;
+
 using TddEbook.TddToolkit;
 
 namespace EqualsAssertions.EqualityOperator
 {
+  using TddXt.XAssert.AssertionConstraints;
+
   public class StateBasedEqualityShouldBeAvailableInTermsOfEqualityOperator
     : IConstraint
   {

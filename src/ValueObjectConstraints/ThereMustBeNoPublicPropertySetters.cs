@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
-using AssertionConstraints;
 
 namespace ValueObjectConstraints
 {
+  using TddXt.XAssert.AssertionConstraints;
   using TddXt.XAssert.TypeReflection;
 
   public class ThereMustBeNoPublicPropertySetters : IConstraint

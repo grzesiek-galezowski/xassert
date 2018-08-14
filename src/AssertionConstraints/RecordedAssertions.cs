@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace AssertionConstraints
+﻿namespace TddXt.XAssert.AssertionConstraints
 {
+  using System;
+
   public class RecordedAssertions
   {
     public static void True(bool condition, string message, IConstraintsViolations errors)

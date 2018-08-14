@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Reflection;
-using AssertionConstraints;
+
 using FluentAssertions;
 using NSubstitute;
 using NUnit.Framework;
@@ -10,6 +10,8 @@ using static TddXt.AnyRoot.Root;
 
 namespace TddEbook.TddToolkitSpecification
 {
+  using TddXt.XAssert.AssertionConstraints;
+
   class RecordedAssertionsSpecification
   {
     [Test]

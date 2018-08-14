@@ -3,11 +3,11 @@
   using System;
   using System.Collections.Generic;
 
-  using global::AssertionConstraints;
-
   using EqualsAssertions;
   using EqualsAssertions.EqualityOperator;
   using EqualsAssertions.InequalityOperator;
+
+  using TddXt.XAssert.AssertionConstraints;
 
   using ValueActivation;
 

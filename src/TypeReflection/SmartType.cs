@@ -6,9 +6,8 @@ namespace TddXt.XAssert.TypeReflection
   using System.Reflection;
   using System.Runtime.CompilerServices;
 
-  using ConstructorRetrieval;
-
   using TddXt.XAssert.CommonTypes;
+  using TddXt.XAssert.ConstructorRetrieval;
   using TddXt.XAssert.TypeReflection.ImplementationDetails;
   using TddXt.XAssert.TypeReflection.Interfaces;
 
@@ -19,10 +18,10 @@ namespace TddXt.XAssert.TypeReflection
   public class SmartType : ISmartType
   {
     private readonly Type _type;
-    private readonly global::ConstructorRetrieval.ConstructorRetrieval _constructorRetrieval;
+    private readonly ConstructorRetrieval _constructorRetrieval;
     private readonly TypeInfo _typeInfo;
 
-    public SmartType(Type type, global::ConstructorRetrieval.ConstructorRetrieval constructorRetrieval)
+    public SmartType(Type type, ConstructorRetrieval constructorRetrieval)
     {
       this._type = type;
       this._constructorRetrieval = constructorRetrieval;

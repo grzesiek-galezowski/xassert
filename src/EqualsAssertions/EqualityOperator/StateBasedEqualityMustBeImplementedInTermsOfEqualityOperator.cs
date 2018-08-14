@@ -1,9 +1,10 @@
-﻿using AssertionConstraints;
-using TddEbook.TddToolkit;
+﻿using TddEbook.TddToolkit;
 using ValueActivation;
 
 namespace EqualsAssertions.EqualityOperator
 {
+  using TddXt.XAssert.AssertionConstraints;
+
   public class StateBasedEqualityMustBeImplementedInTermsOfEqualityOperator : IConstraint
   {
     private readonly ValueObjectActivator _activator;

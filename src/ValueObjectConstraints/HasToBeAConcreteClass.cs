@@ -1,8 +1,9 @@
 ﻿using System;
-using AssertionConstraints;
 
 namespace ValueObjectConstraints
 {
+  using TddXt.XAssert.AssertionConstraints;
+
   public class HasToBeAConcreteClass : IConstraint
   {
     private readonly Type _type;

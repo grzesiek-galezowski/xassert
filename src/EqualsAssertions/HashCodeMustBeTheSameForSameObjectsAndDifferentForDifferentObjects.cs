@@ -1,9 +1,11 @@
 ﻿using System.Linq;
-using AssertionConstraints;
+
 using ValueActivation;
 
 namespace EqualsAssertions
 {
+  using TddXt.XAssert.AssertionConstraints;
+
   public class HashCodeMustBeTheSameForSameObjectsAndDifferentForDifferentObjects : IConstraint
   {
     private readonly ValueObjectActivator _activator;
