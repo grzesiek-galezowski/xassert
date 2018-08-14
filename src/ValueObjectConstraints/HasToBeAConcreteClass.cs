@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace ValueObjectConstraints
+﻿namespace TddXt.XAssert.ValueObjectConstraints
 {
+  using System;
+
   using TddXt.XAssert.AssertionConstraints;
 
   public class HasToBeAConcreteClass : IConstraint

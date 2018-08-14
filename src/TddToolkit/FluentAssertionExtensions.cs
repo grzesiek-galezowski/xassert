@@ -19,8 +19,7 @@
   using TddXt.XAssert.TypeReflection;
   using TddXt.XAssert.TypeReflection.Interfaces;
   using TddXt.XAssert.ValueActivation;
-
-  using ValueObjectConstraints;
+  using TddXt.XAssert.ValueObjectConstraints;
 
   public static class FluentAssertionExtensions
   {

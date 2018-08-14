@@ -1,8 +1,8 @@
-﻿using System;
-using System.Linq;
-
-namespace ValueObjectConstraints
+﻿namespace TddXt.XAssert.ValueObjectConstraints
 {
+  using System;
+  using System.Linq;
+
   using TddXt.XAssert.AssertionConstraints;
   using TddXt.XAssert.TypeReflection;
 

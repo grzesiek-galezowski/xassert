@@ -8,8 +8,7 @@
   using TddXt.XAssert.EqualsAssertions.EqualityOperator;
   using TddXt.XAssert.EqualsAssertions.InequalityOperator;
   using TddXt.XAssert.ValueActivation;
-
-  using ValueObjectConstraints;
+  using TddXt.XAssert.ValueObjectConstraints;
 
   public partial class AssertionConstraints
   {
