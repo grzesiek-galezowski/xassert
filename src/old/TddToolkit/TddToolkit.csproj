@@ -87,7 +87,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CharAssertions.cs" />
+    <Compile Include="SimpleAssertions\CharAssertions.cs" />
     <Compile Include="CharExtensions.cs" />
     <Compile Include="ConstraintsAssertions\AssertionConstraints.cs" />
     <Compile Include="ConstraintsAssertions\ConstructorsMustBeNullProtected.cs" />

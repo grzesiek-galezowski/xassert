@@ -16,6 +16,7 @@
   using TddXt.XAssert.LockAssertions;
   using TddXt.XAssert.ReflectionAssertions;
   using TddXt.XAssert.TddEbook.TddToolkit.ConstraintsAssertions;
+  using TddXt.XAssert.TddEbook.TddToolkit.SimpleAssertions;
   using TddXt.XAssert.TddEbook.TddToolkit.ValueAssertions;
   using TddXt.XAssert.TypeReflection;
   using TddXt.XAssert.TypeReflection.Interfaces;
