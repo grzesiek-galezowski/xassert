@@ -4,4 +4,19 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="FluentAssertions" Version="5.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TypeReflection.Interfaces\TypeReflection.Interfaces.csproj" />
+    <ProjectReference Include="..\TypeReflection\TypeReflection.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="TddXt.AnyRoot">
+      <HintPath>..\..\..\..\..\..\.nuget\packages\any\1.1.3\lib\netstandard2.0\TddXt.AnyRoot.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

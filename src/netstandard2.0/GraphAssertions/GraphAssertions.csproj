@@ -4,4 +4,14 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Albedo" Version="2.0.0" />
+    <PackageReference Include="CompareNETObjects" Version="4.55.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TypeReflection.ImplementationDetails\TypeReflection.ImplementationDetails.csproj" />
+    <ProjectReference Include="..\TypeReflection\TypeReflection.csproj" />
+  </ItemGroup>
+
 </Project>
