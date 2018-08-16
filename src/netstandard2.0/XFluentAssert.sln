@@ -37,6 +37,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypeReflectionSpecification
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssertionConstraintsSpecification", "AssertionConstraintsSpecification\AssertionConstraintsSpecification.csproj", "{D5D70FFC-CA57-43DF-BF8D-352AC5424800}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{477401E3-8233-4EEF-BF11-9A242AE1104D}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\build.cake = ..\..\build.cake
+		..\..\build.ps1 = ..\..\build.ps1
+		..\..\build.sh = ..\..\build.sh
+		..\..\LICENSE = ..\..\LICENSE
+		..\..\README.md = ..\..\README.md
+		..\..\XFluentAssert.nuspec = ..\..\XFluentAssert.nuspec
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
