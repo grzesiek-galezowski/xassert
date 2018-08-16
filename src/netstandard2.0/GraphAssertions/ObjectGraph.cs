@@ -21,7 +21,7 @@
         {
           CompareChildren = true,
           CompareFields = true,
-          //bug according to https://github.com/GregFinzer/Compare-Net-Objects this is not supported due to a security restriction
+          //according to https://github.com/GregFinzer/Compare-Net-Objects this is not supported due to a security restriction
           //ComparePrivateFields = true,
           //ComparePrivateProperties = true,
           CompareProperties = true,

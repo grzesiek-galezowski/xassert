@@ -38,5 +38,7 @@ namespace TddXt.XFluentAssert.TypeReflection.Interfaces
     Type ToClrType();
 
     bool IsException();
+
+    IEnumerable<IAmEvent> GetAllEvents();
   }
 }

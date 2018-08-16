@@ -2,9 +2,9 @@
 {
   using System.Collections.Generic;
 
-  public class ValueTypeTraits
+  public class ValueTypeTraits : IKnowWhatValueTraitsToCheck
   {
-    public static ValueTypeTraits Full()
+    public static IKnowWhatValueTraitsToCheck Full()
     {
       var result = new ValueTypeTraits
                      {
@@ -21,7 +21,7 @@
       RequireEqualityAndInequalityOperatorImplementation = true;
     }
 
-    public static ValueTypeTraits Custom => new ValueTypeTraits();
+    public static IKnowWhatValueTraitsToCheck Custom => new ValueTypeTraits();
 
     public List<int> IndexesOfConstructorArgumentsIndexesThatDoNotConstituteAValueIdentify
     {
@@ -53,12 +53,12 @@
       get; set;
     }
 
-    public static ValueTypeTraits Default()
+    public static IKnowWhatValueTraitsToCheck Default()
     {
       return Full();
     }
 
-    public ValueTypeTraits SkipConstructorArgument(int constructorArgumentIndex)
+    public IKnowWhatValueTraitsToCheck SkipConstructorArgument(int constructorArgumentIndex)
     {
       this.IndexesOfConstructorArgumentsIndexesThatDoNotConstituteAValueIdentify.Add(constructorArgumentIndex);
       return this;

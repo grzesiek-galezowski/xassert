@@ -224,6 +224,17 @@ namespace TddXt.XFluentAssert.TypeReflection
                   .Select(e => new Event(e));
     }
 
+    public IEnumerable<IAmEvent> GetAllEvents()
+    {
+      return this._typeInfo.GetEvents(
+        BindingFlags.Public
+        | BindingFlags.NonPublic 
+        | BindingFlags.Instance
+          | BindingFlags.Static
+          | BindingFlags.DeclaredOnly)
+                  .Select(e => new Event(e));
+    }
+
     private static bool IsNotExplicitlyImplemented(EventInfo eventInfo)
     {
       var eventDeclaringType = eventInfo.DeclaringType;

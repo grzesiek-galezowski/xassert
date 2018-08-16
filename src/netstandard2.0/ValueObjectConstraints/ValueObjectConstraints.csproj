@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AssertionConstraints\AssertionConstraints.csproj" />
+    <ProjectReference Include="..\EqualityAssertions\EqualityAssertions.csproj" />
     <ProjectReference Include="..\TypeReflection\TypeReflection.csproj" />
   </ItemGroup>
 

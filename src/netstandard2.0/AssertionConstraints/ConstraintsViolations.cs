@@ -21,14 +21,15 @@
                                          + Environment.NewLine + MessageContainingAll(_violations) + Environment.NewLine);
     }
 
+    public void Add(string violationDetails)
+    {
+      _violations.Add(violationDetails);
+    }
+
     private static string MessageContainingAll(IEnumerable<string> violations)
     {
       return violations.Any() ? violations.Aggregate((a, b) => a + Environment.NewLine + b) : "No violations.";
     }
 
-    public void Add(string violationDetails)
-    {
-      _violations.Add(violationDetails);
-    }
   }
 }

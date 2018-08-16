@@ -1,4 +1,4 @@
-﻿namespace TddXt.XFluentAssert.Root.ConstraintsAssertions
+﻿namespace TddXt.XFluentAssert.ValueObjectConstraints
 {
   using System;
   using System.Collections.Generic;
@@ -9,13 +9,12 @@
   using TddXt.XFluentAssert.EqualityAssertions.InequalityOperator;
   using TddXt.XFluentAssert.Root.ValueAssertions;
   using TddXt.XFluentAssert.ValueActivation;
-  using TddXt.XFluentAssert.ValueObjectConstraints;
 
-  public partial class AssertionConstraints
+  public class AssertionConstraints
   {
-    //bug move elsewhere
+    //todo move elsewhere (but has troublesome dependency on ValueTraits which is public...)
     public static IEnumerable<IConstraint> ForValueSemantics(
-      Type type, ValueTypeTraits traits, ValueObjectActivator activator)
+      Type type, IKnowWhatValueTraitsToCheck traits, ValueObjectActivator activator)
     {
 
       var constraints = new List<IConstraint>();

@@ -165,8 +165,6 @@
         .Should().ThrowExactly<XunitException>();
     }
 
-    //bug movie this elsewhere
-
     [Fact]
     public void ShouldThrowWhenVoidMethodDoesNotEnterReadLockAtAll()
     {
@@ -244,9 +242,6 @@
         service.Should().SynchronizeAccessTo(s => s.CallWithResultNotExitedOnException("alabama"), Blocking.ReadOn(service.Lock), wrappedObjectMock))
         .Should().ThrowExactly<XunitException>();
     }
-
-    //bug end
-    //bug movie this elsewhere
 
     [Fact]
     public void ShouldThrowWhenVoidMethodDoesNotEnterWriteLockAtAll()
@@ -326,7 +321,6 @@
         .Should().ThrowExactly<XunitException>();
     }
 
-    //bug end
 
     private class ReadSynchronizedMyService : SynchronizedMyService<ReaderWriterLockSlim>
     {

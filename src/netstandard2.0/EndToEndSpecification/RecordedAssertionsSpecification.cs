@@ -1,6 +1,7 @@
 ﻿namespace TddXt.XFluentAssert.EndToEndSpecification
 {
   using System;
+  using System.ComponentModel;
 
   using FluentAssertions;
 
@@ -64,18 +65,27 @@
     }
 
 
-    [Fact] //TODO 1. only single constructor! 2. class inheritance levels
+    [Fact]
     public void ShouldFailNonPublicEventsAssertionWhenAssemblyContainsAtLeastOneNonPublicEvent()
     {
+      const string EventName = "explicitlyImplementedEvent";
       var assembly = typeof (RecordedAssertionsSpecification).Assembly;
+      assembly.Should().DefineType("TddXt.XFluentAssert.EndToEndSpecification", nameof(ExplicitImplementation));
+      assembly.Should().DefineType("TddXt.XFluentAssert.EndToEndSpecification", nameof(ExplicitlyImplemented));
+      typeof(ExplicitlyImplemented).Should().HaveEventWithShortName(EventName);
+      typeof(ExplicitImplementation).Should().HaveEventWithShortName(EventName);
+
       new Action(() => assembly.Should().NotHaveHiddenEvents()).Should().ThrowExactly<XunitException>()
-        .Which.Message.Should().NotContain("explicitlyImplementedEvent");
+        .Which.Message.Should().NotContain(EventName);
     }
 
-    [Fact] //TODO 1. only single constructor! 2. class inheritance levels, 3. private/protected events
+    [Fact]
     public void ShouldFailConstructorLimitAssertionWhenAnyClassContainsAtLeastOneConstructor()
     {
-      var assembly = typeof (RecordedAssertionsSpecification).Assembly;
+      typeof(ObjectWithTwoConstructors).Should().HaveConstructor(new[] { typeof(int) });
+      typeof(ObjectWithTwoConstructors).Should().HaveConstructor(new[] { typeof(string) });
+      var assembly = typeof(RecordedAssertionsSpecification).Assembly;
+
       new Action(() => assembly.Should().HaveOnlyTypesWithSingleConstructor()).Should().ThrowExactly<XunitException>().Which
         .Message.Should().NotContain("MyException");
     }
@@ -129,6 +139,7 @@
   {
     
   }
+
 
   public interface ExplicitlyImplemented
   {

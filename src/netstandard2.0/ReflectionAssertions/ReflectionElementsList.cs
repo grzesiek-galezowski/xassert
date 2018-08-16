@@ -14,11 +14,18 @@
       return string.Join(Environment.NewLine, result);
     }
 
-    public static string Format(IEnumerable<IAmEvent> nonPublicEvents)
+    public static string NonPublicEventsFoundMessage(IEnumerable<IAmEvent> nonPublicEvents)
     {
       var result = new HashSet<string>(nonPublicEvents.Select(eventWrapper => eventWrapper.GenerateNonPublicExistenceMessage()));
       return string.Join(Environment.NewLine, result);
     }
+
+    public static string FormattedListof(IEnumerable<IAmEvent> events)
+    {
+      var result = new HashSet<string>(events.Select(eventWrapper => eventWrapper.Name()));
+      return string.Join(Environment.NewLine, result);
+    }
+
 
     public static string Format(IEnumerable<Tuple<Type, int>> constructorLimitsExceeded)
     {

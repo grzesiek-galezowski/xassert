@@ -94,6 +94,17 @@
       return new AndConstraint<AssemblyAssertions>(assertions);
     }
 
+    public static AndConstraint<TypeAssertions> HaveEventWithShortName(this TypeAssertions assertions, string eventName)
+    {
+      var allEvents = SmartType.For(assertions.Subject).GetAllEvents();
+
+      allEvents.Should().Match(
+        events => events.Any(ev => ev.HasName(eventName)),
+        "Type " + assertions.Subject + " should define expected event " + eventName);
+
+      return new AndConstraint<TypeAssertions>(assertions);
+    }
+
     public static AndConstraint<AssemblyAssertions> NotHaveHiddenEvents(this AssemblyAssertions assertions)
     {
       Assembly assembly = assertions.Subject;
@@ -105,7 +116,7 @@
       }
 
       nonPublicEvents.Should()
-        .BeEmpty("assembly " + assembly + " should not contain non-public events, but: " + Environment.NewLine + ReflectionElementsList.Format(nonPublicEvents));
+        .BeEmpty("assembly " + assembly + " should not contain non-public events, but: " + Environment.NewLine + ReflectionElementsList.NonPublicEventsFoundMessage(nonPublicEvents));
       return new AndConstraint<AssemblyAssertions>(assertions);
     }
 
@@ -192,7 +203,7 @@
       return new AndConstraint<TypeAssertions>(o);
     }
 
-    public static AndConstraint<TypeAssertions> HaveValueSemantics(this TypeAssertions o, ValueTypeTraits traits)
+    public static AndConstraint<TypeAssertions> HaveValueSemantics(this TypeAssertions o, IKnowWhatValueTraitsToCheck traits)
     {
       Type type = o.Subject;
       if (!ValueObjectWhiteList.Contains(type))

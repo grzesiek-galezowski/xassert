@@ -33,7 +33,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ValueActivation", "ValueAct
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EndToEndSpecification", "EndToEndSpecification\EndToEndSpecification.csproj", "{1897702A-E831-4ECC-B016-85F6C4FACBE6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypeReflectionSpecification", "TypeReflectionSpecification\TypeReflectionSpecification.csproj", "{7266FEB7-73EE-4E20-8350-18E2D770172F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypeReflectionSpecification", "TypeReflectionSpecification\TypeReflectionSpecification.csproj", "{7266FEB7-73EE-4E20-8350-18E2D770172F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssertionConstraintsSpecification", "AssertionConstraintsSpecification\AssertionConstraintsSpecification.csproj", "{D5D70FFC-CA57-43DF-BF8D-352AC5424800}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -237,6 +239,18 @@ Global
 		{7266FEB7-73EE-4E20-8350-18E2D770172F}.Release|x64.Build.0 = Release|Any CPU
 		{7266FEB7-73EE-4E20-8350-18E2D770172F}.Release|x86.ActiveCfg = Release|Any CPU
 		{7266FEB7-73EE-4E20-8350-18E2D770172F}.Release|x86.Build.0 = Release|Any CPU
+		{D5D70FFC-CA57-43DF-BF8D-352AC5424800}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5D70FFC-CA57-43DF-BF8D-352AC5424800}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5D70FFC-CA57-43DF-BF8D-352AC5424800}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D5D70FFC-CA57-43DF-BF8D-352AC5424800}.Debug|x64.Build.0 = Debug|Any CPU
+		{D5D70FFC-CA57-43DF-BF8D-352AC5424800}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D5D70FFC-CA57-43DF-BF8D-352AC5424800}.Debug|x86.Build.0 = Debug|Any CPU
+		{D5D70FFC-CA57-43DF-BF8D-352AC5424800}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5D70FFC-CA57-43DF-BF8D-352AC5424800}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5D70FFC-CA57-43DF-BF8D-352AC5424800}.Release|x64.ActiveCfg = Release|Any CPU
+		{D5D70FFC-CA57-43DF-BF8D-352AC5424800}.Release|x64.Build.0 = Release|Any CPU
+		{D5D70FFC-CA57-43DF-BF8D-352AC5424800}.Release|x86.ActiveCfg = Release|Any CPU
+		{D5D70FFC-CA57-43DF-BF8D-352AC5424800}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
