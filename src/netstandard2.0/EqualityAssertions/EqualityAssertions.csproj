@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>TddXt.XFluentAssert.EqualityAssertions</AssemblyName>
+    <RootNamespace>TddXt.XFluentAssert.EqualityAssertions</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

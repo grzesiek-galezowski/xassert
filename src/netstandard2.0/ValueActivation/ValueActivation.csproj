@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>TddXt.XFluentAssert.ValueActivation</AssemblyName>
+    <RootNamespace>TddXt.XFluentAssert.ValueActivation</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

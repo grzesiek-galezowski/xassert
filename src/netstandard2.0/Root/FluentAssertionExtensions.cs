@@ -1,4 +1,6 @@
-﻿namespace TddXt.XAssert.TddEbook.TddToolkit
+﻿using NSubstitute.Core.Arguments;
+
+namespace TddXt.XAssert.TddEbook.TddToolkit
 {
   using System;
   using System.Collections.Generic;
@@ -209,13 +211,13 @@
     public static void SynchronizeAccessTo<T>(this ObjectAssertions assertions,
       Action<T> callToCheck,
       XAssert.LockAssertions.LockAssertions lockAssertions,
-      T wrappedObjectMock) 
+      T wrappedObjectMock)
       where T : class
     {
       SynchronizationAssertions.Synchronizes(
-        (T)assertions.Subject, 
-        callToCheck, 
-        lockAssertions, 
+        (T)assertions.Subject,
+        callToCheck,
+        lockAssertions,
         wrappedObjectMock);
     }
 
