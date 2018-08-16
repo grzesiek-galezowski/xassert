@@ -4,6 +4,13 @@
 #tool "nuget:?package=GitVersion.CommandLine"
 
 //////////////////////////////////////////////////////////////////////
+// VERSION
+//////////////////////////////////////////////////////////////////////
+
+//var nugetVersion = "0.0.2";
+GitVersion nugetVersion = null; 
+
+//////////////////////////////////////////////////////////////////////
 // ARGUMENTS
 //////////////////////////////////////////////////////////////////////
 
@@ -16,16 +23,17 @@ var netstandard20 = new Framework("netstandard2.0");
 var solutionName = "XFluentAssert.sln";
 var mainDll = "TddXt.XFluentAssert.Root.dll";
 
+
 //////////////////////////////////////////////////////////////////////
 // DEPENDENCIES
 //////////////////////////////////////////////////////////////////////
 
 
 //todo change
-				//Albedo 2.0.0
-				//Any 1.1.3
-				//CompareNETObjects.4.55.0.0
-				//FluentAssertions.5.4.1
+                //Albedo 2.0.0
+                //Any 1.1.3
+                //CompareNETObjects.4.55.0.0
+                //FluentAssertions.5.4.1
 
 var castleCore       = new[] {"Castle.Core"     , "4.3.1"};
 var nSubstitute      = new[] {"NSubstitute"     , "3.1.0"};
@@ -54,7 +62,7 @@ var specificationNetStandardDir = specificationDir + Directory("netcoreapp2.0");
 //var specificationNet45Dir = specificationDir + Directory("netstandard2.0");
 //var slnNet45 = srcNet45Dir + File(solutionName);
 
-GitVersion gitVersion = null; 
+
 
 //////////////////////////////////////////////////////////////////////
 // TASKS
@@ -65,99 +73,110 @@ Task("Clean")
 {
     CleanDirectory(buildDir);
     CleanDirectory(publishDir);
-	CleanDirectory("./nuget");
+    CleanDirectory("./nuget");
 });
 
 Task("Build")
+	.IsDependentOn("GitVersion")
     .Does(() =>
 {
     DotNetCoreBuild("./src/netstandard2.0/Root", new DotNetCoreBuildSettings
      {
          Configuration = configuration,
-         OutputDirectory = buildNetStandardDir
+         OutputDirectory = buildNetStandardDir,
+         ArgumentCustomization = args=>args.Append("/property:Version=" + nugetVersion.NuGetVersionV2)
      });
 });
 
 Task("Run-Unit-Tests")
-	.IsDependentOn("Build")
+    .IsDependentOn("Build")
     .Does(() =>
 {
-	var projectFiles = GetFiles(srcNetStandardDir.ToString() + "/**/*Specification.csproj");
+    var projectFiles = GetFiles(srcNetStandardDir.ToString() + "/**/*Specification.csproj");
     foreach(var file in projectFiles)
     {
         DotNetCoreTest(file.FullPath, new DotNetCoreTestSettings           
-		{
+        {
            Configuration = configuration
-		});
+        });
     }
 });
 
 public void BundleDependencies(DirectoryPath specificVersionPublishDir, string rootDllName)
 {
-	var fullRootDllFilePath = specificVersionPublishDir + "/" + rootDllName;
-	var assemblyPaths = GetFiles(specificVersionPublishDir + "/TddXt.XFluentAssert.*.dll");
-	var mainAssemblyPath = new FilePath(fullRootDllFilePath).MakeAbsolute(Context.Environment);
-	assemblyPaths.Remove(mainAssemblyPath);
-	foreach(var path in assemblyPaths)
-	{
-		Console.WriteLine(path);
-	}
-	ILRepack(fullRootDllFilePath, fullRootDllFilePath, assemblyPaths);
-	DeleteFiles(assemblyPaths);
+    var fullRootDllFilePath = specificVersionPublishDir + "/" + rootDllName;
+    var assemblyPaths = GetFiles(specificVersionPublishDir + "/TddXt.XFluentAssert.*.dll");
+    var mainAssemblyPath = new FilePath(fullRootDllFilePath).MakeAbsolute(Context.Environment);
+    assemblyPaths.Remove(mainAssemblyPath);
+    foreach(var path in assemblyPaths)
+    {
+        Console.WriteLine(path);
+    }
+    ILRepack(fullRootDllFilePath, fullRootDllFilePath, assemblyPaths);
+    DeleteFiles(assemblyPaths);
 }
+
+Task("GitVersion")
+    .Does(() =>
+{
+    nugetVersion = GitVersion(new GitVersionSettings {
+        UpdateAssemblyInfo = true,
+	});
+});
 
 
 Task("Pack")
-	.IsDependentOn("Build")
+    .IsDependentOn("Build")
     .Does(() => 
     {
-		CopyDirectory(buildDir, publishDir);
-		BundleDependencies(publishNetStandardDir, mainDll);
-		//BundleDependencies(publishNet45Dir, mainDll);
-		NuGetPack("./XFluentAssert.nuspec", new NuGetPackSettings()
-		{
-			Id = "XFluentAssert",
-			Title = "XFluentAssert",
-			Owners = new [] { "Grzegorz Galezowski" },
-			Authors = new [] { "Grzegorz Galezowski" },
-			Summary = "A set of assertions to be used together with FluentAssertions library.",
-			Description = "A set of assertions to be used together with FluentAssertions library.",
-			Language = "en-US",
-			ReleaseNotes = new[] {"Initial version"},
-			ProjectUrl = new Uri("https://github.com/grzesiek-galezowski/xassert"),
-			OutputDirectory = "./nuget",
-			Version = "0.0.1",
-			Files = new [] 
-			{
-				new NuSpecContent {Source = @".\publish\netstandard2.0\TddXt.XFluentAssert.*", Exclude=@"**\*.json", Target = @"lib\netstandard2.0"},
-			},
+        CopyDirectory(buildDir, publishDir);
+        BundleDependencies(publishNetStandardDir, mainDll);
+        //BundleDependencies(publishNet45Dir, mainDll);
+        NuGetPack("./XFluentAssert.nuspec", new NuGetPackSettings()
+        {
+            Id = "XFluentAssert",
+            Title = "XFluentAssert",
+            Owners = new [] { "Grzegorz Galezowski" },
+            Authors = new [] { "Grzegorz Galezowski" },
+            Summary = "A set of assertions to be used together with FluentAssertions library.",
+            Description = "A set of assertions to be used together with FluentAssertions library.",
+            Language = "en-US",
+            ReleaseNotes = new[] {"Initial version"},
+            ProjectUrl = new Uri("https://github.com/grzesiek-galezowski/xassert"),
+            OutputDirectory = "./nuget",
+            Version = nugetVersion.NuGetVersionV2,
+            Files = new [] 
+            {
+                new NuSpecContent {Source = @".\publish\netstandard2.0\TddXt.XFluentAssert.*", Exclude=@"**\*.json", Target = @"lib\netstandard2.0"},
+            },
 
-			Dependencies = new [] 
-			{
-				netstandard20.Dependency(castleCore),
-				netstandard20.Dependency(nSubstitute),
-				netstandard20.Dependency(fluentAssertions),
-				netstandard20.Dependency(albedo),
-				netstandard20.Dependency(any),
-			}
+            Dependencies = new [] 
+            {
+                netstandard20.Dependency(castleCore),
+                netstandard20.Dependency(nSubstitute),
+                netstandard20.Dependency(fluentAssertions),
+                netstandard20.Dependency(albedo),
+                netstandard20.Dependency(any),
+            }
 
-		});  
+        });  
     });
 
-	public class Framework
-	{
-		string _name;
+    public class Framework
+    {
+        string _name;
 
-		public Framework(string name)
-		{
-			_name = name;
-		}
+        public Framework(string name)
+        {
+            _name = name;
+        }
 
-		public NuSpecDependency Dependency(params string[] idAndVersion)
-		{
-			return new NuSpecDependency { Id = idAndVersion[0], Version = idAndVersion[1], TargetFramework = _name };
-		}
-	}
+        public NuSpecDependency Dependency(params string[] idAndVersion)
+        {
+            return new NuSpecDependency { Id = idAndVersion[0], Version = idAndVersion[1], TargetFramework = _name };
+        }
+    }
+
 
 
 //////////////////////////////////////////////////////////////////////
@@ -165,6 +184,7 @@ Task("Pack")
 //////////////////////////////////////////////////////////////////////
 
 Task("Default")
+	.IsDependentOn("GitVersion")
     .IsDependentOn("Build")
     .IsDependentOn("Run-Unit-Tests")
     .IsDependentOn("Pack");

@@ -35,7 +35,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EndToEndSpecification", "En
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypeReflectionSpecification", "TypeReflectionSpecification\TypeReflectionSpecification.csproj", "{7266FEB7-73EE-4E20-8350-18E2D770172F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssertionConstraintsSpecification", "AssertionConstraintsSpecification\AssertionConstraintsSpecification.csproj", "{D5D70FFC-CA57-43DF-BF8D-352AC5424800}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AssertionConstraintsSpecification", "AssertionConstraintsSpecification\AssertionConstraintsSpecification.csproj", "{D5D70FFC-CA57-43DF-BF8D-352AC5424800}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{477401E3-8233-4EEF-BF11-9A242AE1104D}"
 	ProjectSection(SolutionItems) = preProject
