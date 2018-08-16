@@ -1,11 +1,11 @@
-namespace TddXt.XAssert.ValueActivation
+namespace TddXt.XFluentAssert.ValueActivation
 {
   using System;
   using System.Collections.Generic;
 
   using FluentAssertions;
 
-  using TddXt.XAssert.TypeReflection.Interfaces;
+  using TddXt.XFluentAssert.TypeReflection.Interfaces;
 
   public class FallbackTypeGenerator
   {

@@ -1,7 +1,7 @@
-﻿namespace TddXt.XAssert.EqualsAssertions
+﻿namespace TddXt.XFluentAssert.EqualityAssertions
 {
-  using TddXt.XAssert.AssertionConstraints;
-  using TddXt.XAssert.ValueActivation;
+  using TddXt.XFluentAssert.AssertionConstraints;
+  using TddXt.XFluentAssert.ValueActivation;
 
   public class StateBasedEqualityMustBeImplementedInTermsOfEqualsMethod : IConstraint
   {

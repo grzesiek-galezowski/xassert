@@ -1,9 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace TddEbook.TddToolkitSpecification
+namespace TddXt.XFluentAssert.EndToEndSpecification
 {
+  using System;
+  using System.Collections.Generic;
+  using System.Linq;
+
   public class SequenceEqualsMatcher
   {
     private readonly List<int> _expected;

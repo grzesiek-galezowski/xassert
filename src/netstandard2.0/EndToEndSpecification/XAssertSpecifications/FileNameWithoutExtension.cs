@@ -1,7 +1,7 @@
-using System;
-
-namespace TddEbook.TddToolkitSpecification.XAssertSpecifications
+namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
 {
+  using System;
+
   public class FileNameWithoutExtension : IEquatable<FileNameWithoutExtension>
   {
     public static FileNameWithoutExtension Value(string fileNameWithoutExtensionString)

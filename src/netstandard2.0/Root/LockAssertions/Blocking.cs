@@ -1,8 +1,8 @@
-namespace TddXt.XAssert.TddEbook.TddToolkit.LockAssertions
+namespace TddXt.XFluentAssert.Root.LockAssertions
 {
   using System.Threading;
 
-  using TddXt.XAssert.LockAssertions;
+  using TddXt.XFluentAssert.LockAssertions;
 
   public static class Blocking
   {

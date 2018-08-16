@@ -1,9 +1,9 @@
-namespace TddXt.XAssert.ConstructorRetrieval
+namespace TddXt.XFluentAssert.ConstructorRetrieval
 {
   using System.Collections.Generic;
   using System.Linq;
 
-  using TddXt.XAssert.TypeReflection.Interfaces;
+  using TddXt.XFluentAssert.TypeReflection.Interfaces;
 
   public class InternalRecursiveConstructorRetrieval : ConstructorRetrieval
   {

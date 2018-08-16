@@ -1,4 +1,4 @@
-namespace TddXt.XAssert.ConstructorRetrieval
+namespace TddXt.XFluentAssert.ConstructorRetrieval
 {
   public class ConstructorRetrievalFactory
   {

@@ -1,16 +1,15 @@
-﻿namespace TddEbook.TddToolkitSpecification
+﻿namespace TddXt.XFluentAssert.EndToEndSpecification
 {
   using System;
 
   using FluentAssertions;
 
+  using TddXt.AnyRoot;
   using TddXt.AnyRoot.Strings;
-  using TddXt.XAssert.AssertionConstraints;
+  using TddXt.XFluentAssert.AssertionConstraints;
 
   using Xunit;
   using Xunit.Sdk;
-
-  using static TddXt.AnyRoot.Root;
 
   //bug this isn't end to end
   public class ConstraintsViolationsSpecification
@@ -30,7 +29,7 @@
     {
       //GIVEN
       var violations = new ConstraintsViolations();
-      violations.Add(Any.String());
+      violations.Add(Root.Any.String());
 
       //WHEN - THEN
       new Action(violations.AssertNone).Should().ThrowExactly<XunitException>();
@@ -41,9 +40,9 @@
     {
       //GIVEN
       var violations = new ConstraintsViolations();
-      var violation1 = Any.String();
-      var violation2 = Any.String();
-      var violation3 = Any.String();
+      var violation1 = Root.Any.String();
+      var violation2 = Root.Any.String();
+      var violation3 = Root.Any.String();
       violations.Add(violation1);
       violations.Add(violation2);
       violations.Add(violation3);
@@ -58,8 +57,8 @@
     {
       //WHEN
       const string seed = "xyz";
-      var violation1 = Any.String(seed);
-      var violation2 = Any.String(seed);
+      var violation1 = Root.Any.String(seed);
+      var violation2 = Root.Any.String(seed);
 
       //THEN
       violation1.Should().StartWith(seed);

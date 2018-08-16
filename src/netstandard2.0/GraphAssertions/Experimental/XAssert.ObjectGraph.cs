@@ -1,5 +1,5 @@
 ﻿
-namespace TddXt.XAssert.GraphAssertions.Experimental
+namespace TddXt.XFluentAssert.GraphAssertions.Experimental
 {
   using System;
   using System.Reflection;

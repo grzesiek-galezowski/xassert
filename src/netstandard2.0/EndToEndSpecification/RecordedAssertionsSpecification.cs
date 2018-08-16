@@ -1,4 +1,4 @@
-﻿namespace TddEbook.TddToolkitSpecification
+﻿namespace TddXt.XFluentAssert.EndToEndSpecification
 {
   using System;
 
@@ -6,14 +6,13 @@
 
   using NSubstitute;
 
+  using TddXt.AnyRoot;
   using TddXt.AnyRoot.Strings;
-  using TddXt.XAssert.AssertionConstraints;
-  using TddXt.XAssert.TddEbook.TddToolkit;
+  using TddXt.XFluentAssert.AssertionConstraints;
+  using TddXt.XFluentAssert.Root;
 
   using Xunit;
   using Xunit.Sdk;
-
-  using static TddXt.AnyRoot.Root;
 
   public class RecordedAssertionsSpecification
   {
@@ -22,7 +21,7 @@
     {
       //GIVEN
       var violations = Substitute.For<IConstraintsViolations>();
-      var message = Any.String();
+      var message = Root.Any.String();
 
       //WHEN
       RecordedAssertions.True(false, message, violations);
@@ -36,7 +35,7 @@
     {
       //GIVEN
       var violations = Substitute.For<IConstraintsViolations>();
-      var message = Any.String();
+      var message = Root.Any.String();
 
       //WHEN
       RecordedAssertions.True(true, message, violations);

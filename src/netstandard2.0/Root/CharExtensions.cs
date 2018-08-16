@@ -1,6 +1,6 @@
-﻿namespace TddXt.XAssert.TddEbook.TddToolkit
+﻿namespace TddXt.XFluentAssert.Root
 {
-  using TddXt.XAssert.TddEbook.TddToolkit.SimpleAssertions;
+  using TddXt.XFluentAssert.Root.SimpleAssertions;
 
   public static class CharExtensions
   {

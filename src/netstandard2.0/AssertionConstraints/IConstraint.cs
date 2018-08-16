@@ -1,4 +1,4 @@
-﻿namespace TddXt.XAssert.AssertionConstraints
+﻿namespace TddXt.XFluentAssert.AssertionConstraints
 {
   public interface IConstraint
   {

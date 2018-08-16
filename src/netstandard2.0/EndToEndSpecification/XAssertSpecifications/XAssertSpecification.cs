@@ -1,20 +1,19 @@
-﻿namespace TddEbook.TddToolkitSpecification.XAssertSpecifications
+﻿namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
 {
   using System;
   using System.Diagnostics.CodeAnalysis;
 
   using FluentAssertions;
 
+  using TddXt.AnyRoot;
   using TddXt.AnyRoot.Strings;
-  using TddXt.XAssert.CommonTypes;
-  using TddXt.XAssert.TddEbook.TddToolkit;
-  using TddXt.XAssert.TddEbook.TddToolkit.ValueAssertions;
-  using TddXt.XAssert.TypeReflection.ImplementationDetails;
+  using TddXt.XFluentAssert.CommonTypes;
+  using TddXt.XFluentAssert.Root;
+  using TddXt.XFluentAssert.Root.ValueAssertions;
+  using TddXt.XFluentAssert.TypeReflection.ImplementationDetails;
 
   using Xunit;
   using Xunit.Sdk;
-
-  using static TddXt.AnyRoot.Root;
 
   public class XAssertSpecification
   {
@@ -50,14 +49,14 @@
     [Fact]
     public void ShouldPreferInternalNonRecursiveConstructorsToPublicRecursiveOnes()
     {
-      new Action(() => Any.Instance<DirectoryPath>()).Should().NotThrow();
+      new Action(() => Root.Any.Instance<DirectoryPath>()).Should().NotThrow();
       new Action(() => typeof(DirectoryPath).Should().HaveValueSemantics()).Should().NotThrow();
     }
 
     [Fact]
     public void ShouldBeAbleToChooseInternalConstructorWhenThereisNoPublicOne()
     {
-      new Action(() => Any.Instance<FileNameWithoutExtension>()).Should().NotThrow();
+      new Action(() => Root.Any.Instance<FileNameWithoutExtension>()).Should().NotThrow();
       new Action(() => typeof(FileNameWithoutExtension).Should().HaveValueSemantics()).Should().NotThrow();
     }
 
@@ -92,7 +91,7 @@
     [Fact]
     public void ShouldFailUpperCaseAssertionOnLowerCaseStringAndPassOnUpperCaseString()
     {
-      var s = Any.String();
+      var s = Root.Any.String();
       new Action(() => s.ToLower().Should().BeUppercase() ).Should().ThrowExactly<XunitException>();
       new Action(() => s.ToUpper().Should().BeUppercase()).Should().NotThrow();
     }
@@ -100,7 +99,7 @@
     [Fact]
     public void ShouldFailLowerCaseAssertionOnUpperCaseStringAndPassOnLowerCaseString()
     {
-      var s = Any.String();
+      var s = Root.Any.String();
       new Action(() => s.ToUpper().Should().BeLowercase()).Should().ThrowExactly<XunitException>();
       new Action(() => s.ToLower().Should().BeLowercase()).Should().NotThrow();
     }
@@ -108,7 +107,7 @@
     [Fact]
     public void ShouldFailUpperCaseAssertionOnLowerCaseCharAndPassOnUpperCaseChar()
     {
-      var c = Any.AlphaChar();
+      var c = Root.Any.AlphaChar();
       new Action(() => char.ToLower(c).Should().BeUppercase()).Should().ThrowExactly<XunitException>();
       new Action(() => char.ToUpper(c).Should().BeUppercase()).Should().NotThrow();
     }
@@ -116,7 +115,7 @@
     [Fact]
     public void ShouldFailLowerCaseAssertionOnUpperCaseCharAndPassOnLowerCaseChar()
     {
-      var c = Any.AlphaChar();
+      var c = Root.Any.AlphaChar();
       new Action(() => char.ToUpper(c).Should().BeLowercase()).Should().ThrowExactly<XunitException>();
       new Action(() => char.ToLower(c).Should().BeLowercase()).Should().NotThrow();
     }
@@ -174,27 +173,27 @@
     [Fact]
     public void ShouldPassUppercaseAssertionOnUppercaseString()
     {
-       Any.UpperCaseString().Should().BeUppercase();
+       Root.Any.UpperCaseString().Should().BeUppercase();
     }
 
     [Fact]
     public void ShouldFailUppercaseAssertionOnLowercaseString()
     {
 
-      new Action(() => (Any.UpperCaseString() + "a").Should().BeUppercase())
+      new Action(() => (Root.Any.UpperCaseString() + "a").Should().BeUppercase())
         .Should().ThrowExactly<XunitException>();
     }
     [Fact]
     public void ShouldPassLowercaseAssertionOnLowercaseString()
     {
-      Any.LowerCaseString().Should().BeLowercase();
+      Root.Any.LowerCaseString().Should().BeLowercase();
     }
 
     [Fact]
     public void ShouldFailLowercaseAssertionOnUppercaseString()
     {
 
-      new Action(() => (Any.LowerCaseString() + "A").Should().BeLowercase())
+      new Action(() => (Root.Any.LowerCaseString() + "A").Should().BeLowercase())
         .Should().ThrowExactly<XunitException>();
     }
 

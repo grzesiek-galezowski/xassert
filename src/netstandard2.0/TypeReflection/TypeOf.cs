@@ -1,9 +1,9 @@
-namespace TddXt.XAssert.TypeReflection
+namespace TddXt.XFluentAssert.TypeReflection
 {
   using System;
 
-  using TddXt.XAssert.TypeReflection.ImplementationDetails;
-  using TddXt.XAssert.TypeReflection.Interfaces;
+  using TddXt.XFluentAssert.TypeReflection.ImplementationDetails;
+  using TddXt.XFluentAssert.TypeReflection.Interfaces;
 
   public static class TypeOf<T>
   {

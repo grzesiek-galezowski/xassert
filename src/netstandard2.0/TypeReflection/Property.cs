@@ -1,10 +1,10 @@
-namespace TddXt.XAssert.TypeReflection
+namespace TddXt.XFluentAssert.TypeReflection
 {
   using System;
   using System.Linq.Expressions;
   using System.Reflection;
 
-  using TddXt.XAssert.CommonTypes;
+  using TddXt.XFluentAssert.CommonTypes;
 
   public class Property
   {

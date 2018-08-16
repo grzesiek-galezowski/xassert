@@ -1,4 +1,4 @@
-﻿namespace TddXt.XAssert.ValueActivation
+﻿namespace TddXt.XFluentAssert.ValueActivation
 {
   using System;
 

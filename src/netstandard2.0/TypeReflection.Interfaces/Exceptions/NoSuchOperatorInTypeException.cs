@@ -1,4 +1,4 @@
-﻿namespace TddXt.XAssert.TypeReflection.Interfaces.Exceptions
+﻿namespace TddXt.XFluentAssert.TypeReflection.Interfaces.Exceptions
 {
   using System;
 

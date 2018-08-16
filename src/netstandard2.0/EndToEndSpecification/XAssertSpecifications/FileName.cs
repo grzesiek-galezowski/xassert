@@ -1,4 +1,4 @@
-namespace TddEbook.TddToolkitSpecification.XAssertSpecifications
+namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
 {
   public class FileName
   {

@@ -1,8 +1,8 @@
-﻿namespace TddXt.XAssert.EqualsAssertions.InequalityOperator
+﻿namespace TddXt.XFluentAssert.EqualityAssertions.InequalityOperator
 {
   using System;
 
-  using TddXt.XAssert.AssertionConstraints;
+  using TddXt.XFluentAssert.AssertionConstraints;
 
   public class StateBasedEqualityShouldBeAvailableInTermsOfInequalityOperator : IConstraint
   {

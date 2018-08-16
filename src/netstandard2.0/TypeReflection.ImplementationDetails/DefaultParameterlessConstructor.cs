@@ -1,10 +1,10 @@
-namespace TddXt.XAssert.TypeReflection.ImplementationDetails
+namespace TddXt.XFluentAssert.TypeReflection.ImplementationDetails
 {
   using System;
   using System.Collections.Generic;
   using System.Reflection;
 
-  using TddXt.XAssert.TypeReflection.Interfaces;
+  using TddXt.XFluentAssert.TypeReflection.Interfaces;
 
   public class DefaultParameterlessConstructor : ICreateObjects
   {

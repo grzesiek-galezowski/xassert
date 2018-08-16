@@ -1,9 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-
-namespace TddEbook.TddToolkitSpecification.Fixtures
+namespace TddXt.XFluentAssert.EndToEndSpecification.Fixtures
 {
+  using System;
+  using System.Collections.Generic;
+  using System.Diagnostics.CodeAnalysis;
+
   [SuppressMessage("ReSharper", "UnusedMember.Global")]
   public interface IObservableConcurrentDictionary<TKey, TValue>
     : IObservable<Tuple<TKey, TValue>>, IEnumerable<KeyValuePair<TKey, TValue>>

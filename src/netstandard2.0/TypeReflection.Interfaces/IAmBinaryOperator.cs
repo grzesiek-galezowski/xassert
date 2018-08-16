@@ -1,4 +1,4 @@
-﻿namespace TddXt.XAssert.TypeReflection.Interfaces
+﻿namespace TddXt.XFluentAssert.TypeReflection.Interfaces
 {
   public interface IAmBinaryOperator<in T, out TResult>
   {

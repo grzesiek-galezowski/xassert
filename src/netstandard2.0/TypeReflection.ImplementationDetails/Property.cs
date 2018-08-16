@@ -1,8 +1,8 @@
-﻿namespace TddXt.XAssert.TypeReflection.ImplementationDetails
+﻿namespace TddXt.XFluentAssert.TypeReflection.ImplementationDetails
 {
   using System.Reflection;
 
-  using TddXt.XAssert.TypeReflection.Interfaces;
+  using TddXt.XFluentAssert.TypeReflection.Interfaces;
 
   public class Property : IAmProperty //bug there's another Property class in this sln
   {

@@ -1,10 +1,10 @@
-﻿namespace TddXt.XAssert.EqualsAssertions
+﻿namespace TddXt.XFluentAssert.EqualityAssertions
 {
   using System;
 
   using FluentAssertions;
 
-  using TddXt.XAssert.TypeReflection;
+  using TddXt.XFluentAssert.TypeReflection;
 
   public static class Are
   {

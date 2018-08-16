@@ -1,15 +1,15 @@
-﻿namespace TddXt.XAssert.TddEbook.TddToolkit.ConstraintsAssertions
+﻿namespace TddXt.XFluentAssert.Root.ConstraintsAssertions
 {
   using System;
   using System.Collections.Generic;
 
-  using TddXt.XAssert.AssertionConstraints;
-  using TddXt.XAssert.EqualsAssertions;
-  using TddXt.XAssert.EqualsAssertions.EqualityOperator;
-  using TddXt.XAssert.EqualsAssertions.InequalityOperator;
-  using TddXt.XAssert.TddEbook.TddToolkit.ValueAssertions;
-  using TddXt.XAssert.ValueActivation;
-  using TddXt.XAssert.ValueObjectConstraints;
+  using TddXt.XFluentAssert.AssertionConstraints;
+  using TddXt.XFluentAssert.EqualityAssertions;
+  using TddXt.XFluentAssert.EqualityAssertions.EqualityOperator;
+  using TddXt.XFluentAssert.EqualityAssertions.InequalityOperator;
+  using TddXt.XFluentAssert.Root.ValueAssertions;
+  using TddXt.XFluentAssert.ValueActivation;
+  using TddXt.XFluentAssert.ValueObjectConstraints;
 
   public partial class AssertionConstraints
   {

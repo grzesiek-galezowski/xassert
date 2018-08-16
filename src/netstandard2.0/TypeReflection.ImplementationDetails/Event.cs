@@ -1,9 +1,9 @@
-﻿namespace TddXt.XAssert.TypeReflection.ImplementationDetails
+﻿namespace TddXt.XFluentAssert.TypeReflection.ImplementationDetails
 {
   using System.Reflection;
   using System.Text;
 
-  using TddXt.XAssert.TypeReflection.Interfaces;
+  using TddXt.XFluentAssert.TypeReflection.Interfaces;
 
   public class Event : IAmEvent
   {

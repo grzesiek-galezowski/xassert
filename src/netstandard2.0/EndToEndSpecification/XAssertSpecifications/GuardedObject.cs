@@ -1,7 +1,7 @@
-using System;
-
-namespace TddEbook.TddToolkitSpecification.XAssertSpecifications
+namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
 {
+  using System;
+
   public class GuardedObject
   {
     public GuardedObject(int a, string b, int c, string dede)

@@ -1,8 +1,8 @@
-namespace TddXt.XAssert.ConstructorRetrieval
+namespace TddXt.XFluentAssert.ConstructorRetrieval
 {
   using System.Collections.Generic;
 
-  using TddXt.XAssert.TypeReflection.Interfaces;
+  using TddXt.XFluentAssert.TypeReflection.Interfaces;
 
   public class NonPublicParameterlessConstructorRetrieval : ConstructorRetrieval
   {

@@ -1,4 +1,4 @@
-﻿namespace TddXt.XAssert.NSubstituteExtensions
+﻿namespace TddXt.XFluentAssert.NSubstituteExtensions
 {
   using System;
   using System.Collections;
@@ -8,8 +8,8 @@
   using NSubstitute.Core;
   using NSubstitute.Core.Arguments;
 
-  using TddXt.XAssert.NSubstituteExtensions.ImplementationDetails;
-  using TddXt.XAssert.TddEbook.TddToolkit;
+  using TddXt.XFluentAssert.NSubstituteExtensions.ImplementationDetails;
+  using TddXt.XFluentAssert.Root;
 
   public static class XArg
   {

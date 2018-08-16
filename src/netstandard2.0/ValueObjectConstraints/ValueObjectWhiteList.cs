@@ -1,4 +1,4 @@
-namespace TddXt.XAssert.ValueObjectConstraints
+namespace TddXt.XFluentAssert.ValueObjectConstraints
 {
   using System;
   using System.Linq;

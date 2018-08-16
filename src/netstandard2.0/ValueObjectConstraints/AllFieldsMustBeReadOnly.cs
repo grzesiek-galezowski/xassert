@@ -1,10 +1,10 @@
-﻿namespace TddXt.XAssert.ValueObjectConstraints
+﻿namespace TddXt.XFluentAssert.ValueObjectConstraints
 {
   using System;
   using System.Linq;
 
-  using TddXt.XAssert.AssertionConstraints;
-  using TddXt.XAssert.TypeReflection;
+  using TddXt.XFluentAssert.AssertionConstraints;
+  using TddXt.XFluentAssert.TypeReflection;
 
   public class AllFieldsMustBeReadOnly : IConstraint
   {

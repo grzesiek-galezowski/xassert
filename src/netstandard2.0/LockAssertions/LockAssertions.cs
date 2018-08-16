@@ -1,4 +1,4 @@
-namespace TddXt.XAssert.LockAssertions
+namespace TddXt.XFluentAssert.LockAssertions
 {
   public interface LockAssertions
   {

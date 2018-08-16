@@ -1,4 +1,4 @@
-﻿namespace TddXt.XAssert.TddEbook.TddToolkit.ValueAssertions
+﻿namespace TddXt.XFluentAssert.Root.ValueAssertions
 {
   using System.Collections.Generic;
 

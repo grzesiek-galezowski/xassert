@@ -1,13 +1,13 @@
-﻿namespace TddXt.XAssert.TddEbook.TddToolkit.ConstraintsAssertions
+﻿namespace TddXt.XFluentAssert.Root.ConstraintsAssertions
 {
   using System;
   using System.Reflection;
 
   using TddXt.AnyRoot;
-  using TddXt.XAssert.AssertionConstraints;
-  using TddXt.XAssert.TypeReflection;
-  using TddXt.XAssert.TypeReflection.Interfaces;
-  using TddXt.XAssert.ValueActivation;
+  using TddXt.XFluentAssert.AssertionConstraints;
+  using TddXt.XFluentAssert.TypeReflection;
+  using TddXt.XFluentAssert.TypeReflection.Interfaces;
+  using TddXt.XFluentAssert.ValueActivation;
 
   public class ConstructorsMustBeNullProtected : IConstraint
   {

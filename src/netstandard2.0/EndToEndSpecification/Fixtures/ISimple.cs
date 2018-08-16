@@ -1,8 +1,8 @@
-using System;
-using System.Collections.Generic;
-
-namespace TddEbook.TddToolkitSpecification.Fixtures
+namespace TddXt.XFluentAssert.EndToEndSpecification.Fixtures
 {
+  using System;
+  using System.Collections.Generic;
+
   public interface ISimple
   {
     int GetInt();

@@ -1,4 +1,4 @@
-namespace TddXt.XAssert.TypeReflection.Interfaces
+namespace TddXt.XFluentAssert.TypeReflection.Interfaces
 {
   using System;
   using System.Collections.Generic;

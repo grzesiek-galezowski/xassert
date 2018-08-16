@@ -1,4 +1,4 @@
-namespace TddXt.XAssert.TypeReflection
+namespace TddXt.XFluentAssert.TypeReflection
 {
   using System;
   using System.Collections.Generic;
@@ -6,10 +6,10 @@ namespace TddXt.XAssert.TypeReflection
   using System.Reflection;
   using System.Runtime.CompilerServices;
 
-  using TddXt.XAssert.CommonTypes;
-  using TddXt.XAssert.ConstructorRetrieval;
-  using TddXt.XAssert.TypeReflection.ImplementationDetails;
-  using TddXt.XAssert.TypeReflection.Interfaces;
+  using TddXt.XFluentAssert.CommonTypes;
+  using TddXt.XFluentAssert.ConstructorRetrieval;
+  using TddXt.XFluentAssert.TypeReflection.ImplementationDetails;
+  using TddXt.XFluentAssert.TypeReflection.Interfaces;
 
   public interface ISmartType : IType, IConstructorQueries
   {
@@ -107,7 +107,7 @@ namespace TddXt.XAssert.TypeReflection
     public IEnumerable<IAmProperty> GetAllPublicInstanceProperties()
     {
       var properties = this._typeInfo.GetProperties(BindingFlags.Instance | BindingFlags.Public);
-      return properties.Select(p => new TddXt.XAssert.TypeReflection.ImplementationDetails.Property(p));
+      return properties.Select(p => new ImplementationDetails.Property(p));
     }
 
     public Maybe<ICreateObjects> PickConstructorWithLeastNonPointersParameters()

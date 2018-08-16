@@ -1,4 +1,4 @@
-﻿namespace TddXt.XAssert.CommonTypes
+﻿namespace TddXt.XFluentAssert.CommonTypes
 {
   using System;
 

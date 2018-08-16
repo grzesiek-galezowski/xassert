@@ -1,4 +1,4 @@
-﻿namespace TddXt.XAssert.TddEbook.TddToolkit.SimpleAssertions
+﻿namespace TddXt.XFluentAssert.Root.SimpleAssertions
 {
   using FluentAssertions.Numeric;
 

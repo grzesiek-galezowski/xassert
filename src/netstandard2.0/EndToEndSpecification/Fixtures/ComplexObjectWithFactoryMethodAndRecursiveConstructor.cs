@@ -1,8 +1,8 @@
-using System;
-using System.Diagnostics.CodeAnalysis;
-
-namespace TddEbook.TddToolkitSpecification.Fixtures
+namespace TddXt.XFluentAssert.EndToEndSpecification.Fixtures
 {
+  using System;
+  using System.Diagnostics.CodeAnalysis;
+
   [SuppressMessage("ReSharper", "UnusedMember.Global")]
   [Serializable]
   public class ComplexObjectWithFactoryMethodAndRecursiveConstructor

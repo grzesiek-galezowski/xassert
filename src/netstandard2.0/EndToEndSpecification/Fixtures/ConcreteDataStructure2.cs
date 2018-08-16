@@ -1,4 +1,4 @@
-namespace TddEbook.TddToolkitSpecification.Fixtures
+namespace TddXt.XFluentAssert.EndToEndSpecification.Fixtures
 {
   public class ConcreteDataStructure2
   {

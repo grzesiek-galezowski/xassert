@@ -1,10 +1,10 @@
-﻿namespace TddXt.XAssert.NSubstituteExtensions
+﻿namespace TddXt.XFluentAssert.NSubstituteExtensions
 {
   using System;
 
   using NSubstitute.Core;
 
-  using TddXt.XAssert.NSubstituteExtensions.ImplementationDetails;
+  using TddXt.XFluentAssert.NSubstituteExtensions.ImplementationDetails;
 
   public class XReceived
   {

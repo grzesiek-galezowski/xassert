@@ -1,4 +1,4 @@
-﻿namespace TddXt.XAssert.GraphAssertions
+﻿namespace TddXt.XFluentAssert.GraphAssertions
 {
   using System;
   using System.Collections.Generic;
@@ -6,11 +6,10 @@
 
   using KellermanSoftware.CompareNetObjects;
 
-  using TddXt.XAssert.CommonTypes;
-  using TddXt.XAssert.TypeReflection;
-  using TddXt.XAssert.TypeReflection.ImplementationDetails;
+  using TddXt.XFluentAssert.CommonTypes;
+  using TddXt.XFluentAssert.TypeReflection;
 
-  using Property = TddXt.XAssert.TypeReflection.Property;
+  using Property = TddXt.XFluentAssert.TypeReflection.Property;
 
   public static class ObjectGraph
   {

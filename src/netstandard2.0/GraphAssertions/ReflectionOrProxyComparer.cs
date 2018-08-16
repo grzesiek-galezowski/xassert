@@ -1,4 +1,4 @@
-﻿namespace TddXt.XAssert.GraphAssertions
+﻿namespace TddXt.XFluentAssert.GraphAssertions
 {
   using System;
 

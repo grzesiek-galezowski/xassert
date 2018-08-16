@@ -1,4 +1,4 @@
-﻿namespace TddXt.XAssert.TypeReflection.ImplementationDetails
+﻿namespace TddXt.XFluentAssert.TypeReflection.ImplementationDetails
 {
   using System;
 

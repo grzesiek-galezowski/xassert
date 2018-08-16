@@ -1,7 +1,6 @@
-﻿using System;
-
-namespace TddEbook.TddToolkitSpecification.Fixtures
+﻿namespace TddXt.XFluentAssert.EndToEndSpecification.Fixtures
 {
+  using System;
   using System.ComponentModel;
 
   class AttributeFixture

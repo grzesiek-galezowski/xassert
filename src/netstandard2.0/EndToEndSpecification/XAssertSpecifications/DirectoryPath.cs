@@ -1,8 +1,8 @@
-using System;
-using System.IO;
-
-namespace TddEbook.TddToolkitSpecification.XAssertSpecifications
+namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
 {
+  using System;
+  using System.IO;
+
   public class DirectoryPath : IEquatable<DirectoryPath>
   {
     private readonly string _path;

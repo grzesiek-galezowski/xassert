@@ -1,10 +1,10 @@
-﻿namespace TddXt.XAssert.ReflectionAssertions
+﻿namespace TddXt.XFluentAssert.ReflectionAssertions
 {
   using System;
   using System.Collections.Generic;
   using System.Linq;
 
-  using TddXt.XAssert.TypeReflection.Interfaces;
+  using TddXt.XFluentAssert.TypeReflection.Interfaces;
 
   public class ReflectionElementsList
   {

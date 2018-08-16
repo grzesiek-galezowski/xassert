@@ -1,6 +1,4 @@
-﻿using NSubstitute.Core.Arguments;
-
-namespace TddXt.XAssert.TddEbook.TddToolkit
+﻿namespace TddXt.XFluentAssert.Root
 {
   using System;
   using System.Collections.Generic;
@@ -13,17 +11,17 @@ namespace TddXt.XAssert.TddEbook.TddToolkit
   using FluentAssertions.Reflection;
   using FluentAssertions.Types;
 
-  using TddXt.XAssert.AssertionConstraints;
-  using TddXt.XAssert.GraphAssertions;
-  using TddXt.XAssert.LockAssertions;
-  using TddXt.XAssert.ReflectionAssertions;
-  using TddXt.XAssert.TddEbook.TddToolkit.ConstraintsAssertions;
-  using TddXt.XAssert.TddEbook.TddToolkit.SimpleAssertions;
-  using TddXt.XAssert.TddEbook.TddToolkit.ValueAssertions;
-  using TddXt.XAssert.TypeReflection;
-  using TddXt.XAssert.TypeReflection.Interfaces;
-  using TddXt.XAssert.ValueActivation;
-  using TddXt.XAssert.ValueObjectConstraints;
+  using TddXt.XFluentAssert.AssertionConstraints;
+  using TddXt.XFluentAssert.GraphAssertions;
+  using TddXt.XFluentAssert.LockAssertions;
+  using TddXt.XFluentAssert.ReflectionAssertions;
+  using TddXt.XFluentAssert.Root.ConstraintsAssertions;
+  using TddXt.XFluentAssert.Root.SimpleAssertions;
+  using TddXt.XFluentAssert.Root.ValueAssertions;
+  using TddXt.XFluentAssert.TypeReflection;
+  using TddXt.XFluentAssert.TypeReflection.Interfaces;
+  using TddXt.XFluentAssert.ValueActivation;
+  using TddXt.XFluentAssert.ValueObjectConstraints;
 
   public static class FluentAssertionExtensions
   {
@@ -210,7 +208,7 @@ namespace TddXt.XAssert.TddEbook.TddToolkit
 
     public static void SynchronizeAccessTo<T>(this ObjectAssertions assertions,
       Action<T> callToCheck,
-      XAssert.LockAssertions.LockAssertions lockAssertions,
+      XFluentAssert.LockAssertions.LockAssertions lockAssertions,
       T wrappedObjectMock)
       where T : class
     {
@@ -224,7 +222,7 @@ namespace TddXt.XAssert.TddEbook.TddToolkit
     public static void SynchronizeAccessTo<T, TReturn>(
       this ObjectAssertions assertions,
       Func<T, TReturn> callToCheck,
-      XAssert.LockAssertions.LockAssertions lockAssertions,
+      XFluentAssert.LockAssertions.LockAssertions lockAssertions,
       T wrappedObjectMock)
       where T : class
     {

@@ -1,10 +1,10 @@
-﻿namespace TddXt.XAssert.TypeReflection.ImplementationDetails
+﻿namespace TddXt.XFluentAssert.TypeReflection.ImplementationDetails
 {
   using System.Reflection;
 
-  using TddXt.XAssert.CommonTypes;
-  using TddXt.XAssert.TypeReflection.Interfaces;
-  using TddXt.XAssert.TypeReflection.Interfaces.Exceptions;
+  using TddXt.XFluentAssert.CommonTypes;
+  using TddXt.XFluentAssert.TypeReflection.Interfaces;
+  using TddXt.XFluentAssert.TypeReflection.Interfaces.Exceptions;
 
   public class BinaryOperator<T, TResult> : IAmBinaryOperator<T,TResult>
   {

@@ -1,4 +1,4 @@
-namespace TddXt.XAssert.TypeReflection
+namespace TddXt.XFluentAssert.TypeReflection
 {
   using System;
   using System.Linq.Expressions;
@@ -6,9 +6,9 @@ namespace TddXt.XAssert.TypeReflection
   using System.Runtime.CompilerServices;
   using System.Text;
 
-  using TddXt.XAssert.CommonTypes;
-  using TddXt.XAssert.TypeReflection.ImplementationDetails;
-  using TddXt.XAssert.TypeReflection.Interfaces;
+  using TddXt.XFluentAssert.CommonTypes;
+  using TddXt.XFluentAssert.TypeReflection.ImplementationDetails;
+  using TddXt.XFluentAssert.TypeReflection.Interfaces;
 
   public class Field : IAmField
   {

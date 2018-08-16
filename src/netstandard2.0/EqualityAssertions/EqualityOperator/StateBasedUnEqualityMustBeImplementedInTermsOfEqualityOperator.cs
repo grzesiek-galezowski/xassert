@@ -1,9 +1,9 @@
-﻿namespace TddXt.XAssert.EqualsAssertions.EqualityOperator
+﻿namespace TddXt.XFluentAssert.EqualityAssertions.EqualityOperator
 {
   using System.Linq;
 
-  using TddXt.XAssert.AssertionConstraints;
-  using TddXt.XAssert.ValueActivation;
+  using TddXt.XFluentAssert.AssertionConstraints;
+  using TddXt.XFluentAssert.ValueActivation;
 
   public class StateBasedUnEqualityMustBeImplementedInTermsOfEqualityOperator
     : IConstraint

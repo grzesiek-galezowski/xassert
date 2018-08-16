@@ -1,8 +1,8 @@
-using System;
-using System.Collections.Generic;
-
-namespace TddEbook.TddToolkitSpecification.XAssertSpecifications
+namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
 {
+  using System;
+  using System.Collections.Generic;
+
   public class ProperValueTypeWithoutEqualityOperator : IEquatable<ProperValueTypeWithoutEqualityOperator>
   {
     public bool Equals(ProperValueTypeWithoutEqualityOperator other)

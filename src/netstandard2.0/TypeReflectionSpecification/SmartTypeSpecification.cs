@@ -1,9 +1,8 @@
-﻿using System;
-
-
-namespace TypeReflectionSpecification
+﻿namespace TddXt.XFluentAssert.TypeReflectionSpecification
 {
-  using TddXt.XAssert.TypeReflection;
+  using System;
+
+  using TddXt.XFluentAssert.TypeReflection;
 
   using Xunit;
 

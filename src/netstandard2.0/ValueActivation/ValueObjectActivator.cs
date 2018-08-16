@@ -1,4 +1,4 @@
-﻿namespace TddXt.XAssert.ValueActivation
+﻿namespace TddXt.XFluentAssert.ValueActivation
 {
   using System;
   using System.Collections.Generic;
@@ -7,7 +7,7 @@
   using FluentAssertions;
 
   using TddXt.AnyRoot;
-  using TddXt.XAssert.TypeReflection;
+  using TddXt.XFluentAssert.TypeReflection;
 
   public class ValueObjectActivator
   {

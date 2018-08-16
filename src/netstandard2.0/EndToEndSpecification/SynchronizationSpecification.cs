@@ -1,4 +1,4 @@
-﻿namespace TddEbook.TddToolkitSpecification
+﻿namespace TddXt.XFluentAssert.EndToEndSpecification
 {
   using System;
   using System.Threading;
@@ -8,10 +8,9 @@
   using NSubstitute;
   using NSubstitute.Exceptions;
 
-  using TddEbook.TddToolkitSpecification.Fixtures;
-
-  using TddXt.XAssert.TddEbook.TddToolkit;
-  using TddXt.XAssert.TddEbook.TddToolkit.LockAssertions;
+  using TddXt.XFluentAssert.EndToEndSpecification.Fixtures;
+  using TddXt.XFluentAssert.Root;
+  using TddXt.XFluentAssert.Root.LockAssertions;
 
   using Xunit;
   using Xunit.Sdk;

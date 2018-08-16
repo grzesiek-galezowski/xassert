@@ -1,9 +1,9 @@
-namespace TddXt.XAssert.TypeReflection.Interfaces
+namespace TddXt.XFluentAssert.TypeReflection.Interfaces
 {
   using System;
   using System.Collections.Generic;
 
-  using TddXt.XAssert.CommonTypes;
+  using TddXt.XFluentAssert.CommonTypes;
 
   public interface IType
   {

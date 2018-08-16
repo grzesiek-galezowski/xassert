@@ -1,4 +1,4 @@
-namespace TddXt.XAssert.NSubstituteExtensions.ImplementationDetails
+namespace TddXt.XFluentAssert.NSubstituteExtensions.ImplementationDetails
 {
   using System;
 

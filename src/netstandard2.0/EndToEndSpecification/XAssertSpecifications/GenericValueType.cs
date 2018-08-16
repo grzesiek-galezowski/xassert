@@ -1,8 +1,8 @@
-using System;
-using System.Collections.Generic;
-
-namespace TddEbook.TddToolkitSpecification.XAssertSpecifications
+namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
 {
+  using System;
+  using System.Collections.Generic;
+
   public class GenericValueType<T> : IEquatable<GenericValueType<T>>
   {
     public bool Equals(GenericValueType<T> other)

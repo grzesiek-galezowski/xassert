@@ -1,4 +1,4 @@
-﻿namespace TddEbook.TddToolkitSpecification.NSubstituteSpecifications
+﻿namespace TddXt.XFluentAssert.EndToEndSpecification.NSubstituteSpecifications
 {
   using System.Collections.Generic;
 
@@ -7,7 +7,7 @@
   using NSubstitute;
   using NSubstitute.Exceptions;
 
-  using TddXt.XAssert.NSubstituteExtensions;
+  using TddXt.XFluentAssert.NSubstituteExtensions;
 
   using Xunit;
 
