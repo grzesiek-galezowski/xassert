@@ -122,6 +122,7 @@ Task("GitVersion")
     nugetVersion = GitVersion(new GitVersionSettings {
         UpdateAssemblyInfo = true,
 	});
+	Console.WriteLine(nugetVersion.NuGetVersionV2);
 });
 
 
