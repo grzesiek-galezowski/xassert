@@ -1,4 +1,4 @@
-namespace TddXt.XFluentAssert.NSubstituteExtensions.ImplementationDetails
+namespace TddXt.XFluentAssert.NSubstituteExtensions
 {
   using System;
   using System.Collections.Generic;

@@ -1,9 +1,11 @@
-namespace TddXt.XFluentAssert.NSubstituteExtensions.ImplementationDetails
+namespace TddXt.XFluentAssert.NSubstituteExtensions
 {
   using System;
 
   using NSubstitute.Core;
   using NSubstitute.Core.Arguments;
+
+  using TddXt.XFluentAssert.NSubstituteExtensions.ImplementationDetails;
 
   public class LambdaArgumentMatcher<T> : IArgumentMatcher, IDescribeNonMatches
   {
