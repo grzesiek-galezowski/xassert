@@ -4,8 +4,6 @@
 
   using NSubstitute.Core;
 
-  using TddXt.XFluentAssert.NSubstituteExtensions.ImplementationDetails;
-
   public class XReceived
   {
     public static void Only(Action action)

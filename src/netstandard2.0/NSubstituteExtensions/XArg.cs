@@ -8,7 +8,6 @@
   using NSubstitute.Core;
   using NSubstitute.Core.Arguments;
 
-  using TddXt.XFluentAssert.NSubstituteExtensions.ImplementationDetails;
   using TddXt.XFluentAssert.Root;
 
   public static class XArg

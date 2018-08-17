@@ -1,9 +1,11 @@
 ﻿namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
 {
   using System;
+  using System.Collections.Generic;
   using System.Diagnostics.CodeAnalysis;
 
   using FluentAssertions;
+  using FluentAssertions.Primitives;
 
   using TddXt.AnyRoot;
   using TddXt.AnyRoot.Strings;
@@ -141,6 +143,18 @@
       tp1.X1 = 0;
 
       tp1.Should().NotBeLike(tp2, tp => tp.X2, tp => tp.X3, tp => tp.x4);
+    }
+
+    [Fact]
+    public void ShouldAllowComparingLikenessOfGenericTypesEgCollections()
+    {
+      new List<int> { 1, 2, 3 }.Should().BeLike(new List<int> { 1, 2, 3 });
+      new Action(() => new List<int> { 1, 2, 3 }.Should().NotBeLike(new List<int> { 1, 2, 3 }))
+        .Should().ThrowExactly<XunitException>();
+
+      new List<int> { 1, 2, 3 }.Should().NotBeLike(new List<int> { 1, 2, 4 });
+      new Action(() => new List<int> { 1, 2, 3 }.Should().BeLike(new List<int> { 1, 2, 4 }))
+        .Should().ThrowExactly<XunitException>();
     }
 
     [Fact]
