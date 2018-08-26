@@ -135,7 +135,7 @@ Task("Pack")
             Summary = "A set of assertions to be used together with FluentAssertions library.",
             Description = "A set of assertions to be used together with FluentAssertions library.",
             Language = "en-US",
-            ReleaseNotes = new[] {"BeLike() and NotBeLike() available for all reference types"},
+            ReleaseNotes = new[] {"Added assertions for structural inspection"},
             ProjectUrl = new Uri("https://github.com/grzesiek-galezowski/xassert"),
             OutputDirectory = "./nuget",
             Version = nugetVersion.NuGetVersionV2,
