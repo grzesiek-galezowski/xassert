@@ -40,6 +40,7 @@ var nSubstitute      = new[] {"NSubstitute"     , "3.1.0"};
 var fluentAssertions = new[] {"FluentAssertions", "5.4.1"};
 var albedo           = new[] {"Albedo"          , "2.0.0"};
 var any              = new[] {"Any"             , "1.1.3"};
+var compareNetObjects= new[] {"CompareNETObjects", "4.55.0"};
 
 
 //////////////////////////////////////////////////////////////////////
@@ -77,7 +78,7 @@ Task("Clean")
 });
 
 Task("Build")
-	.IsDependentOn("GitVersion")
+    .IsDependentOn("GitVersion")
     .Does(() =>
 {
     DotNetCoreBuild("./src/netstandard2.0/Root", new DotNetCoreBuildSettings
@@ -121,8 +122,8 @@ Task("GitVersion")
 {
     nugetVersion = GitVersion(new GitVersionSettings {
         UpdateAssemblyInfo = true,
-	});
-	Console.WriteLine(nugetVersion.NuGetVersionV2);
+    });
+    Console.WriteLine(nugetVersion.NuGetVersionV2);
 });
 
 
@@ -157,6 +158,7 @@ Task("Pack")
                 netstandard20.Dependency(nSubstitute),
                 netstandard20.Dependency(fluentAssertions),
                 netstandard20.Dependency(albedo),
+                netstandard20.Dependency(compareNetObjects),
                 netstandard20.Dependency(any),
             }
 
@@ -185,7 +187,7 @@ Task("Pack")
 //////////////////////////////////////////////////////////////////////
 
 Task("Default")
-	.IsDependentOn("GitVersion")
+    .IsDependentOn("GitVersion")
     .IsDependentOn("Build")
     .IsDependentOn("Run-Unit-Tests")
     .IsDependentOn("Pack");

@@ -42,7 +42,7 @@ namespace TddXt.XFluentAssert.TypeReflection
       }
       else
       {
-        return Maybe<ICreateObjects>.Not;
+        return Maybe<ICreateObjects>.Nothing;
       }
     }
 
@@ -53,7 +53,7 @@ namespace TddXt.XFluentAssert.TypeReflection
         BindingFlags.Public | BindingFlags.Instance, null, Type.EmptyTypes, null);
       if (constructorInfo == null)
       {
-        return Maybe<ICreateObjects>.Not;
+        return Maybe<ICreateObjects>.Nothing;
       }
       else
       {
@@ -138,21 +138,21 @@ namespace TddXt.XFluentAssert.TypeReflection
     {
       var equality = this._typeInfo.GetMethod(OpEquality);
 
-      return equality == null ? Maybe<MethodInfo>.Not : new Maybe<MethodInfo>(equality);
+      return equality == null ? Maybe<MethodInfo>.Nothing : new Maybe<MethodInfo>(equality);
     }
 
     private Maybe<MethodInfo> InequalityMethod()
     {
       var inequality = this._typeInfo.GetMethod(OpInequality);
 
-      return inequality == null ? Maybe<MethodInfo>.Not : new Maybe<MethodInfo>(inequality);
+      return inequality == null ? Maybe<MethodInfo>.Nothing : new Maybe<MethodInfo>(inequality);
     }
 
     private Maybe<MethodInfo> ValueTypeEqualityMethod()
     {
       return this._typeInfo.IsValueType ?
                Maybe.Just(this.GetType().GetTypeInfo().GetMethod(nameof(ValuesEqual)))
-               : Maybe<MethodInfo>.Not;
+               : Maybe<MethodInfo>.Nothing;
 
     }
 
@@ -160,7 +160,7 @@ namespace TddXt.XFluentAssert.TypeReflection
     {
       return this._typeInfo.IsValueType ?
                Maybe.Just(this.GetType().GetTypeInfo().GetMethod(nameof(ValuesNotEqual))) 
-               : Maybe<MethodInfo>.Not;
+               : Maybe<MethodInfo>.Nothing;
     }
 
     public static bool ValuesEqual(object instance1, object instance2)

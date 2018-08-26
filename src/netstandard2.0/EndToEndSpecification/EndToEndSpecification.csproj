@@ -31,7 +31,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AssertionConstraints\AssertionConstraints.csproj" />
-    <ProjectReference Include="..\NSubstituteExtensions\NSubstituteExtensions.csproj" />
+    <ProjectReference Include="..\GraphAssertions\GraphAssertions.csproj" />
+    <ProjectReference Include="..\Root\Root.csproj" />
   </ItemGroup>
 
 </Project>

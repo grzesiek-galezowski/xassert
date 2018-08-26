@@ -48,7 +48,7 @@
       }
     }
 
-    public static Maybe<T> Not { get; } = new Maybe<T>();
+    public static Maybe<T> Nothing { get; } = new Maybe<T>();
 
     public Maybe<T> Otherwise(Maybe<T> alternative)
     {
