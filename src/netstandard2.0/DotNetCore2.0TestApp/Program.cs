@@ -5,9 +5,6 @@
   using System.Collections.Generic;
 
   using FluentAssertions;
-
-  using NSubstitute;
-
   using TddXt.XFluentAssert.Root;
 
   public class Program

@@ -1,6 +1,5 @@
 ﻿using System.Numerics;
 using System.Security.Permissions;
-using Albedo.Refraction;
 using TddXt.XFluentAssert.Root;
 
 namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications

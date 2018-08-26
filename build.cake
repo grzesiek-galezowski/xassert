@@ -1,6 +1,4 @@
 #tool "nuget:?package=ILRepack"
-#addin nuget:?package=Cake.SemVer
-#addin nuget:?package=semver&version=2.0.4
 #tool "nuget:?package=GitVersion.CommandLine"
 
 //////////////////////////////////////////////////////////////////////
@@ -30,16 +28,10 @@ var mainDll = "TddXt.XFluentAssert.Root.dll";
 
 
 //todo change
-                //Albedo 2.0.0
-                //Any 1.1.3
-                //CompareNETObjects.4.55.0.0
-                //FluentAssertions.5.4.1
-
-var castleCore       = new[] {"Castle.Core"     , "4.3.1"};
-var nSubstitute      = new[] {"NSubstitute"     , "3.1.0"};
-var fluentAssertions = new[] {"FluentAssertions", "5.4.1"};
-var albedo           = new[] {"Albedo"          , "2.0.0"};
-var any              = new[] {"Any"             , "1.1.3"};
+var castleCore       = new[] {"Castle.Core"      , "4.3.1"};
+var nSubstitute      = new[] {"NSubstitute"      , "3.1.0"};
+var fluentAssertions = new[] {"FluentAssertions" , "5.4.1"};
+var any              = new[] {"Any"              , "1.1.3"};
 var compareNetObjects= new[] {"CompareNETObjects", "4.55.0"};
 
 
@@ -157,7 +149,6 @@ Task("Pack")
                 netstandard20.Dependency(castleCore),
                 netstandard20.Dependency(nSubstitute),
                 netstandard20.Dependency(fluentAssertions),
-                netstandard20.Dependency(albedo),
                 netstandard20.Dependency(compareNetObjects),
                 netstandard20.Dependency(any),
             }
