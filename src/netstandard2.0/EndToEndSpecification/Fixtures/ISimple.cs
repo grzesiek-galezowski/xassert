@@ -12,5 +12,6 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.Fixtures
     string GetStringProperty { get; }
     Type GetTypeProperty { get; }
     IEnumerable<ISimple> Simples { get; }
+
   }
 }

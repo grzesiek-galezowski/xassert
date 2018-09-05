@@ -158,7 +158,15 @@ namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
 
     public bool ValueIsEqualTo<T>(T value)
     {
-      return Equals(value, _target);
+      //todo what if both are null?
+      if ((object)value is object[] expectedArray && _target is object[] targetArray)
+      {
+        return expectedArray.SequenceEqual(targetArray);
+      }
+      else
+      {
+        return Object.Equals(value, _target);
+      }
     }
 
     public override string ToString()
