@@ -9,14 +9,14 @@ namespace TddXt.XFluentAssert.Root
     public static void DependOn<T>(this ObjectAssertions o)
     {
       var objectTreePaths = new ObjectGraphPaths();
-      new ObjectGraphNode(o.Subject, "Root", new List<ObjectGraphNode>(), str => { }).CollectPathsInto(objectTreePaths);
+      new ObjectGraphNode(o.Subject, "Root", new List<IObjectGraphNode>(), str => { }).CollectPathsInto(objectTreePaths);
       objectTreePaths.AssertContainNonRootObjectOf(typeof(T));
     }
 
     public static void DependOn<T>(this ObjectAssertions o, T value)
     {
       var objectTreePaths = new ObjectGraphPaths();
-      new ObjectGraphNode(o.Subject, "Root", new List<ObjectGraphNode>(), str => { }).CollectPathsInto(objectTreePaths);
+      new ObjectGraphNode(o.Subject, "Root", new List<IObjectGraphNode>(), str => { }).CollectPathsInto(objectTreePaths);
       objectTreePaths.AssertContainNonRoot(value);
     }
 
@@ -26,7 +26,7 @@ namespace TddXt.XFluentAssert.Root
       where TAssertions : ReferenceTypeAssertions<TThisType, TAssertions>
     {
       var objectTreePaths = new ObjectGraphPaths();
-      new ObjectGraphNode(o.Subject, "Root", new List<ObjectGraphNode>(), str => { }).CollectPathsInto(objectTreePaths);
+      new ObjectGraphNode(o.Subject, "Root", new List<IObjectGraphNode>(), str => { }).CollectPathsInto(objectTreePaths);
       objectTreePaths.AssertContainNonRoot(value);
     }
 
