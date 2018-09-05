@@ -111,8 +111,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
 
       new Action(() => new MyObjectImpl(Substitute.For<IEnumerable<int>>())
           .Should().DependOn(Substitute.For<IEnumerable<int>>()))
-        .Should().NotThrow();
-
+        .Should().ThrowExactly<XunitException>();
     }
 
     private class MyObjectImpl 
