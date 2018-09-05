@@ -42,7 +42,7 @@ namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
 
     }
 
-    private static string WithMessageThatCouldNotFind<T>(T value, IReadOnlyCollection<ObjectGraphPath> pathsWithInstanceOfType)
+    private string WithMessageThatCouldNotFind<T>(T value, IReadOnlyCollection<ObjectGraphPath> pathsWithInstanceOfType)
     {
       var message = "Could not find the particular instance: " + value +
                     " anywhere in dependency graph";
@@ -50,6 +50,10 @@ namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
       {
         message += " however, another instance of this type was found within the following paths: " +
                    Environment.NewLine + AsString(pathsWithInstanceOfType);
+      }
+      else
+      {
+        message += ". Paths created when searching: " + Environment.NewLine + AsString(_paths);
       }
 
       return message;

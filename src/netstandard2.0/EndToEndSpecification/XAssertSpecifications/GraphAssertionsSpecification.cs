@@ -85,9 +85,9 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
 [Root(A1)]->[_a2(A2)]->[_num(Int32)]");
 
       new Action(() => a1.Should().DependOn(a1))
-        .Should().ThrowExactly<XunitException>().WithMessage(@"Could not find the particular instance: TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.A1 anywhere in dependency graph");
+        .Should().ThrowExactly<XunitException>().Which.Message.Contains(@"Could not find the particular instance: TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.A1 anywhere in dependency graph");
       new Action(() => a2.Should().DependOn(a1))
-        .Should().ThrowExactly<XunitException>().WithMessage("Could not find the particular instance: TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.A1 anywhere in dependency graph");
+        .Should().ThrowExactly<XunitException>().Which.Message.Contains("Could not find the particular instance: TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.A1 anywhere in dependency graph");
 
       new Action(() => abc.Should().DependOn(22))
         .Should().ThrowExactly<XunitException>().WithMessage(@"Could not find the particular instance: 22 anywhere in dependency graph however, another instance of this type was found within the following paths: 
@@ -114,6 +114,24 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
         .Should().ThrowExactly<XunitException>();
     }
 
+    [Fact]
+    public void ShouldBeAbleToFindItemsWithinCollections()
+    {
+      new List<string> { "trolololo" }.Should().DependOn("trolololo");
+      
+      new Action(() => new List<string> { "trolololo" }.Should().DependOn("trolololo2"))
+        .Should().ThrowExactly<XunitException>()
+        .WithMessage(@"Could not find the particular instance: trolololo2 anywhere in dependency graph however, another instance of this type was found within the following paths: 
+[Root(List`1)]->[_items(String[])]->[array element[0](String)]->[m_stringLength(Int32)]
+[Root(List`1)]->[_items(String[])]->[array element[0](String)]->[m_firstChar(Char)]
+[Root(List`1)]->[_items(String[])]->[array element[0](String)]->[FirstChar(Char)]
+[Root(List`1)]->[_items(String[])]->[array element[0](String)]->[Length(Int32)]");
+    }
+
+
+    //todo add Should().NotDependOn();
+    //todo add Should().DependOn(Func matchCriteria)
+
     private class MyObjectImpl 
     {
       private readonly IEnumerable<int> _s;
@@ -121,7 +139,6 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
       public MyObjectImpl(IEnumerable<int> s)
       {
         _s = s;
-        //throw new NotImplementedException();
       }
     }
   }
