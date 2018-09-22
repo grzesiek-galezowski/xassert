@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions.Common;
+using static System.Environment;
 
 namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
 {
@@ -41,6 +42,39 @@ namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
         FindAllPathsContainingNonRootInstanceOf(typeof(T)))); //TODO
 
     }
+    public void AssertContainNonRootSubPath(object[] values)
+    {
+      foreach (var path in _paths)
+      {
+        if (path.ContainsNonRootSubpath(values))
+        {
+          return;
+        }
+      }
+
+      Services.ThrowException(WithMessageThatCouldNotFindMultiple(values, _paths));
+    }
+
+    public void AssertContainNonRootTypeSubPath(Type[] types)
+    {
+      foreach (var path in _paths)
+      {
+        if (path.ContainsNonRootTypeSubpath(types))
+        {
+          return;
+        }
+      }
+
+      Services.ThrowException(WithMessageThatCouldNotFindMultiple(types, _paths)); //bug
+
+    }
+
+    private string WithMessageThatCouldNotFindMultiple(object[] values, List<ObjectGraphPath> paths)
+    {
+      var message = "Could not find the particular sequence of objects: [" + string.Join(", ", values) +
+                    $"] anywhere in dependency graph. Paths searched: {NewLine} {AsString(paths)}";
+      return message;
+    }
 
     private static string WithMessageThatCouldNotFind<T>(T value, IReadOnlyCollection<ObjectGraphPath> pathsWithInstanceOfType)
     {
@@ -49,7 +83,7 @@ namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
       if (pathsWithInstanceOfType.Any())
       {
         message += " however, another instance of this type was found within the following paths: " +
-                   Environment.NewLine + AsString(pathsWithInstanceOfType);
+                   NewLine + AsString(pathsWithInstanceOfType);
       }
 
       return message;
@@ -62,5 +96,6 @@ namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
 
 
     //todo report error - make generic method non-static sometimes doesn't work
+
   }
 }
