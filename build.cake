@@ -120,7 +120,7 @@ Task("GitVersion")
 
 
 Task("Pack")
-    .IsDependentOn("Build")
+    .IsDependentOn("Run-Unit-Tests")
     .Does(() => 
     {
         CopyDirectory(buildDir, publishDir);

@@ -8,10 +8,10 @@ namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
   {
     //TODO support for recursion (direct or indirect) or reference to this
     //TODO  UT
-    private readonly IReadOnlyList<ObjectGraphNode> _path;
-    private IReadOnlyList<ObjectGraphNode> PathWithoutRoot => _path.Skip(1).ToList();
+    private readonly IReadOnlyList<IObjectGraphNode> _path;
+    private IReadOnlyList<IObjectGraphNode> PathWithoutRoot => _path.Skip(1).ToList();
 
-    public ObjectGraphPath(IReadOnlyList<ObjectGraphNode> path)
+    public ObjectGraphPath(IReadOnlyList<IObjectGraphNode> path)
     {
       _path = path;
     }
