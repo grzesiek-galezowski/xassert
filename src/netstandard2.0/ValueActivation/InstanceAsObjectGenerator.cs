@@ -2,7 +2,7 @@
 {
   using System;
 
-  using TddXt.AnyExtensibility;
+  using AnyExtensibility;
 
   internal class InstanceAsObjectGenerator : InlineGenerator<object>
   {
@@ -13,9 +13,9 @@
       _type = type;
     }
 
-    public object GenerateInstance(InstanceGenerator instanceGenerator)
+    public object GenerateInstance(InstanceGenerator instanceGenerator, GenerationTrace trace)
     {
-      return instanceGenerator.Instance(_type);
+      return instanceGenerator.Instance(_type, trace);
     }
   }
 }

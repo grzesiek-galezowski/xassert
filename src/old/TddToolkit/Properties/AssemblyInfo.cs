@@ -1,4 +1,4 @@
-using System.Reflection;
+﻿using System.Reflection;
 
 // Information about this assembly is defined by the following attributes.
 // Change them to the values specific to your project.
@@ -13,12 +13,12 @@ using System.Reflection;
 // The assembly version has the format "{Major}.{Minor}.{Build}.{Revision}".
 // The form "{Major}.{Minor}.*" will automatically update the build and revision,
 // and "{Major}.{Minor}.{Build}.*" will update just the revision.
-[assembly: AssemblyVersion("0.2.1.0")]
+[assembly: AssemblyVersion("0.2.3.0")]
 // The following attributes are used to specify the signing key for the assembly,
 // if desired. See the Mono documentation for more information about signing.
 //[assembly: AssemblyDelaySign(false)]
 //[assembly: AssemblyKeyFile("")]
 
 
-[assembly: AssemblyInformationalVersion("0.2.1+7.Branch.master.Sha.1eb546429b5a54743395ca112448aa8f975f78aa")]
-[assembly: AssemblyFileVersion("0.2.1.0")]
+[assembly: AssemblyInformationalVersion("0.2.3+1.Branch.master.Sha.0b1d8e72c2bd266ebf3d2edd6fd67df1110803a6")]
+[assembly: AssemblyFileVersion("0.2.3.0")]
