@@ -27,12 +27,10 @@ var mainDll = "TddXt.XFluentAssert.Root.dll";
 //////////////////////////////////////////////////////////////////////
 
 
-//todo change
-var castleCore       = new[] {"Castle.Core"      , "4.3.1"};
 var nSubstitute      = new[] {"NSubstitute"      , "3.1.0"};
-var fluentAssertions = new[] {"FluentAssertions" , "5.4.1"};
-var any              = new[] {"Any"              , "1.1.3"};
-var compareNetObjects= new[] {"CompareNETObjects", "4.55.0"};
+var fluentAssertions = new[] {"FluentAssertions" , "5.5.0"};
+var any              = new[] {"Any"              , "3.0.1"};
+var compareNetObjects= new[] {"CompareNETObjects", "4.57.0"};
 
 
 //////////////////////////////////////////////////////////////////////
@@ -146,7 +144,6 @@ Task("Pack")
 
             Dependencies = new [] 
             {
-                netstandard20.Dependency(castleCore),
                 netstandard20.Dependency(nSubstitute),
                 netstandard20.Dependency(fluentAssertions),
                 netstandard20.Dependency(compareNetObjects),

@@ -6,8 +6,8 @@
 
   using FluentAssertions;
 
-  using TddXt.AnyRoot;
-  using TddXt.XFluentAssert.TypeReflection;
+  using AnyRoot;
+  using TypeReflection;
 
   public class ValueObjectActivator
   {
