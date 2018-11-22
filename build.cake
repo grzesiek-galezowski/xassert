@@ -28,7 +28,7 @@ var mainDll = "TddXt.XFluentAssert.Root.dll";
 
 
 var nSubstitute      = new[] {"NSubstitute"      , "3.1.0"};
-var fluentAssertions = new[] {"FluentAssertions" , "5.5.0"};
+var fluentAssertions = new[] {"FluentAssertions" , "5.5.3"};
 var any              = new[] {"Any"              , "3.0.1"};
 var compareNetObjects= new[] {"CompareNETObjects", "4.57.0"};
 
