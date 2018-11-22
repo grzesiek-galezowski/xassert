@@ -29,6 +29,11 @@ namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
       return value == null;
     }
 
+    public bool ValueIsSameAs(object value)
+    {
+      return value == null;
+    }
+
     public override string ToString()
     {
       return "null";

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Generic;
 using FluentAssertions;
 using FluentAssertions.Primitives;
 using TddXt.XFluentAssert.GraphAssertions.DependencyAssertions;
@@ -12,7 +11,8 @@ namespace TddXt.XFluentAssert.Root
     public static AndConstraint<ObjectAssertions> DependOn<T>(this ObjectAssertions o)
     {
       var objectTreePaths = new ObjectGraphPaths();
-      new ObjectGraphNode(o.Subject, "Root", new List<IObjectGraphNode>(), str => { }).CollectPathsInto(objectTreePaths);
+      new ObjectGraphNode(o.Subject, "Root", new List<IObjectGraphNode>(), str => { })
+        .CollectPathsInto(objectTreePaths);
       objectTreePaths.AssertContainNonRootObjectOf(typeof(T));
       return new AndConstraint<ObjectAssertions>(o);
     }
@@ -24,7 +24,7 @@ namespace TddXt.XFluentAssert.Root
       objectTreePaths.AssertContainNonRoot(value);
       return new AndConstraint<ObjectAssertions>(o);
     }*/
-    
+
     public static AndConstraint<ReferenceTypeAssertions<TThisType, TAssertions>> DependOn<TAssertions, TDependency, TThisType>(
       this ReferenceTypeAssertions<TThisType, TAssertions> o,
       TDependency value)
@@ -37,9 +37,9 @@ namespace TddXt.XFluentAssert.Root
 
     }
 
-    public static AndConstraint<ReferenceTypeAssertions<TThisType, TAssertions>> 
+    public static AndConstraint<ReferenceTypeAssertions<TThisType, TAssertions>>
       DependOnTypeChain<TThisType, TAssertions>(
-        this ReferenceTypeAssertions<TThisType, TAssertions> o, 
+        this ReferenceTypeAssertions<TThisType, TAssertions> o,
         params Type[] types)
       where TAssertions : ReferenceTypeAssertions<TThisType, TAssertions>
     {
@@ -49,9 +49,9 @@ namespace TddXt.XFluentAssert.Root
       return new AndConstraint<ReferenceTypeAssertions<TThisType, TAssertions>>(o);
     }
 
-    public static AndConstraint<ReferenceTypeAssertions<TThisType, TAssertions>> 
+    public static AndConstraint<ReferenceTypeAssertions<TThisType, TAssertions>>
       DependOnChain<TThisType, TAssertions>(
-        this ReferenceTypeAssertions<TThisType, TAssertions> o, 
+        this ReferenceTypeAssertions<TThisType, TAssertions> o,
         params object[] values)
       where TAssertions : ReferenceTypeAssertions<TThisType, TAssertions>
     {

@@ -38,7 +38,7 @@ namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
         }
       }
 
-      Services.ThrowException(WithMessageThatCouldNotFind(value, 
+      Services.ThrowException(WithMessageThatCouldNotFind(value,
         FindAllPathsContainingNonRootInstanceOf(typeof(T)))); //TODO
 
     }
@@ -72,7 +72,7 @@ namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
     private string WithMessageThatCouldNotFindMultiple(object[] values, List<ObjectGraphPath> paths)
     {
       var message = "Could not find the particular sequence of objects: [" + string.Join(", ", values) +
-                    $"] anywhere in dependency graph. Paths searched: {NewLine} {AsString(paths)}";
+                    $"] anywhere in dependency graph. Paths searched:{NewLine} {AsString(paths)}";
       return message;
     }
 
@@ -82,7 +82,7 @@ namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
                     " anywhere in dependency graph";
       if (pathsWithInstanceOfType.Any())
       {
-        message += " however, another instance of this type was found within the following paths: " +
+        message += " however, another instance of this type was found within the following paths:" +
                    NewLine + AsString(pathsWithInstanceOfType);
       }
       else

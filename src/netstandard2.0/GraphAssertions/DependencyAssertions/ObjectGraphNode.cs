@@ -2,8 +2,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 
 namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
 {
@@ -12,6 +14,7 @@ namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
     void CollectPathsInto(ObjectGraphPaths objectGraphPaths);
     bool IsOf(Type type);
     bool ValueIsEqualTo<T>(T value);
+    bool ValueIsSameAs(object value);
   }
 
   public class ObjectGraphNode : IObjectGraphNode
@@ -50,7 +53,7 @@ namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
       {
         return new ArrayNode(target, targetHolderName, path, log);
       }
-      else if (target.GetType().Namespace.Contains("Castle.Proxies"))
+      else if (IsSpecialTerminalCase(target, path))
       {
         return new SpecialCaseTerminalNode(target, targetHolderName, path);
       }
@@ -58,6 +61,31 @@ namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
       {
         return new ObjectGraphNode(target, targetHolderName, path, log);
       }
+    }
+
+    private static bool IsSpecialTerminalCase(object target, IReadOnlyList<IObjectGraphNode> path)
+    {
+      if (CycleDetected(target, path))
+      {
+        return true;
+      }
+
+      if (target.GetType().Namespace.Contains("Castle.Proxies"))
+      {
+        return true;
+      }
+
+      if (target is CancellationToken)
+      {
+        return false;
+      }
+
+      return false;
+    }
+
+    private static bool CycleDetected(object target, IReadOnlyList<IObjectGraphNode> path)
+    {
+      return !target.GetType().IsValueType && path.Any(node => node.ValueIsSameAs(target));
     }
 
     public void CollectPathsInto(ObjectGraphPaths objectGraphPaths)
@@ -117,6 +145,11 @@ namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
     {
       return Equals(_target, value);
     }
+
+    public bool ValueIsSameAs(object value)
+    {
+      return ReferenceEquals(_target, value);
+    }
   }
 
   internal class ArrayNode : IObjectGraphNode
@@ -167,6 +200,11 @@ namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
       {
         return Object.Equals(value, _target);
       }
+    }
+
+    public bool ValueIsSameAs(object value)
+    {
+      return ReferenceEquals(_target, value);
     }
 
     public override string ToString()

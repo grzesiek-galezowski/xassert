@@ -33,6 +33,11 @@ namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
       return object.Equals(_target, value);
     }
 
+    public bool ValueIsSameAs(object value)
+    {
+      return ReferenceEquals(_target, value);
+    }
+
     public override string ToString()
     {
       return ObjectGraphNode.FormatFieldAndTypeName(_fieldName, _target);

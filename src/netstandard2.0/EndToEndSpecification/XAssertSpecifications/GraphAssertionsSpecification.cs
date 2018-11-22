@@ -1,16 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Security.Permissions;
+using System.Threading;
 using FluentAssertions;
 using NSubstitute;
 using TddXt.XFluentAssert.Root;
 using Xunit;
+using Xunit.Abstractions;
 using Xunit.Sdk;
 
 namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
 {
-  public class GraphAssertionsSpecification
+  public class GraphAssertionsSpecification : IDisposable
   {
+    private readonly ITestOutputHelper output;
+    private StringWriter _stringWriter;
+
+    public GraphAssertionsSpecification(ITestOutputHelper output)
+    {
+      this.output = output;
+      _stringWriter = new StringWriter();
+      Console.SetOut(_stringWriter);
+    }
+
     [Fact]
     public void ShouldAllowAssertingOnTypeDependency()
     {
@@ -56,7 +69,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
 
       new Action(() => a1.Should().DependOn(new A2()))
         .Should().ThrowExactly<XunitException>().WithMessage(
-          @"Could not find the particular instance: TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.A2 anywhere in dependency graph however, another instance of this type was found within the following paths: 
+          @"Could not find the particular instance: TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.A2 anywhere in dependency graph however, another instance of this type was found within the following paths:
 [Root(A1)]->[_a2(A2)]->[_a3(A3)]
 [Root(A1)]->[_a2(A2)]->[_b3(B3)]
 [Root(A1)]->[_a2(A2)]->[_str(String)]->[m_stringLength(Int32)]
@@ -65,20 +78,20 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
 [Root(A1)]->[_a2(A2)]->[_str(String)]->[Length(Int32)]
 [Root(A1)]->[_a2(A2)]->[_num(Int32)]");
       new Action(() => a1.Should().DependOn(new B2()))
-        .Should().ThrowExactly<XunitException>().WithMessage(@"Could not find the particular instance: TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.B2 anywhere in dependency graph however, another instance of this type was found within the following paths: 
+        .Should().ThrowExactly<XunitException>().WithMessage(@"Could not find the particular instance: TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.B2 anywhere in dependency graph however, another instance of this type was found within the following paths:
 [Root(A1)]->[_b2(B2)]->[_b3(B3)]");
       new Action(() => a1.Should().DependOn(new B3()))
-        .Should().ThrowExactly<XunitException>().WithMessage(@"Could not find the particular instance: TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.B3 anywhere in dependency graph however, another instance of this type was found within the following paths: 
+        .Should().ThrowExactly<XunitException>().WithMessage(@"Could not find the particular instance: TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.B3 anywhere in dependency graph however, another instance of this type was found within the following paths:
 [Root(A1)]->[_a2(A2)]->[_b3(B3)]
 [Root(A1)]->[_b2(B2)]->[_b3(B3)]");
       new Action(() => a1.Should().DependOn(abc + "a"))
-        .Should().ThrowExactly<XunitException>().WithMessage(@"Could not find the particular instance: abca anywhere in dependency graph however, another instance of this type was found within the following paths: 
+        .Should().ThrowExactly<XunitException>().WithMessage(@"Could not find the particular instance: abca anywhere in dependency graph however, another instance of this type was found within the following paths:
 [Root(A1)]->[_a2(A2)]->[_str(String)]->[m_stringLength(Int32)]
 [Root(A1)]->[_a2(A2)]->[_str(String)]->[m_firstChar(Char)]
 [Root(A1)]->[_a2(A2)]->[_str(String)]->[FirstChar(Char)]
 [Root(A1)]->[_a2(A2)]->[_str(String)]->[Length(Int32)]");
       new Action(() => a1.Should().DependOn(num + 1))
-        .Should().ThrowExactly<XunitException>().WithMessage(@"Could not find the particular instance: 124 anywhere in dependency graph however, another instance of this type was found within the following paths: 
+        .Should().ThrowExactly<XunitException>().WithMessage(@"Could not find the particular instance: 124 anywhere in dependency graph however, another instance of this type was found within the following paths:
 [Root(A1)]->[_a2(A2)]->[_str(String)]->[m_stringLength(Int32)]
 [Root(A1)]->[_a2(A2)]->[_str(String)]->[Length(Int32)]
 [Root(A1)]->[_a2(A2)]->[_num(Int32)]");
@@ -89,7 +102,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
         .Should().ThrowExactly<XunitException>().Which.Message.Contains("Could not find the particular instance: TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.A1 anywhere in dependency graph");
 
       new Action(() => abc.Should().DependOn(22))
-        .Should().ThrowExactly<XunitException>().WithMessage(@"Could not find the particular instance: 22 anywhere in dependency graph however, another instance of this type was found within the following paths: 
+        .Should().ThrowExactly<XunitException>().WithMessage(@"Could not find the particular instance: 22 anywhere in dependency graph however, another instance of this type was found within the following paths:
 [Root(String)]->[m_stringLength(Int32)]
 [Root(String)]->[Length(Int32)]");
 
@@ -128,7 +141,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
       //THEN
       new Action(() => { decorator1.Should().DependOnChain(decorator2, decorator3, decorator1); })
         .Should().ThrowExactly<XunitException>()
-        .WithMessage(@"Could not find the particular sequence of objects: [TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.Decorator2, TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.Decorator3, TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.Decorator1] anywhere in dependency graph. Paths searched: 
+        .WithMessage(@"Could not find the particular sequence of objects: [TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.Decorator2, TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.Decorator3, TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.Decorator1] anywhere in dependency graph. Paths searched:
  [Root(Decorator1)]->[_decorator(Decorator2)]->[_decorator3(Decorator3)]->[_decorator4(Decorator4)]");
     }
 
@@ -162,7 +175,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
       //THEN
       new Action(() => { decorator1.Should().DependOnTypeChain(decorator2.GetType(), decorator3.GetType(), decorator1.GetType()); })
         .Should().ThrowExactly<XunitException>()
-        .WithMessage(@"Could not find the particular sequence of objects: [TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.Decorator2, TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.Decorator3, TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.Decorator1] anywhere in dependency graph. Paths searched: 
+        .WithMessage(@"Could not find the particular sequence of objects: [TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.Decorator2, TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.Decorator3, TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.Decorator1] anywhere in dependency graph. Paths searched:
  [Root(Decorator1)]->[_decorator(Decorator2)]->[_decorator3(Decorator3)]->[_decorator4(Decorator4)]");
     }
 
@@ -186,21 +199,32 @@ public void ShouldNotFailWhenInvokedOnObjectWithProxies()
     public void ShouldBeAbleToFindItemsWithinCollections()
     {
       new List<string> { "trolololo" }.Should().DependOn("trolololo");
-      
+
       new Action(() => new List<string> { "trolololo" }.Should().DependOn("trolololo2"))
         .Should().ThrowExactly<XunitException>()
-        .WithMessage(@"Could not find the particular instance: trolololo2 anywhere in dependency graph however, another instance of this type was found within the following paths: 
+        .WithMessage(@"Could not find the particular instance: trolololo2 anywhere in dependency graph however, another instance of this type was found within the following paths:
 [Root(List`1)]->[_items(String[])]->[array element[0](String)]->[m_stringLength(Int32)]
 [Root(List`1)]->[_items(String[])]->[array element[0](String)]->[m_firstChar(Char)]
 [Root(List`1)]->[_items(String[])]->[array element[0](String)]->[FirstChar(Char)]
 [Root(List`1)]->[_items(String[])]->[array element[0](String)]->[Length(Int32)]");
     }
 
+    [Fact]
+    public void ShouldSupportCancellationTokens()
+    {
+      //GIVEN
+      var cancellationToken = new CancellationToken(true);
+
+      //WHEN - THEN
+      cancellationToken.Should().DependOn<CancellationTokenSource>();
+      cancellationToken.Should().DependOn<ManualResetEvent>();
+    }
+
 
     //todo add Should().NotDependOn();
     //todo add Should().DependOn(Func matchCriteria)
 
-    private class MyObjectImpl 
+    private class MyObjectImpl
     {
       private readonly IEnumerable<int> _s;
 
@@ -210,6 +234,10 @@ public void ShouldNotFailWhenInvokedOnObjectWithProxies()
       }
     }
 
+    public void Dispose()
+    {
+      this.output.WriteLine(_stringWriter.ToString());
+    }
   }
 
   public class Decorator4 : Decorator
@@ -249,5 +277,5 @@ public void ShouldNotFailWhenInvokedOnObjectWithProxies()
   public interface Decorator
   {
   }
-    
+
 }
