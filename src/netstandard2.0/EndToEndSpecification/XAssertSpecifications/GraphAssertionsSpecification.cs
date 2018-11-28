@@ -9,6 +9,7 @@ using TddXt.XFluentAssert.Root;
 using Xunit;
 using Xunit.Abstractions;
 using Xunit.Sdk;
+using static TddXt.AnyRoot.Root;
 
 namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
 {
@@ -220,7 +221,11 @@ public void ShouldNotFailWhenInvokedOnObjectWithProxies()
       cancellationToken.Should().DependOn<ManualResetEvent>();
     }
 
-
+      [Fact]
+      public void ShouldSupportDateTimes()
+      {
+          Any.Instance<SomethingWithTime>().Should().DependOn<DateTime>();
+      }
     //todo add Should().NotDependOn();
     //todo add Should().DependOn(Func matchCriteria)
 
@@ -278,4 +283,8 @@ public void ShouldNotFailWhenInvokedOnObjectWithProxies()
   {
   }
 
+  public class SomethingWithTime
+  {
+      public DateTime LastAccess { get; set; }
+  }
 }

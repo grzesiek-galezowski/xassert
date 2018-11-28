@@ -75,6 +75,16 @@ namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
         return true;
       }
 
+      if (target is DateTime)
+      {
+          return true;
+      }
+
+      if (target is TimeSpan)
+      {
+          return true;
+      }
+
       if (target is CancellationToken)
       {
         return false;
@@ -121,9 +131,13 @@ namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
 
     private IEnumerable<IObjectGraphNode> PropertyNodes(object o)
     {
-      return o.GetType().GetProperties(BindingFlags)
-        .Where(p => !p.GetIndexParameters().Any())
-        .Select(propertyInfo => From(_path.ToList(), propertyInfo.GetValue(o), propertyInfo.Name, _log));
+        var type = o.GetType();
+        var propertyInfos = type.GetProperties(BindingFlags);
+        var enumerable = propertyInfos
+            .Where(p => !p.GetIndexParameters().Any()).ToList();
+        var objectGraphNodes = enumerable
+            .Select(propertyInfo => From(_path.ToList(), propertyInfo.GetValue(o), propertyInfo.Name, _log)).ToList();
+        return objectGraphNodes;
     }
 
     public override string ToString()
