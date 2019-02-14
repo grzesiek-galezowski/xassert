@@ -1,4 +1,8 @@
-﻿namespace TddXt.XFluentAssert.Root
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+namespace TddXt.XFluentAssert.Root
 {
   using System;
 
@@ -35,6 +39,36 @@
       string str = assertions.Subject;
       str.Should().Be(str.ToLowerInvariant());
       return new AndConstraint<StringAssertions>(assertions);
+    }
+
+    public static AndConstraint<StringAssertions> ContainInOrder(this StringAssertions assertions, params string[] subtexts)
+    {
+      var subject = assertions.Subject;
+      var indices = subtexts.Select(subtext => subject.IndexOf(subtext, StringComparison.Ordinal));
+
+      indices.Should().NotContain(-1, subject);
+      indices.Should().BeInAscendingOrder(subject);
+      return new AndConstraint<StringAssertions>(assertions);
+    }
+
+    public static AndConstraint<StringAssertions> ContainExactlyOnce(this StringAssertions assertions, string substring)
+    {
+      var subject = assertions.Subject;
+      IndexOfAll(subject, substring).Should().HaveCount(1,
+        "\"" + subject + "\"" + " should contain exactly 1 occurence of " + "\"" + substring + "\"");
+      return new AndConstraint<StringAssertions>(assertions);
+    }
+
+    private static IEnumerable<int> IndexOfAll(string sourceString, string subString)
+    {
+      var indices = new List<int>();
+      var matchCollection = Regex.Matches(sourceString, Regex.Escape(subString));
+      foreach (Match m in matchCollection)
+      {
+        indices.Add(m.Index);
+      }
+
+      return indices;
     }
   }
 }
