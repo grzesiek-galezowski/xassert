@@ -12,7 +12,7 @@
     public static void Main(string[] args)
     {
       Console.WriteLine("START");
-      typeof(Program).Assembly.Should().NotHaveStaticFields();
+      //typeof(Program).Assembly.Should().NotHaveStaticFields();
       //var enumerable = Substitute.For<ICollection<int>>();
       //todo move that to new API: enumerable.ReceivedNothing().
       //enumerable.Received().
