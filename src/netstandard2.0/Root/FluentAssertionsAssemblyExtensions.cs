@@ -8,9 +8,9 @@
   using FluentAssertions;
   using FluentAssertions.Reflection;
 
-  using TddXt.XFluentAssert.ReflectionAssertions;
-  using TddXt.XFluentAssert.TypeReflection;
-  using TddXt.XFluentAssert.TypeReflection.Interfaces;
+  using ReflectionAssertions;
+  using TypeReflection;
+  using TypeReflection.Interfaces;
 
   public static class FluentAssertionsAssemblyExtensions
   {

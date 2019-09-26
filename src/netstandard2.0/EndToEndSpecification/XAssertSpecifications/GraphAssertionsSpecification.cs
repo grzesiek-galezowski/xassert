@@ -13,7 +13,7 @@ using static TddXt.AnyRoot.Root;
 
 namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
 {
-  public class GraphAssertionsSpecification : IDisposable
+    public class GraphAssertionsSpecification : IDisposable
   {
     private readonly ITestOutputHelper output;
     private StringWriter _stringWriter;
