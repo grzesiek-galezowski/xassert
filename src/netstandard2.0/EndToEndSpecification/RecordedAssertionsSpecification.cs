@@ -5,7 +5,6 @@ using FluentAssertions;
 using FluentAssertions.Types;
 using TddXt.XFluentAssert.TypeReflection;
 using TddXt.XFluentAssert.TypeReflection.Interfaces;
-using Xunit;
 
 namespace TddXt.XFluentAssert.EndToEndSpecification
 {
@@ -163,53 +162,129 @@ namespace TddXt.XFluentAssert.EndToEndSpecification
   }
 }
 
-public class NewEqualityAssertionSpecification
-{
-    [Fact]
-    public void ShouldXXXXX()
-    {
-        typeof(MyIntWrapper)
-            .Should().HaveCorrectEquality(
-                EqualityArg.For(() => 1, () => 2)
-                );
-    }
-
-}
-
 public static class TypeAssertionsExtensions
 {
-    public static AndConstraint<TypeAssertions> HaveCorrectEquality(this TypeAssertions assertions,
-        params EqualityArg[] equalityArgs)
+  public static AndConstraint<TypeAssertions> HaveCorrectEquality(this TypeAssertions assertions,
+    params EqualityArg[] equalityArgs)
+  {
+    var smartType = SmartType.For(assertions.Subject);
+    var constructor = smartType.PickConstructorWithLeastNonPointersParameters();
+
+    var instance = constructor.Value().InvokeWithExample1ParamsOnly(equalityArgs);
+    var equalInstance = constructor.Value().InvokeWithExample1ParamsOnly(equalityArgs);
+
+    if (instance.Equals(null))
     {
-        var smartType = SmartType.For(assertions.Subject);
-        var constructor = smartType.PickConstructorWithLeastNonPointersParameters();
-
-        constructor.Value().InvokeWithExample1ParamsOnly(equalityArgs)
-          .Should().Be(
-            constructor.Value().InvokeWithExample1ParamsOnly(equalityArgs));
-
-        //TODO compare in reverse (i.e. instance1.Equals(instance1))
-        for (int i = 0; i < constructor.Value().GetParametersCount(); ++i)
-        {
-            var instance1 = constructor.Value().InvokeWithExample1ParamsOnly(equalityArgs);
-            var instance2 = constructor.Value().InvokeWithExample2ParamFor(i, equalityArgs);
-            instance1.Should().NotBe(instance2);
-            //bug test equality
-        }
-        for (int i = 0; i < constructor.Value().GetParametersCount(); ++i)
-        {
-            var instance1 = constructor.Value().InvokeWithExample2ParamFor(i, equalityArgs);
-            var instance2 = constructor.Value().InvokeWithExample1ParamsOnly(equalityArgs);
-            instance1.Should().NotBe(instance2);
-            //bug test equality
-        }
-
-        //bug types without constructors or with invisible constructors?
-            return new AndConstraint<TypeAssertions>(assertions);
+      throw new Exception( /* TODO */);
     }
+    if (instance.Equals(constructor))
+    {
+      throw new Exception( /* TODO */);
+    }
+    if (!instance.Equals(instance))
+    {
+      throw new Exception();
+    }
+    if (!instance.Equals(equalInstance))
+    {
+      throw new Exception();
+    }
+    if (!equalInstance.Equals(instance))
+    {
+      throw new Exception();
+    }
+    if (!(bool)smartType.EqualityOperator().Evaluate(instance, instance))
+    {
+      throw new Exception();
+    }
+    if ((bool)smartType.EqualityOperator().Evaluate(instance, null))
+    {
+      throw new Exception();
+    }
+    if (!(bool)smartType.EqualityOperator().Evaluate(equalInstance, instance))
+    {
+      throw new Exception();
+    }
+    if (!(bool)smartType.EqualityOperator().Evaluate(instance, equalInstance))
+    {
+      throw new Exception();
+    }
+    if ((bool)smartType.InequalityOperator().Evaluate(instance, instance))
+    {
+      throw new Exception();
+    }
+    if (!(bool)smartType.InequalityOperator().Evaluate(instance, null))
+    {
+      throw new Exception();
+    }
+    if ((bool)smartType.InequalityOperator().Evaluate(instance, equalInstance))
+    {
+      throw new Exception();
+    }
+    if ((bool)smartType.InequalityOperator().Evaluate(equalInstance, instance))
+    {
+      throw new Exception();
+    }
+    if (instance.GetHashCode() != equalInstance.GetHashCode())
+    {
+      throw new Exception();
+    }
+    if (instance.GetHashCode() != instance.GetHashCode())
+    {
+      throw new Exception();
+    }
+
+    //TODO compare in reverse (i.e. instance1.Equals(instance1))
+    for (int i = 0; i < constructor.Value().GetParametersCount(); ++i)
+    {
+      var instance2 = constructor.Value().InvokeWithExample2ParamFor(i, equalityArgs);
+
+      if (instance.Equals(instance2))
+      {
+        throw new Exception( /* TODO */);
+      }
+      if (instance2.Equals(instance))
+      {
+        throw new Exception( /* TODO */);
+      }
+      if ((bool)smartType.EqualityOperator().Evaluate(instance, instance2))
+      {
+        throw new Exception();
+      }
+      if ((bool)smartType.EqualityOperator().Evaluate(instance2, instance))
+      {
+        throw new Exception();
+      }
+      if (!(bool)smartType.InequalityOperator().Evaluate(instance, instance2))
+      {
+        throw new Exception();
+      }
+      if (!(bool)smartType.InequalityOperator().Evaluate(instance2, instance))
+      {
+        throw new Exception();
+      }
+      if (instance.GetHashCode().Equals(instance2.GetHashCode()))
+      {
+        throw new Exception();
+      }
+
+      //bug test equality
+    }
+
+    for (int i = 0; i < constructor.Value().GetParametersCount(); ++i)
+    {
+      var instance1 = constructor.Value().InvokeWithExample2ParamFor(i, equalityArgs);
+      var instance2 = constructor.Value().InvokeWithExample1ParamsOnly(equalityArgs);
+      instance1.Should().NotBe(instance2);
+      //bug test equality
+    }
+
+    //bug types without constructors or with invisible constructors?
+    return new AndConstraint<TypeAssertions>(assertions);
+  }
 }
 
-internal class MyIntWrapper
+internal class MyIntWrapper : IEquatable<MyIntWrapper>
 {
   private readonly int _a;
   private readonly int _b;
@@ -218,6 +293,56 @@ internal class MyIntWrapper
   {
     _a = a;
     _b = b;
+  }
+
+  public bool Equals(MyIntWrapper other)
+  {
+    if (ReferenceEquals(null, other))
+    {
+      return false;
+    }
+
+    if (ReferenceEquals(this, other))
+    {
+      return true;
+    }
+    return _a == other._a && _b == other._b;
+  }
+
+  public override bool Equals(object obj)
+  {
+    if (ReferenceEquals(null, obj))
+    {
+      return false;
+    }
+
+    if (ReferenceEquals(this, obj))
+    {
+      return true;
+    }
+    if (obj.GetType() != this.GetType()) 
+    {
+      return false;
+    }
+    return Equals((MyIntWrapper) obj);
+  }
+
+  public override int GetHashCode()
+  {
+    unchecked
+    {
+      return (_a * 397) ^ _b;
+    }
+  }
+
+  public static bool operator ==(MyIntWrapper left, MyIntWrapper right)
+  {
+    return Equals(left, right);
+  }
+
+  public static bool operator !=(MyIntWrapper left, MyIntWrapper right)
+  {
+    return !Equals(left, right);
   }
 
   public override string ToString()

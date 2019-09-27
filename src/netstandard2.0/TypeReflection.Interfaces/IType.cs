@@ -23,9 +23,9 @@ namespace TddXt.XFluentAssert.TypeReflection.Interfaces
 
     Maybe<ICreateObjects> PickConstructorWithLeastNonPointersParameters();
 
-    IAmBinaryOperator Equality();
+    IAmBinaryOperator EqualityOperator();
 
-    IAmBinaryOperator Inequality();
+    IAmBinaryOperator InequalityOperator();
 
     IEnumerable<IAmEvent> GetAllNonPublicEventsWithoutExplicitlyImplemented();
 

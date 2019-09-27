@@ -173,12 +173,12 @@ namespace TddXt.XFluentAssert.TypeReflection
       return !Equals(instance1, instance2);
     }
 
-    public IAmBinaryOperator Equality()
+    public IAmBinaryOperator EqualityOperator()
     {
       return BinaryOperator.Wrap(this.EqualityMethod(), this.ValueTypeEqualityMethod(), "operator ==");
     }
 
-    public IAmBinaryOperator Inequality()
+    public IAmBinaryOperator InequalityOperator()
     {
       return BinaryOperator.Wrap(this.InequalityMethod(), this.ValueTypeInequalityMethod(), "operator !=");
     }

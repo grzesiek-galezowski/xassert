@@ -32,12 +32,12 @@ namespace TddXt.XFluentAssert.TypeReflection
     public static IAmBinaryOperator<T, bool> Equality()
     {
 
-      return BinaryOperator<T, bool>.Wrap(Type.Equality());
+      return BinaryOperator<T, bool>.Wrap(Type.EqualityOperator());
     }
 
-    public static IAmBinaryOperator<T, bool> Inequality()
+    public static IAmBinaryOperator<T, bool> InequalityOperator()
     {
-      return BinaryOperator<T, bool>.Wrap(Type.Inequality());
+      return BinaryOperator<T, bool>.Wrap(Type.InequalityOperator());
     }
 
     public static bool Is<T1>()
