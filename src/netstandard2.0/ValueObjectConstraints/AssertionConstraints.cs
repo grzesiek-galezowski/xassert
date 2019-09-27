@@ -14,7 +14,8 @@
   {
     //todo move elsewhere (but has troublesome dependency on ValueTraits which is public...)
     public static IEnumerable<IConstraint> ForValueSemantics(
-      Type type, IKnowWhatValueTraitsToCheck traits, ValueObjectActivator activator)
+      Type type, IKnowWhatValueTraitsToCheck traits, 
+      ValueObjectActivator activator)
     {
 
       var constraints = new List<IConstraint>();

@@ -9,7 +9,7 @@ namespace TddXt.XFluentAssert.Root
   using FluentAssertions;
   using FluentAssertions.Primitives;
 
-  using TddXt.XFluentAssert.Root.SimpleAssertions;
+  using SimpleAssertions;
 
   public static class FluentAssertionsTextExtensions
   {

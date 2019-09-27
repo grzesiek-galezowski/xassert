@@ -3,11 +3,11 @@
   using System;
   using System.Reflection;
 
-  using TddXt.AnyRoot;
-  using TddXt.XFluentAssert.AssertionConstraints;
-  using TddXt.XFluentAssert.TypeReflection;
-  using TddXt.XFluentAssert.TypeReflection.Interfaces;
-  using TddXt.XFluentAssert.ValueActivation;
+  using AnyRoot;
+  using AssertionConstraints;
+  using TypeReflection;
+  using TypeReflection.Interfaces;
+  using ValueActivation;
 
   public class ConstructorsMustBeNullProtected : IConstraint
   {
@@ -21,7 +21,7 @@
     public void CheckAndRecord(ConstraintsViolations violations)
     {
       var constructors = _smartType.GetAllPublicConstructors();
-      var fallbackTypeGenerator = new FallbackTypeGenerator(_smartType);
+      var fallbackTypeGenerator = new ObjectGenerator(_smartType);
 
       foreach (var constructor in constructors)
       {
@@ -31,7 +31,7 @@
 
     private static void AssertNullCheckForEveryPossibleArgumentOf(IConstraintsViolations violations,
       ICreateObjects constructor,
-      FallbackTypeGenerator fallbackTypeGenerator)
+      ObjectGenerator objectGenerator)
     {
       for (int i = 0; i < constructor.GetParametersCount(); ++i)
       {
@@ -42,7 +42,7 @@
 
           try
           {
-            fallbackTypeGenerator.GenerateInstance(parameters);
+            objectGenerator.GenerateInstance(parameters);
             violations.Add("Not guarded against nulls: " + constructor + ", Not guarded parameter: " +
                            constructor.GetDescriptionForParameter(i));
           }

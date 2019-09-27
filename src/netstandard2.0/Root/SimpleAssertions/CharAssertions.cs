@@ -6,7 +6,7 @@
   {
     public CharAssertions(char c) : base(c)
     {
-      this.CharSubject = c;
+      CharSubject = c;
     }
 
     public char CharSubject { get; }

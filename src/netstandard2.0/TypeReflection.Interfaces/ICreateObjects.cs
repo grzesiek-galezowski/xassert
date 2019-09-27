@@ -16,5 +16,7 @@ namespace TddXt.XFluentAssert.TypeReflection.Interfaces
     bool IsInternal();
     bool IsNotRecursive();
     bool IsRecursive();
+    object InvokeWithExample1ParamsOnly(EqualityArg[] equalityArgs);
+    object InvokeWithExample2ParamFor(int i, EqualityArg[] equalityArgs);
   }
 }

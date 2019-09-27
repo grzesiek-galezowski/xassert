@@ -8,8 +8,8 @@
   using NSubstitute;
   using NSubstitute.Exceptions;
 
-  using TddXt.XFluentAssert.EndToEndSpecification.Fixtures;
-  using TddXt.XFluentAssert.Root;
+  using Fixtures;
+  using Root;
   using TddXt.XFluentAssert.Root.LockAssertions;
 
   using Xunit;

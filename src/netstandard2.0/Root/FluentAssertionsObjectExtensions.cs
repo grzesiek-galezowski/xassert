@@ -6,7 +6,7 @@
   using FluentAssertions;
   using FluentAssertions.Primitives;
 
-  using TddXt.XFluentAssert.GraphAssertions;
+  using GraphAssertions;
   using TddXt.XFluentAssert.LockAssertions;
 
   public static class FluentAssertionsObjectExtensions

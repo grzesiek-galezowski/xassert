@@ -1,16 +1,22 @@
-﻿namespace TddXt.XFluentAssert.EndToEndSpecification
+﻿using System;
+using System.Linq;
+using FluentAssertions;
+using FluentAssertions.Types;
+using TddXt.XFluentAssert.TypeReflection;
+using TddXt.XFluentAssert.TypeReflection.Interfaces;
+using Xunit;
+
+namespace TddXt.XFluentAssert.EndToEndSpecification
 {
   using System;
-  using System.ComponentModel;
-
   using FluentAssertions;
 
   using NSubstitute;
 
-  using TddXt.AnyRoot;
-  using TddXt.AnyRoot.Strings;
-  using TddXt.XFluentAssert.AssertionConstraints;
-  using TddXt.XFluentAssert.Root;
+  using AnyRoot;
+  using AnyRoot.Strings;
+  using AssertionConstraints;
+  using Root;
 
   using Xunit;
   using Xunit.Sdk;
@@ -154,4 +160,43 @@
       remove { throw new NotImplementedException(); }
     }
   }
+}
+
+public class NewEqualityAssertionSpecification
+{
+    [Fact]
+    public void ShouldXXXXX()
+    {
+        typeof(MyIntWrapper)
+            .Should().HaveCorrectEquality(
+                EqualityArg.For(() => 1, () => 2)
+                );
+    }
+
+}
+
+public static class TypeAssertionsExtensions
+{
+    public static AndConstraint<TypeAssertions> HaveCorrectEquality(this TypeAssertions assertions,
+        params EqualityArg[] equalityArgs)
+    {
+        var smartType = SmartType.For(assertions.Subject);
+        var constructor = smartType.PickConstructorWithLeastNonPointersParameters();
+
+        //TODO compare in reverse (i.e. instance1.Equals(instance1))
+        for (int i = 0; i < constructor.Value().GetParametersCount(); ++i)
+        {
+            var instance1 = constructor.Value().InvokeWithExample1ParamsOnly(equalityArgs);
+            var instance2 = constructor.Value().InvokeWithExample2ParamFor(i, equalityArgs);
+            instance1.Should().Be(instance2);
+            //bug test equality
+        }
+
+        //bug types without constructors or with invisible constructors?
+            return new AndConstraint<TypeAssertions>(assertions);
+    }
+}
+
+internal class MyIntWrapper
+{
 }

@@ -1,6 +1,6 @@
 ﻿namespace TddXt.XFluentAssert.Root
 {
-  using TddXt.XFluentAssert.Root.SimpleAssertions;
+  using SimpleAssertions;
 
   public static class FluentAssertionsCharExtensions
   {

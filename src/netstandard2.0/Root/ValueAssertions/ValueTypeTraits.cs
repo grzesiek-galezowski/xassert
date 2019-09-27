@@ -60,7 +60,7 @@
 
     public IKnowWhatValueTraitsToCheck SkipConstructorArgument(int constructorArgumentIndex)
     {
-      this.IndexesOfConstructorArgumentsIndexesThatDoNotConstituteAValueIdentify.Add(constructorArgumentIndex);
+      IndexesOfConstructorArgumentsIndexesThatDoNotConstituteAValueIdentify.Add(constructorArgumentIndex);
       return this;
     }
 

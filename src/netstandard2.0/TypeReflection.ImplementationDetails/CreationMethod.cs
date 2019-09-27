@@ -127,5 +127,15 @@ namespace TddXt.XFluentAssert.TypeReflection.ImplementationDetails
     {
       return this._creationMethodParameters.IsAnyOfType(this._returnType);
     }
+
+    public object InvokeWithExample1ParamsOnly(EqualityArg[] equalityArgs)
+    {
+        throw new NotImplementedException();
+    }
+
+    public object InvokeWithExample2ParamFor(int i, EqualityArg[] equalityArgs)
+    {
+        throw new NotImplementedException();
+    }
   }
 }

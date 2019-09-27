@@ -1,23 +1,16 @@
-﻿using System.Numerics;
-using TddXt.XFluentAssert.Root;
-
-namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
+﻿namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
 {
   using System;
   using System.Collections.Generic;
   using System.Diagnostics.CodeAnalysis;
 
   using FluentAssertions;
-  using FluentAssertions.Primitives;
-
-  using NSubstitute;
-
-  using TddXt.AnyRoot;
-  using TddXt.AnyRoot.Strings;
-  using TddXt.XFluentAssert.CommonTypes;
-  using TddXt.XFluentAssert.Root;
-  using TddXt.XFluentAssert.Root.ValueAssertions;
-  using TddXt.XFluentAssert.TypeReflection.ImplementationDetails;
+  using AnyRoot;
+  using AnyRoot.Strings;
+  using CommonTypes;
+  using Root;
+  using Root.ValueAssertions;
+  using TypeReflection.ImplementationDetails;
 
   using Xunit;
   using Xunit.Abstractions;

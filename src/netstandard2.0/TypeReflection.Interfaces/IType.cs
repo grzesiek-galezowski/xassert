@@ -41,4 +41,5 @@ namespace TddXt.XFluentAssert.TypeReflection.Interfaces
 
     IEnumerable<IAmEvent> GetAllEvents();
   }
+
 }

@@ -7,11 +7,11 @@ namespace TddXt.XFluentAssert.ValueActivation
 
   using TddXt.XFluentAssert.TypeReflection.Interfaces;
 
-  public class FallbackTypeGenerator
+  public class ObjectGenerator
   {
     private readonly IType _smartType;
 
-    public FallbackTypeGenerator(IType smartType)
+    public ObjectGenerator(IType smartType)
     {
       _smartType = smartType;
     }

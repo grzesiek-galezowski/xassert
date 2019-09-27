@@ -7,21 +7,22 @@
   using FluentAssertions;
   using FluentAssertions.Types;
 
-  using TddXt.XFluentAssert.AssertionConstraints;
-  using TddXt.XFluentAssert.ReflectionAssertions;
-  using TddXt.XFluentAssert.Root.ConstraintsAssertions;
-  using TddXt.XFluentAssert.Root.ValueAssertions;
-  using TddXt.XFluentAssert.TypeReflection;
-  using TddXt.XFluentAssert.TypeReflection.Interfaces;
-  using TddXt.XFluentAssert.ValueActivation;
-  using TddXt.XFluentAssert.ValueObjectConstraints;
+  using AssertionConstraints;
+  using ReflectionAssertions;
+  using ConstraintsAssertions;
+  using ValueAssertions;
+  using TypeReflection;
+  using TypeReflection.Interfaces;
+  using ValueActivation;
+  using ValueObjectConstraints;
 
   public static class FluentAssertionsTypeExtensions
   {
 
     public static AndConstraint<TypeAssertions> HaveValueSemantics(this TypeAssertions o)
     {
-      o.Subject.Should().HaveValueSemantics(ValueTypeTraits.Default());
+      o.Subject.Should().HaveValueSemantics(
+          ValueTypeTraits.Default());
       return new AndConstraint<TypeAssertions>(o);
     }
 

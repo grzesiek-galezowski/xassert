@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System;
+using FluentAssertions;
 using TddXt.XFluentAssert.Root;
 using Xunit;
 
