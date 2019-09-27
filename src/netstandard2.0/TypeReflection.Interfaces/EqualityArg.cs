@@ -29,5 +29,10 @@ namespace TddXt.XFluentAssert.TypeReflection.Interfaces
         {
             return _createExample1();
         }
+
+        public object Example2()
+        {
+          return _createExample2();
+        }
     }
 }

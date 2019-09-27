@@ -130,12 +130,14 @@ namespace TddXt.XFluentAssert.TypeReflection.ImplementationDetails
 
     public object InvokeWithExample1ParamsOnly(EqualityArg[] equalityArgs)
     {
-        throw new NotImplementedException();
+      return InvokeWith(
+        _creationMethodParameters.ParamsFromExample1(equalityArgs));
     }
 
     public object InvokeWithExample2ParamFor(int i, EqualityArg[] equalityArgs)
     {
-        throw new NotImplementedException();
+      return InvokeWith(
+        _creationMethodParameters.ParamsWithExample2For(i, equalityArgs));
     }
   }
 }

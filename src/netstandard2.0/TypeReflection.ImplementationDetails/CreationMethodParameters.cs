@@ -1,3 +1,5 @@
+using TddXt.XFluentAssert.TypeReflection.Interfaces;
+
 namespace TddXt.XFluentAssert.TypeReflection.ImplementationDetails
 {
   using System;
@@ -75,6 +77,21 @@ namespace TddXt.XFluentAssert.TypeReflection.ImplementationDetails
     public bool IsAnyOfType(Type type)
     {
       return this._parameters.Any(p => p.ParameterType == type);
+    }
+
+    public IEnumerable<object> ParamsFromExample1(EqualityArg[] equalityArgs)
+    {
+      return _parameters
+        .Select(p => 
+          equalityArgs.Single(a => a.IsFor(p.ParameterType)).Example1());
+    }
+
+    public IEnumerable<object> ParamsWithExample2For(int argIndex, EqualityArg[] equalityArgs)
+    {
+      return _parameters.Select((paramInfo, i) => i == argIndex
+          ? equalityArgs.Single(arg => arg.IsFor(paramInfo.ParameterType)).Example2()
+          : equalityArgs.Single(arg => arg.IsFor(paramInfo.ParameterType)).Example1())
+        .ToList();
     }
   }
 }

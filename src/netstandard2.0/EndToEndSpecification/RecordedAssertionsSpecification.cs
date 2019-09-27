@@ -184,12 +184,23 @@ public static class TypeAssertionsExtensions
         var smartType = SmartType.For(assertions.Subject);
         var constructor = smartType.PickConstructorWithLeastNonPointersParameters();
 
+        constructor.Value().InvokeWithExample1ParamsOnly(equalityArgs)
+          .Should().Be(
+            constructor.Value().InvokeWithExample1ParamsOnly(equalityArgs));
+
         //TODO compare in reverse (i.e. instance1.Equals(instance1))
         for (int i = 0; i < constructor.Value().GetParametersCount(); ++i)
         {
             var instance1 = constructor.Value().InvokeWithExample1ParamsOnly(equalityArgs);
             var instance2 = constructor.Value().InvokeWithExample2ParamFor(i, equalityArgs);
-            instance1.Should().Be(instance2);
+            instance1.Should().NotBe(instance2);
+            //bug test equality
+        }
+        for (int i = 0; i < constructor.Value().GetParametersCount(); ++i)
+        {
+            var instance1 = constructor.Value().InvokeWithExample2ParamFor(i, equalityArgs);
+            var instance2 = constructor.Value().InvokeWithExample1ParamsOnly(equalityArgs);
+            instance1.Should().NotBe(instance2);
             //bug test equality
         }
 
@@ -200,4 +211,17 @@ public static class TypeAssertionsExtensions
 
 internal class MyIntWrapper
 {
+  private readonly int _a;
+  private readonly int _b;
+
+  public MyIntWrapper(int a, int b)
+  {
+    _a = a;
+    _b = b;
+  }
+
+  public override string ToString()
+  {
+    return $"{nameof(_a)}: {_a}, {nameof(_b)}: {_b}";
+  }
 }
