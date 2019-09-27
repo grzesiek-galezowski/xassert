@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>TddXt.XFluentAssert.Root</AssemblyName>
-    <RootNamespace>TddXt.XFluentAssert.Root</RootNamespace>
+    <AssemblyName>TddXt.XFluentAssertRoot</AssemblyName>
+    <RootNamespace>TddXt.XFluentAssertRoot</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -13,6 +13,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <OutputPath>..\..\..\build\Release\</OutputPath>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="CollectionAssertions\**" />
+    <EmbeddedResource Remove="CollectionAssertions\**" />
+    <None Remove="CollectionAssertions\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="5.6.0" />
@@ -30,7 +36,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="CollectionAssertions\" />
+    <None Include="..\..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

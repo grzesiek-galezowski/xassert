@@ -6,6 +6,7 @@ using System.Threading;
 using FluentAssertions;
 using NSubstitute;
 using TddXt.XFluentAssert.Root;
+using TddXt.XFluentAssertRoot;
 using Xunit;
 using Xunit.Abstractions;
 using Xunit.Sdk;

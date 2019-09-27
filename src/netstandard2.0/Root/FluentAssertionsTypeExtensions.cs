@@ -1,11 +1,13 @@
-﻿namespace TddXt.XFluentAssert.Root
-{
-  using System;
-  using System.Collections.Generic;
-  using System.Linq;
+﻿  using System;
+  using FluentAssertions.Types;
 
   using FluentAssertions;
-  using FluentAssertions.Types;
+  using System.Linq;
+  using System.Collections.Generic;
+using TddXt.XFluentAssertRoot.ConstraintsAssertions;
+using TddXt.XFluentAssertRoot.ValueAssertions;
+namespace TddXt.XFluentAssertRoot
+{
 
   using AssertionConstraints;
   using ReflectionAssertions;

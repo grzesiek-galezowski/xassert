@@ -1,11 +1,10 @@
-﻿using FluentAssertions.Collections;
+﻿using System.Collections.Generic;
+using FluentAssertions;
+using FluentAssertions.Collections;
 
-namespace TddXt.XFluentAssert.Root
+namespace TddXt.XFluentAssertRoot
 {
-    using System.Collections.Generic;
-    using FluentAssertions;
-
-    public static class FluentAssertionsEnumerableExtensions
+  public static class FluentAssertionsEnumerableExtensions
   {
       public static AndConstraint<TAssertions> Be<TAssertions, TElement>(
           this CollectionAssertions<IEnumerable<TElement>, TAssertions> assertions, params TElement[] expected) 

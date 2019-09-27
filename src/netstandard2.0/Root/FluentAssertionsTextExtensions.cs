@@ -1,13 +1,14 @@
-﻿using System.Collections.Generic;
+﻿  using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-
-namespace TddXt.XFluentAssert.Root
-{
-  using System;
+  using FluentAssertions.Primitives;
 
   using FluentAssertions;
-  using FluentAssertions.Primitives;
+using TddXt.XFluentAssertRoot.SimpleAssertions;
+
+namespace TddXt.XFluentAssertRoot
+{
 
   using SimpleAssertions;
 

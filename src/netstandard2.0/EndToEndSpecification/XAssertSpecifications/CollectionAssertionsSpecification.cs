@@ -1,6 +1,7 @@
 ﻿using System;
 using FluentAssertions;
 using TddXt.XFluentAssert.Root;
+using TddXt.XFluentAssertRoot;
 using Xunit;
 
 namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
@@ -17,6 +18,31 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
 
             coll1.Should().Be(coll3);
             coll1.Invoking(c => c.Should().Be(coll2)).Should().Throw<Exception>();
+        }
+        
+        [Fact]
+        public void ShouldUseEqualsForEquality()
+        {
+            var coll1 = new[] {new AlwaysNotEqual(1)};
+            var coll2 = new[] { new AlwaysNotEqual(1) };
+
+            coll1.Invoking(c => c.Should().Be(coll2)).Should().Throw<Exception>();
+        }
+
+        private class AlwaysNotEqual
+        {
+          private int a;
+
+          public AlwaysNotEqual(int a)
+          {
+            this.a = a;
+          }
+
+          public override bool Equals(object obj)
+          {
+            return false;
+          }
+
         }
 
     }

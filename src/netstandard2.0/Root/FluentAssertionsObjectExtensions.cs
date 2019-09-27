@@ -1,13 +1,13 @@
-﻿namespace TddXt.XFluentAssert.Root
-{
-  using System;
-  using System.Linq.Expressions;
-
-  using FluentAssertions;
+﻿  using System;
+  using TddXt.XFluentAssert.LockAssertions;
   using FluentAssertions.Primitives;
 
+  using FluentAssertions;
+  using System.Linq.Expressions;
+namespace TddXt.XFluentAssertRoot
+{
+
   using GraphAssertions;
-  using TddXt.XFluentAssert.LockAssertions;
 
   public static class FluentAssertionsObjectExtensions
   {

@@ -4,7 +4,7 @@ using FluentAssertions;
 using FluentAssertions.Primitives;
 using TddXt.XFluentAssert.GraphAssertions.DependencyAssertions;
 
-namespace TddXt.XFluentAssert.Root
+namespace TddXt.XFluentAssertRoot
 {
   public static class ObjectDependencyAssertions
   {

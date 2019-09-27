@@ -1,4 +1,5 @@
-﻿namespace TddXt.XFluentAssert.Root
+﻿using TddXt.XFluentAssertRoot.SimpleAssertions;
+namespace TddXt.XFluentAssertRoot
 {
   using SimpleAssertions;
 

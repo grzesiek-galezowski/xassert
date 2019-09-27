@@ -1,4 +1,6 @@
-﻿namespace TddXt.XFluentAssert.EndToEndSpecification
+﻿using TddXt.XFluentAssertRoot;
+using TddXt.XFluentAssertRoot.LockAssertions;
+namespace TddXt.XFluentAssert.EndToEndSpecification
 {
   using System;
   using System.Threading;
@@ -10,7 +12,6 @@
 
   using Fixtures;
   using Root;
-  using TddXt.XFluentAssert.Root.LockAssertions;
 
   using Xunit;
   using Xunit.Sdk;

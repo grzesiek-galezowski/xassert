@@ -1,7 +1,7 @@
-﻿namespace TddXt.XFluentAssert.Root.ConstraintsAssertions
-{
-  using System;
+﻿  using System;
   using System.Reflection;
+namespace TddXt.XFluentAssertRoot.ConstraintsAssertions
+{
 
   using AnyRoot;
   using AssertionConstraints;
