@@ -1,6 +1,7 @@
 ﻿using System;
 using FluentAssertions;
 using TddXt.XFluentAssert.Root;
+using TddXt.XFluentAssertRoot;
 using Xunit;
 
 namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications

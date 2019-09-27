@@ -1,14 +1,13 @@
-﻿namespace TddXt.XFluentAssert.Root.ConstraintsAssertions
+﻿using System;
+using System.Reflection;
+using TddXt.AnyRoot;
+using TddXt.XFluentAssert.AssertionConstraints;
+using TddXt.XFluentAssert.TypeReflection;
+using TddXt.XFluentAssert.TypeReflection.Interfaces;
+using TddXt.XFluentAssert.ValueActivation;
+
+namespace TddXt.XFluentAssertRoot.ConstraintsAssertions
 {
-  using System;
-  using System.Reflection;
-
-  using TddXt.AnyRoot;
-  using TddXt.XFluentAssert.AssertionConstraints;
-  using TddXt.XFluentAssert.TypeReflection;
-  using TddXt.XFluentAssert.TypeReflection.Interfaces;
-  using TddXt.XFluentAssert.ValueActivation;
-
   public class ConstructorsMustBeNullProtected : IConstraint
   {
     private readonly ISmartType _smartType;

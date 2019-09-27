@@ -1,7 +1,8 @@
-﻿namespace TddXt.XFluentAssert.Root.ValueAssertions
-{
-  using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using TddXt.XFluentAssert.Root.ValueAssertions;
 
+namespace TddXt.XFluentAssertRoot.ValueAssertions
+{
   public class ValueTypeTraits : IKnowWhatValueTraitsToCheck
   {
     public static IKnowWhatValueTraitsToCheck Full()

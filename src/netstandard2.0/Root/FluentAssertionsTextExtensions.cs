@@ -1,16 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using FluentAssertions;
+using FluentAssertions.Primitives;
+using TddXt.XFluentAssertRoot.SimpleAssertions;
 
-namespace TddXt.XFluentAssert.Root
+namespace TddXt.XFluentAssertRoot
 {
-  using System;
-
-  using FluentAssertions;
-  using FluentAssertions.Primitives;
-
-  using TddXt.XFluentAssert.Root.SimpleAssertions;
-
   public static class FluentAssertionsTextExtensions
   {
     public static AndConstraint<CharAssertions> BeUppercase(this CharAssertions assertions)

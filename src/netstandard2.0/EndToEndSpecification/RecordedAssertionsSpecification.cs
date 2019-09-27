@@ -1,4 +1,6 @@
-﻿namespace TddXt.XFluentAssert.EndToEndSpecification
+﻿using TddXt.XFluentAssertRoot;
+
+namespace TddXt.XFluentAssert.EndToEndSpecification
 {
   using System;
   using System.ComponentModel;

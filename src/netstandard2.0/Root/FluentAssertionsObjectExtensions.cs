@@ -1,14 +1,12 @@
-﻿namespace TddXt.XFluentAssert.Root
+﻿using System;
+using System.Linq.Expressions;
+using FluentAssertions;
+using FluentAssertions.Primitives;
+using TddXt.XFluentAssert.GraphAssertions;
+using TddXt.XFluentAssert.LockAssertions;
+
+namespace TddXt.XFluentAssertRoot
 {
-  using System;
-  using System.Linq.Expressions;
-
-  using FluentAssertions;
-  using FluentAssertions.Primitives;
-
-  using TddXt.XFluentAssert.GraphAssertions;
-  using TddXt.XFluentAssert.LockAssertions;
-
   public static class FluentAssertionsObjectExtensions
   {
     public static AndConstraint<ObjectAssertions> NotBeLike<T>(

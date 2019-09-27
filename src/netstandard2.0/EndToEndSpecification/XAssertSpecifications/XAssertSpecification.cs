@@ -1,5 +1,7 @@
 ﻿using System.Numerics;
 using TddXt.XFluentAssert.Root;
+using TddXt.XFluentAssertRoot;
+using TddXt.XFluentAssertRoot.ValueAssertions;
 
 namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
 {
@@ -122,16 +124,16 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
     public void ShouldFailUpperCaseAssertionOnLowerCaseCharAndPassOnUpperCaseChar()
     {
       var c = Root.Any.AlphaChar();
-      new Action(() => char.ToLower(c).Should().BeUppercase()).Should().ThrowExactly<XunitException>();
-      new Action(() => char.ToUpper(c).Should().BeUppercase()).Should().NotThrow();
+      new Action(() => FluentAssertionsCharExtensions.Should(char.ToLower(c)).BeUppercase()).Should().ThrowExactly<XunitException>();
+      new Action(() => FluentAssertionsCharExtensions.Should(char.ToUpper(c)).BeUppercase()).Should().NotThrow();
     }
 
     [Fact]
     public void ShouldFailLowerCaseAssertionOnUpperCaseCharAndPassOnLowerCaseChar()
     {
       var c = Root.Any.AlphaChar();
-      new Action(() => char.ToUpper(c).Should().BeLowercase()).Should().ThrowExactly<XunitException>();
-      new Action(() => char.ToLower(c).Should().BeLowercase()).Should().NotThrow();
+      new Action(() => FluentAssertionsCharExtensions.Should(char.ToUpper(c)).BeLowercase()).Should().ThrowExactly<XunitException>();
+      new Action(() => FluentAssertionsCharExtensions.Should(char.ToLower(c)).BeLowercase()).Should().NotThrow();
     }
 
     [Fact]

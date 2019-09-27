@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>XFluentAssert</id>
+    <version>3.0.0</version>
+    <title>XFluentAssert</title>
+    <authors>Grzegorz Galezowski</authors>
+    <owners>Grzegorz Galezowski</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <projectUrl>https://github.com/grzesiek-galezowski/xassert</projectUrl>
+    <description>A set of assertions to be used together with FluentAssertions library.</description>
+    <summary>A set of assertions to be used together with FluentAssertions library.</summary>
+    <releaseNotes>Added assertions for dependency chains and AndConstraints to existing structural assertions</releaseNotes>
+    <language>en-US</language>
+    <dependencies>
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="NSubstitute" version="4.0.0" />
+        <dependency id="FluentAssertions" version="5.6.0" />
+        <dependency id="CompareNETObjects" version="4.57.0" />
+        <dependency id="Any" version="3.0.1" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>

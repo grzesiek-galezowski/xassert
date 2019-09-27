@@ -1,17 +1,15 @@
-﻿namespace TddXt.XFluentAssert.Root
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using FluentAssertions;
+using FluentAssertions.Reflection;
+using TddXt.XFluentAssert.ReflectionAssertions;
+using TddXt.XFluentAssert.TypeReflection;
+using TddXt.XFluentAssert.TypeReflection.Interfaces;
+
+namespace TddXt.XFluentAssertRoot
 {
-  using System;
-  using System.Collections.Generic;
-  using System.Linq;
-  using System.Reflection;
-
-  using FluentAssertions;
-  using FluentAssertions.Reflection;
-
-  using ReflectionAssertions;
-  using TypeReflection;
-  using TypeReflection.Interfaces;
-
   public static class FluentAssertionsAssemblyExtensions
   {
     public static AndConstraint<AssemblyAssertions> NotHaveHiddenEvents(this AssemblyAssertions assertions)

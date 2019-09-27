@@ -1,21 +1,20 @@
-﻿namespace TddXt.XFluentAssert.Root
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using FluentAssertions;
+using FluentAssertions.Types;
+using TddXt.XFluentAssert.AssertionConstraints;
+using TddXt.XFluentAssert.ReflectionAssertions;
+using TddXt.XFluentAssert.Root.ValueAssertions;
+using TddXt.XFluentAssert.TypeReflection;
+using TddXt.XFluentAssert.TypeReflection.Interfaces;
+using TddXt.XFluentAssert.ValueActivation;
+using TddXt.XFluentAssert.ValueObjectConstraints;
+using TddXt.XFluentAssertRoot.ConstraintsAssertions;
+using TddXt.XFluentAssertRoot.ValueAssertions;
+
+namespace TddXt.XFluentAssertRoot
 {
-  using System;
-  using System.Collections.Generic;
-  using System.Linq;
-
-  using FluentAssertions;
-  using FluentAssertions.Types;
-
-  using TddXt.XFluentAssert.AssertionConstraints;
-  using TddXt.XFluentAssert.ReflectionAssertions;
-  using TddXt.XFluentAssert.Root.ConstraintsAssertions;
-  using TddXt.XFluentAssert.Root.ValueAssertions;
-  using TddXt.XFluentAssert.TypeReflection;
-  using TddXt.XFluentAssert.TypeReflection.Interfaces;
-  using TddXt.XFluentAssert.ValueActivation;
-  using TddXt.XFluentAssert.ValueObjectConstraints;
-
   public static class FluentAssertionsTypeExtensions
   {
 

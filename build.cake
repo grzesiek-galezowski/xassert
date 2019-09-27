@@ -1,12 +1,10 @@
 #tool "nuget:?package=ILRepack"
-#tool "nuget:?package=GitVersion.CommandLine"
 
 //////////////////////////////////////////////////////////////////////
 // VERSION
 //////////////////////////////////////////////////////////////////////
 
-//var nugetVersion = "0.0.2";
-GitVersion nugetVersion = null; 
+var nugetVersion = "3.0.0";
 
 //////////////////////////////////////////////////////////////////////
 // ARGUMENTS
@@ -15,11 +13,9 @@ GitVersion nugetVersion = null;
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
 var toolpath = Argument("toolpath", @"");
-//var net45 = new Framework("net45");
-//var net462 = new Framework("net462");
 var netstandard20 = new Framework("netstandard2.0");
 var solutionName = "XFluentAssert.sln";
-var mainDll = "TddXt.XFluentAssert.Root.dll";
+var mainDll = "TddXt.XFluentAssertRoot.dll";
 
 
 //////////////////////////////////////////////////////////////////////
@@ -47,13 +43,6 @@ var publishNetStandardDir = publishDir + Directory("netstandard2.0");
 var srcNetStandardDir = srcDir + Directory("netstandard2.0");
 var slnNetStandard = srcNetStandardDir + File(solutionName);
 var specificationNetStandardDir = specificationDir + Directory("netcoreapp2.0");
-//var buildNet45Dir = buildDir + Directory("net45");
-//var publishNet45Dir = publishDir + Directory("net45");
-//var srcNet45Dir = srcDir + Directory("net45");
-//var specificationNet45Dir = specificationDir + Directory("netstandard2.0");
-//var slnNet45 = srcNet45Dir + File(solutionName);
-
-
 
 //////////////////////////////////////////////////////////////////////
 // TASKS
@@ -68,14 +57,13 @@ Task("Clean")
 });
 
 Task("Build")
-    .IsDependentOn("GitVersion")
     .Does(() =>
 {
     DotNetCoreBuild("./src/netstandard2.0/Root", new DotNetCoreBuildSettings
      {
          Configuration = configuration,
          OutputDirectory = buildNetStandardDir,
-         ArgumentCustomization = args=>args.Append("/property:Version=" + nugetVersion.NuGetVersionV2)
+         ArgumentCustomization = args=>args.Append("/property:Version=" + nugetVersion)
      });
 });
 
@@ -96,26 +84,19 @@ Task("Run-Unit-Tests")
 public void BundleDependencies(DirectoryPath specificVersionPublishDir, string rootDllName)
 {
     var fullRootDllFilePath = specificVersionPublishDir + "/" + rootDllName;
-    var assemblyPaths = GetFiles(specificVersionPublishDir + "/TddXt.XFluentAssert.*.dll");
+    var assemblyPaths = GetFiles(specificVersionPublishDir + "/TddXt.XFluentAssert*.dll");
     var mainAssemblyPath = new FilePath(fullRootDllFilePath).MakeAbsolute(Context.Environment);
     assemblyPaths.Remove(mainAssemblyPath);
     foreach(var path in assemblyPaths)
     {
         Console.WriteLine(path);
     }
-    ILRepack(fullRootDllFilePath, fullRootDllFilePath, assemblyPaths);
+    ILRepack(fullRootDllFilePath, fullRootDllFilePath, assemblyPaths,  new ILRepackSettings 
+	{ 
+		
+	});
     DeleteFiles(assemblyPaths);
 }
-
-Task("GitVersion")
-    .Does(() =>
-{
-    nugetVersion = GitVersion(new GitVersionSettings {
-        UpdateAssemblyInfo = true,
-    });
-    Console.WriteLine(nugetVersion.NuGetVersionV2);
-});
-
 
 Task("Pack")
     .IsDependentOn("Run-Unit-Tests")
@@ -123,7 +104,6 @@ Task("Pack")
     {
         CopyDirectory(buildDir, publishDir);
         BundleDependencies(publishNetStandardDir, mainDll);
-        //BundleDependencies(publishNet45Dir, mainDll);
         NuGetPack("./XFluentAssert.nuspec", new NuGetPackSettings()
         {
             Id = "XFluentAssert",
@@ -136,12 +116,11 @@ Task("Pack")
             ReleaseNotes = new[] {"Added assertions for dependency chains and AndConstraints to existing structural assertions"},
             ProjectUrl = new Uri("https://github.com/grzesiek-galezowski/xassert"),
             OutputDirectory = "./nuget",
-            Version = nugetVersion.NuGetVersionV2,
+            Version = nugetVersion,
             Files = new [] 
             {
-                new NuSpecContent {Source = @".\publish\netstandard2.0\TddXt.XFluentAssert.*", Exclude=@"**\*.json", Target = @"lib\netstandard2.0"},
+                new NuSpecContent {Source = @".\publish\netstandard2.0\TddXt.XFluentAssertRoot.dll", Exclude=@"**\*.json", Target = @"lib\netstandard2.0"},
             },
-
             Dependencies = new [] 
             {
                 netstandard20.Dependency(nSubstitute),
@@ -175,7 +154,7 @@ Task("Pack")
 //////////////////////////////////////////////////////////////////////
 
 Task("Default")
-    .IsDependentOn("GitVersion")
+    .IsDependentOn("Clean")
     .IsDependentOn("Build")
     .IsDependentOn("Run-Unit-Tests")
     .IsDependentOn("Pack");

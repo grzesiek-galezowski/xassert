@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29324.140
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ValueObjectConstraints", "ValueObjectConstraints\ValueObjectConstraints.csproj", "{381C696D-8018-449F-B841-DA7CD6F822EE}"
 EndProject
@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LockAssertions", "LockAsser
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReflectionAssertions", "ReflectionAssertions\ReflectionAssertions.csproj", "{F46FA367-663D-4B6C-B3F3-B5930B917BD3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Root", "Root\Root.csproj", "{F7A50561-BD32-46FA-8443-AD7B3BA91C42}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XFluentAssertRoot", "Root\XFluentAssertRoot.csproj", "{F7A50561-BD32-46FA-8443-AD7B3BA91C42}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypeReflection", "TypeReflection\TypeReflection.csproj", "{46C5803D-BE8B-4A9E-A5FC-217F728CAEE0}"
 EndProject
