@@ -4,19 +4,17 @@
   using FluentAssertions;
   using System.Linq;
   using System.Collections.Generic;
-using TddXt.XFluentAssertRoot.ConstraintsAssertions;
+  using TddXt.XFluentAssert.AssertionConstraints;
+  using TddXt.XFluentAssert.ReflectionAssertions;
+  using TddXt.XFluentAssert.Root.ValueAssertions;
+  using TddXt.XFluentAssert.TypeReflection;
+  using TddXt.XFluentAssert.TypeReflection.Interfaces;
+  using TddXt.XFluentAssert.ValueActivation;
+  using TddXt.XFluentAssert.ValueObjectConstraints;
+  using TddXt.XFluentAssertRoot.ConstraintsAssertions;
 using TddXt.XFluentAssertRoot.ValueAssertions;
 namespace TddXt.XFluentAssertRoot
 {
-
-  using AssertionConstraints;
-  using ReflectionAssertions;
-  using ConstraintsAssertions;
-  using ValueAssertions;
-  using TypeReflection;
-  using TypeReflection.Interfaces;
-  using ValueActivation;
-  using ValueObjectConstraints;
 
   public static class FluentAssertionsTypeExtensions
   {

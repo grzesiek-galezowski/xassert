@@ -5,7 +5,7 @@ namespace TddXt.XFluentAssert.ValueActivation
 
   using FluentAssertions;
 
-  using TddXt.XFluentAssert.TypeReflection.Interfaces;
+  using TypeReflection.Interfaces;
 
   public class ObjectGenerator
   {
