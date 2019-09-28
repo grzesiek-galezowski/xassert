@@ -5,7 +5,7 @@
   using System.Reflection;
   using System.Text;
 
-  using TddXt.XFluentAssert.TypeReflection.Interfaces;
+  using Interfaces;
 
   public class Event : IAmEvent
   {

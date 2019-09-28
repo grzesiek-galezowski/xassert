@@ -2,7 +2,7 @@
 {
   using System;
 
-  using TddXt.XFluentAssert.TypeReflection;
+  using TypeReflection;
 
   using Xunit;
 

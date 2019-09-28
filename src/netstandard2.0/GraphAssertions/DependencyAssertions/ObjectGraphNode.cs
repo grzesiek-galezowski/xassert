@@ -212,7 +212,7 @@ namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
       }
       else
       {
-        return Object.Equals(value, _target);
+        return Equals(value, _target);
       }
     }
 

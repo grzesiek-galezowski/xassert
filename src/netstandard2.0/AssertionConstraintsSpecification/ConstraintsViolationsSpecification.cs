@@ -4,13 +4,13 @@
 
   using FluentAssertions;
 
-  using TddXt.AnyRoot.Strings;
-  using TddXt.XFluentAssert.AssertionConstraints;
+  using AnyRoot.Strings;
+  using AssertionConstraints;
 
   using Xunit;
   using Xunit.Sdk;
 
-  using static TddXt.AnyRoot.Root;
+  using static AnyRoot.Root;
 
   public class ConstraintsViolationsSpecification
   {

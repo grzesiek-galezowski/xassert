@@ -25,12 +25,12 @@ namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
 
     public bool IsOf(Type type)
     {
-      return object.Equals(_target.GetType(), type);
+      return Equals(_target.GetType(), type);
     }
 
     public bool ValueIsEqualTo<T>(T value)
     {
-      return object.Equals(_target, value);
+      return Equals(_target, value);
     }
 
     public bool ValueIsSameAs(object value)

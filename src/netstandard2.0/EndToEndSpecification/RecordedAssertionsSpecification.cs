@@ -173,6 +173,23 @@ public static class TypeAssertionsExtensions
     var instance = constructor.Value().InvokeWithExample1ParamsOnly(equalityArgs);
     var equalInstance = constructor.Value().InvokeWithExample1ParamsOnly(equalityArgs);
 
+    // equals(null)
+    // a.equals(b)
+    // a.equals(a)
+    // string.equals(int)
+    // string.equals(int)
+
+    // == null
+    // a == a
+    // a == b
+    // a.hashcode == a.hashcode
+    
+    // != null
+    // a != a
+    // a != b
+    // b != a
+    // a.hashcode != b.hashcode
+
     if (instance.Equals(null))
     {
       throw new Exception( /* TODO */);

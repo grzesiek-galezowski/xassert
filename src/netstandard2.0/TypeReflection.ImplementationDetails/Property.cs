@@ -2,7 +2,7 @@
 {
   using System.Reflection;
 
-  using TddXt.XFluentAssert.TypeReflection.Interfaces;
+  using Interfaces;
 
   public class Property : IAmProperty //bug there's another Property class in this sln
   {

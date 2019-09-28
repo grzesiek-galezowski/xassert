@@ -4,7 +4,7 @@
   using System.Collections.Generic;
   using System.Linq;
 
-  using TddXt.XFluentAssert.TypeReflection.Interfaces;
+  using TypeReflection.Interfaces;
 
   public class ReflectionElementsList
   {

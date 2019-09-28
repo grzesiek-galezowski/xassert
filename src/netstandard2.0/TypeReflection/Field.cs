@@ -6,9 +6,9 @@ namespace TddXt.XFluentAssert.TypeReflection
   using System.Runtime.CompilerServices;
   using System.Text;
 
-  using TddXt.XFluentAssert.CommonTypes;
-  using TddXt.XFluentAssert.TypeReflection.ImplementationDetails;
-  using TddXt.XFluentAssert.TypeReflection.Interfaces;
+  using CommonTypes;
+  using ImplementationDetails;
+  using Interfaces;
 
   public class Field : IAmField
   {

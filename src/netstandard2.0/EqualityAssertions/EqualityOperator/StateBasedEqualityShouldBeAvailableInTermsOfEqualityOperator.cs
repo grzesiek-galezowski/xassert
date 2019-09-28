@@ -2,7 +2,7 @@
 {
   using System;
 
-  using TddXt.XFluentAssert.AssertionConstraints;
+  using AssertionConstraints;
 
   public class StateBasedEqualityShouldBeAvailableInTermsOfEqualityOperator
     : IConstraint

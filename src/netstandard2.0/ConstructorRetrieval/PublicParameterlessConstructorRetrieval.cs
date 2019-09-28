@@ -2,7 +2,7 @@ namespace TddXt.XFluentAssert.ConstructorRetrieval
 {
   using System.Collections.Generic;
 
-  using TddXt.XFluentAssert.TypeReflection.Interfaces;
+  using TypeReflection.Interfaces;
 
   public class PublicParameterlessConstructorRetrieval : ConstructorRetrieval
   {

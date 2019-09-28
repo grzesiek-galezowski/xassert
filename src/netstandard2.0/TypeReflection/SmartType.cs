@@ -6,10 +6,10 @@ namespace TddXt.XFluentAssert.TypeReflection
   using System.Reflection;
   using System.Runtime.CompilerServices;
 
-  using TddXt.XFluentAssert.CommonTypes;
-  using TddXt.XFluentAssert.ConstructorRetrieval;
-  using TddXt.XFluentAssert.TypeReflection.ImplementationDetails;
-  using TddXt.XFluentAssert.TypeReflection.Interfaces;
+  using CommonTypes;
+  using ConstructorRetrieval;
+  using ImplementationDetails;
+  using Interfaces;
 
   public interface ISmartType : IType, IConstructorQueries
   {

@@ -2,7 +2,7 @@
 {
   using System;
 
-  using TddXt.AnyExtensibility;
+  using AnyExtensibility;
 
   public static class SpecialAnyExtension
   {

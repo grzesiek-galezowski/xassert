@@ -4,7 +4,7 @@
   using System.Linq;
 
   using TddXt.XFluentAssert.AssertionConstraints;
-  using TddXt.XFluentAssert.TypeReflection;
+  using TypeReflection;
 
   public class AllFieldsMustBeReadOnly : IConstraint
   {

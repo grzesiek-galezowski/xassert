@@ -2,9 +2,9 @@
 {
   using System.Reflection;
 
-  using TddXt.XFluentAssert.CommonTypes;
-  using TddXt.XFluentAssert.TypeReflection.Interfaces;
-  using TddXt.XFluentAssert.TypeReflection.Interfaces.Exceptions;
+  using CommonTypes;
+  using Interfaces;
+  using Interfaces.Exceptions;
 
   public class BinaryOperator<T, TResult> : IAmBinaryOperator<T,TResult>
   {

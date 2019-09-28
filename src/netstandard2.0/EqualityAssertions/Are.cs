@@ -4,7 +4,7 @@
 
   using FluentAssertions;
 
-  using TddXt.XFluentAssert.TypeReflection;
+  using TypeReflection;
 
   public static class Are
   {

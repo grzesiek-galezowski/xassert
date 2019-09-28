@@ -8,7 +8,7 @@ namespace TddXt.XFluentAssert.LockAssertions
   using NSubstitute;
   using NSubstitute.Exceptions;
 
-  using TddXt.AnyRoot;
+  using AnyRoot;
 
   public static class SynchronizationAssertions
   {
@@ -96,15 +96,15 @@ namespace TddXt.XFluentAssert.LockAssertions
       T wrappedObjectMock) where T : class
     {
       NSubstituteIsInCorrectVersion(wrappedObjectMock);
-      SynchronizationAssertions.LockShouldBeReleasedAfterACall(wrappingObject, wrappedObjectMock, callToCheck, lockAssertions);
-      SynchronizationAssertions.LockShouldBeReleasedWhenCallThrowsException(lockAssertions, wrappingObject, wrappedObjectMock, callToCheck);
+      LockShouldBeReleasedAfterACall(wrappingObject, wrappedObjectMock, callToCheck, lockAssertions);
+      LockShouldBeReleasedWhenCallThrowsException(lockAssertions, wrappingObject, wrappedObjectMock, callToCheck);
     }
 
     public static void Synchronizes<T, TReturn>(T wrappingObject, Func<T, TReturn> callToCheck, LockAssertions lockAssertions, T wrappedObjectMock) where T : class
     {
       NSubstituteIsInCorrectVersion(wrappedObjectMock);
-      SynchronizationAssertions.LockShouldBeReleasedAfterACall(wrappingObject, wrappedObjectMock, callToCheck, lockAssertions);
-      SynchronizationAssertions.LockShouldBeReleasedWhenCallThrowsException(lockAssertions, wrappingObject, wrappedObjectMock, t => callToCheck(t));
+      LockShouldBeReleasedAfterACall(wrappingObject, wrappedObjectMock, callToCheck, lockAssertions);
+      LockShouldBeReleasedWhenCallThrowsException(lockAssertions, wrappingObject, wrappedObjectMock, t => callToCheck(t));
     }
 
     private static void NSubstituteIsInCorrectVersion<T>(T wrappedObjectMock) where T : class

@@ -1,7 +1,7 @@
 ﻿namespace TddXt.XFluentAssert.EqualityAssertions.EqualityOperator
 {
-  using TddXt.XFluentAssert.AssertionConstraints;
-  using TddXt.XFluentAssert.ValueActivation;
+  using AssertionConstraints;
+  using ValueActivation;
 
   public class StateBasedEqualityWithItselfMustBeImplementedInTermsOfEqualityOperator
     : IConstraint

@@ -5,7 +5,7 @@ namespace TddXt.XFluentAssert.TypeReflection.ImplementationDetails
   using System.Linq;
   using System.Reflection;
 
-  using TddXt.XFluentAssert.TypeReflection.Interfaces;
+  using Interfaces;
 
   public class CreationMethod : ICreateObjects
   {

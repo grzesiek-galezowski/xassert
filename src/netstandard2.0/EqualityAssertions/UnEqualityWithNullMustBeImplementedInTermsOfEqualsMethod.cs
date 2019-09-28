@@ -1,7 +1,7 @@
 ﻿namespace TddXt.XFluentAssert.EqualityAssertions
 {
-  using TddXt.XFluentAssert.AssertionConstraints;
-  using TddXt.XFluentAssert.ValueActivation;
+  using AssertionConstraints;
+  using ValueActivation;
 
   public class UnEqualityWithNullMustBeImplementedInTermsOfEqualsMethod : IConstraint
   {

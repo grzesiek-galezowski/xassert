@@ -2,8 +2,8 @@ namespace TddXt.XFluentAssert.ConstructorRetrieval
 {
   using System.Collections.Generic;
 
-  using TddXt.XFluentAssert.CommonTypes;
-  using TddXt.XFluentAssert.TypeReflection.Interfaces;
+  using CommonTypes;
+  using TypeReflection.Interfaces;
 
   public interface IConstructorQueries
   {

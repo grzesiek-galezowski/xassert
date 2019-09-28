@@ -6,10 +6,10 @@
 
   using KellermanSoftware.CompareNetObjects;
 
-  using TddXt.XFluentAssert.CommonTypes;
-  using TddXt.XFluentAssert.TypeReflection;
+  using CommonTypes;
+  using TypeReflection;
 
-  using Property = TddXt.XFluentAssert.TypeReflection.Property;
+  using Property = TypeReflection.Property;
 
   public static class ObjectGraph
   {
@@ -37,7 +37,7 @@
 
     public static ComparisonResult Compare<T>(T expected, T actual, string[] skippedPropertiesOrFields)
     {
-      var comparison = ObjectGraph.Comparison();
+      var comparison = Comparison();
       foreach (var skippedMember in skippedPropertiesOrFields)
       {
         comparison.Config.MembersToIgnore.Add(skippedMember);
@@ -48,7 +48,7 @@
 
     public static ComparisonResult Compare<T>(T expected, T actual, IEnumerable<Expression<Func<T, object>>> skippedPropertiesOrFields)
     {
-      var comparison = ObjectGraph.Comparison();
+      var comparison = Comparison();
       foreach (var skippedPropertyOrField in skippedPropertiesOrFields)
       {
         var property = Property.FromUnaryExpression(skippedPropertyOrField);

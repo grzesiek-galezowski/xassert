@@ -87,7 +87,7 @@ namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
       }
       else
       {
-        message += ". Paths created when searching: " + Environment.NewLine + AsString(_paths);
+        message += ". Paths created when searching: " + NewLine + AsString(_paths);
       }
 
       return message;

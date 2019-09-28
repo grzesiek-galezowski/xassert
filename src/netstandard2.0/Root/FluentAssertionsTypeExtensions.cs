@@ -33,7 +33,7 @@ namespace TddXt.XFluentAssertRoot
 
       if (!smartType.HasConstructorWithParameters())
       {
-        AssertionConstraintsEngine.TypeAdheresTo(new List<IConstraint> { new ConstructorsMustBeNullProtected(smartType) });
+        AssertionConstraintsEngine.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 TypeAdheresTo(new List<IConstraint> { new ConstructorsMustBeNullProtected(smartType) });
       }
 
       return new AndConstraint<TypeAssertions>(o);
