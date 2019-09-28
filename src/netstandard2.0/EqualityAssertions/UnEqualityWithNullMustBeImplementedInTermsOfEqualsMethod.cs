@@ -1,4 +1,6 @@
-﻿namespace TddXt.XFluentAssert.EqualityAssertions
+﻿using TddXt.XFluentAssert.TypeReflection;
+
+namespace TddXt.XFluentAssert.EqualityAssertions
 {
   using AssertionConstraints;
   using ValueActivation;
@@ -6,10 +8,13 @@
   public class UnEqualityWithNullMustBeImplementedInTermsOfEqualsMethod : IConstraint
   {
     private readonly ValueObjectActivator _activator;
+    private readonly ISmartType _smartType;
 
-    public UnEqualityWithNullMustBeImplementedInTermsOfEqualsMethod(ValueObjectActivator activator)
+    public UnEqualityWithNullMustBeImplementedInTermsOfEqualsMethod(ValueObjectActivator activator,
+      ISmartType smartType)
     {
       _activator = activator;
+      _smartType = smartType;
     }
 
     public void CheckAndRecord(ConstraintsViolations violations)
@@ -19,6 +24,15 @@
         RecordedAssertions.False(instance1.Equals(null), 
         "a.Equals(null) should return false", violations),
         "a.Equals(null) should return false", violations);
+
+      var equatableEquals = _smartType.EquatableEquality();
+      if(equatableEquals.HasValue)
+      {
+        RecordedAssertions.DoesNotThrow(() =>
+            RecordedAssertions.False((bool)equatableEquals.Value().Evaluate(instance1, null),
+              "a.Equals(null) should return false", violations),
+          "a.Equals(null) should return false", violations);
+      }
     }
   }
 }

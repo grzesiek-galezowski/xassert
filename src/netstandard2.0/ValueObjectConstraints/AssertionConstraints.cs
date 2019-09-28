@@ -20,6 +20,7 @@ namespace TddXt.XFluentAssert.ValueObjectConstraints
     {
 
       var constraints = new List<IConstraint>();
+      var smartType = TypeReflection.SmartType.For(type);
 
       constraints.Add(new HasToBeAConcreteClass(type));
 
@@ -32,18 +33,19 @@ namespace TddXt.XFluentAssert.ValueObjectConstraints
       constraints.Add(new ThereMustBeNoPublicPropertySetters(type));
       constraints.Add(new MustBeSealed(type));
 
-      constraints.Add(new StateBasedEqualityWithItselfMustBeImplementedInTermsOfEqualsMethod(activator));
-      constraints.Add(new StateBasedEqualityMustBeImplementedInTermsOfEqualsMethod(activator, TypeReflection.SmartType.For(type)));
+      constraints.Add(new StateBasedEqualityWithItselfMustBeImplementedInTermsOfEqualsMethod(activator, smartType));
+      constraints.Add(new StateBasedEqualityMustBeImplementedInTermsOfEqualsMethod(activator, smartType));
 
       constraints.Add(new StateBasedUnEqualityMustBeImplementedInTermsOfEqualsMethod(activator, 
-        traits.IndexesOfConstructorArgumentsIndexesThatDoNotConstituteAValueIdentify.ToArray()));
+        traits.IndexesOfConstructorArgumentsIndexesThatDoNotConstituteAValueIdentify.ToArray(),
+        smartType));
       
       constraints.Add(new HashCodeMustBeTheSameForSameObjectsAndDifferentForDifferentObjects(activator,
         traits.IndexesOfConstructorArgumentsIndexesThatDoNotConstituteAValueIdentify.ToArray()));
 
       if(traits.RequireSafeInequalityToNull)
       {
-        constraints.Add(new UnEqualityWithNullMustBeImplementedInTermsOfEqualsMethod(activator));
+        constraints.Add(new UnEqualityWithNullMustBeImplementedInTermsOfEqualsMethod(activator, smartType));
       }
 
       if (traits.RequireEqualityAndInequalityOperatorImplementation)
