@@ -38,11 +38,6 @@ namespace TddXt.XFluentAssert.TypeReflection.ImplementationDetails
       return _parameters.Length;
     }
 
-    public bool IsAnyAbstractInterface()
-    {
-      return _hasAbstractOrInterfaceArguments;
-    }
-
     public void FillWithGeneratedValues(Func<Type, object> instanceGenerator, List<object> constructorValues)
     {
       foreach (var constructorParam in _parameterTypes)
@@ -79,19 +74,5 @@ namespace TddXt.XFluentAssert.TypeReflection.ImplementationDetails
       return _parameters.Any(p => p.ParameterType == type);
     }
 
-    public IEnumerable<object> ParamsFromExample1(EqualityArg[] equalityArgs)
-    {
-      return _parameters
-        .Select(p => 
-          equalityArgs.Single(a => a.IsFor(p.ParameterType)).Example1());
-    }
-
-    public IEnumerable<object> ParamsWithExample2For(int argIndex, EqualityArg[] equalityArgs)
-    {
-      return _parameters.Select((paramInfo, i) => i == argIndex
-          ? equalityArgs.Single(arg => arg.IsFor(paramInfo.ParameterType)).Example2()
-          : equalityArgs.Single(arg => arg.IsFor(paramInfo.ParameterType)).Example1())
-        .ToList();
-    }
   }
 }

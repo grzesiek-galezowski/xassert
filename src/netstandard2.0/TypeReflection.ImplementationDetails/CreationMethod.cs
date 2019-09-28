@@ -68,12 +68,6 @@ namespace TddXt.XFluentAssert.TypeReflection.ImplementationDetails
       return _creationMethodParameters.Count();
     }
 
-    public bool HasAbstractOrInterfaceArguments()
-    {
-
-      return _creationMethodParameters.IsAnyAbstractInterface();
-    }
-
     public List<object> GenerateAnyParameterValues(Func<Type, object> instanceGenerator)
     {
       var constructorValues = new List<object>();
@@ -86,11 +80,6 @@ namespace TddXt.XFluentAssert.TypeReflection.ImplementationDetails
       return _creationMethodParameters.GetDescriptionFor(i);
     }
 
-    public object InvokeWithParametersCreatedBy(Func<Type, object> instanceGenerator)
-    {
-      return _invocation(GenerateAnyParameterValues(instanceGenerator).ToArray());
-    }
-
     public object InvokeWith(IEnumerable<object> constructorParameters)
     {
       return _invocation(constructorParameters.ToArray());
@@ -101,11 +90,6 @@ namespace TddXt.XFluentAssert.TypeReflection.ImplementationDetails
       var description = _constructor.DeclaringType.Name + "(";
       description += _creationMethodParameters + ")";
       return description;
-    }
-
-    public bool IsInternal()
-    {
-      return IsInternal(_constructor);
     }
 
     public static bool IsInternal(MethodBase c)
@@ -128,16 +112,5 @@ namespace TddXt.XFluentAssert.TypeReflection.ImplementationDetails
       return _creationMethodParameters.IsAnyOfType(_returnType);
     }
 
-    public object InvokeWithExample1ParamsOnly(EqualityArg[] equalityArgs)
-    {
-      return InvokeWith(
-        _creationMethodParameters.ParamsFromExample1(equalityArgs));
-    }
-
-    public object InvokeWithExample2ParamFor(int i, EqualityArg[] equalityArgs)
-    {
-      return InvokeWith(
-        _creationMethodParameters.ParamsWithExample2For(i, equalityArgs));
-    }
   }
 }

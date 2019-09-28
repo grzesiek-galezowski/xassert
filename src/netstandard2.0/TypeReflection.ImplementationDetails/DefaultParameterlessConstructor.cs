@@ -80,14 +80,5 @@ namespace TddXt.XFluentAssert.TypeReflection.ImplementationDetails
       return false;
     }
 
-    public object InvokeWithExample1ParamsOnly(EqualityArg[] equalityArgs)
-    {
-        return _creation.Invoke();
-    }
-
-    public object InvokeWithExample2ParamFor(int i, EqualityArg[] equalityArgs)
-    {
-        return _creation.Invoke();
-    }
   }
 }
