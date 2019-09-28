@@ -1,14 +1,15 @@
-﻿namespace TddXt.XFluentAssert.ValueObjectConstraints
+﻿using TddXt.TypeReflection;
+using TddXt.XFluentAssert.AssertionConstraints;
+using TddXt.XFluentAssert.EqualityAssertions;
+using TddXt.XFluentAssert.EqualityAssertions.EqualityOperator;
+using TddXt.XFluentAssert.EqualityAssertions.InequalityOperator;
+using TddXt.XFluentAssert.Root.ValueAssertions;
+using TddXt.XFluentAssert.ValueActivation;
+
+namespace TddXt.XFluentAssert.ValueObjectConstraints
 {
   using System;
   using System.Collections.Generic;
-
-  using TddXt.XFluentAssert.AssertionConstraints;
-  using EqualityAssertions;
-  using EqualityAssertions.EqualityOperator;
-  using EqualityAssertions.InequalityOperator;
-  using Root.ValueAssertions;
-  using ValueActivation;
 
   public class AssertionConstraints
   {
@@ -32,7 +33,7 @@
       constraints.Add(new MustBeSealed(type));
 
       constraints.Add(new StateBasedEqualityWithItselfMustBeImplementedInTermsOfEqualsMethod(activator));
-      constraints.Add(new StateBasedEqualityMustBeImplementedInTermsOfEqualsMethod(activator));
+      constraints.Add(new StateBasedEqualityMustBeImplementedInTermsOfEqualsMethod(activator, TypeReflection.SmartType.For(type)));
 
       constraints.Add(new StateBasedUnEqualityMustBeImplementedInTermsOfEqualsMethod(activator, 
         traits.IndexesOfConstructorArgumentsIndexesThatDoNotConstituteAValueIdentify.ToArray()));

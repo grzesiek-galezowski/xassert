@@ -7,12 +7,6 @@ namespace TddXt.XFluentAssert.TypeReflection.Interfaces
 
   public interface IType
   {
-    bool HasPublicParameterlessConstructor();
-
-    bool IsImplementationOfOpenGeneric(Type openGenericType);
-
-    bool IsConcrete();
-
     IEnumerable<IAmField> GetAllInstanceFields();
 
     IEnumerable<IAmField> GetAllStaticFields();
@@ -40,6 +34,8 @@ namespace TddXt.XFluentAssert.TypeReflection.Interfaces
     bool IsException();
 
     IEnumerable<IAmEvent> GetAllEvents();
+    
+    Maybe<IAmBinaryOperator> EquatableEquality();
   }
 
 }

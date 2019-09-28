@@ -1,4 +1,7 @@
-﻿namespace TddXt.XFluentAssert.EqualityAssertions
+﻿using System;
+using TddXt.XFluentAssert.TypeReflection;
+
+namespace TddXt.XFluentAssert.EqualityAssertions
 {
   using AssertionConstraints;
   using ValueActivation;
@@ -6,10 +9,14 @@
   public class StateBasedEqualityMustBeImplementedInTermsOfEqualsMethod : IConstraint
   {
     private readonly ValueObjectActivator _activator;
+    private readonly ISmartType _type;
 
-    public StateBasedEqualityMustBeImplementedInTermsOfEqualsMethod(ValueObjectActivator activator)
+    public StateBasedEqualityMustBeImplementedInTermsOfEqualsMethod(
+      ValueObjectActivator activator, 
+      ISmartType type)
     {
       _activator = activator;
+      _type = type;
     }
 
     public void CheckAndRecord(ConstraintsViolations violations)
@@ -19,17 +26,20 @@
         var instance1 = _activator.CreateInstanceAsValueObjectWithFreshParameters();
         var instance2 = _activator.CreateInstanceAsValueObjectWithPreviousParameters();
 
-        //bug this does not test equatable!!!!
-        RecordedAssertions.DoesNotThrow(() =>
-          RecordedAssertions.True(instance1.Equals(instance2),
+        var equatableEquality = _type.EquatableEquality();
+        if (equatableEquality.HasValue)
+        {
+          RecordedAssertions.DoesNotThrow(() =>
+              RecordedAssertions.True((bool)equatableEquality.Value().Evaluate(instance1, instance2),
             "a.Equals(b) should return true if both are created with the same arguments", violations),
-            "a.Equals(b) should return true if both are created with the same arguments", violations);
-        RecordedAssertions.DoesNotThrow(() =>
-          RecordedAssertions.True(instance2.Equals(instance1),
-          "b.Equals(a) should return true if both are created with the same arguments", violations),
-          "b.Equals(a) should return true if both are created with the same arguments", violations);
-        //end of bug
-
+          "a.Equals(b) should return true if both are created with the same arguments", violations);
+          RecordedAssertions.DoesNotThrow(() =>
+              RecordedAssertions.True((bool)equatableEquality.Value().Evaluate(instance2, instance1),
+                "b.Equals(a) should return true if both are created with the same arguments", violations),
+            "b.Equals(a) should return true if both are created with the same arguments", violations);
+          //end of bug
+        }
+        
         RecordedAssertions.DoesNotThrow(() =>
           RecordedAssertions.True(instance1.Equals(instance2),
           "(object)a.Equals((object)b) should return true if both are created with the same arguments", violations),

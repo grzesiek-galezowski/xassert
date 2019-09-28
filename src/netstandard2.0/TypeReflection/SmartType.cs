@@ -134,7 +134,7 @@ namespace TddXt.XFluentAssert.TypeReflection
     private const string OpEquality = "op_Equality";
     private const string OpInequality = "op_Inequality";
 
-    private Maybe<MethodInfo> EqualityMethod()
+    private Maybe<MethodInfo> EqualityOpMethod()
     {
       var equality = _typeInfo.GetMethod(OpEquality, 
         BindingFlags.Public | BindingFlags.FlattenHierarchy | BindingFlags.Static);
@@ -142,7 +142,7 @@ namespace TddXt.XFluentAssert.TypeReflection
       return equality == null ? Maybe<MethodInfo>.Nothing : new Maybe<MethodInfo>(equality);
     }
 
-    private Maybe<MethodInfo> InequalityMethod()
+    private Maybe<MethodInfo> InequalityOpMethod()
     {
       var inequality = _typeInfo.GetMethod(OpInequality,
         BindingFlags.Public | BindingFlags.FlattenHierarchy | BindingFlags.Static);
@@ -177,12 +177,29 @@ namespace TddXt.XFluentAssert.TypeReflection
 
     public IAmBinaryOperator EqualityOperator()
     {
-      return BinaryOperator.Wrap(EqualityMethod(), ValueTypeEqualityMethod(), "operator ==");
+      return BinaryOperator.Wrap(EqualityOpMethod(), ValueTypeEqualityMethod(), "operator ==");
+    }
+
+    public Maybe<IAmBinaryOperator> EquatableEquality()
+    {
+      var equatableInterfaces =
+        _type.GetInterfaces().Where(iface => iface.GetGenericTypeDefinition() == typeof(IEquatable<>));
+
+      if(equatableInterfaces.Any())
+      {
+        var equatableInterface = equatableInterfaces.Single();
+        var equalsMethod = equatableInterface.GetMethods().Single();
+        return Maybe.Just((IAmBinaryOperator)new BinaryInstanceOperation(equalsMethod));
+      }
+      else
+      {
+        return Maybe<IAmBinaryOperator>.Nothing;
+      }
     }
 
     public IAmBinaryOperator InequalityOperator()
     {
-      return BinaryOperator.Wrap(InequalityMethod(), ValueTypeInequalityMethod(), "operator !=");
+      return BinaryOperator.Wrap(InequalityOpMethod(), ValueTypeInequalityMethod(), "operator !=");
     }
 
     public static ISmartType For(Type type)
@@ -343,5 +360,4 @@ namespace TddXt.XFluentAssert.TypeReflection
       return !string.Equals(mi.Name, "op_Implicit", StringComparison.Ordinal);
     }
   }
-
 }

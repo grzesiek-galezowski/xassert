@@ -29,7 +29,7 @@ namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
 
     public override string ToString()
     {
-      return string.Join("->", _path.Select(p => "[" + p.ToString() + "]"));
+      return string.Join("->", _path.Select(p => "[" + p + "]"));
     }
 
     public bool ContainsNonRootSubpath(object[] values)
