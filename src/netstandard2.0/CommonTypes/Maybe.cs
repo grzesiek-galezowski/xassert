@@ -29,8 +29,8 @@
     {
       if (instance != null)
       {
-        this.HasValue = true;
-        this._value = instance;
+        HasValue = true;
+        _value = instance;
       }
     }
 
@@ -38,9 +38,9 @@
 
     public T Value()
     {
-      if (this.HasValue)
+      if (HasValue)
       {
-        return this._value;
+        return _value;
       }
       else
       {
@@ -52,7 +52,7 @@
 
     public Maybe<T> Otherwise(Maybe<T> alternative)
     {
-      return this.HasValue ? this : alternative;
+      return HasValue ? this : alternative;
     }
 
     public static implicit operator Maybe<T>(T instance)
@@ -62,7 +62,7 @@
 
     public override string ToString()
     {
-      return this.HasValue ? this.Value().ToString() : "<Nothing>";
+      return HasValue ? Value().ToString() : "<Nothing>";
     }
   }
 

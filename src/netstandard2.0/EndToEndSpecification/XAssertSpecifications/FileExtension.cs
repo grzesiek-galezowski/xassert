@@ -2,7 +2,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
 {
   using System;
 
-  public class FileExtension
+  public sealed class FileExtension
     : IEquatable<FileExtension>
   {
     private readonly string _extension;

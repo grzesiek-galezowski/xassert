@@ -74,9 +74,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
           @"Could not find the particular instance: TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.A2 anywhere in dependency graph however, another instance of this type was found within the following paths:
 [Root(A1)]->[_a2(A2)]->[_a3(A3)]
 [Root(A1)]->[_a2(A2)]->[_b3(B3)]
-[Root(A1)]->[_a2(A2)]->[_str(String)]->[_stringLength(Int32)]
-[Root(A1)]->[_a2(A2)]->[_str(String)]->[_firstChar(Char)]
-[Root(A1)]->[_a2(A2)]->[_str(String)]->[Length(Int32)]
+[Root(A1)]->[_a2(A2)]->[_str(String)]
 [Root(A1)]->[_a2(A2)]->[_num(Int32)]");
       new Action(() => a1.Should().DependOn(new B2()))
         .Should().ThrowExactly<XunitException>().WithMessage(@"Could not find the particular instance: TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.B2 anywhere in dependency graph however, another instance of this type was found within the following paths:
@@ -87,13 +85,9 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
 [Root(A1)]->[_b2(B2)]->[_b3(B3)]");
       new Action(() => a1.Should().DependOn(abc + "a"))
         .Should().ThrowExactly<XunitException>().WithMessage(@"Could not find the particular instance: abca anywhere in dependency graph however, another instance of this type was found within the following paths:
-[Root(A1)]->[_a2(A2)]->[_str(String)]->[_stringLength(Int32)]
-[Root(A1)]->[_a2(A2)]->[_str(String)]->[_firstChar(Char)]
-[Root(A1)]->[_a2(A2)]->[_str(String)]->[Length(Int32)]");
+[Root(A1)]->[_a2(A2)]->[_str(String)]");
       new Action(() => a1.Should().DependOn(num + 1))
         .Should().ThrowExactly<XunitException>().WithMessage(@"Could not find the particular instance: 124 anywhere in dependency graph however, another instance of this type was found within the following paths:
-[Root(A1)]->[_a2(A2)]->[_str(String)]->[_stringLength(Int32)]
-[Root(A1)]->[_a2(A2)]->[_str(String)]->[Length(Int32)]
 [Root(A1)]->[_a2(A2)]->[_num(Int32)]");
 
       new Action(() => a1.Should().DependOn(a1))
@@ -101,13 +95,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
       new Action(() => a2.Should().DependOn(a1))
         .Should().ThrowExactly<XunitException>().Which.Message.Contains("Could not find the particular instance: TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.A1 anywhere in dependency graph");
 
-      new Action(() => abc.Should().DependOn(22))
-        .Should().ThrowExactly<XunitException>().WithMessage(@"Could not find the particular instance: 22 anywhere in dependency graph however, another instance of this type was found within the following paths:
-[Root(String)]->[_stringLength(Int32)]
-[Root(String)]->[Length(Int32)]");
-
       abc.Should().DependOn(3);
-
     }
 
     [Fact]
@@ -203,9 +191,7 @@ public void ShouldNotFailWhenInvokedOnObjectWithProxies()
       new Action(() => new List<string> { "trolololo" }.Should().DependOn("trolololo2"))
         .Should().ThrowExactly<XunitException>()
         .WithMessage(@"Could not find the particular instance: trolololo2 anywhere in dependency graph however, another instance of this type was found within the following paths:
-[Root(List`1)]->[_items(String[])]->[array element[0](String)]->[_stringLength(Int32)]
-[Root(List`1)]->[_items(String[])]->[array element[0](String)]->[_firstChar(Char)]
-[Root(List`1)]->[_items(String[])]->[array element[0](String)]->[Length(Int32)]");
+[Root(List`1)]->[_items(String[])]->[array element[0](String)]");
     }
 
     [Fact]

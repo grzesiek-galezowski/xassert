@@ -10,18 +10,18 @@
 
     public Property(PropertyInfo propertyInfo)
     {
-      this._propertyInfo = propertyInfo;
+      _propertyInfo = propertyInfo;
     }
 
     public bool HasPublicSetter()
     {
-      return this._propertyInfo.GetSetMethod() != null && this._propertyInfo.GetSetMethod().IsPublic;
+      return _propertyInfo.GetSetMethod() != null && _propertyInfo.GetSetMethod().IsPublic;
     }
 
     public string ShouldNotBeMutableButIs()
     {
       return "Value objects are immutable by design, but Property "
-             + this._propertyInfo.Name
+             + _propertyInfo.Name
              + " is mutable. Declare property setter as private to pass this check";
     }
   }

@@ -48,6 +48,12 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
     {
       typeof(ProperValueType).Should().HaveValueSemantics();
     }
+    
+    [Fact]
+    public void ShouldPassValueTypeAssertionForProperValueTypeDerivedFromValueLibrary()
+    {
+      typeof(ProperValueTypeDerivedFromLibrary).Should().HaveValueSemantics();
+    }
 
     [Fact]
     public void ShouldPassValueTypeAssertionForProperValueTypeWithInternalConstructor()

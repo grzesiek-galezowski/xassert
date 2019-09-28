@@ -55,12 +55,12 @@ namespace TddXt.XFluentAssert.TypeReflection
 
     public string Name
     {
-      get { return this._propertyInfo.Name; }
+      get { return _propertyInfo.Name; }
     }
 
     private Property(PropertyInfo property)
     {
-      this._propertyInfo = property;
+      _propertyInfo = property;
     }
 
     private readonly PropertyInfo _propertyInfo;

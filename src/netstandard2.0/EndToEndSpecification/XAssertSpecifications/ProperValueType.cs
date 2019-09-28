@@ -1,8 +1,11 @@
+using System.Collections.Generic;
+using Value;
+
 namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
 {
   using System;
 
-  public class ProperValueType : IEquatable<ProperValueType>
+  public sealed class ProperValueType : IEquatable<ProperValueType>
   {
     public bool Equals(ProperValueType other)
     {
@@ -44,6 +47,25 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
     {
       _a = a;
       _anArray = anArray;
+    }
+  }
+
+  public sealed class ProperValueTypeDerivedFromLibrary : ValueType<ProperValueTypeDerivedFromLibrary>
+  {
+
+    private readonly int _a;
+    private readonly string _str;
+
+    public ProperValueTypeDerivedFromLibrary(int a, string str)
+    {
+      _a = a;
+      _str = str;
+    }
+
+    protected override IEnumerable<object> GetAllAttributesToBeUsedForEquality()
+    {
+      yield return _a;
+      yield return _str;
     }
   }
 }

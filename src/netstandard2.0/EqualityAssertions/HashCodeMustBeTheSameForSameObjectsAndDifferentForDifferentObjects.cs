@@ -35,6 +35,12 @@
       }
 
       RecordedAssertions.DoesNotThrow(() =>
+          RecordedAssertions.Equal(instance1.GetHashCode(), instance1.GetHashCode(),
+            "a.GetHashCode() should consistently return the same value", violations),
+        "a.GetHashCode() should consistently return the same value", violations);
+
+
+      RecordedAssertions.DoesNotThrow(() =>
         RecordedAssertions.Equal(instance1.GetHashCode(), instance3.GetHashCode(),
           "a.GetHashCode() and b.GetHashCode() should return same values when both are created with same arguments", violations),
           "a.GetHashCode() and b.GetHashCode() should return same values when both are created with same arguments", violations);

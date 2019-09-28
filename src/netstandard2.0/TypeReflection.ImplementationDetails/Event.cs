@@ -22,11 +22,11 @@
     public string GenerateNonPublicExistenceMessage()
     {
       return new StringBuilder("SmartType: ")
-        .Append(this._eventInfo.DeclaringType)
+        .Append(_eventInfo.DeclaringType)
         .Append(" contains non public event ")
-        .Append(this._eventInfo.Name)
+        .Append(_eventInfo.Name)
         .Append(" of type ")
-        .Append(this._eventInfo.EventHandlerType).ToString();
+        .Append(_eventInfo.EventHandlerType).ToString();
     }
 
     public bool HasName(string eventName)

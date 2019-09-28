@@ -19,7 +19,7 @@
         var instance1 = _activator.CreateInstanceAsValueObjectWithFreshParameters();
         var instance2 = _activator.CreateInstanceAsValueObjectWithPreviousParameters();
 
-        //TODO how to test equatable???
+        //bug this does not test equatable!!!!
         RecordedAssertions.DoesNotThrow(() =>
           RecordedAssertions.True(instance1.Equals(instance2),
             "a.Equals(b) should return true if both are created with the same arguments", violations),
@@ -28,6 +28,7 @@
           RecordedAssertions.True(instance2.Equals(instance1),
           "b.Equals(a) should return true if both are created with the same arguments", violations),
           "b.Equals(a) should return true if both are created with the same arguments", violations);
+        //end of bug
 
         RecordedAssertions.DoesNotThrow(() =>
           RecordedAssertions.True(instance1.Equals(instance2),

@@ -12,7 +12,7 @@ namespace TddXt.XFluentAssert.TypeReflection.ImplementationDetails
 
     public DefaultParameterlessConstructor(Func<object> creation)
     {
-      this._creation = creation;
+      _creation = creation;
     }
 
     public bool HasNonPointerArgumentsOnly()
@@ -47,12 +47,12 @@ namespace TddXt.XFluentAssert.TypeReflection.ImplementationDetails
 
     public object InvokeWithParametersCreatedBy(Func<Type, object> instanceGenerator)
     {
-      return this._creation.Invoke();
+      return _creation.Invoke();
     }
 
     public object InvokeWith(IEnumerable<object> constructorParameters)
     {
-      return this._creation.Invoke();
+      return _creation.Invoke();
     }
 
     public bool IsInternal()
@@ -82,12 +82,12 @@ namespace TddXt.XFluentAssert.TypeReflection.ImplementationDetails
 
     public object InvokeWithExample1ParamsOnly(EqualityArg[] equalityArgs)
     {
-        return this._creation.Invoke();
+        return _creation.Invoke();
     }
 
     public object InvokeWithExample2ParamFor(int i, EqualityArg[] equalityArgs)
     {
-        return this._creation.Invoke();
+        return _creation.Invoke();
     }
   }
 }

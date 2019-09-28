@@ -29,6 +29,8 @@
 
       //bug add sealed constraint
       constraints.Add(new ThereMustBeNoPublicPropertySetters(type));
+      constraints.Add(new MustBeSealed(type));
+
       constraints.Add(new StateBasedEqualityWithItselfMustBeImplementedInTermsOfEqualsMethod(activator));
       constraints.Add(new StateBasedEqualityMustBeImplementedInTermsOfEqualsMethod(activator));
 
@@ -49,7 +51,7 @@
         constraints.Add(new StateBasedEqualityShouldBeAvailableInTermsOfEqualityOperator(type));
         constraints.Add(new StateBasedEqualityMustBeImplementedInTermsOfEqualityOperator(activator));
         constraints.Add(new StateBasedEqualityWithItselfMustBeImplementedInTermsOfEqualityOperator(activator));
-        constraints.Add(new StateBasedUnEqualityMustBeImplementedInTermsOfEqualityOperator(activator,
+        constraints.Add(new StateBasedInequalityMustBeImplementedInTermsOfEqualityOperator(activator,
           traits.IndexesOfConstructorArgumentsIndexesThatDoNotConstituteAValueIdentify.ToArray()));
         constraints.Add(new InequalityWithNullMustBeImplementedInTermsOfEqualityOperator(
           activator));

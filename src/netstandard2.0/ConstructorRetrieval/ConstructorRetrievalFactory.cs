@@ -6,15 +6,15 @@ namespace TddXt.XFluentAssert.ConstructorRetrieval
 
     public ConstructorRetrievalFactory()
     {
-      this._constructorQuery = 
+      _constructorQuery = 
         PublicNonRecursiveConstructors(
           PublicParameterlessConstructors(
             InternalNonRecursiveConstructors(
               InternalParameterlessConstructors(
-                this.PublicStaticNonRecursiveFactoryMethod(
+                PublicStaticNonRecursiveFactoryMethod(
                   PublicRecursiveConstructors(
                     InternalRecursiveConstructors(
-                      this.PrimitiveConstructor()
+                      PrimitiveConstructor()
                     )))))));
     }
 
@@ -30,7 +30,7 @@ namespace TddXt.XFluentAssert.ConstructorRetrieval
 
     public ConstructorRetrieval Create()
     {
-      return this._constructorQuery;
+      return _constructorQuery;
     }
 
     private static ConstructorRetrieval PublicRecursiveConstructors(ConstructorRetrieval next)

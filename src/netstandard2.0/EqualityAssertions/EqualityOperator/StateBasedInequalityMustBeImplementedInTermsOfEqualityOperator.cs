@@ -5,13 +5,13 @@
   using AssertionConstraints;
   using ValueActivation;
 
-  public class StateBasedUnEqualityMustBeImplementedInTermsOfEqualityOperator
+  public class StateBasedInequalityMustBeImplementedInTermsOfEqualityOperator
     : IConstraint
   {
     private readonly ValueObjectActivator _activator;
     private readonly int[] _indexesOfConstructorArgumentsToSkip;
 
-    public StateBasedUnEqualityMustBeImplementedInTermsOfEqualityOperator(
+    public StateBasedInequalityMustBeImplementedInTermsOfEqualityOperator(
       ValueObjectActivator activator, 
       int[] indexesOfConstructorArgumentsToSkip)
     {

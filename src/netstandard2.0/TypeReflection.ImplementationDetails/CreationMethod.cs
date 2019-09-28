@@ -33,15 +33,15 @@ namespace TddXt.XFluentAssert.TypeReflection.ImplementationDetails
       Func<object[], object> invocation, 
       Type returnType, CreationMethodParameters creationMethodParameters)
     {
-      this._constructor = constructor;
-      this._creationMethodParameters = creationMethodParameters;
-      this._returnType = returnType;
-      this._invocation = invocation;
+      _constructor = constructor;
+      _creationMethodParameters = creationMethodParameters;
+      _returnType = returnType;
+      _invocation = invocation;
     }
 
     public bool HasNonPointerArgumentsOnly()
     {
-      if(!this._creationMethodParameters.ContainAnyPointer())
+      if(!_creationMethodParameters.ContainAnyPointer())
       {
         return true;
       }
@@ -53,7 +53,7 @@ namespace TddXt.XFluentAssert.TypeReflection.ImplementationDetails
 
     public bool HasLessParametersThan(int numberOfParams)
     {
-      if (this._creationMethodParameters.AreLessThan(numberOfParams))
+      if (_creationMethodParameters.AreLessThan(numberOfParams))
       {
         return true;
       }
@@ -65,47 +65,47 @@ namespace TddXt.XFluentAssert.TypeReflection.ImplementationDetails
 
     public int GetParametersCount()
     {
-      return this._creationMethodParameters.Count();
+      return _creationMethodParameters.Count();
     }
 
     public bool HasAbstractOrInterfaceArguments()
     {
 
-      return this._creationMethodParameters.IsAnyAbstractInterface();
+      return _creationMethodParameters.IsAnyAbstractInterface();
     }
 
     public List<object> GenerateAnyParameterValues(Func<Type, object> instanceGenerator)
     {
       var constructorValues = new List<object>();
-      this._creationMethodParameters.FillWithGeneratedValues(instanceGenerator, constructorValues);
+      _creationMethodParameters.FillWithGeneratedValues(instanceGenerator, constructorValues);
       return constructorValues;
     }
 
     public string GetDescriptionForParameter(int i)
     {
-      return this._creationMethodParameters.GetDescriptionFor(i);
+      return _creationMethodParameters.GetDescriptionFor(i);
     }
 
     public object InvokeWithParametersCreatedBy(Func<Type, object> instanceGenerator)
     {
-      return this._invocation(this.GenerateAnyParameterValues(instanceGenerator).ToArray());
+      return _invocation(GenerateAnyParameterValues(instanceGenerator).ToArray());
     }
 
     public object InvokeWith(IEnumerable<object> constructorParameters)
     {
-      return this._invocation(constructorParameters.ToArray());
+      return _invocation(constructorParameters.ToArray());
     }
 
     public override string ToString()
     {
-      var description = this._constructor.DeclaringType.Name + "(";
-      description += this._creationMethodParameters + ")";
+      var description = _constructor.DeclaringType.Name + "(";
+      description += _creationMethodParameters + ")";
       return description;
     }
 
     public bool IsInternal()
     {
-      return IsInternal(this._constructor);
+      return IsInternal(_constructor);
     }
 
     public static bool IsInternal(MethodBase c)
@@ -115,17 +115,17 @@ namespace TddXt.XFluentAssert.TypeReflection.ImplementationDetails
 
     public bool IsFactoryMethod()
     {
-      return this._constructor.DeclaringType == this._returnType;
+      return _constructor.DeclaringType == _returnType;
     }
 
     public bool IsNotRecursive()
     {
-      return !this.IsRecursive();
+      return !IsRecursive();
     }
 
     public bool IsRecursive()
     {
-      return this._creationMethodParameters.IsAnyOfType(this._returnType);
+      return _creationMethodParameters.IsAnyOfType(_returnType);
     }
 
     public object InvokeWithExample1ParamsOnly(EqualityArg[] equalityArgs)

@@ -12,12 +12,12 @@
 
     private BinaryOperator(IAmBinaryOperator binaryOperator)
     {
-      this._method = binaryOperator;
+      _method = binaryOperator;
     }
 
     public TResult Evaluate(T instance1, T instance2)
     {
-      return (TResult)this._method.Evaluate(instance1, instance2);
+      return (TResult)_method.Evaluate(instance1, instance2);
     }
 
     public static IAmBinaryOperator<T, bool> Wrap(IAmBinaryOperator binaryOperator)
@@ -32,12 +32,12 @@
 
     public BinaryOperator(MethodInfo method)
     {
-      this._method = method;
+      _method = method;
     }
 
     public object Evaluate(object instance1, object instance2)
     {
-      return this._method.Invoke(null, new[] { instance1, instance2 });
+      return _method.Invoke(null, new[] { instance1, instance2 });
     }
 
     public static IAmBinaryOperator Wrap(

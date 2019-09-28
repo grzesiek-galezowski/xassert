@@ -10,7 +10,7 @@ namespace TddXt.XFluentAssert.ConstructorRetrieval
 
     public PublicParameterlessConstructorRetrieval(ConstructorRetrieval next)
     {
-      this._next = next;
+      _next = next;
     }
 
     public IEnumerable<ICreateObjects> RetrieveFrom(IConstructorQueries constructors)
@@ -22,7 +22,7 @@ namespace TddXt.XFluentAssert.ConstructorRetrieval
       }
       else
       {
-        return this._next.RetrieveFrom(constructors);
+        return _next.RetrieveFrom(constructors);
       }
     }
   }

@@ -25,7 +25,8 @@
     {
       var fields = SmartType.For(type).GetAllInstanceFields().ToList();
       var fieldWrappers = fields
-        .Where(item => item.IsNotDeveloperDefinedReadOnlyField());
+        .Where(item => item.IsNotDeveloperDefinedReadOnlyField())
+        .Where(item => item.IsNotSpecialCase());
 
       foreach (var item in fieldWrappers)
       {

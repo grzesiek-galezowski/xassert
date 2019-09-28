@@ -11,5 +11,6 @@
     bool HasValue(object name);
     void AssertNotDuplicateOf(IAmField otherConstant);
     void AddNameTo(StringBuilder builder);
+    bool IsNotSpecialCase();
   }
 }

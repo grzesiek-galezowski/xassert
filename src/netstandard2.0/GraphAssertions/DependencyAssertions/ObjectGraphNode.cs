@@ -85,6 +85,11 @@ namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
           return true;
       }
 
+      if (target is string)
+      {
+          return true;
+      }
+
       if (target is CancellationToken)
       {
         return false;
