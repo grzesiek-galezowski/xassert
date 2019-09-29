@@ -4,7 +4,7 @@ namespace TddXt.XFluentAssert.ConstructorRetrieval
 
   using TypeReflection.Interfaces;
 
-  public class PrimitiveConstructorRetrieval : ConstructorRetrieval
+  internal class PrimitiveConstructorRetrieval : ConstructorRetrieval
   {
     public IEnumerable<ICreateObjects> RetrieveFrom(IConstructorQueries constructors)
     {

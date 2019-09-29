@@ -5,7 +5,7 @@ namespace TddXt.XFluentAssert.ConstructorRetrieval
 
   using TypeReflection.Interfaces;
 
-  public class InternalConstructorWithoutRecursionRetrieval : ConstructorRetrieval
+  internal class InternalConstructorWithoutRecursionRetrieval : ConstructorRetrieval
   {
     private readonly ConstructorRetrieval _next;
 
