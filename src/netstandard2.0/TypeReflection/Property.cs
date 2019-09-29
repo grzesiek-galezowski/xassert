@@ -8,20 +8,6 @@ namespace TddXt.XFluentAssert.TypeReflection
 
   public class Property
   {
-    public static Property ObjectOf<T>(Expression<Func<T, object>> expression)
-    {
-      var propertyUsageExppression = expression.Body as MemberExpression;
-      if (propertyUsageExppression != null)
-      {
-        var propertyInfo = propertyUsageExppression.Member as PropertyInfo;
-        if (propertyInfo != null)
-        {
-          return new Property(propertyInfo);
-        }
-      }
-      throw new Exception("The expression is not a property body");
-    }
-
     public static Maybe<Property> FromUnaryExpression<T>(Expression<Func<T, object>> expression)
     {
       var unaryExpression = expression.Body as UnaryExpression;
@@ -38,25 +24,7 @@ namespace TddXt.XFluentAssert.TypeReflection
     }
 
 
-    //todo change to method that returns property info
-    public static Property ValueOf<T, U>(Expression<Func<T, U>> expression) where U : struct
-    {
-      var propertyUsageExppression = expression.Body as MemberExpression;
-      if (propertyUsageExppression != null)
-      {
-        var propertyInfo = propertyUsageExppression.Member as PropertyInfo;
-        if (propertyInfo != null)
-        {
-          return new Property(propertyInfo);
-        }
-      }
-      throw new Exception("The expression is not a property body");
-    }
-
-    public string Name
-    {
-      get { return _propertyInfo.Name; }
-    }
+    public string Name => _propertyInfo.Name;
 
     private Property(PropertyInfo property)
     {

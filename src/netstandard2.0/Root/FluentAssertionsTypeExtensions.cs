@@ -4,6 +4,7 @@
   using FluentAssertions;
   using System.Linq;
   using System.Collections.Generic;
+  using TddXt.AnyRoot;
   using TddXt.XFluentAssert.AssertionConstraints;
   using TddXt.XFluentAssert.ReflectionAssertions;
   using TddXt.XFluentAssert.Root.ValueAssertions;
@@ -45,7 +46,7 @@ namespace TddXt.XFluentAssertRoot
       Type type = o.Subject;
       if (!ValueObjectWhiteList.Contains(type))
       {
-        var activator = ValueObjectActivator.FreshInstance(type);
+        var activator = ValueObjectActivator.FreshInstance(type, Root.Any.InstanceAsObject);
         var constraints = AssertionConstraints.ForValueSemantics(type, traits, activator);
         AssertionConstraintsEngine.TypeAdheresTo(constraints);
       }

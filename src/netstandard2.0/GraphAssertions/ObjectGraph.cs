@@ -35,17 +35,6 @@
       return comparisonMechanism;
     }
 
-    public static ComparisonResult Compare<T>(T expected, T actual, string[] skippedPropertiesOrFields)
-    {
-      var comparison = Comparison();
-      foreach (var skippedMember in skippedPropertiesOrFields)
-      {
-        comparison.Config.MembersToIgnore.Add(skippedMember);
-      }
-      var result = comparison.Compare(expected, actual);
-      return result;
-    }
-
     public static ComparisonResult Compare<T>(T expected, T actual, IEnumerable<Expression<Func<T, object>>> skippedPropertiesOrFields)
     {
       var comparison = Comparison();

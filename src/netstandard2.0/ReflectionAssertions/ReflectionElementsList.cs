@@ -20,13 +20,6 @@
       return string.Join(Environment.NewLine, result);
     }
 
-    public static string FormattedListof(IEnumerable<IAmEvent> events)
-    {
-      var result = new HashSet<string>(events.Select(eventWrapper => eventWrapper.Name()));
-      return string.Join(Environment.NewLine, result);
-    }
-
-
     public static string Format(IEnumerable<Tuple<Type, int>> constructorLimitsExceeded)
     {
       var limits = new HashSet<Tuple<Type, int>>(constructorLimitsExceeded);

@@ -8,16 +8,6 @@
 
   public static class Are
   {
-    public static bool EqualInTermsOfEqualityOperator<T>(T instance1, T instance2) where T : class
-    {
-      return TypeOf<T>.Equality().Evaluate(instance1, instance2);
-    }
-
-    public static bool NotEqualInTermsOfInEqualityOperator<T>(T instance1, T instance2) where T : class
-    {
-      return TypeOf<T>.InequalityOperator().Evaluate(instance1, instance2);
-    }
-
     public static bool EqualInTermsOfEqualityOperator(Type type, object instance1, object instance2)
     {
       return (bool)SmartType.For(type).EqualityOperator().Evaluate(instance1, instance2);

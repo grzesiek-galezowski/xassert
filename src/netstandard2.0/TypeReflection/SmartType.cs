@@ -28,11 +28,6 @@ namespace TddXt.XFluentAssert.TypeReflection
       _typeInfo = _type.GetTypeInfo();
     }
 
-    public bool HasPublicParameterlessConstructor()
-    {
-      return GetPublicParameterlessConstructor().HasValue || _typeInfo.IsPrimitive || _typeInfo.IsAbstract;
-    }
-
     public Maybe<ICreateObjects> GetNonPublicParameterlessConstructorInfo()
     {
       var constructorInfo = _type.GetConstructor(BindingFlags.NonPublic | BindingFlags.Instance, null, Type.EmptyTypes, null);
@@ -59,23 +54,6 @@ namespace TddXt.XFluentAssert.TypeReflection
       {
         return Maybe.Just(DefaultParameterlessConstructor.ForOrdinaryType(constructorInfo));
       }
-    }
-
-    public bool IsImplementationOfOpenGeneric(Type openGenericType)
-    {
-      return _typeInfo.GetInterfaces().Any(
-        ifaceType => IsOpenGeneric(ifaceType, openGenericType));
-    }
-
-    private static bool IsOpenGeneric(Type checkedType, Type openGenericType)
-    {
-      return checkedType.GetTypeInfo().IsGenericType && 
-             checkedType.GetGenericTypeDefinition() == openGenericType;
-    }
-
-    public bool IsConcrete()
-    {
-      return !_typeInfo.IsAbstract && !_typeInfo.IsInterface;
     }
 
     public IEnumerable<IAmField> GetAllInstanceFields()

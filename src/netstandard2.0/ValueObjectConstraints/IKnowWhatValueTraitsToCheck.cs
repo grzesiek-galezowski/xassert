@@ -9,6 +9,7 @@
       get;
       // ReSharper disable once MemberCanBePrivate.Global
       // ReSharper disable once AutoPropertyCanBeMadeGetOnly.Global
+      // ReSharper disable once UnusedMemberInSuper.Global
       set;
     }
 
@@ -16,6 +17,7 @@
     {
       get;
       // ReSharper disable once MemberCanBePrivate.Global
+      // ReSharper disable once UnusedMemberInSuper.Global
       set;
     }
 
@@ -24,6 +26,7 @@
       get;
       // ReSharper disable once MemberCanBePrivate.Global
       // ReSharper disable once AutoPropertyCanBeMadeGetOnly.Global
+      // ReSharper disable once UnusedMemberInSuper.Global
       set;
     }
 
@@ -32,6 +35,7 @@
       // ReSharper disable once MemberCanBePrivate.Global
       // ReSharper disable once AutoPropertyCanBeMadeGetOnly.Global
       get;
+      // ReSharper disable once UnusedMemberInSuper.Global
       set;
     }
 

@@ -71,7 +71,8 @@ namespace TddXt.XFluentAssert.LockAssertions
     {
       try
       {
-        var cannedResult = Root.Any.Instance<TReturn>();
+        Func<TReturn> instance = Root.Any.Instance<TReturn>;
+        var cannedResult = instance();
         callToCheck(wrappedObjectMock).Returns(ci =>
         {
           lockAssertions.AssertLocked();

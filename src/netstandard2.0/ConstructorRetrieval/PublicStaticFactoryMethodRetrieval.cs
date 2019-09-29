@@ -17,7 +17,7 @@ namespace TddXt.XFluentAssert.ConstructorRetrieval
     public IEnumerable<ICreateObjects> RetrieveFrom(IConstructorQueries constructors)
     {
       var methods = constructors.TryToObtainPublicStaticFactoryMethodWithoutRecursion();
-      if (methods.Count() == 0)
+      if (!methods.Any())
       {
         return _next.RetrieveFrom(constructors);
       }

@@ -5,8 +5,6 @@
   using System.Linq;
 
   using FluentAssertions;
-
-  using AnyRoot;
   using TypeReflection;
 
   public class ValueObjectActivator
@@ -14,16 +12,18 @@
     private readonly ObjectGenerator _objectGenerator;
 
     private List<object> _constructorArguments;
+    private readonly Func<Type, object> _objectFactory;
 
-    public ValueObjectActivator(ObjectGenerator objectGenerator, Type type)
+    public ValueObjectActivator(ObjectGenerator objectGenerator, Type type, Func<Type, object> objectFactory)
     {
       _objectGenerator = objectGenerator;
       TargetType = type;
+      _objectFactory = objectFactory;
     }
 
-    public static ValueObjectActivator FreshInstance(Type type)
+    public static ValueObjectActivator FreshInstance(Type type, Func<Type, object> objectFactory)
     {
-      return new ValueObjectActivator(new ObjectGenerator(SmartType.For(type)), type);
+      return new ValueObjectActivator(new ObjectGenerator(SmartType.For(type)), type, objectFactory);
     }
 
     public object CreateInstanceAsValueObjectWithFreshParameters()
@@ -52,7 +52,7 @@
     public object CreateInstanceAsValueObjectWithModifiedParameter(int i)
     {
       var modifiedArguments = _constructorArguments.ToList();
-      modifiedArguments[i] = Root.Any.InstanceAsObject(modifiedArguments[i].GetType());
+      modifiedArguments[i] = _objectFactory(modifiedArguments[i].GetType());
       return _objectGenerator.GenerateInstance(modifiedArguments.ToArray());
     }
 
@@ -60,7 +60,7 @@
 
     private object CreateInstanceWithNewConstructorArguments()
     {
-      _constructorArguments = _objectGenerator.GenerateConstructorParameters(Root.Any.InstanceAsObject);
+      _constructorArguments = _objectGenerator.GenerateConstructorParameters(_objectFactory);
       return CreateInstanceWithCurrentConstructorArguments();
     }
 

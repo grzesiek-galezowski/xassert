@@ -30,11 +30,6 @@ namespace TddXt.XFluentAssert.TypeReflection.ImplementationDetails
       return 0;
     }
 
-    public bool HasAbstractOrInterfaceArguments()
-    {
-      return false;
-    }
-
     public List<object> GenerateAnyParameterValues(Func<Type, object> instanceGenerator)
     {
       return new List<object>();
@@ -45,19 +40,9 @@ namespace TddXt.XFluentAssert.TypeReflection.ImplementationDetails
       return string.Empty;
     }
 
-    public object InvokeWithParametersCreatedBy(Func<Type, object> instanceGenerator)
-    {
-      return _creation.Invoke();
-    }
-
     public object InvokeWith(IEnumerable<object> constructorParameters)
     {
       return _creation.Invoke();
-    }
-
-    public bool IsInternal()
-    {
-      return false; //?? actually, this is not right...
     }
 
     public static ICreateObjects ForOrdinaryType(ConstructorInfo constructorInfo)
