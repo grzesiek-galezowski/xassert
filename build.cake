@@ -93,7 +93,7 @@ public void BundleDependencies(DirectoryPath specificVersionPublishDir, string r
     }
     ILRepack(fullRootDllFilePath, fullRootDllFilePath, assemblyPaths,  new ILRepackSettings 
 	{ 
-		
+		Internalize = true
 	});
     DeleteFiles(assemblyPaths);
 }
