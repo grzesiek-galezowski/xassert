@@ -189,7 +189,8 @@ namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
     public void CollectPathsInto(ObjectGraphPaths objectGraphPaths)
     {
       //todo consider extracting the items before passing them to this class instance
-      var items = (_target as object[]).Select((o, i) => ObjectGraphNode.From(_path, o, "array element[" + i + "]", _log));
+      var list = ToObjectsList();
+      var items = list.Select((o, i) => ObjectGraphNode.From(_path, o, "array element[" + i + "]", _log));
       if (items.Any())
       {
         foreach (var item in items)
@@ -201,6 +202,17 @@ namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
       {
         objectGraphPaths.Add(new ObjectGraphPath(_path));
       }
+    }
+
+    private List<object> ToObjectsList()
+    {
+      var list = new List<object>();
+      foreach (var o in (IEnumerable)_target)
+      {
+        list.Add(o);
+      }
+
+      return list;
     }
 
     public bool IsOf(Type type)

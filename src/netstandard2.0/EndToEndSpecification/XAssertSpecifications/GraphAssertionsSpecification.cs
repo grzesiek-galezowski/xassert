@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using System.Security.Permissions;
 using System.Threading;
 using FluentAssertions;
@@ -96,6 +97,17 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
         .Should().ThrowExactly<XunitException>().Which.Message.Contains("Could not find the particular instance: TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.A1 anywhere in dependency graph");
 
       abc.Should().DependOn(3);
+    }
+
+    [Fact]
+    public void ShouldAllowUsingReadOnlyDictionaryInsideAnObject()
+    {
+      //GIVEN
+      //WHEN
+      var readOnlyDictionary = Any.Instance<IReadOnlyDictionary<string, string>>();
+      IObjectWithReadOnlyDictionary obj = new ObjectWithReadOnlyDictionary(readOnlyDictionary);
+      //THEN
+      obj.Should().DependOn(readOnlyDictionary);
     }
 
     [Fact]
@@ -229,7 +241,21 @@ public void ShouldNotFailWhenInvokedOnObjectWithProxies()
     }
   }
 
-  public class Decorator4 : Decorator
+    public interface IObjectWithReadOnlyDictionary
+    {
+    }
+
+    public class ObjectWithReadOnlyDictionary : IObjectWithReadOnlyDictionary
+    {
+      private readonly IReadOnlyDictionary<string, string> _readOnlyDictionary;
+
+      public ObjectWithReadOnlyDictionary(IReadOnlyDictionary<string, string> readOnlyDictionary)
+      {
+        _readOnlyDictionary = readOnlyDictionary;
+      }
+    }
+
+    public class Decorator4 : Decorator
   {
   }
 
