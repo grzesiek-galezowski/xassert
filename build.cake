@@ -23,10 +23,10 @@ var mainDll = "TddXt.XFluentAssertRoot.dll";
 //////////////////////////////////////////////////////////////////////
 
 
-var nSubstitute      = new[] {"NSubstitute"      , "4.0.0"};
-var fluentAssertions = new[] {"FluentAssertions" , "5.6.0"};
-var any              = new[] {"Any"              , "3.0.1"};
-var compareNetObjects= new[] {"CompareNETObjects", "4.57.0"};
+var nSubstitute      = new[] {"NSubstitute"      , "4.2.1"};
+var fluentAssertions = new[] {"FluentAssertions" , "5.9.0"};
+var any              = new[] {"Any"              , "4.0.2"};
+var compareNetObjects= new[] {"CompareNETObjects", "4.63.0"};
 
 
 //////////////////////////////////////////////////////////////////////
