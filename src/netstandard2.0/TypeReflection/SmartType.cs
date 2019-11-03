@@ -161,7 +161,9 @@ namespace TddXt.XFluentAssert.TypeReflection
     public Maybe<IAmBinaryOperator> EquatableEquality()
     {
       var equatableInterfaces =
-        _type.GetInterfaces().Where(iface => iface.GetGenericTypeDefinition() == typeof(IEquatable<>));
+        _type.GetInterfaces()
+          .Where(iface => iface.IsGenericType)
+          .Where(iface => iface.GetGenericTypeDefinition() == typeof(IEquatable<>));
 
       if(equatableInterfaces.Any())
       {

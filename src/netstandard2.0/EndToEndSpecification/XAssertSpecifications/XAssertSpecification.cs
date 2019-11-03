@@ -1,4 +1,5 @@
-﻿using TddXt.XFluentAssertRoot;
+﻿using AtmaFileSystem;
+using TddXt.XFluentAssertRoot;
 using TddXt.XFluentAssertRoot.ValueAssertions;
 namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
 {
@@ -59,6 +60,11 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
     public void ShouldPassValueTypeAssertionForProperValueTypeWithInternalConstructor()
     {
       typeof(FileExtension).Should().HaveValueSemantics();
+    }
+    [Fact]
+    public void ShouldPassValueTypeAssertionForProperValueTypeWithNonGenericSuperclass()
+    {
+      typeof(RelativeFilePath).Should().HaveValueSemantics();
     }
 
     [Fact]
