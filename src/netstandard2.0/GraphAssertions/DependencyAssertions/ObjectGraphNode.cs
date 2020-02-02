@@ -1,11 +1,11 @@
 ﻿
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
+using FluentAssertions.Primitives;
 
 namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
 {
@@ -23,6 +23,7 @@ namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
     private readonly IReadOnlyList<IObjectGraphNode> _path;
     private readonly string _name;
     private readonly Action<string> _log;
+    private readonly IEnumerable<ITerminalNodeCondition> _terminalNodeConditions;
 
     private const BindingFlags BindingFlags = System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.DeclaredOnly;
 
@@ -30,40 +31,56 @@ namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
       object target,
       string name,
       IReadOnlyList<IObjectGraphNode> path,
-      Action<string> log)
+      Action<string> log, 
+      IEnumerable<ITerminalNodeCondition> terminalNodeConditions)
     {
       _target = target;
       _path = path;
       _name = name;
       _log = log;
       _path = path.Concat(new[] { this }).ToList();
+      _terminalNodeConditions = terminalNodeConditions;
     }
 
     public static IObjectGraphNode From(
       IReadOnlyList<IObjectGraphNode> path,
       object target,
       string targetHolderName,
-      Action<string> log)
+      Action<string> log, 
+      IEnumerable<ITerminalNodeCondition> terminalNodeConditions)
     {
       if (target == null)
       {
         return new NullNode(path);
       }
-      else if (target.GetType().GetTypeInfo().IsArray)
+
+      if (target.GetType().GetTypeInfo().IsArray)
       {
-        return new ArrayNode(target, targetHolderName, path, log);
+        return new ArrayNode(
+          target, 
+          targetHolderName, 
+          path, 
+          log, 
+          terminalNodeConditions);
       }
-      else if (IsSpecialTerminalCase(target, path))
+
+      if (IsSpecialTerminalCase(target, path, terminalNodeConditions))
       {
         return new SpecialCaseTerminalNode(target, targetHolderName, path);
       }
-      else
+
+      return new ObjectGraphNode(target, targetHolderName, path, log, new ITerminalNodeCondition[]
       {
-        return new ObjectGraphNode(target, targetHolderName, path, log);
-      }
+        new TerminalNodeTypeCondition<DateTime>(),
+        new TerminalNodeTypeCondition<TimeSpan>(),
+        new TerminalNodeTypeCondition<string>()
+      });
     }
 
-    private static bool IsSpecialTerminalCase(object target, IReadOnlyList<IObjectGraphNode> path)
+    private static bool IsSpecialTerminalCase(
+      object target, 
+      IReadOnlyList<IObjectGraphNode> path, 
+      IEnumerable<ITerminalNodeCondition> terminalNodeConditions)
     {
       if (CycleDetected(target, path))
       {
@@ -75,24 +92,12 @@ namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
         return true;
       }
 
-      if (target is DateTime)
+      foreach (var condition in terminalNodeConditions)
       {
+        if (condition.Evaluate(target))
+        {
           return true;
-      }
-
-      if (target is TimeSpan)
-      {
-          return true;
-      }
-
-      if (target is string)
-      {
-          return true;
-      }
-
-      if (target is CancellationToken)
-      {
-        return false;
+        }
       }
 
       return false;
@@ -131,7 +136,7 @@ namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
     {
       return o.GetType().GetFields(BindingFlags)
         .Where(f => !(f.FieldType.IsValueType && f.FieldType == f.DeclaringType))
-        .Select(fieldInfo => From(_path.ToList(), fieldInfo.GetValue(o), fieldInfo.Name, _log));
+        .Select(fieldInfo => From(_path.ToList(), fieldInfo.GetValue(o), fieldInfo.Name, _log, _terminalNodeConditions));
     }
 
     private IEnumerable<IObjectGraphNode> PropertyNodes(object o)
@@ -141,7 +146,8 @@ namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
         var enumerable = propertyInfos
             .Where(p => !p.GetIndexParameters().Any()).ToList();
         var objectGraphNodes = enumerable
-            .Select(propertyInfo => From(_path.ToList(), propertyInfo.GetValue(o), propertyInfo.Name, _log)).ToList();
+            .Select(propertyInfo => From(_path.ToList(), propertyInfo.GetValue(o), propertyInfo.Name, _log, 
+              _terminalNodeConditions)).ToList();
         return objectGraphNodes;
     }
 
@@ -169,78 +175,15 @@ namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
     {
       return ReferenceEquals(_target, value);
     }
-  }
 
-  internal class ArrayNode : IObjectGraphNode
-  {
-    private readonly object _target;
-    private readonly string _fieldName;
-    private readonly IReadOnlyList<IObjectGraphNode> _path;
-    private readonly Action<string> _log;
-
-    public ArrayNode(object target, string fieldName, IReadOnlyList<IObjectGraphNode> path, Action<string> log)
+    public static ObjectGraphNode Root<TThisType, TAssertions>(ReferenceTypeAssertions<TThisType, TAssertions> o, Action<string> log, IEnumerable<ITerminalNodeCondition> terminalNodeConditions) where TAssertions : ReferenceTypeAssertions<TThisType, TAssertions>
     {
-      _target = target;
-      _fieldName = fieldName;
-      _log = log;
-      _path = path.Concat(new [] {this}).ToList();
-    }
-
-    public void CollectPathsInto(ObjectGraphPaths objectGraphPaths)
-    {
-      //todo consider extracting the items before passing them to this class instance
-      var list = ToObjectsList();
-      var items = list.Select((o, i) => ObjectGraphNode.From(_path, o, "array element[" + i + "]", _log));
-      if (items.Any())
-      {
-        foreach (var item in items)
-        {
-          item.CollectPathsInto(objectGraphPaths);
-        }
-      }
-      else
-      {
-        objectGraphPaths.Add(new ObjectGraphPath(_path));
-      }
-    }
-
-    private List<object> ToObjectsList()
-    {
-      var list = new List<object>();
-      foreach (var o in (IEnumerable)_target)
-      {
-        list.Add(o);
-      }
-
-      return list;
-    }
-
-    public bool IsOf(Type type)
-    {
-      return _target.GetType() == type;
-    }
-
-    public bool ValueIsEqualTo<T>(T value)
-    {
-      //todo what if both are null?
-      if ((object)value is object[] expectedArray && _target is object[] targetArray)
-      {
-        return expectedArray.SequenceEqual(targetArray);
-      }
-      else
-      {
-        return Equals(value, _target);
-      }
-    }
-
-    public bool ValueIsSameAs(object value)
-    {
-      return ReferenceEquals(_target, value);
-    }
-
-    public override string ToString()
-    {
-      return ObjectGraphNode.FormatFieldAndTypeName(_fieldName, _target);
+      return new ObjectGraphNode(
+        o.Subject, 
+        "Root", 
+        new List<ObjectGraphNode>(), 
+        log, 
+        terminalNodeConditions);
     }
   }
 }

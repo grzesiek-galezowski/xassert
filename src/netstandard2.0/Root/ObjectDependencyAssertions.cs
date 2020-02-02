@@ -8,10 +8,12 @@ namespace TddXt.XFluentAssertRoot
 {
   public static class ObjectDependencyAssertions
   {
+    private static readonly Action<string> _noLogging = str => { };
+
     public static AndConstraint<ObjectAssertions> DependOn<T>(this ObjectAssertions o)
     {
       var objectTreePaths = new ObjectGraphPaths();
-      new ObjectGraphNode(o.Subject, "Root", new List<IObjectGraphNode>(), str => { })
+      ObjectGraphNode.Root(o, _noLogging, DefaultTerminalNodeConditions())
         .CollectPathsInto(objectTreePaths);
       objectTreePaths.AssertContainNonRootObjectOf(typeof(T));
       return new AndConstraint<ObjectAssertions>(o);
@@ -31,10 +33,10 @@ namespace TddXt.XFluentAssertRoot
       where TAssertions : ReferenceTypeAssertions<TThisType, TAssertions>
     {
       var objectTreePaths = new ObjectGraphPaths();
-      new ObjectGraphNode(o.Subject, "Root", new List<IObjectGraphNode>(), str => { }).CollectPathsInto(objectTreePaths);
+      ObjectGraphNode.Root(o, _noLogging, DefaultTerminalNodeConditions())
+        .CollectPathsInto(objectTreePaths);
       objectTreePaths.AssertContainNonRoot(value);
       return new AndConstraint<ReferenceTypeAssertions<TThisType, TAssertions>>(o);
-
     }
 
     public static AndConstraint<ReferenceTypeAssertions<TThisType, TAssertions>>
@@ -44,7 +46,8 @@ namespace TddXt.XFluentAssertRoot
       where TAssertions : ReferenceTypeAssertions<TThisType, TAssertions>
     {
       var objectTreePaths = new ObjectGraphPaths();
-      new ObjectGraphNode(o.Subject, "Root", new List<ObjectGraphNode>(), str => { }).CollectPathsInto(objectTreePaths);
+      ObjectGraphNode.Root(o, _noLogging, DefaultTerminalNodeConditions())
+        .CollectPathsInto(objectTreePaths);
       objectTreePaths.AssertContainNonRootTypeSubPath(types);
       return new AndConstraint<ReferenceTypeAssertions<TThisType, TAssertions>>(o);
     }
@@ -56,11 +59,21 @@ namespace TddXt.XFluentAssertRoot
       where TAssertions : ReferenceTypeAssertions<TThisType, TAssertions>
     {
       var objectTreePaths = new ObjectGraphPaths();
-      new ObjectGraphNode(o.Subject, "Root", new List<ObjectGraphNode>(), str => { }).CollectPathsInto(objectTreePaths);
+      ObjectGraphNode.Root(o, _noLogging, DefaultTerminalNodeConditions())
+        .CollectPathsInto(objectTreePaths);
       objectTreePaths.AssertContainNonRootSubPath(values);
       return new AndConstraint<ReferenceTypeAssertions<TThisType, TAssertions>>(o);
     }
 
+    private static IEnumerable<ITerminalNodeCondition> DefaultTerminalNodeConditions()
+    {
+      return new ITerminalNodeCondition[]
+      {
+        new TerminalNodeTypeCondition<DateTime>(),
+        new TerminalNodeTypeCondition<TimeSpan>(),
+        new TerminalNodeTypeCondition<string>()
+      };
+    }
 
   }
 }

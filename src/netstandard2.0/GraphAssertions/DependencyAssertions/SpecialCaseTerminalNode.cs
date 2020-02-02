@@ -25,7 +25,7 @@ namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
 
     public bool IsOf(Type type)
     {
-      return Equals(_target.GetType(), type);
+      return _target.GetType() == type;
     }
 
     public bool ValueIsEqualTo<T>(T value)
