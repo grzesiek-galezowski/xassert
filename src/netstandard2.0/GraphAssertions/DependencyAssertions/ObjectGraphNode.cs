@@ -69,12 +69,7 @@ namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
         return new SpecialCaseTerminalNode(target, targetHolderName, path);
       }
 
-      return new ObjectGraphNode(target, targetHolderName, path, log, new ITerminalNodeCondition[]
-      {
-        new TerminalNodeTypeCondition<DateTime>(),
-        new TerminalNodeTypeCondition<TimeSpan>(),
-        new TerminalNodeTypeCondition<string>()
-      });
+      return new ObjectGraphNode(target, targetHolderName, path, log, terminalNodeConditions);
     }
 
     private static bool IsSpecialTerminalCase(
