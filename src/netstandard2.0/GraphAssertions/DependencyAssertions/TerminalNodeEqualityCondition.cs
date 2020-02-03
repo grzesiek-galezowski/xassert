@@ -1,0 +1,18 @@
+namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
+{
+  public class TerminalNodeEqualityCondition : ITerminalNodeCondition
+  {
+    private readonly object _instance;
+
+    public TerminalNodeEqualityCondition(object instance)
+    {
+      _instance = instance;
+    }
+
+    public bool Evaluate(object target)
+    {
+      return _instance.Equals(target);
+    }
+
+  }
+}

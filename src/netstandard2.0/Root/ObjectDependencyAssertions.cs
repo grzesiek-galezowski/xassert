@@ -13,27 +13,36 @@ namespace TddXt.XFluentAssertRoot
     public static AndConstraint<ObjectAssertions> DependOn<T>(this ObjectAssertions o)
     {
       var objectTreePaths = new ObjectGraphPaths();
-      ObjectGraphNode.Root(o, _noLogging, DefaultTerminalNodeConditions())
+      new ObjectGraphNodeFactory(_noLogging, DefaultTerminalNodeConditions())
+        .Root(o.Subject)
         .CollectPathsInto(objectTreePaths);
       objectTreePaths.AssertContainNonRootObjectOf(typeof(T));
       return new AndConstraint<ObjectAssertions>(o);
     }
 
-    /*public static AndConstraint<ObjectAssertions> DependOn<T>(this ObjectAssertions o, T value)
-    {
-      var objectTreePaths = new ObjectGraphPaths();
-      new ObjectGraphNode(o.Subject, "Root", new List<IObjectGraphNode>(), str => { }).CollectPathsInto(objectTreePaths);
-      objectTreePaths.AssertContainNonRoot(value);
-      return new AndConstraint<ObjectAssertions>(o);
-    }*/
-
-    public static AndConstraint<ReferenceTypeAssertions<TThisType, TAssertions>> DependOn<TAssertions, TDependency, TThisType>(
+    public static AndConstraint<ReferenceTypeAssertions<TThisType, TAssertions>> DependOn<
+      TAssertions, TDependency, TThisType>(
       this ReferenceTypeAssertions<TThisType, TAssertions> o,
       TDependency value)
       where TAssertions : ReferenceTypeAssertions<TThisType, TAssertions>
     {
       var objectTreePaths = new ObjectGraphPaths();
-      ObjectGraphNode.Root(o, _noLogging, DefaultTerminalNodeConditions())
+      new ObjectGraphNodeFactory(_noLogging, DefaultTerminalNodeConditions()).Root(o.Subject)
+        .CollectPathsInto(objectTreePaths);
+      objectTreePaths.AssertContainNonRoot(value);
+      return new AndConstraint<ReferenceTypeAssertions<TThisType, TAssertions>>(o);
+    }
+
+    public static AndConstraint<ReferenceTypeAssertions<TThisType, TAssertions>> DependOn<
+      TAssertions, TDependency, TThisType>(
+      this ReferenceTypeAssertions<TThisType, TAssertions> o,
+      TDependency value,
+      Func<DependsOnObjectAssertionsOptions<TThisType>, DependsOnObjectAssertionsOptions<TThisType>> optionsFunc)
+      where TAssertions : ReferenceTypeAssertions<TThisType, TAssertions>
+    {
+      var options = optionsFunc(new DependsOnObjectAssertionsOptions<TThisType>());
+      var objectTreePaths = new ObjectGraphPaths();
+      new ObjectGraphNodeFactory(_noLogging, options.TerminalNodeConditions).Root(o.Subject)
         .CollectPathsInto(objectTreePaths);
       objectTreePaths.AssertContainNonRoot(value);
       return new AndConstraint<ReferenceTypeAssertions<TThisType, TAssertions>>(o);
@@ -46,7 +55,7 @@ namespace TddXt.XFluentAssertRoot
       where TAssertions : ReferenceTypeAssertions<TThisType, TAssertions>
     {
       var objectTreePaths = new ObjectGraphPaths();
-      ObjectGraphNode.Root(o, _noLogging, DefaultTerminalNodeConditions())
+      new ObjectGraphNodeFactory(_noLogging, DefaultTerminalNodeConditions()).Root(o.Subject)
         .CollectPathsInto(objectTreePaths);
       objectTreePaths.AssertContainNonRootTypeSubPath(types);
       return new AndConstraint<ReferenceTypeAssertions<TThisType, TAssertions>>(o);
@@ -59,7 +68,7 @@ namespace TddXt.XFluentAssertRoot
       where TAssertions : ReferenceTypeAssertions<TThisType, TAssertions>
     {
       var objectTreePaths = new ObjectGraphPaths();
-      ObjectGraphNode.Root(o, _noLogging, DefaultTerminalNodeConditions())
+      new ObjectGraphNodeFactory(_noLogging, DefaultTerminalNodeConditions()).Root(o.Subject)
         .CollectPathsInto(objectTreePaths);
       objectTreePaths.AssertContainNonRootSubPath(values);
       return new AndConstraint<ReferenceTypeAssertions<TThisType, TAssertions>>(o);
@@ -69,6 +78,7 @@ namespace TddXt.XFluentAssertRoot
     {
       return new ITerminalNodeCondition[]
       {
+        new TerminalNodeNamespaceCondition("Castle.Proxies"),
         new TerminalNodeTypeCondition<DateTime>(),
         new TerminalNodeTypeCondition<TimeSpan>(),
         new TerminalNodeTypeCondition<string>()

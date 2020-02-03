@@ -22,85 +22,21 @@ namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
     private readonly object _target;
     private readonly IReadOnlyList<IObjectGraphNode> _path;
     private readonly string _name;
-    private readonly Action<string> _log;
-    private readonly IEnumerable<ITerminalNodeCondition> _terminalNodeConditions;
+    private readonly ObjectGraphNodeFactory _objectGraphNodeFactory;
 
     private const BindingFlags BindingFlags = System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.DeclaredOnly;
 
     public ObjectGraphNode(
       object target,
       string name,
-      IReadOnlyList<IObjectGraphNode> path,
-      Action<string> log, 
-      IEnumerable<ITerminalNodeCondition> terminalNodeConditions)
+      IReadOnlyList<IObjectGraphNode> path, 
+      ObjectGraphNodeFactory objectGraphNodeFactory)
     {
       _target = target;
       _path = path;
       _name = name;
-      _log = log;
       _path = path.Concat(new[] { this }).ToList();
-      _terminalNodeConditions = terminalNodeConditions;
-    }
-
-    public static IObjectGraphNode From(
-      IReadOnlyList<IObjectGraphNode> path,
-      object target,
-      string targetHolderName,
-      Action<string> log, 
-      IEnumerable<ITerminalNodeCondition> terminalNodeConditions)
-    {
-      if (target == null)
-      {
-        return new NullNode(path);
-      }
-
-      if (target.GetType().GetTypeInfo().IsArray)
-      {
-        return new ArrayNode(
-          target, 
-          targetHolderName, 
-          path, 
-          log, 
-          terminalNodeConditions);
-      }
-
-      if (IsSpecialTerminalCase(target, path, terminalNodeConditions))
-      {
-        return new SpecialCaseTerminalNode(target, targetHolderName, path);
-      }
-
-      return new ObjectGraphNode(target, targetHolderName, path, log, terminalNodeConditions);
-    }
-
-    private static bool IsSpecialTerminalCase(
-      object target, 
-      IReadOnlyList<IObjectGraphNode> path, 
-      IEnumerable<ITerminalNodeCondition> terminalNodeConditions)
-    {
-      if (CycleDetected(target, path))
-      {
-        return true;
-      }
-
-      if (target.GetType().Namespace.Contains("Castle.Proxies"))
-      {
-        return true;
-      }
-
-      foreach (var condition in terminalNodeConditions)
-      {
-        if (condition.Evaluate(target))
-        {
-          return true;
-        }
-      }
-
-      return false;
-    }
-
-    private static bool CycleDetected(object target, IReadOnlyList<IObjectGraphNode> path)
-    {
-      return !target.GetType().IsValueType && path.Any(node => node.ValueIsSameAs(target));
+      _objectGraphNodeFactory = objectGraphNodeFactory;
     }
 
     public void CollectPathsInto(ObjectGraphPaths objectGraphPaths)
@@ -131,7 +67,7 @@ namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
     {
       return o.GetType().GetFields(BindingFlags)
         .Where(f => !(f.FieldType.IsValueType && f.FieldType == f.DeclaringType))
-        .Select(fieldInfo => From(_path.ToList(), fieldInfo.GetValue(o), fieldInfo.Name, _log, _terminalNodeConditions));
+        .Select(fieldInfo => _objectGraphNodeFactory.From(_path.ToList(), fieldInfo.GetValue(o), fieldInfo.Name));
     }
 
     private IEnumerable<IObjectGraphNode> PropertyNodes(object o)
@@ -141,8 +77,7 @@ namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
         var enumerable = propertyInfos
             .Where(p => !p.GetIndexParameters().Any()).ToList();
         var objectGraphNodes = enumerable
-            .Select(propertyInfo => From(_path.ToList(), propertyInfo.GetValue(o), propertyInfo.Name, _log, 
-              _terminalNodeConditions)).ToList();
+            .Select(propertyInfo => _objectGraphNodeFactory.From(_path.ToList(), propertyInfo.GetValue(o), propertyInfo.Name)).ToList();
         return objectGraphNodes;
     }
 
@@ -171,14 +106,5 @@ namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
       return ReferenceEquals(_target, value);
     }
 
-    public static ObjectGraphNode Root<TThisType, TAssertions>(ReferenceTypeAssertions<TThisType, TAssertions> o, Action<string> log, IEnumerable<ITerminalNodeCondition> terminalNodeConditions) where TAssertions : ReferenceTypeAssertions<TThisType, TAssertions>
-    {
-      return new ObjectGraphNode(
-        o.Subject, 
-        "Root", 
-        new List<ObjectGraphNode>(), 
-        log, 
-        terminalNodeConditions);
-    }
   }
 }

@@ -1,0 +1,34 @@
+﻿using System;
+using System.Collections.Generic;
+using TddXt.XFluentAssert.GraphAssertions.DependencyAssertions;
+
+namespace TddXt.XFluentAssertRoot
+{
+  public class DependsOnObjectAssertionsOptions<T>
+  {
+    private static IList<ITerminalNodeCondition> DefaultTerminalNodeConditions()
+    {
+      return new List<ITerminalNodeCondition>
+      {
+        new TerminalNodeNamespaceCondition("Castle.Proxies"),
+        new TerminalNodeTypeCondition<DateTime>(),
+        new TerminalNodeTypeCondition<TimeSpan>(),
+        new TerminalNodeTypeCondition<string>()
+      };
+    }
+
+    public IList<ITerminalNodeCondition> TerminalNodeConditions { get; } = DefaultTerminalNodeConditions();
+
+    public DependsOnObjectAssertionsOptions<T> SkipType<T1>()
+    {
+      TerminalNodeConditions.Add(new TerminalNodeTypeCondition<T1>());
+      return this;
+    }
+
+    public DependsOnObjectAssertionsOptions<T> Skip<T1>(T1 instance)
+    {
+      TerminalNodeConditions.Add(new TerminalNodeEqualityCondition(instance));
+      return this;
+    }
+  }
+}

@@ -10,33 +10,25 @@ namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
     private readonly object _target;
     private readonly string _fieldName;
     private readonly IReadOnlyList<IObjectGraphNode> _path;
-    private readonly Action<string> _log;
-    private readonly IEnumerable<ITerminalNodeCondition> _terminalNodeConditions;
+    private readonly ObjectGraphNodeFactory _objectGraphNodeFactory;
 
     public ArrayNode(
       object target,
       string fieldName,
       IEnumerable<IObjectGraphNode> path, 
-      Action<string> log, 
-      IEnumerable<ITerminalNodeCondition> terminalNodeConditions)
+      ObjectGraphNodeFactory objectGraphNodeFactory)
     {
       _target = target;
       _fieldName = fieldName;
-      _log = log;
       _path = path.Concat(new [] {this}).ToList();
-      _terminalNodeConditions = terminalNodeConditions;
+      _objectGraphNodeFactory = objectGraphNodeFactory;
     }
 
     public void CollectPathsInto(ObjectGraphPaths objectGraphPaths)
     {
       //todo consider extracting the items before passing them to this class instance
       var list = ToObjectsList();
-      var items = list.Select((o, i) => ObjectGraphNode.From(
-        _path, 
-        o, 
-        "array element[" + i + "]", 
-        _log, 
-        _terminalNodeConditions));
+      var items = list.Select((o, i) => _objectGraphNodeFactory.From(_path, o, "array element[" + i + "]"));
 
       if (items.Any())
       {

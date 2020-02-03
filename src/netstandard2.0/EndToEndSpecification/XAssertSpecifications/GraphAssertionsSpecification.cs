@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Security.Permissions;
 using System.Threading;
 using FluentAssertions;
+using Functional.Maybe;
 using NSubstitute;
 using TddXt.XFluentAssert.Root;
 using TddXt.XFluentAssertRoot;
@@ -15,7 +16,7 @@ using static TddXt.AnyRoot.Root;
 
 namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
 {
-    public class GraphAssertionsSpecification : IDisposable
+  public class GraphAssertionsSpecification : IDisposable
   {
     private readonly ITestOutputHelper output;
     private StringWriter _stringWriter;
@@ -78,23 +79,29 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
 [Root(A1)]->[_a2(A2)]->[_str(String)]
 [Root(A1)]->[_a2(A2)]->[_num(Int32)]");
       new Action(() => a1.Should().DependOn(new B2()))
-        .Should().ThrowExactly<XunitException>().WithMessage(@"Could not find the particular instance: TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.B2 anywhere in dependency graph however, another instance of this type was found within the following paths:
+        .Should().ThrowExactly<XunitException>().WithMessage(
+          @"Could not find the particular instance: TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.B2 anywhere in dependency graph however, another instance of this type was found within the following paths:
 [Root(A1)]->[_b2(B2)]->[_b3(B3)]");
       new Action(() => a1.Should().DependOn(new B3()))
-        .Should().ThrowExactly<XunitException>().WithMessage(@"Could not find the particular instance: TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.B3 anywhere in dependency graph however, another instance of this type was found within the following paths:
+        .Should().ThrowExactly<XunitException>().WithMessage(
+          @"Could not find the particular instance: TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.B3 anywhere in dependency graph however, another instance of this type was found within the following paths:
 [Root(A1)]->[_a2(A2)]->[_b3(B3)]
 [Root(A1)]->[_b2(B2)]->[_b3(B3)]");
       new Action(() => a1.Should().DependOn(abc + "a"))
-        .Should().ThrowExactly<XunitException>().WithMessage(@"Could not find the particular instance: abca anywhere in dependency graph however, another instance of this type was found within the following paths:
+        .Should().ThrowExactly<XunitException>().WithMessage(
+          @"Could not find the particular instance: abca anywhere in dependency graph however, another instance of this type was found within the following paths:
 [Root(A1)]->[_a2(A2)]->[_str(String)]");
       new Action(() => a1.Should().DependOn(num + 1))
-        .Should().ThrowExactly<XunitException>().WithMessage(@"Could not find the particular instance: 124 anywhere in dependency graph however, another instance of this type was found within the following paths:
+        .Should().ThrowExactly<XunitException>().WithMessage(
+          @"Could not find the particular instance: 124 anywhere in dependency graph however, another instance of this type was found within the following paths:
 [Root(A1)]->[_a2(A2)]->[_num(Int32)]");
 
       new Action(() => a1.Should().DependOn(a1))
-        .Should().ThrowExactly<XunitException>().Which.Message.Contains(@"Could not find the particular instance: TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.A1 anywhere in dependency graph");
+        .Should().ThrowExactly<XunitException>().Which.Message.Contains(
+          @"Could not find the particular instance: TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.A1 anywhere in dependency graph");
       new Action(() => a2.Should().DependOn(a1))
-        .Should().ThrowExactly<XunitException>().Which.Message.Contains("Could not find the particular instance: TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.A1 anywhere in dependency graph");
+        .Should().ThrowExactly<XunitException>().Which.Message.Contains(
+          "Could not find the particular instance: TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.A1 anywhere in dependency graph");
 
       abc.Should().DependOn(3);
     }
@@ -141,7 +148,8 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
       //THEN
       new Action(() => { decorator1.Should().DependOnChain(decorator2, decorator3, decorator1); })
         .Should().ThrowExactly<XunitException>()
-        .WithMessage(@"Could not find the particular sequence of objects: [TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.Decorator2, TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.Decorator3, TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.Decorator1] anywhere in dependency graph. Paths searched:
+        .WithMessage(
+          @"Could not find the particular sequence of objects: [TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.Decorator2, TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.Decorator3, TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.Decorator1] anywhere in dependency graph. Paths searched:
  [Root(Decorator1)]->[_decorator(Decorator2)]->[_decorator3(Decorator3)]->[_decorator4(Decorator4)]");
     }
 
@@ -173,14 +181,18 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
       var decorator1 = new Decorator1(decorator2);
 
       //THEN
-      new Action(() => { decorator1.Should().DependOnTypeChain(decorator2.GetType(), decorator3.GetType(), decorator1.GetType()); })
+      new Action(() =>
+        {
+          decorator1.Should().DependOnTypeChain(decorator2.GetType(), decorator3.GetType(), decorator1.GetType());
+        })
         .Should().ThrowExactly<XunitException>()
-        .WithMessage(@"Could not find the particular sequence of objects: [TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.Decorator2, TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.Decorator3, TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.Decorator1] anywhere in dependency graph. Paths searched:
+        .WithMessage(
+          @"Could not find the particular sequence of objects: [TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.Decorator2, TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.Decorator3, TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.Decorator1] anywhere in dependency graph. Paths searched:
  [Root(Decorator1)]->[_decorator(Decorator2)]->[_decorator3(Decorator3)]->[_decorator4(Decorator4)]");
     }
 
-[Fact]
-public void ShouldNotFailWhenInvokedOnObjectWithProxies()
+    [Fact]
+    public void ShouldNotFailWhenInvokedOnObjectWithProxies()
     {
       var enumerable = Substitute.For<IEnumerable<int>>();
       new Action(() =>
@@ -198,11 +210,12 @@ public void ShouldNotFailWhenInvokedOnObjectWithProxies()
     [Fact]
     public void ShouldBeAbleToFindItemsWithinCollections()
     {
-      new List<string> { "trolololo" }.Should().DependOn("trolololo");
+      new List<string> {"trolololo"}.Should().DependOn("trolololo");
 
-      new Action(() => new List<string> { "trolololo" }.Should().DependOn("trolololo2"))
+      new Action(() => new List<string> {"trolololo"}.Should().DependOn("trolololo2"))
         .Should().ThrowExactly<XunitException>()
-        .WithMessage(@"Could not find the particular instance: trolololo2 anywhere in dependency graph however, another instance of this type was found within the following paths:
+        .WithMessage(
+          @"Could not find the particular instance: trolololo2 anywhere in dependency graph however, another instance of this type was found within the following paths:
 [Root(List`1)]->[_items(String[])]->[array element[0](String)]");
     }
 
@@ -217,11 +230,48 @@ public void ShouldNotFailWhenInvokedOnObjectWithProxies()
       cancellationToken.Should().DependOn<ManualResetEvent>();
     }
 
-      [Fact]
-      public void ShouldSupportDateTimes()
+    [Fact]
+    public void ShouldSupportDateTimes()
+    {
+      Any.Instance<SomethingWithTime>().Should().DependOn<DateTime>();
+    }
+
+    [Fact]
+    public void ShouldAllowSpecifyingAdditionalTypesToSkip()
+    {
+      new
       {
-          Any.Instance<SomethingWithTime>().Should().DependOn<DateTime>();
-      }
+        x = Maybe<int>.Nothing,
+        y = 12
+      }.Invoking(o => o.Should().DependOn(12)).Should().Throw<Exception>();
+
+      new
+      {
+        x = Maybe<int>.Nothing,
+        y = 12
+      }.Invoking(o => o.Should().DependOn(12, options => options.SkipType<Maybe<int>>()))
+        .Should().NotThrow();
+    }
+
+    [Fact]
+    public void ShouldAllowSpecifyingAdditionalObjectsToSkip()
+    {
+      new
+      {
+        x = Maybe<int>.Nothing,
+        y = 12
+      }.Invoking(o => o.Should().DependOn(12)).Should().Throw<Exception>();
+
+      new
+      {
+        x = Maybe<int>.Nothing,
+        y = 12
+      }.Invoking(o => o.Should().DependOn(12, options => options.Skip(Maybe<int>.Nothing)))
+        .Should().NotThrow();
+    }
+
+    //bug add object not to inspect
+
     //todo add Should().NotDependOn();
     //todo add Should().DependOn(Func matchCriteria)
 
@@ -241,21 +291,23 @@ public void ShouldNotFailWhenInvokedOnObjectWithProxies()
     }
   }
 
-    public interface IObjectWithReadOnlyDictionary
+
+
+  public interface IObjectWithReadOnlyDictionary
+  {
+  }
+
+  public class ObjectWithReadOnlyDictionary : IObjectWithReadOnlyDictionary
+  {
+    private readonly IReadOnlyDictionary<string, string> _readOnlyDictionary;
+
+    public ObjectWithReadOnlyDictionary(IReadOnlyDictionary<string, string> readOnlyDictionary)
     {
+      _readOnlyDictionary = readOnlyDictionary;
     }
+  }
 
-    public class ObjectWithReadOnlyDictionary : IObjectWithReadOnlyDictionary
-    {
-      private readonly IReadOnlyDictionary<string, string> _readOnlyDictionary;
-
-      public ObjectWithReadOnlyDictionary(IReadOnlyDictionary<string, string> readOnlyDictionary)
-      {
-        _readOnlyDictionary = readOnlyDictionary;
-      }
-    }
-
-    public class Decorator4 : Decorator
+  public class Decorator4 : Decorator
   {
   }
 
@@ -295,6 +347,6 @@ public void ShouldNotFailWhenInvokedOnObjectWithProxies()
 
   public class SomethingWithTime
   {
-      public DateTime LastAccess { get; set; }
+    public DateTime LastAccess { get; set; }
   }
 }
