@@ -270,7 +270,23 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
         .Should().NotThrow();
     }
 
-    //bug add object not to inspect
+    [Fact]
+    public void ShouldAllowSpecifyingAdditionalObjectsToSkipAvoidingNulls()
+    {
+        new
+        {
+            x = Maybe<int>.Nothing,
+            y = 12
+        }.Invoking(o => o.Should().DependOn(12)).Should().Throw<Exception>();
+
+        new
+            {
+                z = null as string,
+                x = Maybe<int>.Nothing,
+                y = 12,
+            }.Invoking(o => o.Should().DependOn(12, options => options.Skip(Maybe<int>.Nothing)))
+            .Should().NotThrow();
+    }
 
     //todo add Should().NotDependOn();
     //todo add Should().DependOn(Func matchCriteria)

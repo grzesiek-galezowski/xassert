@@ -1,13 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
-
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <IsPackable>false</IsPackable>
-
     <AssemblyName>TddXt.XFluentAssert.TypeReflectionSpecification</AssemblyName>
-
     <RootNamespace>TddXt.XFluentAssert.TypeReflectionSpecification</RootNamespace>
+    <Nullable>enable</Nullable>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

@@ -4,6 +4,8 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>TddXt.XFluentAssert.AssertionConstraints</AssemblyName>
     <RootNamespace>TddXt.XFluentAssert.AssertionConstraints</RootNamespace>
+    <Nullable>enable</Nullable>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>

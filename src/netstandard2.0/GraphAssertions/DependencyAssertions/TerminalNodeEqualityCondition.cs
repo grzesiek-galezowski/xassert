@@ -11,7 +11,7 @@ namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
 
     public bool Evaluate(object target)
     {
-      return _instance.Equals(target);
+      return Equals(_instance, target);
     }
 
   }

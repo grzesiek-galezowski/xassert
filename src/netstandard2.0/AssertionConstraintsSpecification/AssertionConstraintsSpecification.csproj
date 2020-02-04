@@ -1,8 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
-
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Nullable>enable</Nullable>
+    <LangVersion>8.0</LangVersion>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
@@ -27,11 +28,4 @@
   <ItemGroup>
     <ProjectReference Include="..\AssertionConstraints\AssertionConstraints.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="TddXt.AnyRoot">
-      <HintPath>..\..\..\..\..\..\.nuget\packages\any\1.1.3\lib\netstandard2.0\TddXt.AnyRoot.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
 </Project>

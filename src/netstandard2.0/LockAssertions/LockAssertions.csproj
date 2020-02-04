@@ -4,6 +4,8 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>TddXt.XFluentAssert.LockAssertions</AssemblyName>
     <RootNamespace>TddXt.XFluentAssert.LockAssertions</RootNamespace>
+    <Nullable>enable</Nullable>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
