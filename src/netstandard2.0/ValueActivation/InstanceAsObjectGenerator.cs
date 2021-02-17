@@ -13,9 +13,9 @@
       _type = type;
     }
 
-    public object GenerateInstance(InstanceGenerator instanceGenerator, GenerationTrace trace)
+    public object GenerateInstance(InstanceGenerator instanceGenerator, GenerationRequest request)
     {
-      return instanceGenerator.Instance(_type, trace);
+      return instanceGenerator.Instance(_type, request);
     }
   }
 }
