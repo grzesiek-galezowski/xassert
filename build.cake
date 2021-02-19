@@ -4,7 +4,7 @@
 // VERSION
 //////////////////////////////////////////////////////////////////////
 
-var nugetVersion = "3.2.0";
+var nugetVersion = "4.0.0";
 
 //////////////////////////////////////////////////////////////////////
 // ARGUMENTS
@@ -23,10 +23,10 @@ var mainDll = "TddXt.XFluentAssertRoot.dll";
 //////////////////////////////////////////////////////////////////////
 
 
-var nSubstitute      = new[] {"NSubstitute"      , "4.2.1"};
-var fluentAssertions = new[] {"FluentAssertions" , "5.10.0"};
-var any              = new[] {"Any"              , "4.2.0"};
-var compareNetObjects= new[] {"CompareNETObjects", "4.65.0"};
+var nSubstitute      = new[] {"NSubstitute"      , "4.2.2"};
+var fluentAssertions = new[] {"FluentAssertions" , "5.10.3"};
+var any              = new[] {"Any"              , "6.0.0"};
+var compareNetObjects= new[] {"CompareNETObjects", "4.72.0"};
 
 
 //////////////////////////////////////////////////////////////////////
