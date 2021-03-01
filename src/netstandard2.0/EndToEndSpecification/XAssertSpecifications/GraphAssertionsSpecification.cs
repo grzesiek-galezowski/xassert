@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
 using System.Security.Permissions;
 using System.Threading;
 using FluentAssertions;
 using Functional.Maybe;
 using NSubstitute;
-using TddXt.XFluentAssert.Root;
-using TddXt.XFluentAssertRoot;
 using Xunit;
 using Xunit.Abstractions;
 using Xunit.Sdk;
 using static TddXt.AnyRoot.Root;
+using ObjectDependencyAssertions = TddXt.XFluentAssert.Api.ObjectDependencyAssertions;
 
 namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
 {
@@ -32,19 +30,19 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
     public void ShouldAllowAssertingOnTypeDependency()
     {
       //TODO split into several facts
-      new A1().Should().DependOn<int>();
-      new A1().Should().DependOn<A2>();
-      new A1().Should().DependOn<A3>();
-      new A1().Should().DependOn<B2>();
-      new A1().Should().DependOn<B3>();
+      ObjectDependencyAssertions.DependOn<int>(new A1().Should());
+      ObjectDependencyAssertions.DependOn<A2>(new A1().Should());
+      ObjectDependencyAssertions.DependOn<A3>(new A1().Should());
+      ObjectDependencyAssertions.DependOn<B2>(new A1().Should());
+      ObjectDependencyAssertions.DependOn<B3>(new A1().Should());
 
-      new Action(() => new A1().Should().DependOn<SecurityAttribute>())
+      new Action(() => ObjectDependencyAssertions.DependOn<SecurityAttribute>(new A1().Should()))
         .Should().ThrowExactly<XunitException>()
         .WithMessage("Could not find " +
                      "System.Security.Permissions.SecurityAttribute " +
                      "anywhere in dependency graph");
 
-      new Action(() => new A1().Should().DependOn<A1>())
+      new Action(() => ObjectDependencyAssertions.DependOn<A1>(new A1().Should()))
         .Should().ThrowExactly<XunitException>()
         .WithMessage("Could not find " +
                      "TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.A1 " +
@@ -65,45 +63,45 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
       var b2 = new B2(b3);
       var a1 = new A1(a2, b2);
 
-      a1.Should().DependOn(a2);
-      a1.Should().DependOn(b2);
-      a1.Should().DependOn(b3);
-      a1.Should().DependOn(abc);
-      a1.Should().DependOn(num);
+      ObjectDependencyAssertions.DependOn(a1.Should(), a2);
+      ObjectDependencyAssertions.DependOn(a1.Should(), b2);
+      ObjectDependencyAssertions.DependOn(a1.Should(), b3);
+      ObjectDependencyAssertions.DependOn(a1.Should(), abc);
+      ObjectDependencyAssertions.DependOn(a1.Should(), num);
 
-      new Action(() => a1.Should().DependOn(new A2()))
+      new Action(() => ObjectDependencyAssertions.DependOn(a1.Should(), new A2()))
         .Should().ThrowExactly<XunitException>().WithMessage(
           @"Could not find the particular instance: TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.A2 anywhere in dependency graph however, another instance of this type was found within the following paths:
 [Root(A1)]->[_a2(A2)]->[_a3(A3)]
 [Root(A1)]->[_a2(A2)]->[_b3(B3)]
 [Root(A1)]->[_a2(A2)]->[_str(String)]
 [Root(A1)]->[_a2(A2)]->[_num(Int32)]");
-      new Action(() => a1.Should().DependOn(new B2()))
+      new Action(() => ObjectDependencyAssertions.DependOn(a1.Should(), new B2()))
         .Should().ThrowExactly<XunitException>().WithMessage(
           @"Could not find the particular instance: TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.B2 anywhere in dependency graph however, another instance of this type was found within the following paths:
 [Root(A1)]->[_b2(B2)]->[_b3(B3)]");
-      new Action(() => a1.Should().DependOn(new B3()))
+      new Action(() => ObjectDependencyAssertions.DependOn(a1.Should(), new B3()))
         .Should().ThrowExactly<XunitException>().WithMessage(
           @"Could not find the particular instance: TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.B3 anywhere in dependency graph however, another instance of this type was found within the following paths:
 [Root(A1)]->[_a2(A2)]->[_b3(B3)]
 [Root(A1)]->[_b2(B2)]->[_b3(B3)]");
-      new Action(() => a1.Should().DependOn(abc + "a"))
+      new Action(() => ObjectDependencyAssertions.DependOn(a1.Should(), abc + "a"))
         .Should().ThrowExactly<XunitException>().WithMessage(
           @"Could not find the particular instance: abca anywhere in dependency graph however, another instance of this type was found within the following paths:
 [Root(A1)]->[_a2(A2)]->[_str(String)]");
-      new Action(() => a1.Should().DependOn(num + 1))
+      new Action(() => ObjectDependencyAssertions.DependOn(a1.Should(), num + 1))
         .Should().ThrowExactly<XunitException>().WithMessage(
           @"Could not find the particular instance: 124 anywhere in dependency graph however, another instance of this type was found within the following paths:
 [Root(A1)]->[_a2(A2)]->[_num(Int32)]");
 
-      new Action(() => a1.Should().DependOn(a1))
+      new Action(() => ObjectDependencyAssertions.DependOn(a1.Should(), a1))
         .Should().ThrowExactly<XunitException>().Which.Message.Contains(
           @"Could not find the particular instance: TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.A1 anywhere in dependency graph");
-      new Action(() => a2.Should().DependOn(a1))
+      new Action(() => ObjectDependencyAssertions.DependOn(a2.Should(), a1))
         .Should().ThrowExactly<XunitException>().Which.Message.Contains(
           "Could not find the particular instance: TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.A1 anywhere in dependency graph");
 
-      abc.Should().DependOn(3);
+      ObjectDependencyAssertions.DependOn(abc.Should(), 3);
     }
 
     [Fact]
@@ -114,7 +112,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
       var readOnlyDictionary = Any.Instance<IReadOnlyDictionary<string, string>>();
       IObjectWithReadOnlyDictionary obj = new ObjectWithReadOnlyDictionary(readOnlyDictionary);
       //THEN
-      obj.Should().DependOn(readOnlyDictionary);
+      ObjectDependencyAssertions.DependOn(obj.Should(), readOnlyDictionary);
     }
 
     [Fact]
@@ -129,9 +127,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
       var decorator1 = new Decorator1(decorator2);
 
       //THEN
-      decorator1.Should()
-        .DependOnChain(decorator2, decorator3).And
-        .DependOnChain(decorator2, decorator3, decorator4);
+      ObjectDependencyAssertions.DependOnChain(ObjectDependencyAssertions.DependOnChain(decorator1.Should(), decorator2, decorator3).And, decorator2, decorator3, decorator4);
     }
 
     [Fact]
@@ -146,7 +142,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
       var decorator1 = new Decorator1(decorator2);
 
       //THEN
-      new Action(() => { decorator1.Should().DependOnChain(decorator2, decorator3, decorator1); })
+      new Action(() => { ObjectDependencyAssertions.DependOnChain(decorator1.Should(), decorator2, decorator3, decorator1); })
         .Should().ThrowExactly<XunitException>()
         .WithMessage(
           @"Could not find the particular sequence of objects: [TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.Decorator2, TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.Decorator3, TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.Decorator1] anywhere in dependency graph. Paths searched:
@@ -165,8 +161,8 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
       var decorator1 = new Decorator1(decorator2);
 
       //THEN
-      decorator1.Should().DependOnTypeChain(decorator2.GetType(), decorator3.GetType());
-      decorator1.Should().DependOnTypeChain(decorator2.GetType(), decorator3.GetType(), decorator4.GetType());
+      ObjectDependencyAssertions.DependOnTypeChain(decorator1.Should(), decorator2.GetType(), decorator3.GetType());
+      ObjectDependencyAssertions.DependOnTypeChain(decorator1.Should(), decorator2.GetType(), decorator3.GetType(), decorator4.GetType());
     }
 
     [Fact]
@@ -183,7 +179,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
       //THEN
       new Action(() =>
         {
-          decorator1.Should().DependOnTypeChain(decorator2.GetType(), decorator3.GetType(), decorator1.GetType());
+          ObjectDependencyAssertions.DependOnTypeChain(decorator1.Should(), decorator2.GetType(), decorator3.GetType(), decorator1.GetType());
         })
         .Should().ThrowExactly<XunitException>()
         .WithMessage(
@@ -196,23 +192,23 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
     {
       var enumerable = Substitute.For<IEnumerable<int>>();
       new Action(() =>
-          new MyObjectImpl(Substitute.For<IEnumerable<int>>()).Should().DependOn("lol"))
+          ObjectDependencyAssertions.DependOn(new MyObjectImpl(Substitute.For<IEnumerable<int>>()).Should(), "lol"))
         .Should().ThrowExactly<XunitException>();
 
-      new Action(() => { new MyObjectImpl(enumerable).Should().DependOn(enumerable); })
+      new Action(() => { ObjectDependencyAssertions.DependOn(new MyObjectImpl(enumerable).Should(), enumerable); })
         .Should().NotThrow();
 
-      new Action(() => new MyObjectImpl(Substitute.For<IEnumerable<int>>())
-          .Should().DependOn(Substitute.For<IEnumerable<int>>()))
+      new Action(() => ObjectDependencyAssertions.DependOn(new MyObjectImpl(Substitute.For<IEnumerable<int>>())
+            .Should(), Substitute.For<IEnumerable<int>>()))
         .Should().ThrowExactly<XunitException>();
     }
 
     [Fact]
     public void ShouldBeAbleToFindItemsWithinCollections()
     {
-      new List<string> {"trolololo"}.Should().DependOn("trolololo");
+      ObjectDependencyAssertions.DependOn(new List<string> { "trolololo" }.Should(), "trolololo");
 
-      new Action(() => new List<string> {"trolololo"}.Should().DependOn("trolololo2"))
+      new Action(() => ObjectDependencyAssertions.DependOn(new List<string> { "trolololo" }.Should(), "trolololo2"))
         .Should().ThrowExactly<XunitException>()
         .WithMessage(
           @"Could not find the particular instance: trolololo2 anywhere in dependency graph however, another instance of this type was found within the following paths:
@@ -226,14 +222,14 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
       var cancellationToken = new CancellationToken(true);
 
       //WHEN - THEN
-      cancellationToken.Should().DependOn<CancellationTokenSource>();
-      cancellationToken.Should().DependOn<ManualResetEvent>();
+      ObjectDependencyAssertions.DependOn<CancellationTokenSource>(cancellationToken.Should());
+      ObjectDependencyAssertions.DependOn<ManualResetEvent>(cancellationToken.Should());
     }
 
     [Fact]
     public void ShouldSupportDateTimes()
     {
-      Any.Instance<SomethingWithTime>().Should().DependOn<DateTime>();
+      ObjectDependencyAssertions.DependOn<DateTime>(Any.Instance<SomethingWithTime>().Should());
     }
 
     [Fact]
@@ -243,13 +239,13 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
       {
         x = Maybe<int>.Nothing,
         y = 12
-      }.Invoking(o => o.Should().DependOn(12)).Should().Throw<Exception>();
+      }.Invoking(o => ObjectDependencyAssertions.DependOn(o.Should(), 12)).Should().Throw<Exception>();
 
       new
       {
         x = Maybe<int>.Nothing,
         y = 12
-      }.Invoking(o => o.Should().DependOn(12, options => options.SkipType<Maybe<int>>()))
+      }.Invoking(o => ObjectDependencyAssertions.DependOn(o.Should(), 12, options => options.SkipType<Maybe<int>>()))
         .Should().NotThrow();
     }
 
@@ -260,32 +256,32 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
       {
         x = Maybe<int>.Nothing,
         y = 12
-      }.Invoking(o => o.Should().DependOn(12)).Should().Throw<Exception>();
+      }.Invoking(o => ObjectDependencyAssertions.DependOn(o.Should(), 12)).Should().Throw<Exception>();
 
       new
       {
         x = Maybe<int>.Nothing,
         y = 12
-      }.Invoking(o => o.Should().DependOn(12, options => options.Skip(Maybe<int>.Nothing)))
+      }.Invoking(o => ObjectDependencyAssertions.DependOn(o.Should(), 12, options => options.Skip(Maybe<int>.Nothing)))
         .Should().NotThrow();
     }
 
     [Fact]
     public void ShouldAllowSpecifyingAdditionalObjectsToSkipAvoidingNulls()
     {
-        new
-        {
-            x = Maybe<int>.Nothing,
-            y = 12
-        }.Invoking(o => o.Should().DependOn(12)).Should().Throw<Exception>();
+      new
+      {
+        x = Maybe<int>.Nothing,
+        y = 12
+      }.Invoking(o => ObjectDependencyAssertions.DependOn(o.Should(), 12)).Should().Throw<Exception>();
 
-        new
-            {
-                z = null as string,
-                x = Maybe<int>.Nothing,
-                y = 12,
-            }.Invoking(o => o.Should().DependOn(12, options => options.Skip(Maybe<int>.Nothing)))
-            .Should().NotThrow();
+      new
+      {
+        z = null as string,
+        x = Maybe<int>.Nothing,
+        y = 12,
+      }.Invoking(o => ObjectDependencyAssertions.DependOn(o.Should(), 12, options => options.Skip(Maybe<int>.Nothing)))
+          .Should().NotThrow();
     }
 
     //todo add Should().NotDependOn();

@@ -8,9 +8,4 @@
     <LangVersion>8.0</LangVersion>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\CommonTypes\CommonTypes.csproj" />
-    <ProjectReference Include="..\TypeReflection.Interfaces\TypeReflection.Interfaces.csproj" />
-  </ItemGroup>
-
 </Project>

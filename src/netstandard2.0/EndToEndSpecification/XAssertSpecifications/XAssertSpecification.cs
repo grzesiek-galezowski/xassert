@@ -1,6 +1,7 @@
 ﻿using AtmaFileSystem;
-using TddXt.XFluentAssertRoot;
-using TddXt.XFluentAssertRoot.ValueAssertions;
+using TddXt.XFluentAssert.Api;
+using TddXt.XFluentAssert.Api.ValueAssertions;
+
 namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
 {
   using System;
@@ -11,8 +12,6 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
   using AnyRoot;
   using AnyRoot.Strings;
   using CommonTypes;
-  using Root;
-  using Root.ValueAssertions;
   using TypeReflection.ImplementationDetails;
 
   using Xunit;
@@ -49,7 +48,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
     {
       typeof(ProperValueType).Should().HaveValueSemantics();
     }
-    
+
     [Fact]
     public void ShouldPassValueTypeAssertionForProperValueTypeDerivedFromValueLibrary()
     {
@@ -113,7 +112,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
     public void ShouldFailUpperCaseAssertionOnLowerCaseStringAndPassOnUpperCaseString()
     {
       var s = Root.Any.String();
-      new Action(() => s.ToLower().Should().BeUppercase() ).Should().ThrowExactly<XunitException>();
+      new Action(() => s.ToLower().Should().BeUppercase()).Should().ThrowExactly<XunitException>();
       new Action(() => s.ToUpper().Should().BeUppercase()).Should().NotThrow();
     }
 
@@ -206,7 +205,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
     [Fact]
     public void ShouldPassUppercaseAssertionOnUppercaseString()
     {
-       Root.Any.UpperCaseString().Should().BeUppercase();
+      Root.Any.UpperCaseString().Should().BeUppercase();
     }
 
     [Fact]
@@ -334,7 +333,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
   {
     public const int Val1 = 0;
     public const int Val2 = Val1 + 1;
-    public const int Val3 = Val2+1;
+    public const int Val3 = Val2 + 1;
   }
 
   [SuppressMessage("ReSharper", "UnusedMember.Global")]

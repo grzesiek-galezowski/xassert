@@ -12,10 +12,4 @@
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\AssertionConstraints\AssertionConstraints.csproj" />
-    <ProjectReference Include="..\TypeReflection\TypeReflection.csproj" />
-    <ProjectReference Include="..\ValueActivation\ValueActivation.csproj" />
-  </ItemGroup>
-
 </Project>

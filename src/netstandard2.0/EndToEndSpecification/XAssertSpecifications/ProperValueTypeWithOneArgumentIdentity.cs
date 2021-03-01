@@ -17,7 +17,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
       if (ReferenceEquals(null, obj)) return false;
       if (ReferenceEquals(this, obj)) return true;
       if (obj.GetType() != GetType()) return false;
-      return Equals((ProperValueTypeWithOneArgumentIdentity) obj);
+      return Equals((ProperValueTypeWithOneArgumentIdentity)obj);
     }
 
     public override int GetHashCode()

@@ -1,11 +1,6 @@
 ﻿namespace DotNetCore2._0TestApp
 {
   using System;
-  using System.Collections;
-  using System.Collections.Generic;
-
-  using FluentAssertions;
-  using TddXt.XFluentAssert.Root;
 
   public class Program
   {

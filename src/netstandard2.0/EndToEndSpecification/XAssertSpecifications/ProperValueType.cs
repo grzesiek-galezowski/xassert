@@ -19,14 +19,14 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
       if (ReferenceEquals(null, obj)) return false;
       if (ReferenceEquals(this, obj)) return true;
       if (obj.GetType() != GetType()) return false;
-      return Equals((ProperValueType) obj);
+      return Equals((ProperValueType)obj);
     }
 
     public override int GetHashCode()
     {
       unchecked
       {
-        return (_a*397) ^ (_anArray != null ? _anArray.GetHashCode() : 0);
+        return (_a * 397) ^ (_anArray != null ? _anArray.GetHashCode() : 0);
       }
     }
 

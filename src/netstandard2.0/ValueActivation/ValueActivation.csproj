@@ -15,7 +15,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TypeReflection.Interfaces\TypeReflection.Interfaces.csproj" />
-    <ProjectReference Include="..\TypeReflection\TypeReflection.csproj" />
   </ItemGroup>
 
 </Project>

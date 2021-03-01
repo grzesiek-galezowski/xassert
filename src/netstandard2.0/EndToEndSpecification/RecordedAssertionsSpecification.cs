@@ -1,10 +1,4 @@
-﻿using TddXt.XFluentAssertRoot;
-using System;
-using System.Linq;
-using FluentAssertions;
-using FluentAssertions.Types;
-using TddXt.XFluentAssert.TypeReflection;
-using TddXt.XFluentAssert.TypeReflection.Interfaces;
+﻿using TddXt.XFluentAssert.Api;
 
 namespace TddXt.XFluentAssert.EndToEndSpecification
 {
@@ -16,7 +10,6 @@ namespace TddXt.XFluentAssert.EndToEndSpecification
   using AnyRoot;
   using AnyRoot.Strings;
   using AssertionConstraints;
-  using Root;
 
   using Xunit;
   using Xunit.Sdk;
@@ -56,7 +49,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification
     public void ShouldFailStaticFieldsAssertionIfAssemblyContainsAtLeastOneStaticField()
     {
       var assembly = typeof(RecordedAssertionsSpecification).Assembly;
-      
+
       new Action(() => assembly.Should().NotHaveStaticFields()).Should().ThrowExactly<XunitException>()
         .Which.Message.Should().ContainAll(nameof(_lolek), nameof(Lol2._gieniek), nameof(StaticProperty));
     }
@@ -65,7 +58,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification
     public void ShouldFailReferenceAssertionWhenAssemblyReferencesOtherAssembly()
     {
       var assembly1 = typeof(RecordedAssertionsSpecification).Assembly;
-      new Action(() => 
+      new Action(() =>
         assembly1.Should().NotReferenceAssemblyWith(typeof(FactAttribute)))
         .Should().ThrowExactly<XunitException>();
     }
@@ -75,7 +68,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification
     public void ShouldFailNonPublicEventsAssertionWhenAssemblyContainsAtLeastOneNonPublicEvent()
     {
       const string EventName = "explicitlyImplementedEvent";
-      var assembly = typeof (RecordedAssertionsSpecification).Assembly;
+      var assembly = typeof(RecordedAssertionsSpecification).Assembly;
       assembly.Should().DefineType("TddXt.XFluentAssert.EndToEndSpecification", nameof(ExplicitImplementation));
       assembly.Should().DefineType("TddXt.XFluentAssert.EndToEndSpecification", nameof(ExplicitlyImplemented));
       typeof(ExplicitlyImplemented).Should().HaveEventWithShortName(EventName);
@@ -132,7 +125,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification
   {
     public ObjectWithTwoConstructors(int x)
     {
-      
+
     }
 
     public ObjectWithTwoConstructors(string x)
@@ -143,13 +136,13 @@ namespace TddXt.XFluentAssert.EndToEndSpecification
 
   public class MyException : Exception
   {
-    
+
   }
 
 
   public interface ExplicitlyImplemented
   {
-    event AnyEventHandler explicitlyImplementedEvent;    
+    event AnyEventHandler explicitlyImplementedEvent;
   }
 
   public class ExplicitImplementation : ExplicitlyImplemented

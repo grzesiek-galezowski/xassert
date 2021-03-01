@@ -8,8 +8,4 @@
     <LangVersion>8.0</LangVersion>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\CommonTypes\CommonTypes.csproj" />
-  </ItemGroup>
-
 </Project>

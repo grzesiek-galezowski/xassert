@@ -17,7 +17,7 @@
     {
       Assert.True(SmartType.For(exceptionType).IsException());
     }
-    
+
     [Fact]
     public void ShouldReportWhenItIsNotDerivedFromException()
     {

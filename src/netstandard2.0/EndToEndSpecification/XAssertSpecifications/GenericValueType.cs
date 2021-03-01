@@ -17,7 +17,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
       if (ReferenceEquals(null, obj)) return false;
       if (ReferenceEquals(this, obj)) return true;
       if (obj.GetType() != GetType()) return false;
-      return Equals((GenericValueType<T>) obj);
+      return Equals((GenericValueType<T>)obj);
     }
 
     public override int GetHashCode()
@@ -42,6 +42,6 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
       _field = field;
     }
 
-   
+
   }
 }
