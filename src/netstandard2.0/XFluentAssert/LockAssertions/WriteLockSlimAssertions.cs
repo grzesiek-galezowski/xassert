@@ -4,7 +4,7 @@ using FluentAssertions;
 
 namespace TddXt.XFluentAssert.LockAssertions
 {
-  public class WriteLockSlimAssertions : LockAssertions
+  public class WriteLockSlimAssertions : ILockAssertions
   {
     private readonly ReaderWriterLockSlim _aLock;
 

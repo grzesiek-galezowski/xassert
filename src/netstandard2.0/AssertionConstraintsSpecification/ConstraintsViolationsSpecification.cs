@@ -52,13 +52,13 @@ namespace AssertionConstraintsSpecification
     public void ShouldBeAbleToGenerateSeededStrings()
     {
       //WHEN
-      const string Seed = "xyz";
-      var violation1 = Any.String(Seed);
-      var violation2 = Any.String(Seed);
+      const string seed = "xyz";
+      var violation1 = Any.String(seed);
+      var violation2 = Any.String(seed);
 
       //THEN
-      violation1.Should().StartWith(Seed);
-      violation2.Should().StartWith(Seed);
+      violation1.Should().StartWith(seed);
+      violation2.Should().StartWith(seed);
       violation1.Should().NotBe(violation2);
     }
   }

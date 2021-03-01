@@ -6,6 +6,7 @@ using System.Threading;
 using FluentAssertions;
 using Functional.Maybe;
 using NSubstitute;
+using TddXt.XFluentAssert.Api;
 using Xunit;
 using Xunit.Abstractions;
 using Xunit.Sdk;
@@ -16,12 +17,12 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
 {
   public class GraphAssertionsSpecification : IDisposable
   {
-    private readonly ITestOutputHelper output;
+    private readonly ITestOutputHelper _output;
     private StringWriter _stringWriter;
 
     public GraphAssertionsSpecification(ITestOutputHelper output)
     {
-      this.output = output;
+      this._output = output;
       _stringWriter = new StringWriter();
       Console.SetOut(_stringWriter);
     }
@@ -245,8 +246,14 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
       {
         x = Maybe<int>.Nothing,
         y = 12
-      }.Invoking(o => ObjectDependencyAssertions.DependOn(o.Should(), 12, options => options.SkipType<Maybe<int>>()))
+      }.Invoking(o => o.Should().DependOn(12, options => options.SkipType<Maybe<int>>()))
         .Should().NotThrow();
+
+      new
+      {
+        x = Maybe<int>.Nothing,
+        y = 12
+      }.Invoking(o => o.Should().DependOn<int>(options => options.SkipType<Maybe<int>>())).Should().NotThrow();
     }
 
     [Fact]
@@ -299,7 +306,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
 
     public void Dispose()
     {
-      output.WriteLine(_stringWriter.ToString());
+      _output.WriteLine(_stringWriter.ToString());
     }
   }
 
@@ -319,41 +326,41 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
     }
   }
 
-  public class Decorator4 : Decorator
+  public class Decorator4 : IDecorator
   {
   }
 
-  public class Decorator3 : Decorator
+  public class Decorator3 : IDecorator
   {
-    private readonly Decorator _decorator4;
+    private readonly IDecorator _decorator4;
 
-    public Decorator3(Decorator decorator4)
+    public Decorator3(IDecorator decorator4)
     {
       _decorator4 = decorator4;
     }
   }
 
-  public class Decorator2 : Decorator
+  public class Decorator2 : IDecorator
   {
-    private readonly Decorator _decorator3;
+    private readonly IDecorator _decorator3;
 
-    public Decorator2(Decorator decorator3)
+    public Decorator2(IDecorator decorator3)
     {
       _decorator3 = decorator3;
     }
   }
 
-  public class Decorator1 : Decorator
+  public class Decorator1 : IDecorator
   {
-    private readonly Decorator _decorator;
+    private readonly IDecorator _decorator;
 
-    public Decorator1(Decorator decorator)
+    public Decorator1(IDecorator decorator)
     {
       _decorator = decorator;
     }
   }
 
-  public interface Decorator
+  public interface IDecorator
   {
   }
 

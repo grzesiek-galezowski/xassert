@@ -56,7 +56,7 @@ namespace TddXt.XFluentAssert.Api
     public static void SynchronizeAccessTo<T>(
       this ObjectAssertions assertions,
       Action<T> callToCheck,
-      XFluentAssert.LockAssertions.LockAssertions lockAssertions,
+      XFluentAssert.LockAssertions.ILockAssertions lockAssertions,
       T wrappedObjectMock)
       where T : class
     {
@@ -70,7 +70,7 @@ namespace TddXt.XFluentAssert.Api
     public static void SynchronizeAccessTo<T, TAssertions>(
       this ReferenceTypeAssertions<T, TAssertions> assertions,
       Action<T> callToCheck,
-      XFluentAssert.LockAssertions.LockAssertions lockAssertions,
+      XFluentAssert.LockAssertions.ILockAssertions lockAssertions,
       T wrappedObjectMock)
       where T : class
       where TAssertions : ReferenceTypeAssertions<T, TAssertions>
@@ -85,7 +85,7 @@ namespace TddXt.XFluentAssert.Api
     public static void SynchronizeAccessTo<T, TReturn>(
       this ObjectAssertions assertions,
       Func<T, TReturn> callToCheck,
-      XFluentAssert.LockAssertions.LockAssertions lockAssertions,
+      XFluentAssert.LockAssertions.ILockAssertions lockAssertions,
       T wrappedObjectMock)
       where T : class
     {
@@ -99,7 +99,7 @@ namespace TddXt.XFluentAssert.Api
     public static void SynchronizeAccessTo<T, TReturn, TAssertions>(
       this ReferenceTypeAssertions<T, TAssertions> assertions,
       Func<T, TReturn> callToCheck,
-      XFluentAssert.LockAssertions.LockAssertions lockAssertions,
+      XFluentAssert.LockAssertions.ILockAssertions lockAssertions,
       T wrappedObjectMock)
       where T : class
       where TAssertions : ReferenceTypeAssertions<T, TAssertions>

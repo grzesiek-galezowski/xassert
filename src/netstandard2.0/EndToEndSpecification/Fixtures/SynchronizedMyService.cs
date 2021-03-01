@@ -1,10 +1,10 @@
 ﻿namespace TddXt.XFluentAssert.EndToEndSpecification.Fixtures
 {
-  public abstract class SynchronizedMyService<T> : MyService
+  public abstract class SynchronizedMyService<T> : IMyService
   {
-    private readonly MyService _innerInstance;
+    private readonly IMyService _innerInstance;
 
-    protected SynchronizedMyService(MyService innerInstance, T aLock)
+    protected SynchronizedMyService(IMyService innerInstance, T aLock)
     {
       _innerInstance = innerInstance;
       Lock = aLock;

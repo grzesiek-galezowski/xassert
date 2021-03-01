@@ -1,9 +1,9 @@
 ﻿using TddXt.XFluentAssert.Api;
 using System;
+using AutoFixture;
 using FluentAssertions;
-
+using Functional.Maybe;
 using NSubstitute;
-
 using TddXt.AnyRoot;
 using TddXt.AnyRoot.Strings;
 using TddXt.XFluentAssert.AssertionConstraints;
@@ -49,7 +49,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification
       var assembly = typeof(RecordedAssertionsSpecification).Assembly;
 
       new Action(() => assembly.Should().NotHaveStaticFields()).Should().ThrowExactly<XunitException>()
-        .Which.Message.Should().ContainAll(nameof(_lolek), nameof(Lol2._gieniek), nameof(StaticProperty));
+        .Which.Message.Should().ContainAll(nameof(_lolek), nameof(Lol2.Gieniek), nameof(StaticProperty));
     }
 
     [Fact]
@@ -65,15 +65,15 @@ namespace TddXt.XFluentAssert.EndToEndSpecification
     [Fact]
     public void ShouldFailNonPublicEventsAssertionWhenAssemblyContainsAtLeastOneNonPublicEvent()
     {
-      const string EventName = "explicitlyImplementedEvent";
+      const string eventName = "ExplicitlyImplementedEvent";
       var assembly = typeof(RecordedAssertionsSpecification).Assembly;
       assembly.Should().DefineType("TddXt.XFluentAssert.EndToEndSpecification", nameof(ExplicitImplementation));
-      assembly.Should().DefineType("TddXt.XFluentAssert.EndToEndSpecification", nameof(ExplicitlyImplemented));
-      typeof(ExplicitlyImplemented).Should().HaveEventWithShortName(EventName);
-      typeof(ExplicitImplementation).Should().HaveEventWithShortName(EventName);
+      assembly.Should().DefineType("TddXt.XFluentAssert.EndToEndSpecification", nameof(IExplicitlyImplemented));
+      typeof(IExplicitlyImplemented).Should().HaveEventWithShortName(eventName);
+      typeof(ExplicitImplementation).Should().HaveEventWithShortName(eventName);
 
       new Action(() => assembly.Should().NotHaveHiddenEvents()).Should().ThrowExactly<XunitException>()
-        .Which.Message.Should().NotContain(EventName);
+        .Which.Message.Should().NotContain(eventName);
     }
 
     [Fact]
@@ -87,17 +87,22 @@ namespace TddXt.XFluentAssert.EndToEndSpecification
         .Message.Should().NotContain("MyException");
     }
 
-
+    [Fact]
+    public void ShouldSupportEmptyMaybe()
+    {
+      new ObjectWithMaybe().Invoking(o => o.Should().DependOn(Maybe<string>.Nothing))
+        .Should().Throw<XunitException>();
+    }
 
     public class Lol2
     {
 #pragma warning disable 169
-      public static int _gieniek = 123;
+      public static int Gieniek = 123;
 #pragma warning restore 169
     }
 
 #pragma warning disable 67
-    protected event AnyEventHandler _changed;
+    protected event AnyEventHandler Changed;
 #pragma warning restore 67
 
 
@@ -113,9 +118,9 @@ namespace TddXt.XFluentAssert.EndToEndSpecification
 
   }
 
-  public delegate void AnyEventHandler(object sender, AnyEventHandlerArgs args);
+  public delegate void AnyEventHandler(object sender, IAnyEventHandlerArgs args);
 
-  public interface AnyEventHandlerArgs
+  public interface IAnyEventHandlerArgs
   {
   }
 
@@ -137,15 +142,20 @@ namespace TddXt.XFluentAssert.EndToEndSpecification
 
   }
 
-
-  public interface ExplicitlyImplemented
+  public class ObjectWithMaybe
   {
-    event AnyEventHandler explicitlyImplementedEvent;
+    public Maybe<string> M1;
+    public Maybe<string> M2 = "".ToMaybe();
   }
 
-  public class ExplicitImplementation : ExplicitlyImplemented
+  public interface IExplicitlyImplemented
   {
-    event AnyEventHandler ExplicitlyImplemented.explicitlyImplementedEvent
+    event AnyEventHandler ExplicitlyImplementedEvent;
+  }
+
+  public class ExplicitImplementation : IExplicitlyImplemented
+  {
+    event AnyEventHandler IExplicitlyImplemented.ExplicitlyImplementedEvent
     {
       add { throw new NotImplementedException(); }
       remove { throw new NotImplementedException(); }

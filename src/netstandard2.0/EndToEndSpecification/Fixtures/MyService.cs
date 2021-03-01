@@ -1,6 +1,6 @@
 ﻿namespace TddXt.XFluentAssert.EndToEndSpecification.Fixtures
 {
-  public interface MyService
+  public interface IMyService
   {
     void VoidCall(int i);
     void VoidCallNotExited(int i);

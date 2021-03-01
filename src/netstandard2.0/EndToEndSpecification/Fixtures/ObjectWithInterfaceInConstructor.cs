@@ -6,9 +6,9 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.Fixtures
   public class ObjectWithInterfaceInConstructor
   {
     private readonly int _a;
-    public readonly ISimple _constructorArgument;
+    public readonly ISimple ConstructorArgument;
     private readonly string _b;
-    public readonly ObjectWithInterfaceInConstructor _constructorNestedArgument;
+    public readonly ObjectWithInterfaceInConstructor ConstructorNestedArgument;
 
     public ObjectWithInterfaceInConstructor(
       int a,
@@ -17,9 +17,9 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.Fixtures
       ObjectWithInterfaceInConstructor constructorNestedArgument)
     {
       _a = a;
-      _constructorArgument = constructorArgument;
+      ConstructorArgument = constructorArgument;
       _b = b;
-      _constructorNestedArgument = constructorNestedArgument;
+      ConstructorNestedArgument = constructorNestedArgument;
     }
   }
 }

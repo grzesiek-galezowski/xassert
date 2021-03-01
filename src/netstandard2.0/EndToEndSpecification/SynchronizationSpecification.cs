@@ -21,7 +21,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification
     public void ShouldNotThrowWhenVoidMethodIsReadSynchronizedCorrectly()
     {
       //GIVEN
-      var wrappedObjectMock = Substitute.For<MyService>();
+      var wrappedObjectMock = Substitute.For<IMyService>();
       var aLock = new ReaderWriterLockSlim();
       var service = new ReadSynchronizedMyService(wrappedObjectMock, aLock);
 
@@ -33,7 +33,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification
     public void ShouldNotThrowWhenVoidMethodIsWriteSynchronizedCorrectly()
     {
       //GIVEN
-      var wrappedObjectMock = Substitute.For<MyService>();
+      var wrappedObjectMock = Substitute.For<IMyService>();
       var service = new WriteSynchronizedMyService(wrappedObjectMock, new ReaderWriterLockSlim());
 
       //WHEN - THEN
@@ -44,7 +44,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification
     public void ShouldNotThrowWhenVoidMethodIsMonitorSynchronizedCorrectly()
     {
       //GIVEN
-      var wrappedObjectMock = Substitute.For<MyService>();
+      var wrappedObjectMock = Substitute.For<IMyService>();
       var service = new MonitorSynchronizedMyService(wrappedObjectMock, new object());
 
       //WHEN - THEN
@@ -58,7 +58,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification
     public void ShouldNotThrowWhenNonVoidMethodIsReadSynchronizedCorrectly()
     {
       //GIVEN
-      var wrappedObjectMock = Substitute.For<MyService>();
+      var wrappedObjectMock = Substitute.For<IMyService>();
       var aLock = new ReaderWriterLockSlim();
       var service = new ReadSynchronizedMyService(wrappedObjectMock, aLock);
 
@@ -70,7 +70,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification
     public void ShouldNotThrowWhenNonVoidMethodIsWriteSynchronizedCorrectly()
     {
       //GIVEN
-      var wrappedObjectMock = Substitute.For<MyService>();
+      var wrappedObjectMock = Substitute.For<IMyService>();
       var service = new WriteSynchronizedMyService(wrappedObjectMock, new ReaderWriterLockSlim());
 
       //WHEN - THEN
@@ -81,7 +81,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification
     public void ShouldNotThrowWhenNonVoidMethodIsMonitorSynchronizedCorrectly()
     {
       //GIVEN
-      var wrappedObjectMock = Substitute.For<MyService>();
+      var wrappedObjectMock = Substitute.For<IMyService>();
       var service = new MonitorSynchronizedMyService(wrappedObjectMock, new object());
 
       //WHEN - THEN
@@ -92,7 +92,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification
     public void ShouldThrowWhenVoidMethodDoesNotEnterMonitorAtAll()
     {
       //GIVEN
-      var wrappedObjectMock = Substitute.For<MyService>();
+      var wrappedObjectMock = Substitute.For<IMyService>();
       var service = new MonitorSynchronizedMyService(wrappedObjectMock, new object());
 
       //WHEN - THEN
@@ -105,7 +105,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification
     public void ShouldThrowWhenVoidMethodDoesNotExitMonitor()
     {
       //GIVEN
-      var wrappedObjectMock = Substitute.For<MyService>();
+      var wrappedObjectMock = Substitute.For<IMyService>();
       var service = new MonitorSynchronizedMyService(wrappedObjectMock, new object());
 
       //WHEN - THEN
@@ -118,7 +118,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification
     public void ShouldThrowWhenVoidMethodDoesNotExitMonitorOnException()
     {
       //GIVEN
-      var wrappedObjectMock = Substitute.For<MyService>();
+      var wrappedObjectMock = Substitute.For<IMyService>();
       var service = new MonitorSynchronizedMyService(wrappedObjectMock, new object());
 
       //WHEN - THEN
@@ -131,7 +131,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification
     public void ShouldThrowWhenNonVoidMethodDoesNotEnterMonitorAtAll()
     {
       //GIVEN
-      var wrappedObjectMock = Substitute.For<MyService>();
+      var wrappedObjectMock = Substitute.For<IMyService>();
       var service = new MonitorSynchronizedMyService(wrappedObjectMock, new object());
 
       //WHEN - THEN
@@ -144,7 +144,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification
     public void ShouldThrowWhenNonVoidMethodDoesNotExitMonitor()
     {
       //GIVEN
-      var wrappedObjectMock = Substitute.For<MyService>();
+      var wrappedObjectMock = Substitute.For<IMyService>();
       var service = new MonitorSynchronizedMyService(wrappedObjectMock, new object());
 
       //WHEN - THEN
@@ -156,7 +156,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification
     public void ShouldThrowWhenNonVoidMethodDoesNotExitMonitorOnException()
     {
       //GIVEN
-      var wrappedObjectMock = Substitute.For<MyService>();
+      var wrappedObjectMock = Substitute.For<IMyService>();
       var service = new MonitorSynchronizedMyService(wrappedObjectMock, new object());
 
       //WHEN - THEN
@@ -169,7 +169,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification
     public void ShouldThrowWhenVoidMethodDoesNotEnterReadLockAtAll()
     {
       //GIVEN
-      var wrappedObjectMock = Substitute.For<MyService>();
+      var wrappedObjectMock = Substitute.For<IMyService>();
       var service = new ReadSynchronizedMyService(wrappedObjectMock, new ReaderWriterLockSlim());
 
       //WHEN - THEN
@@ -182,7 +182,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification
     public void ShouldThrowWhenVoidMethodDoesNotExitReadLock()
     {
       //GIVEN
-      var wrappedObjectMock = Substitute.For<MyService>();
+      var wrappedObjectMock = Substitute.For<IMyService>();
       var service = new ReadSynchronizedMyService(wrappedObjectMock, new ReaderWriterLockSlim());
 
       //WHEN - THEN
@@ -195,7 +195,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification
     public void ShouldThrowWhenVoidMethodDoesNotExitReadLockOnException()
     {
       //GIVEN
-      var wrappedObjectMock = Substitute.For<MyService>();
+      var wrappedObjectMock = Substitute.For<IMyService>();
       var service = new ReadSynchronizedMyService(wrappedObjectMock, new ReaderWriterLockSlim());
 
       //WHEN - THEN
@@ -208,7 +208,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification
     public void ShouldThrowWhenNonVoidMethodDoesNotEnterReadLockAtAll()
     {
       //GIVEN
-      var wrappedObjectMock = Substitute.For<MyService>();
+      var wrappedObjectMock = Substitute.For<IMyService>();
       var service = new ReadSynchronizedMyService(wrappedObjectMock, new ReaderWriterLockSlim());
 
       //WHEN - THEN
@@ -221,7 +221,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification
     public void ShouldThrowWhenNonVoidMethodDoesNotExitReadLock()
     {
       //GIVEN
-      var wrappedObjectMock = Substitute.For<MyService>();
+      var wrappedObjectMock = Substitute.For<IMyService>();
       var service = new ReadSynchronizedMyService(wrappedObjectMock, new ReaderWriterLockSlim());
 
       //WHEN - THEN
@@ -234,7 +234,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification
     public void ShouldThrowWhenNonVoidMethodDoesNotExitReadLockOnException()
     {
       //GIVEN
-      var wrappedObjectMock = Substitute.For<MyService>();
+      var wrappedObjectMock = Substitute.For<IMyService>();
       var service = new ReadSynchronizedMyService(wrappedObjectMock, new ReaderWriterLockSlim());
 
       //WHEN - THEN
@@ -247,7 +247,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification
     public void ShouldThrowWhenVoidMethodDoesNotEnterWriteLockAtAll()
     {
       //GIVEN
-      var wrappedObjectMock = Substitute.For<MyService>();
+      var wrappedObjectMock = Substitute.For<IMyService>();
       var service = new WriteSynchronizedMyService(wrappedObjectMock, new ReaderWriterLockSlim());
 
       //WHEN - THEN
@@ -260,7 +260,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification
     public void ShouldThrowWhenVoidMethodDoesNotExitWriteLock()
     {
       //GIVEN
-      var wrappedObjectMock = Substitute.For<MyService>();
+      var wrappedObjectMock = Substitute.For<IMyService>();
       var service = new WriteSynchronizedMyService(wrappedObjectMock, new ReaderWriterLockSlim());
 
       //WHEN - THEN
@@ -273,7 +273,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification
     public void ShouldThrowWhenVoidMethodDoesNotExitWriteLockOnException()
     {
       //GIVEN
-      var wrappedObjectMock = Substitute.For<MyService>();
+      var wrappedObjectMock = Substitute.For<IMyService>();
       var service = new WriteSynchronizedMyService(wrappedObjectMock, new ReaderWriterLockSlim());
 
       //WHEN - THEN
@@ -286,7 +286,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification
     public void ShouldThrowWhenNonVoidMethodDoesNotEnterWriteLockAtAll()
     {
       //GIVEN
-      var wrappedObjectMock = Substitute.For<MyService>();
+      var wrappedObjectMock = Substitute.For<IMyService>();
       var service = new WriteSynchronizedMyService(wrappedObjectMock, new ReaderWriterLockSlim());
 
       //WHEN - THEN
@@ -299,7 +299,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification
     public void ShouldThrowWhenNonVoidMethodDoesNotExitWriteLock()
     {
       //GIVEN
-      var wrappedObjectMock = Substitute.For<MyService>();
+      var wrappedObjectMock = Substitute.For<IMyService>();
       var service = new WriteSynchronizedMyService(wrappedObjectMock, new ReaderWriterLockSlim());
 
       //WHEN - THEN
@@ -312,7 +312,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification
     public void ShouldThrowWhenNonVoidMethodDoesNotExitWriteLockOnException()
     {
       //GIVEN
-      var wrappedObjectMock = Substitute.For<MyService>();
+      var wrappedObjectMock = Substitute.For<IMyService>();
       var service = new WriteSynchronizedMyService(wrappedObjectMock, new ReaderWriterLockSlim());
 
       //WHEN - THEN
@@ -324,7 +324,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification
 
     private class ReadSynchronizedMyService : SynchronizedMyService<ReaderWriterLockSlim>
     {
-      public ReadSynchronizedMyService(MyService innerInstance, ReaderWriterLockSlim aLock) : base(innerInstance, aLock)
+      public ReadSynchronizedMyService(IMyService innerInstance, ReaderWriterLockSlim aLock) : base(innerInstance, aLock)
       {
       }
 
@@ -341,7 +341,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification
 
     private class WriteSynchronizedMyService : SynchronizedMyService<ReaderWriterLockSlim>
     {
-      public WriteSynchronizedMyService(MyService innerInstance, ReaderWriterLockSlim aLock) : base(innerInstance, aLock)
+      public WriteSynchronizedMyService(IMyService innerInstance, ReaderWriterLockSlim aLock) : base(innerInstance, aLock)
       {
       }
 
@@ -358,7 +358,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification
 
     private class MonitorSynchronizedMyService : SynchronizedMyService<object>
     {
-      public MonitorSynchronizedMyService(MyService innerInstance, object aLock) : base(innerInstance, aLock)
+      public MonitorSynchronizedMyService(IMyService innerInstance, object aLock) : base(innerInstance, aLock)
       {
       }
 

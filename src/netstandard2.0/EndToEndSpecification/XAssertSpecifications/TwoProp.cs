@@ -5,6 +5,6 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
     public int X1 { get; set; }
     public int X2 { get; set; }
     public int X3 { get; set; }
-    public int x4;
+    public int X4;
   }
 }

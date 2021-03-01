@@ -30,11 +30,11 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
 
     private class AlwaysNotEqual
     {
-      private int a;
+      private int _a;
 
       public AlwaysNotEqual(int a)
       {
-        this.a = a;
+        this._a = a;
       }
 
       public override bool Equals(object obj)

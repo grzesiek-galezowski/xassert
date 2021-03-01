@@ -18,10 +18,10 @@ namespace TddXt.XFluentAssert.TypeReflection
   public class SmartType : ISmartType
   {
     private readonly Type _type;
-    private readonly ConstructorRetrieval.ConstructorRetrieval _constructorRetrieval;
+    private readonly ConstructorRetrieval.IConstructorRetrieval _constructorRetrieval;
     private readonly TypeInfo _typeInfo;
 
-    public SmartType(Type type, ConstructorRetrieval.ConstructorRetrieval constructorRetrieval)
+    public SmartType(Type type, ConstructorRetrieval.IConstructorRetrieval constructorRetrieval)
     {
       _type = type;
       _constructorRetrieval = constructorRetrieval;

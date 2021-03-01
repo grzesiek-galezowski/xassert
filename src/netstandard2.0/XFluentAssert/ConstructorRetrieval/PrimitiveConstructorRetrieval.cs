@@ -4,7 +4,7 @@ using TddXt.XFluentAssert.TypeReflection.Interfaces;
 
 namespace TddXt.XFluentAssert.ConstructorRetrieval
 {
-  internal class PrimitiveConstructorRetrieval : ConstructorRetrieval
+  internal class PrimitiveConstructorRetrieval : IConstructorRetrieval
   {
     public IEnumerable<ICreateObjects> RetrieveFrom(IConstructorQueries constructors)
     {

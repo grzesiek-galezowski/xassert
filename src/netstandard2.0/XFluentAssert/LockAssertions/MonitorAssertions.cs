@@ -3,7 +3,7 @@ using System.Threading;
 
 namespace TddXt.XFluentAssert.LockAssertions
 {
-  public class MonitorAssertions : LockAssertions
+  public class MonitorAssertions : ILockAssertions
   {
     private readonly object _aLock;
 

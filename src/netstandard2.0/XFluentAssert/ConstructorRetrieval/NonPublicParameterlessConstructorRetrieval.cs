@@ -4,11 +4,11 @@ using TddXt.XFluentAssert.TypeReflection.Interfaces;
 
 namespace TddXt.XFluentAssert.ConstructorRetrieval
 {
-  internal class NonPublicParameterlessConstructorRetrieval : ConstructorRetrieval
+  internal class NonPublicParameterlessConstructorRetrieval : IConstructorRetrieval
   {
-    private readonly ConstructorRetrieval _next;
+    private readonly IConstructorRetrieval _next;
 
-    public NonPublicParameterlessConstructorRetrieval(ConstructorRetrieval next)
+    public NonPublicParameterlessConstructorRetrieval(IConstructorRetrieval next)
     {
       _next = next;
     }

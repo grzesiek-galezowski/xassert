@@ -146,19 +146,19 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
         X1 = 123,
         X2 = 345,
         X3 = 999,
-        x4 = 123
+        X4 = 123
       };
       var tp2 = new TwoProp();
       tp2.X1 = 123;
       tp2.X2 = 346;
       tp2.X3 = 346;
-      tp2.x4 = 346;
+      tp2.X4 = 346;
 
-      tp1.Should().BeLike(tp2, tp => tp.X2, tp => tp.X3, tp => tp.x4);
+      tp1.Should().BeLike(tp2, tp => tp.X2, tp => tp.X3, tp => tp.X4);
 
       tp1.X1 = 0;
 
-      tp1.Should().NotBeLike(tp2, tp => tp.X2, tp => tp.X3, tp => tp.x4);
+      tp1.Should().NotBeLike(tp2, tp => tp.X2, tp => tp.X3, tp => tp.X4);
     }
 
     [Fact]
@@ -303,11 +303,11 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
 
   class TypeWithStaticField
   {
-    private static readonly int a = 1;
+    private static readonly int A = 1;
   }
   class TypeWithNoStaticField
   {
-    private readonly int a = 1;
+    private readonly int _a = 1;
   }
 
   [SuppressMessage("ReSharper", "UnusedMember.Global")]

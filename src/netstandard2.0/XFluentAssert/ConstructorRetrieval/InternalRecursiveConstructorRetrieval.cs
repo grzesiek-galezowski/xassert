@@ -5,11 +5,11 @@ using TddXt.XFluentAssert.TypeReflection.Interfaces;
 
 namespace TddXt.XFluentAssert.ConstructorRetrieval
 {
-  internal class InternalRecursiveConstructorRetrieval : ConstructorRetrieval
+  internal class InternalRecursiveConstructorRetrieval : IConstructorRetrieval
   {
-    private readonly ConstructorRetrieval _next;
+    private readonly IConstructorRetrieval _next;
 
-    public InternalRecursiveConstructorRetrieval(ConstructorRetrieval next)
+    public InternalRecursiveConstructorRetrieval(IConstructorRetrieval next)
     {
       _next = next;
     }

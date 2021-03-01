@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using FluentAssertions;
+using TddXt.XFluentAssert.ValueActivation;
 
 namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
 {
@@ -74,8 +76,15 @@ namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
       var enumerable = propertyInfos
           .Where(p => !p.GetIndexParameters().Any()).ToList();
       var objectGraphNodes = enumerable
-          .Select(propertyInfo => _objectGraphNodeFactory.From(_path.ToList(), propertyInfo.GetValue(o), propertyInfo.Name)).ToList();
+          .Select(propertyInfo => _objectGraphNodeFactory.From(_path.ToList(), PropertyValueOrThrow(o, propertyInfo), propertyInfo.Name)).ToList();
       return objectGraphNodes;
+    }
+
+    private static object PropertyValueOrThrow(object o, PropertyInfo propertyInfo)
+    {
+      object? propertyValue = null;
+      propertyInfo.Invoking(p => propertyValue = p.GetValue(o)).Should().NotThrow();
+      return propertyValue;
     }
 
     public override string ToString()

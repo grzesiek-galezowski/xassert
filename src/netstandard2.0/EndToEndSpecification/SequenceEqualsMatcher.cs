@@ -7,7 +7,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification
   public class SequenceEqualsMatcher
   {
     private readonly List<int> _expected;
-    private readonly List<string> failures = new List<string>();
+    private readonly List<string> _failures = new List<string>();
 
     public SequenceEqualsMatcher(List<int> expected)
     {
@@ -19,7 +19,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification
       var sequenceEqual = actual.SequenceEqual(_expected);
       if (!sequenceEqual)
       {
-        failures.Add(EnumerableToString(actual) + " does not match " + EnumerableToString(_expected));
+        _failures.Add(EnumerableToString(actual) + " does not match " + EnumerableToString(_expected));
       }
       return sequenceEqual;
     }
@@ -35,7 +35,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification
 
     public override string ToString()
     {
-      return string.Join(Environment.NewLine, failures);
+      return string.Join(Environment.NewLine, _failures);
     }
   }
 }

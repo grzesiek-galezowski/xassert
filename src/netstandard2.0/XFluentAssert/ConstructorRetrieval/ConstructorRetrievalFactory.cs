@@ -2,7 +2,7 @@ namespace TddXt.XFluentAssert.ConstructorRetrieval
 {
   public class ConstructorRetrievalFactory
   {
-    private readonly ConstructorRetrieval _constructorQuery;
+    private readonly IConstructorRetrieval _constructorQuery;
 
     public ConstructorRetrievalFactory()
     {
@@ -18,47 +18,47 @@ namespace TddXt.XFluentAssert.ConstructorRetrieval
                     )))))));
     }
 
-    private ConstructorRetrieval PublicStaticNonRecursiveFactoryMethod(ConstructorRetrieval next)
+    private IConstructorRetrieval PublicStaticNonRecursiveFactoryMethod(IConstructorRetrieval next)
     {
       return new PublicStaticFactoryMethodRetrieval(next);
     }
 
-    private ConstructorRetrieval PrimitiveConstructor()
+    private IConstructorRetrieval PrimitiveConstructor()
     {
       return new PrimitiveConstructorRetrieval();
     }
 
-    public ConstructorRetrieval Create()
+    public IConstructorRetrieval Create()
     {
       return _constructorQuery;
     }
 
-    private static ConstructorRetrieval PublicRecursiveConstructors(ConstructorRetrieval next)
+    private static IConstructorRetrieval PublicRecursiveConstructors(IConstructorRetrieval next)
     {
       return new PublicRecursiveConstructorsRetrieval(next);
     }
 
-    private static ConstructorRetrieval InternalRecursiveConstructors(ConstructorRetrieval next)
+    private static IConstructorRetrieval InternalRecursiveConstructors(IConstructorRetrieval next)
     {
       return new InternalRecursiveConstructorRetrieval(next);
     }
 
-    private static ConstructorRetrieval PublicNonRecursiveConstructors(ConstructorRetrieval next)
+    private static IConstructorRetrieval PublicNonRecursiveConstructors(IConstructorRetrieval next)
     {
       return new PublicNonRecursiveConstructorRetrieval(next);
     }
 
-    private static ConstructorRetrieval PublicParameterlessConstructors(ConstructorRetrieval next)
+    private static IConstructorRetrieval PublicParameterlessConstructors(IConstructorRetrieval next)
     {
       return new PublicParameterlessConstructorRetrieval(next);
     }
 
-    private static ConstructorRetrieval InternalNonRecursiveConstructors(ConstructorRetrieval next)
+    private static IConstructorRetrieval InternalNonRecursiveConstructors(IConstructorRetrieval next)
     {
       return new InternalConstructorWithoutRecursionRetrieval(next);
     }
 
-    private static ConstructorRetrieval InternalParameterlessConstructors(ConstructorRetrieval next)
+    private static IConstructorRetrieval InternalParameterlessConstructors(IConstructorRetrieval next)
     {
       return new NonPublicParameterlessConstructorRetrieval(next);
     }
