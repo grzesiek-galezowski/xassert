@@ -29,18 +29,20 @@ namespace TddXt.XFluentAssert.ValueActivation
     public object CreateInstanceAsValueObjectWithFreshParameters()
     {
       var instance = DefaultValue.Of(TargetType);
-      this.Invoking(_ => { instance = _.CreateInstanceWithNewConstructorArguments(); }).Should()
-        .NotThrow(TargetType + " cannot even be created as a value object");
-      instance.GetType().Should().Be(TargetType);
+      DomainAssertions.AssertDoesNotThrow(
+        () => instance = CreateInstanceWithNewConstructorArguments(), 
+        $"{TargetType} cannot even be created as a value object");
+      DomainAssertions.AssertAreNotEqual(instance.GetType(), TargetType);
       return instance;
     }
 
     public object CreateInstanceAsValueObjectWithPreviousParameters()
     {
       var instance = DefaultValue.Of(TargetType);
-      this.Invoking(_ => { instance = _.CreateInstanceWithCurrentConstructorArguments(); }).Should()
-        .NotThrow(TargetType + " cannot even be created as a value object");
-      instance.GetType().Should().Be(TargetType);
+      DomainAssertions.AssertDoesNotThrow(
+        () => instance = CreateInstanceWithCurrentConstructorArguments(),
+        $"{TargetType} cannot even be created as a value object");
+      DomainAssertions.AssertAreNotEqual(instance.GetType(), TargetType);
       return instance;
     }
 

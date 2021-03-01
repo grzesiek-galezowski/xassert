@@ -26,7 +26,10 @@ namespace TddXt.XFluentAssert.ValueActivation
     {
       var instance = _smartType.PickConstructorWithLeastNonPointersParameters().Value()  //bug backward compatibility (for now)
         .InvokeWith(constructorParameters);
-      instance.GetType().Should().Be(_smartType.ToClrType());
+      if(instance.GetType() != _smartType.ToClrType())
+      {
+        throw new InvalidOperationException($"Expected {instance.GetType()} to be equal to {_smartType.ToClrType()}");
+      }
       return instance;
     }
 

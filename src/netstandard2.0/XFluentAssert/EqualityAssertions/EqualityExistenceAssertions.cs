@@ -1,25 +1,32 @@
 ﻿using System;
-using FluentAssertions;
 using TddXt.XFluentAssert.TypeReflection;
 
 namespace TddXt.XFluentAssert.EqualityAssertions
 {
   class EqualityExistenceAssertions
   {
-    private static Action ExecutionOf(Action func)
-    {
-      return func;
-    }
-
     public static void AssertEqualityOperatorIsDefinedFor(Type type)
     {
-      ExecutionOf(() => SmartType.For(type).EqualityOperator()).Should().NotThrow<Exception>();
+      try
+      {
+        SmartType.For(type).EqualityOperator();
+      }
+      catch (Exception e)
+      {
+        throw new InvalidOperationException("Expected no exception when retrieving equality operator, but got " + e);
+      }
     }
 
     public static void AssertInequalityOperatorIsDefinedFor(Type type)
     {
-      ExecutionOf(() => SmartType.For(type).InequalityOperator()).Should().NotThrow<Exception>();
+      try
+      {
+        SmartType.For(type).InequalityOperator();
+      }
+      catch (Exception e)
+      {
+        throw new InvalidOperationException("Expected no exception when retrieving equality operator, but got " + e);
+      }
     }
-
   }
 }

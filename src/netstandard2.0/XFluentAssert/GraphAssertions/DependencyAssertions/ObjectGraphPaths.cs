@@ -8,7 +8,7 @@ namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
 {
   public class ObjectGraphPaths
   {
-    private readonly List<ObjectGraphPath> _paths = new List<ObjectGraphPath>();
+    private readonly List<ObjectGraphPath> _paths = new();
 
     public void Add(ObjectGraphPath objectGraphPath)
     {
