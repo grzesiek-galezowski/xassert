@@ -1,7 +1,7 @@
+using System;
+
 namespace TddXt.XFluentAssert.EndToEndSpecification.Fixtures
 {
-  using System;
-
   [Serializable]
   public class ObjectWithInterfaceInConstructor
   {

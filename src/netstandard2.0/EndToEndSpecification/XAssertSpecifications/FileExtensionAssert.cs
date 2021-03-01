@@ -1,8 +1,8 @@
+using System;
+using System.IO;
+
 namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
 {
-  using System;
-  using System.IO;
-
   static internal class FileExtensionAssert
   {
     internal static void Valid(string extensionString)

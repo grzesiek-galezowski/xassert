@@ -1,8 +1,8 @@
-﻿namespace TddXt.XFluentAssert.EndToEndSpecification.Fixtures
-{
-  using System;
-  using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 
+namespace TddXt.XFluentAssert.EndToEndSpecification.Fixtures
+{
   class AttributeFixture
   {
     [Description("AnyCulture")]

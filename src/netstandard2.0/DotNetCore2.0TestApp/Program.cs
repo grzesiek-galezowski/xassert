@@ -1,7 +1,7 @@
-﻿namespace DotNetCore2._0TestApp
-{
-  using System;
+﻿using System;
 
+namespace DotNetCore2._0TestApp
+{
   public class Program
   {
     public static void Main(string[] args)

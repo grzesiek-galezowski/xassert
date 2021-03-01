@@ -1,20 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <IsPackable>false</IsPackable>
     <AssemblyName>TddXt.XFluentAssert.EndToEndSpecification</AssemblyName>
     <RootNamespace>TddXt.XFluentAssert.EndToEndSpecification</RootNamespace>
     <Nullable>enable</Nullable>
-    <LangVersion>8.0</LangVersion>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>..\..\..\specification\Debug\</OutputPath>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath>..\..\..\specification\Release\</OutputPath>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -31,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Root\XFluentAssert.csproj" />
+    <ProjectReference Include="..\XFluentAssert\XFluentAssert.csproj" />
   </ItemGroup>
 
 </Project>

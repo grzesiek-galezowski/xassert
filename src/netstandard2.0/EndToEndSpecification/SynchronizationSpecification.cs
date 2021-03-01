@@ -1,21 +1,20 @@
 ﻿using TddXt.XFluentAssert.Api;
 using TddXt.XFluentAssert.Api.LockAssertions;
+using System;
+using System.Threading;
+
+using FluentAssertions;
+
+using NSubstitute;
+using NSubstitute.Exceptions;
+
+using TddXt.XFluentAssert.EndToEndSpecification.Fixtures;
+
+using Xunit;
+using Xunit.Sdk;
 
 namespace TddXt.XFluentAssert.EndToEndSpecification
 {
-  using System;
-  using System.Threading;
-
-  using FluentAssertions;
-
-  using NSubstitute;
-  using NSubstitute.Exceptions;
-
-  using Fixtures;
-
-  using Xunit;
-  using Xunit.Sdk;
-
   public class SynchronizationSpecification
   {
     [Fact]

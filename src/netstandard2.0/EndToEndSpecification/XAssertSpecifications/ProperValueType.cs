@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using Value;
+using System;
 
 namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
 {
-  using System;
-
   public sealed class ProperValueType : IEquatable<ProperValueType>
   {
     public bool Equals(ProperValueType other)

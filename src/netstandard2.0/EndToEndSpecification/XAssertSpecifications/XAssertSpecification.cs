@@ -1,23 +1,21 @@
 ﻿using AtmaFileSystem;
 using TddXt.XFluentAssert.Api;
 using TddXt.XFluentAssert.Api.ValueAssertions;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+
+using FluentAssertions;
+using TddXt.AnyRoot;
+using TddXt.AnyRoot.Strings;
+using TddXt.XFluentAssert.CommonTypes;
+using TddXt.XFluentAssert.TypeReflection.ImplementationDetails;
+using Xunit;
+using Xunit.Abstractions;
+using Xunit.Sdk;
 
 namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
 {
-  using System;
-  using System.Collections.Generic;
-  using System.Diagnostics.CodeAnalysis;
-
-  using FluentAssertions;
-  using AnyRoot;
-  using AnyRoot.Strings;
-  using CommonTypes;
-  using TypeReflection.ImplementationDetails;
-
-  using Xunit;
-  using Xunit.Abstractions;
-  using Xunit.Sdk;
-
   public class XAssertSpecification
   {
     private readonly ITestOutputHelper _output;

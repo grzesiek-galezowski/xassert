@@ -1,7 +1,7 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace TddXt.XFluentAssert.EndToEndSpecification.Fixtures
 {
-  using System.Diagnostics.CodeAnalysis;
-
   [SuppressMessage("ReSharper", "UnusedMember.Global")]
   public class Feature
   {

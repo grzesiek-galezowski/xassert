@@ -1,7 +1,7 @@
+using System;
+
 namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
 {
-  using System;
-
   public sealed class FileExtension
     : IEquatable<FileExtension>
   {

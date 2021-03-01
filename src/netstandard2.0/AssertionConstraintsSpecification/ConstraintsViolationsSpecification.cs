@@ -1,17 +1,13 @@
-﻿namespace TddXt.XFluentAssert.EndToEndSpecification
+﻿using System;
+using FluentAssertions;
+using TddXt.AnyRoot.Strings;
+using TddXt.XFluentAssert.AssertionConstraints;
+using Xunit;
+using Xunit.Sdk;
+using static TddXt.AnyRoot.Root;
+
+namespace AssertionConstraintsSpecification
 {
-  using System;
-
-  using FluentAssertions;
-
-  using AnyRoot.Strings;
-  using AssertionConstraints;
-
-  using Xunit;
-  using Xunit.Sdk;
-
-  using static AnyRoot.Root;
-
   public class ConstraintsViolationsSpecification
   {
     [Fact]

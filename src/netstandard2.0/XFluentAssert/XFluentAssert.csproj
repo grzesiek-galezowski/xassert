@@ -1,0 +1,48 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>TddXt.XFluentAssert</AssemblyName>
+    <RootNamespace>TddXt.XFluentAssert</RootNamespace>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <PackageId>XFluentAssert</PackageId>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Grzegorz Galezowski</Authors>
+    <Company>Grzegorz Galezowski</Company>
+    <Product>XFluentAssert</Product>
+    <Description>A set of assertions to be used together with FluentAssertions library.</Description>
+    <PackageProjectUrl>https://github.com/grzesiek-galezowski/xassert</PackageProjectUrl>
+    <Copyright>Grzegorz Galezowski 2021</Copyright>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <RepositoryUrl>https://github.com/grzesiek-galezowski/xassert</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>assertions</PackageTags>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="CollectionAssertions\**" />
+    <EmbeddedResource Remove="CollectionAssertions\**" />
+    <None Remove="CollectionAssertions\**" />
+    <None Include="..\..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Any" Version="6.1.1" />
+    <PackageReference Include="CompareNETObjects" Version="4.72.0" />
+    <PackageReference Include="FluentAssertions" Version="5.10.3" />
+    <PackageReference Include="NSubstitute" Version="4.2.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>

@@ -1,19 +1,17 @@
 ﻿using TddXt.XFluentAssert.Api;
+using System;
+using FluentAssertions;
+
+using NSubstitute;
+
+using TddXt.AnyRoot;
+using TddXt.AnyRoot.Strings;
+using TddXt.XFluentAssert.AssertionConstraints;
+using Xunit;
+using Xunit.Sdk;
 
 namespace TddXt.XFluentAssert.EndToEndSpecification
 {
-  using System;
-  using FluentAssertions;
-
-  using NSubstitute;
-
-  using AnyRoot;
-  using AnyRoot.Strings;
-  using AssertionConstraints;
-
-  using Xunit;
-  using Xunit.Sdk;
-
   public class RecordedAssertionsSpecification
   {
     [Fact]

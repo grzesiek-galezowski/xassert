@@ -1,11 +1,10 @@
-﻿namespace TddXt.XFluentAssert.TypeReflectionSpecification
+﻿using System;
+using TddXt.XFluentAssert.TypeReflection;
+
+using Xunit;
+
+namespace TddXt.XFluentAssert.TypeReflectionSpecification
 {
-  using System;
-
-  using TypeReflection;
-
-  using Xunit;
-
   public class SmartTypeSpecification
   {
     [Theory]

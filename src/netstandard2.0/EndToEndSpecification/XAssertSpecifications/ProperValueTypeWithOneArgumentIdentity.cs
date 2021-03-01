@@ -1,8 +1,8 @@
+using System;
+using System.Collections.Generic;
+
 namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
 {
-  using System;
-  using System.Collections.Generic;
-
   public sealed class ProperValueTypeWithOneArgumentIdentity : IEquatable<ProperValueTypeWithOneArgumentIdentity>
   {
     public bool Equals(ProperValueTypeWithOneArgumentIdentity other)
