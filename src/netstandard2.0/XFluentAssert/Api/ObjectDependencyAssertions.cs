@@ -16,10 +16,10 @@ namespace TddXt.XFluentAssert.Api
     }
 
     public static AndConstraint<ObjectAssertions> DependOn<T>(this ObjectAssertions o, 
-      Func<DependsOnAssertionsOptions<T>, DependsOnAssertionsOptions<T>> optionsFunc)
+      Func<DependsOnAssertionsOptions, DependsOnAssertionsOptions> optionsFunc)
     {
       var objectTreePaths = new ObjectGraphPaths();
-      var dependsOnAssertionsOptions = optionsFunc(new DependsOnAssertionsOptions<T>());
+      var dependsOnAssertionsOptions = optionsFunc(new DependsOnAssertionsOptions());
       new ObjectGraphNodeFactory(NoLogging, dependsOnAssertionsOptions.TerminalNodeConditions)
         .Root(o.Subject)
         .CollectPathsInto(objectTreePaths);
@@ -44,10 +44,10 @@ namespace TddXt.XFluentAssert.Api
       TAssertions, TDependency, TThisType>(
       this ReferenceTypeAssertions<TThisType, TAssertions> o,
       TDependency value,
-      Func<DependsOnAssertionsOptions<TThisType>, DependsOnAssertionsOptions<TThisType>> optionsFunc)
+      Func<DependsOnAssertionsOptions, DependsOnAssertionsOptions> optionsFunc)
       where TAssertions : ReferenceTypeAssertions<TThisType, TAssertions>
     {
-      var options = optionsFunc(new DependsOnAssertionsOptions<TThisType>());
+      var options = optionsFunc(new DependsOnAssertionsOptions());
       var objectTreePaths = new ObjectGraphPaths();
       new ObjectGraphNodeFactory(NoLogging, options.TerminalNodeConditions).Root(o.Subject)
         .CollectPathsInto(objectTreePaths);

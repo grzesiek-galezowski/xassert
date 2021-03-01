@@ -4,7 +4,7 @@ using TddXt.XFluentAssert.GraphAssertions.DependencyAssertions;
 
 namespace TddXt.XFluentAssert.Api
 {
-  public class DependsOnAssertionsOptions<T>
+  public class DependsOnAssertionsOptions
   {
     private static IList<ITerminalNodeCondition> DefaultTerminalNodeConditions()
     {
@@ -19,13 +19,13 @@ namespace TddXt.XFluentAssert.Api
 
     public IList<ITerminalNodeCondition> TerminalNodeConditions { get; } = DefaultTerminalNodeConditions();
 
-    public DependsOnAssertionsOptions<T> SkipType<T1>()
+    public DependsOnAssertionsOptions SkipType<T1>()
     {
       TerminalNodeConditions.Add(new TerminalNodeTypeCondition<T1>());
       return this;
     }
 
-    public DependsOnAssertionsOptions<T> Skip<T1>(T1 instance)
+    public DependsOnAssertionsOptions Skip<T1>(T1 instance)
     {
       TerminalNodeConditions.Add(new TerminalNodeEqualityCondition(instance));
       return this;
