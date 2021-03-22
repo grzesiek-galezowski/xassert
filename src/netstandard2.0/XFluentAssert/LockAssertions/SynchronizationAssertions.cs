@@ -1,11 +1,12 @@
 using System;
 using System.Reflection;
-using System.Threading.Tasks;
+
 using FluentAssertions;
 
 using NSubstitute;
 using NSubstitute.Exceptions;
-using static TddXt.AnyRoot.Root;
+
+using TddXt.AnyRoot;
 
 namespace TddXt.XFluentAssert.LockAssertions
 {
@@ -70,7 +71,7 @@ namespace TddXt.XFluentAssert.LockAssertions
     {
       try
       {
-        Func<TReturn> instance = Any.Instance<TReturn>;
+        Func<TReturn> instance = Root.Any.Instance<TReturn>;
         var cannedResult = instance();
         callToCheck(wrappedObjectMock).Returns(ci =>
         {
@@ -91,31 +92,6 @@ namespace TddXt.XFluentAssert.LockAssertions
         wrappedObjectMock.ClearReceivedCalls();
       }
     }
-    
-    private static void LockShouldBeReleasedAfterACall<T>(
-      T wrappingObject,
-      T wrappedObjectMock,
-      Func<T, Task> callToCheck,
-      ILockAssertions lockAssertions)
-      where T : class
-    {
-      try
-      {
-        callToCheck(wrappedObjectMock).Returns(ci =>
-        {
-          lockAssertions.AssertLocked();
-          return Task.CompletedTask;
-        });
-
-        lockAssertions.AssertUnlocked();
-        callToCheck(wrappingObject).Wait();
-        lockAssertions.AssertUnlocked();
-      }
-      finally
-      {
-        wrappedObjectMock.ClearReceivedCalls();
-      }
-    }
 
     public static void Synchronizes<T>(T wrappingObject, Action<T> callToCheck, ILockAssertions lockAssertions,
       T wrappedObjectMock) where T : class
@@ -126,13 +102,6 @@ namespace TddXt.XFluentAssert.LockAssertions
     }
 
     public static void Synchronizes<T, TReturn>(T wrappingObject, Func<T, TReturn> callToCheck, ILockAssertions lockAssertions, T wrappedObjectMock) where T : class
-    {
-      NSubstituteIsInCorrectVersion(wrappedObjectMock);
-      LockShouldBeReleasedAfterACall(wrappingObject, wrappedObjectMock, callToCheck, lockAssertions);
-      LockShouldBeReleasedWhenCallThrowsException(lockAssertions, wrappingObject, wrappedObjectMock, t => callToCheck(t));
-    }
-    
-    public static void Synchronizes<T>(T wrappingObject, Func<T, Task> callToCheck, ILockAssertions lockAssertions, T wrappedObjectMock) where T : class
     {
       NSubstituteIsInCorrectVersion(wrappedObjectMock);
       LockShouldBeReleasedAfterACall(wrappingObject, wrappedObjectMock, callToCheck, lockAssertions);

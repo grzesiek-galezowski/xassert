@@ -22,7 +22,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
 
     public GraphAssertionsSpecification(ITestOutputHelper output)
     {
-      _output = output;
+      this._output = output;
       _stringWriter = new StringWriter();
       Console.SetOut(_stringWriter);
     }

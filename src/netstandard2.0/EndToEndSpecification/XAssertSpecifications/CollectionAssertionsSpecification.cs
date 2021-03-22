@@ -34,7 +34,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
 
       public AlwaysNotEqual(int a)
       {
-        _a = a;
+        this._a = a;
       }
 
       public override bool Equals(object obj)
