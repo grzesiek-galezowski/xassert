@@ -1,4 +1,7 @@
-﻿namespace TddXt.XFluentAssert.EndToEndSpecification.Fixtures
+﻿using System.Threading.Tasks;
+using FluentAssertions;
+
+namespace TddXt.XFluentAssert.EndToEndSpecification.Fixtures
 {
   public abstract class SynchronizedMyService<T> : IMyService
   {
@@ -28,6 +31,19 @@
       }
     }
 
+    public async Task AsyncCall(int i)
+    {
+      try
+      {
+        await EnterLockAsync();
+        await _innerInstance.AsyncCall(i);
+      }
+      finally
+      {
+        await ExitLockAsync();
+      }
+    }
+
     public void VoidCallNotExitedOnException(int i)
     {
       EnterLock();
@@ -46,8 +62,10 @@
       _innerInstance.VoidCall(i);
     }
 
-    protected abstract void ExitLock();
     protected abstract void EnterLock();
+    protected abstract void ExitLock();
+    protected abstract Task EnterLockAsync();
+    protected abstract Task ExitLockAsync();
 
     public int CallWithResult(string alabama)
     {
