@@ -1,6 +1,6 @@
 using System;
 using System.Reflection;
-
+using System.Threading.Tasks;
 using FluentAssertions;
 
 using NSubstitute;
@@ -40,7 +40,7 @@ namespace TddXt.XFluentAssert.LockAssertions
         wrappedObjectMock.ClearReceivedCalls();
       }
     }
-
+    
     private static void LockShouldBeReleasedAfterACall<T>(
       T wrappingObject,
       T wrappedObjectMock,
@@ -61,6 +61,61 @@ namespace TddXt.XFluentAssert.LockAssertions
         wrappedObjectMock.ClearReceivedCalls();
       }
     }
+
+    private static async Task LockShouldBeReleasedWhenCallThrowsException<T>(
+      ILockAssertions lockAssertions,
+      T wrappingObject,
+      T wrappedObjectMock,
+      Func<T, Task> callToCheck) where T : class
+    {
+      try
+      {
+        wrappedObjectMock.When(callToCheck).Do(async _ =>
+        {
+          lockAssertions.AssertLocked();
+          throw new LockNotReleasedWhenExceptionOccurs();
+        });
+
+        await callToCheck(wrappingObject);
+
+        throw new Exception( // todo more specific exception
+          "The specified method was probably not called by the proxy with exactly the same arguments it received");
+      }
+      catch
+      {
+        lockAssertions.AssertUnlocked();
+      }
+      finally
+      {
+        wrappedObjectMock.ClearReceivedCalls();
+      }
+    }
+
+    private static async Task LockShouldBeReleasedAfterACall<T>(
+      T wrappingObject,
+      T wrappedObjectMock,
+      Func<T, Task> callToCheck,
+      ILockAssertions lockAssertions)
+      where T : class
+    {
+      try
+      {
+        callToCheck(wrappedObjectMock).Returns(async ci =>
+        {
+          lockAssertions.AssertLocked();
+        });
+
+        lockAssertions.AssertUnlocked();
+        await callToCheck(wrappingObject);
+        lockAssertions.AssertUnlocked();
+      }
+      finally
+      {
+        wrappedObjectMock.ClearReceivedCalls();
+      }
+    }
+
+
 
     private static void LockShouldBeReleasedAfterACall<T, TReturn>(
       T wrappingObject,
@@ -106,6 +161,13 @@ namespace TddXt.XFluentAssert.LockAssertions
       NSubstituteIsInCorrectVersion(wrappedObjectMock);
       LockShouldBeReleasedAfterACall(wrappingObject, wrappedObjectMock, callToCheck, lockAssertions);
       LockShouldBeReleasedWhenCallThrowsException(lockAssertions, wrappingObject, wrappedObjectMock, t => callToCheck(t));
+    }
+
+    public static async Task SynchronizesAsync<T>(T wrappingObject, Func<T, Task> callToCheck, ILockAssertions lockAssertions, T wrappedObjectMock) where T : class
+    {
+      NSubstituteIsInCorrectVersion(wrappedObjectMock);
+      await LockShouldBeReleasedAfterACall(wrappingObject, wrappedObjectMock, callToCheck, lockAssertions);
+      await LockShouldBeReleasedWhenCallThrowsException(lockAssertions, wrappingObject, wrappedObjectMock, t => callToCheck(t));
     }
 
     private static void NSubstituteIsInCorrectVersion<T>(T wrappedObjectMock) where T : class

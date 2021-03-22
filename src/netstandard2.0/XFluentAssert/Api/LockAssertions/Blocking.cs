@@ -19,5 +19,10 @@ namespace TddXt.XFluentAssert.Api.LockAssertions
     {
       return new MonitorAssertions(@lock);
     }
+
+    public static ILockAssertions On(SemaphoreSlim semaphore)
+    {
+      return new SemaphoreSlimAssertions(semaphore);
+    }
   }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using FluentAssertions;
 using FluentAssertions.Primitives;
 using TddXt.XFluentAssert.GraphAssertions;
@@ -56,7 +57,7 @@ namespace TddXt.XFluentAssert.Api
     public static void SynchronizeAccessTo<T>(
       this ObjectAssertions assertions,
       Action<T> callToCheck,
-      XFluentAssert.LockAssertions.ILockAssertions lockAssertions,
+      ILockAssertions lockAssertions,
       T wrappedObjectMock)
       where T : class
     {
@@ -70,7 +71,7 @@ namespace TddXt.XFluentAssert.Api
     public static void SynchronizeAccessTo<T, TAssertions>(
       this ReferenceTypeAssertions<T, TAssertions> assertions,
       Action<T> callToCheck,
-      XFluentAssert.LockAssertions.ILockAssertions lockAssertions,
+      ILockAssertions lockAssertions,
       T wrappedObjectMock)
       where T : class
       where TAssertions : ReferenceTypeAssertions<T, TAssertions>
@@ -81,11 +82,26 @@ namespace TddXt.XFluentAssert.Api
         lockAssertions,
         wrappedObjectMock);
     }
+    
+    //bug add also for reference type assertions
+    public static async Task SynchronizeAccessTo<T>(
+      this ObjectAssertions assertions,
+      Func<T, Task> callToCheck,
+      ILockAssertions lockAssertions,
+      T wrappedObjectMock)
+      where T : class
+    {
+      await SynchronizationAssertions.SynchronizesAsync(
+        (T)assertions.Subject,
+        callToCheck,
+        lockAssertions,
+        wrappedObjectMock);
+    }
 
     public static void SynchronizeAccessTo<T, TReturn>(
       this ObjectAssertions assertions,
       Func<T, TReturn> callToCheck,
-      XFluentAssert.LockAssertions.ILockAssertions lockAssertions,
+      ILockAssertions lockAssertions,
       T wrappedObjectMock)
       where T : class
     {
@@ -99,7 +115,7 @@ namespace TddXt.XFluentAssert.Api
     public static void SynchronizeAccessTo<T, TReturn, TAssertions>(
       this ReferenceTypeAssertions<T, TAssertions> assertions,
       Func<T, TReturn> callToCheck,
-      XFluentAssert.LockAssertions.ILockAssertions lockAssertions,
+      ILockAssertions lockAssertions,
       T wrappedObjectMock)
       where T : class
       where TAssertions : ReferenceTypeAssertions<T, TAssertions>
