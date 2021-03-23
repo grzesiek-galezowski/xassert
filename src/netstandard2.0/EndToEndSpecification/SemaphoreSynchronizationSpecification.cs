@@ -101,7 +101,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification
         }
         
         [Fact]
-        public void ShouldThrowWhenAsyncMethodDoesNotEnterSynchronization()
+        public async Task ShouldThrowWhenAsyncMethodDoesNotEnterSynchronization()
         {
             //GIVEN
             var wrappedObjectMock = Substitute.For<IMyService>();
@@ -113,7 +113,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification
                         s => s.AsyncCallNotEntered(1), 
                         Blocking.On(service.Lock), 
                         wrappedObjectMock))
-                .Should().ThrowExactly<ReceivedCallsException>();
+                .Should().ThrowExactly<XunitException>();
         }
 
         //
@@ -142,11 +142,10 @@ namespace TddXt.XFluentAssert.EndToEndSpecification
 
             //WHEN - THEN
             service.Awaiting(s => s.Should().SynchronizeAsyncAccessTo(s => s.AsyncCallNotExitedOnException(1), Blocking.On(service.Lock), wrappedObjectMock))
-                .Should().ThrowExactly<ReceivedCallsException>();
+                .Should().ThrowExactly<XunitException>();
         }
 
         //bug add for tasks returning something
-        //bug add scenario for exception
 
         [Fact]
         public void ShouldThrowWhenNonVoidMethodDoesNotEnterSynchronizationAtAll()

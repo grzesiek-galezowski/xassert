@@ -70,10 +70,10 @@ namespace TddXt.XFluentAssert.LockAssertions
     {
       try
       {
-        wrappedObjectMock.When(callToCheck).Do(async _ =>
+        wrappedObjectMock.When(callToCheck).Throw(_ =>
         {
-          lockAssertions.AssertLocked();
-          throw new LockNotReleasedWhenExceptionOccurs();
+            lockAssertions.AssertLocked();
+            return new LockNotReleasedWhenExceptionOccurs();
         });
 
         await callToCheck(wrappingObject);

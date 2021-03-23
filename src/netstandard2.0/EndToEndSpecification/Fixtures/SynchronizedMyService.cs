@@ -45,19 +45,19 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.Fixtures
 
     public async Task AsyncCallNotEntered(int i)
     {
-      await _innerInstance.AsyncCall(i);
+      await _innerInstance.AsyncCallNotEntered(i);
     }
 
     public async Task AsyncCallNotExited(int i)
     {
       await EnterLockAsync();
-      await _innerInstance.AsyncCall(i);
+      await _innerInstance.AsyncCallNotExited(i);
     }
 
     public async Task AsyncCallNotExitedOnException(int i)
     {
         await EnterLockAsync();
-        await _innerInstance.AsyncCall(i);
+        await _innerInstance.AsyncCallNotExitedOnException(i);
         await ExitLockAsync();
     }
 
