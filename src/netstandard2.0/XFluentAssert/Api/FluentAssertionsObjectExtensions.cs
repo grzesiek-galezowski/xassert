@@ -84,7 +84,7 @@ namespace TddXt.XFluentAssert.Api
     }
     
     //bug add also for reference type assertions
-    public static async Task SynchronizeAccessTo<T>(
+    public static async Task SynchronizeAsyncAccessTo<T>(
       this ObjectAssertions assertions,
       Func<T, Task> callToCheck,
       ILockAssertions lockAssertions,

@@ -36,25 +36,6 @@ namespace TddXt.XFluentAssert.EndToEndSpecification
         }
 
         [Fact]
-        public async Task ShouldNotThrowWhenAsyncMethodIsSynchronizedCorrectly()
-        {
-            //GIVEN
-            var wrappedObjectMock = Substitute.For<IMyService>();
-            var service = new SemaphoreSynchronizedMyService(wrappedObjectMock, Semaphore());
-
-            //WHEN - THEN
-            await service.Should().SynchronizeAccessTo(
-                s =>
-                {
-                  return s.AsyncCall(1);
-                },
-                Blocking.On(service.Lock),
-                wrappedObjectMock);
-        }
-        //bug add for tasks returning something
-        //bug add scenario for exception
-
-        [Fact]
         public void ShouldNotThrowWhenNonVoidMethodIsSynchronizedCorrectly()
         {
             //GIVEN
@@ -104,6 +85,68 @@ namespace TddXt.XFluentAssert.EndToEndSpecification
                     service.Should().SynchronizeAccessTo(s => s.VoidCallNotExitedOnException(1), Blocking.On(service.Lock), wrappedObjectMock))
                 .Should().ThrowExactly<ReceivedCallsException>();
         }
+
+        [Fact]
+        public async Task ShouldNotThrowWhenAsyncMethodIsSynchronizedCorrectly()
+        {
+            //GIVEN
+            var wrappedObjectMock = Substitute.For<IMyService>();
+            var service = new SemaphoreSynchronizedMyService(wrappedObjectMock, Semaphore());
+
+            //WHEN - THEN
+            await service.Should().SynchronizeAsyncAccessTo(
+                s => s.AsyncCall(1),
+                Blocking.On(service.Lock),
+                wrappedObjectMock);
+        }
+        
+        [Fact]
+        public void ShouldThrowWhenAsyncMethodDoesNotEnterSynchronization()
+        {
+            //GIVEN
+            var wrappedObjectMock = Substitute.For<IMyService>();
+            var service = new SemaphoreSynchronizedMyService(wrappedObjectMock, Semaphore());
+
+            //WHEN - THEN
+            service.Awaiting(s => s.Should()
+                    .SynchronizeAsyncAccessTo(
+                        s => s.AsyncCallNotEntered(1), 
+                        Blocking.On(service.Lock), 
+                        wrappedObjectMock))
+                .Should().ThrowExactly<ReceivedCallsException>();
+        }
+
+        //
+        [Fact]
+        public void ShouldThrowWhenAsyncMethodDoesNotExitSynchronization()
+        {
+            //GIVEN
+            var wrappedObjectMock = Substitute.For<IMyService>();
+            var service = new SemaphoreSynchronizedMyService(wrappedObjectMock, Semaphore());
+
+            //WHEN - THEN
+            service.Awaiting(s => s.Should()
+                    .SynchronizeAsyncAccessTo(
+                        s => s.AsyncCallNotExited(1), 
+                        Blocking.On(service.Lock), 
+                        wrappedObjectMock))
+                .Should().ThrowExactly<XunitException>();
+        }
+
+        [Fact]
+        public void ShouldThrowWhenAsyncMethodDoesNotExitSynchronizationOnException()
+        {
+            //GIVEN
+            var wrappedObjectMock = Substitute.For<IMyService>();
+            var service = new SemaphoreSynchronizedMyService(wrappedObjectMock, Semaphore());
+
+            //WHEN - THEN
+            service.Awaiting(s => s.Should().SynchronizeAsyncAccessTo(s => s.AsyncCallNotExitedOnException(1), Blocking.On(service.Lock), wrappedObjectMock))
+                .Should().ThrowExactly<ReceivedCallsException>();
+        }
+
+        //bug add for tasks returning something
+        //bug add scenario for exception
 
         [Fact]
         public void ShouldThrowWhenNonVoidMethodDoesNotEnterSynchronizationAtAll()

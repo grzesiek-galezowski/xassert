@@ -14,7 +14,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.Fixtures
 
     public T Lock
     {
-      get; private set;
+      get;
     }
 
     public void VoidCall(int i)
@@ -41,6 +41,24 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.Fixtures
       {
         await ExitLockAsync();
       }
+    }
+
+    public async Task AsyncCallNotEntered(int i)
+    {
+      await _innerInstance.AsyncCall(i);
+    }
+
+    public async Task AsyncCallNotExited(int i)
+    {
+      await EnterLockAsync();
+      await _innerInstance.AsyncCall(i);
+    }
+
+    public async Task AsyncCallNotExitedOnException(int i)
+    {
+        await EnterLockAsync();
+        await _innerInstance.AsyncCall(i);
+        await ExitLockAsync();
     }
 
     public void VoidCallNotExitedOnException(int i)

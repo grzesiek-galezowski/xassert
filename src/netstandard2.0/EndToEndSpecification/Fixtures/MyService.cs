@@ -6,6 +6,9 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.Fixtures
   {
     void VoidCall(int i);
     Task AsyncCall(int i);
+    Task AsyncCallNotEntered(int i);
+    Task AsyncCallNotExited(int i);
+    Task AsyncCallNotExitedOnException(int i);
     void VoidCallNotExited(int i);
     void VoidCallNotExitedOnException(int i);
     void VoidCallNotEntered(int i);
