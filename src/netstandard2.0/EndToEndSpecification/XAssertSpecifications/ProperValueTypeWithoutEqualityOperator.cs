@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
 {
-  public class ProperValueTypeWithoutEqualityOperator : IEquatable<ProperValueTypeWithoutEqualityOperator>
+  public sealed class ProperValueTypeWithoutEqualityOperator : IEquatable<ProperValueTypeWithoutEqualityOperator>
   {
     public bool Equals(ProperValueTypeWithoutEqualityOperator other)
     {
