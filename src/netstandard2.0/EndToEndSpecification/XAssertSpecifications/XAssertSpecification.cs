@@ -4,9 +4,11 @@ using TddXt.XFluentAssert.Api.ValueAssertions;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-
+using System.Linq;
 using FluentAssertions;
+using NullableReferenceTypesExtensions;
 using TddXt.AnyRoot.Strings;
+using TddXt.TypeReflection;
 using TddXt.XFluentAssert.CommonTypes;
 using TddXt.XFluentAssert.TypeReflection.ImplementationDetails;
 using Xunit;
@@ -231,6 +233,79 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
 
     // todo circular dependencies
 
+  }
+
+  public class PlaygroundForNewValueAssertions //bug
+  {
+    [Fact]
+    public void Lol() //bug
+    {
+      AssertIsProperValueObject<ProperValueType>(
+        new Func<ProperValueType>[]
+        {
+          () => new ProperValueType(1, new[] {1,2,3})
+        },
+        new Func<ProperValueType>[]
+        {
+          () => new ProperValueType(2, new[] {1,2,3}),
+          () => new ProperValueType(1, new[] {1,2}),
+          () => new ProperValueType(1, null)
+        });
+    }
+
+    private void AssertIsProperValueObject<T>(Func<T>[] equalInstances, Func<T>[] otherInstances)
+    {
+      //equal to itself
+      var instances = equalInstances.Select(i => i());
+      foreach (var instance in instances)
+      {
+        instance.Should().Be(instance);
+      }
+
+      //bug instances equal to themselves
+      //bug what about nulls in constructors?
+
+      //equal to other equals
+      foreach (var instanceFactory1 in equalInstances)
+      {
+        instanceFactory1().Equals(null).Should().BeFalse();
+        foreach (var instanceFactory2 in equalInstances)
+        {
+          instanceFactory1().Equals(instanceFactory2()).Should().BeTrue(); //bug message
+          instanceFactory2().Equals(instanceFactory1()).Should().BeTrue(); //bug message
+          TypeReflection.TypeOf<T>.Equality().Evaluate(instanceFactory1(), instanceFactory2())
+            .Should().BeTrue(); //bug message
+          TypeReflection.TypeOf<T>.Equality().Evaluate(instanceFactory2(), instanceFactory1())
+            .Should().BeTrue(); //bug message
+          TypeReflection.TypeOf<T>.InequalityOperator().Evaluate(instanceFactory1(), instanceFactory2())
+            .Should().BeFalse(); //bug message
+          TypeReflection.TypeOf<T>.InequalityOperator().Evaluate(instanceFactory2(), instanceFactory1())
+            .Should().BeFalse(); //bug message
+          instanceFactory1().GetHashCode().Should().Be(instanceFactory2().GetHashCode()); //bug message
+        }
+      }
+
+      //bug check for empty arrays
+      //bug check for nulls
+
+      foreach (var instanceFactory1 in equalInstances)
+      {
+        foreach (var instanceFactory2 in otherInstances)
+        {
+          instanceFactory1().Equals(instanceFactory2()).Should().BeFalse(); //bug message
+          instanceFactory2().Equals(instanceFactory1()).Should().BeFalse(); //bug message
+          TypeReflection.TypeOf<T>.Equality().Evaluate(instanceFactory1(), instanceFactory2())
+            .Should().BeFalse(); //bug message
+          TypeReflection.TypeOf<T>.Equality().Evaluate(instanceFactory2(), instanceFactory1())
+            .Should().BeFalse(); //bug message
+          TypeReflection.TypeOf<T>.InequalityOperator().Evaluate(instanceFactory1(), instanceFactory2())
+            .Should().BeTrue(); //bug message
+          TypeReflection.TypeOf<T>.InequalityOperator().Evaluate(instanceFactory2(), instanceFactory1())
+            .Should().BeTrue(); //bug message
+          instanceFactory1().GetHashCode().Should().NotBe(instanceFactory2().GetHashCode()); //bug message
+        }
+      }
+    }
   }
 
 
