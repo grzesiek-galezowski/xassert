@@ -33,7 +33,7 @@ namespace TddXt.XFluentAssert.EqualityAssertions
       {
         var instance1 = _activator.CreateInstanceAsValueObjectWithFreshParameters();
         RecordedAssertions.DoesNotThrow(() =>
-            RecordedAssertions.True((bool)equatableEquals.Value().Evaluate(instance1, instance1),
+            RecordedAssertions.True((bool)equatableEquals.Value.Evaluate(instance1, instance1),
               "a.Equals(a) should return true", violations),
           "a.Equals(a) should return true", violations);
 

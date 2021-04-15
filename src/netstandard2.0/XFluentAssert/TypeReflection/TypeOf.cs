@@ -1,3 +1,4 @@
+using Functional.Maybe;
 using TddXt.XFluentAssert.TypeReflection.ImplementationDetails;
 using TddXt.XFluentAssert.TypeReflection.Interfaces;
 
@@ -20,6 +21,11 @@ namespace TddXt.XFluentAssert.TypeReflection
     public static IAmBinaryOperator<T, bool> InequalityOperator()
     {
       return BinaryOperator<T, bool>.Wrap(Type.InequalityOperator());
+    }
+
+    public static Maybe<IAmBinaryOperator<T, bool>> EquatableEquality()
+    {
+      return Type.EquatableEquality().Select(BinaryOperator<T, bool>.Wrap);
     }
   }
 }

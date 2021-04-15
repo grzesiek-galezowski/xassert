@@ -3,8 +3,8 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
-
-using TddXt.XFluentAssert.CommonTypes;
+using Functional.Maybe;
+using Functional.Maybe.Just;
 using TddXt.XFluentAssert.TypeReflection.ImplementationDetails;
 using TddXt.XFluentAssert.TypeReflection.Interfaces;
 
@@ -30,10 +30,10 @@ namespace TddXt.XFluentAssert.TypeReflection
         var fieldInfo = propertyUsageExppression.Member as FieldInfo;
         if (fieldInfo != null)
         {
-          return new Field(fieldInfo);
+          return new Field(fieldInfo).Just();
         }
       }
-      return null;
+      return Maybe<Field>.Nothing;
     }
 
     public bool IsNotDeveloperDefinedReadOnlyField()

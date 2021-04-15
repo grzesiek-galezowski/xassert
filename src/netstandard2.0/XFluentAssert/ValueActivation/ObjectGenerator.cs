@@ -19,12 +19,12 @@ namespace TddXt.XFluentAssert.ValueActivation
     public int GetConstructorParametersCount()
     {
       var constructor = _smartType.PickConstructorWithLeastNonPointersParameters();
-      return constructor.Value().GetParametersCount(); //bug backward compatibility (for now)
+      return constructor.Value.GetParametersCount(); //bug backward compatibility (for now)
     }
 
     public object GenerateInstance(IEnumerable<object> constructorParameters)
     {
-      var instance = _smartType.PickConstructorWithLeastNonPointersParameters().Value()  //bug backward compatibility (for now)
+      var instance = _smartType.PickConstructorWithLeastNonPointersParameters().Value  //bug backward compatibility (for now)
         .InvokeWith(constructorParameters);
       if(instance.GetType() != _smartType.ToClrType())
       {
@@ -36,7 +36,7 @@ namespace TddXt.XFluentAssert.ValueActivation
     public List<object> GenerateConstructorParameters(Func<Type, object> parameterFactory)
     {
       var constructor = _smartType.PickConstructorWithLeastNonPointersParameters();
-      var constructorParameters = constructor.Value()  //bug backward compatibility (for now)
+      var constructorParameters = constructor.Value  //bug backward compatibility (for now)
         .GenerateAnyParameterValues(parameterFactory);
       return constructorParameters;
     }

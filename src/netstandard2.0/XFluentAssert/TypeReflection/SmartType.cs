@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-
-using TddXt.XFluentAssert.CommonTypes;
+using Functional.Maybe;
+using Functional.Maybe.Just;
 using TddXt.XFluentAssert.ConstructorRetrieval;
 using TddXt.XFluentAssert.TypeReflection.ImplementationDetails;
 using TddXt.XFluentAssert.TypeReflection.Interfaces;
@@ -18,10 +18,10 @@ namespace TddXt.XFluentAssert.TypeReflection
   public class SmartType : ISmartType
   {
     private readonly Type _type;
-    private readonly ConstructorRetrieval.IConstructorRetrieval _constructorRetrieval;
+    private readonly IConstructorRetrieval _constructorRetrieval;
     private readonly TypeInfo _typeInfo;
 
-    public SmartType(Type type, ConstructorRetrieval.IConstructorRetrieval constructorRetrieval)
+    public SmartType(Type type, IConstructorRetrieval constructorRetrieval)
     {
       _type = type;
       _constructorRetrieval = constructorRetrieval;
@@ -33,7 +33,7 @@ namespace TddXt.XFluentAssert.TypeReflection
       var constructorInfo = _type.GetConstructor(BindingFlags.NonPublic | BindingFlags.Instance, null, Type.EmptyTypes, null);
       if (constructorInfo != null)
       {
-        return Maybe.Just(DefaultParameterlessConstructor.ForOrdinaryType(constructorInfo));
+        return DefaultParameterlessConstructor.ForOrdinaryType(constructorInfo).Just();
       }
       else
       {
@@ -52,7 +52,7 @@ namespace TddXt.XFluentAssert.TypeReflection
       }
       else
       {
-        return Maybe.Just(DefaultParameterlessConstructor.ForOrdinaryType(constructorInfo));
+        return DefaultParameterlessConstructor.ForOrdinaryType(constructorInfo).Just();
       }
     }
 
@@ -106,7 +106,7 @@ namespace TddXt.XFluentAssert.TypeReflection
         }
       }
 
-      return Maybe.FromNullable(leastParamsConstructor);
+      return leastParamsConstructor!.ToMaybe();
     }
 
     private const string OpEquality = "op_Equality";
@@ -117,7 +117,7 @@ namespace TddXt.XFluentAssert.TypeReflection
       var equality = _typeInfo.GetMethod(OpEquality,
         BindingFlags.Public | BindingFlags.FlattenHierarchy | BindingFlags.Static);
 
-      return equality == null ? Maybe<MethodInfo>.Nothing : new Maybe<MethodInfo>(equality);
+      return equality.ToMaybe();
     }
 
     private Maybe<MethodInfo> InequalityOpMethod()
@@ -125,13 +125,13 @@ namespace TddXt.XFluentAssert.TypeReflection
       var inequality = _typeInfo.GetMethod(OpInequality,
         BindingFlags.Public | BindingFlags.FlattenHierarchy | BindingFlags.Static);
 
-      return inequality == null ? Maybe<MethodInfo>.Nothing : new Maybe<MethodInfo>(inequality);
+      return inequality.ToMaybe();
     }
 
     private Maybe<MethodInfo> ValueTypeEqualityMethod()
     {
       return _typeInfo.IsValueType ?
-               Maybe.Just(GetType().GetTypeInfo().GetMethod(nameof(ValuesEqual)))
+               GetType().GetTypeInfo().GetMethod(nameof(ValuesEqual)).Just()
                : Maybe<MethodInfo>.Nothing;
 
     }
@@ -139,7 +139,7 @@ namespace TddXt.XFluentAssert.TypeReflection
     private Maybe<MethodInfo> ValueTypeInequalityMethod()
     {
       return _typeInfo.IsValueType ?
-               Maybe.Just(GetType().GetTypeInfo().GetMethod(nameof(ValuesNotEqual)))
+               GetType().GetTypeInfo().GetMethod(nameof(ValuesNotEqual)).Just()
                : Maybe<MethodInfo>.Nothing;
     }
 
@@ -169,7 +169,7 @@ namespace TddXt.XFluentAssert.TypeReflection
       {
         var equatableInterface = equatableInterfaces.Single();
         var equalsMethod = equatableInterface.GetMethods().Single();
-        return Maybe.Just((IAmBinaryOperator)new BinaryInstanceOperation(equalsMethod));
+        return new BinaryInstanceOperation(equalsMethod).Just<IAmBinaryOperator>();
       }
       else
       {

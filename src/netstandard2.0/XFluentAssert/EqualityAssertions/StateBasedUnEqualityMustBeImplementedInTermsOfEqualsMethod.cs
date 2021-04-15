@@ -45,13 +45,13 @@ namespace TddXt.XFluentAssert.EqualityAssertions
           if (equatableEquals.HasValue)
           {
             RecordedAssertions.DoesNotThrow(() =>
-                RecordedAssertions.False((bool)equatableEquals.Value().Evaluate(instance1, instance2),
+                RecordedAssertions.False((bool)equatableEquals.Value.Evaluate(instance1, instance2),
                   "a.Equals(b) should return false if both are created with different argument" +
                   currentParamIndex, violations),
               "a.Equals((object)b) should return false if both are created with different argument" +
               currentParamIndex, violations);
             RecordedAssertions.DoesNotThrow(() =>
-                RecordedAssertions.False((bool)equatableEquals.Value().Evaluate(instance2, instance1),
+                RecordedAssertions.False((bool)equatableEquals.Value.Evaluate(instance2, instance1),
                   "b.Equals(a) should return false if both are created with different argument" +
                   currentParamIndex, violations),
               "b.Equals(a) should return false if both are created with different argument" +

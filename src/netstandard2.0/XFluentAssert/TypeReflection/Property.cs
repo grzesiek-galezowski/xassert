@@ -1,8 +1,8 @@
 using System;
 using System.Linq.Expressions;
 using System.Reflection;
-
-using TddXt.XFluentAssert.CommonTypes;
+using Functional.Maybe;
+using Functional.Maybe.Just;
 
 namespace TddXt.XFluentAssert.TypeReflection
 {
@@ -17,10 +17,10 @@ namespace TddXt.XFluentAssert.TypeReflection
         var propertyInfo = propertyUsageExppression.Member as PropertyInfo;
         if (propertyInfo != null)
         {
-          return new Property(propertyInfo);
+          return new Property(propertyInfo).Just();
         }
       }
-      return null;
+      return Maybe<Property>.Nothing;
     }
 
 

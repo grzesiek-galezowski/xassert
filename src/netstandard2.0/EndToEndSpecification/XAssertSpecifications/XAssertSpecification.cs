@@ -6,10 +6,8 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using FluentAssertions;
-using NullableReferenceTypesExtensions;
+using Functional.Maybe;
 using TddXt.AnyRoot.Strings;
-using TddXt.TypeReflection;
-using TddXt.XFluentAssert.CommonTypes;
 using TddXt.XFluentAssert.TypeReflection.ImplementationDetails;
 using Xunit;
 using Xunit.Abstractions;
@@ -269,6 +267,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
       foreach (var instanceFactory1 in equalInstances)
       {
         instanceFactory1().Equals(null).Should().BeFalse();
+
         foreach (var instanceFactory2 in equalInstances)
         {
           instanceFactory1().Equals(instanceFactory2()).Should().BeTrue(); //bug message
@@ -281,7 +280,14 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
             .Should().BeFalse(); //bug message
           TypeReflection.TypeOf<T>.InequalityOperator().Evaluate(instanceFactory2(), instanceFactory1())
             .Should().BeFalse(); //bug message
+          TypeReflection.TypeOf<T>.EquatableEquality().Do(equality =>
+          {
+            equality.Evaluate(instanceFactory1(), instanceFactory2()).Should().BeTrue(); //bug message
+            equality.Evaluate(instanceFactory2(), instanceFactory1()).Should().BeTrue(); //bug message
+          });
+          
           instanceFactory1().GetHashCode().Should().Be(instanceFactory2().GetHashCode()); //bug message
+
         }
       }
 
@@ -302,6 +308,11 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
             .Should().BeTrue(); //bug message
           TypeReflection.TypeOf<T>.InequalityOperator().Evaluate(instanceFactory2(), instanceFactory1())
             .Should().BeTrue(); //bug message
+          TypeReflection.TypeOf<T>.EquatableEquality().Do(equality =>
+          {
+            equality.Evaluate(instanceFactory1(), instanceFactory2()).Should().BeFalse(); //bug message
+            equality.Evaluate(instanceFactory2(), instanceFactory1()).Should().BeFalse(); //bug message
+          });
           instanceFactory1().GetHashCode().Should().NotBe(instanceFactory2().GetHashCode()); //bug message
         }
       }

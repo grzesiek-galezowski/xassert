@@ -18,7 +18,7 @@ namespace TddXt.XFluentAssert.ConstructorRetrieval
       var constructor = constructors.GetPublicParameterlessConstructor();
       if (constructor.HasValue)
       {
-        return new List<ICreateObjects> { constructor.Value() };
+        return new List<ICreateObjects> { constructor.Value };
       }
       else
       {
