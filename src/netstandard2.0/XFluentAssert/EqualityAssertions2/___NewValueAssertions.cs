@@ -5,7 +5,7 @@ using Functional.Maybe;
 
 namespace TddXt.XFluentAssert.EqualityAssertions2
 {
-  public static class NewValueAssertions
+  public static class ___NewValueAssertions
   {
     public static void AssertIsProperValueObject<T>(Func<T>[] equalInstances, Func<T>[] otherInstances)
     {

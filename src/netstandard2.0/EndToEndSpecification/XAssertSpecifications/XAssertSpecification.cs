@@ -240,7 +240,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
     [Fact]
     public void Lol() //bug
     {
-      NewValueAssertions.AssertIsProperValueObject(
+      ___NewValueAssertions.AssertIsProperValueObject(
         new Func<ProperValueType>[]
         {
           () => new ProperValueType(1, new[] {1,2,3})

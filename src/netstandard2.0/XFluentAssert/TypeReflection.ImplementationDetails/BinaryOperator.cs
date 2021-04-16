@@ -14,7 +14,7 @@ namespace TddXt.XFluentAssert.TypeReflection.ImplementationDetails
       _method = binaryOperator;
     }
 
-    public TResult Evaluate(T instance1, T instance2)
+    public TResult Evaluate(T? instance1, T? instance2)
     {
       return (TResult)_method.Evaluate(instance1, instance2);
     }
@@ -34,7 +34,7 @@ namespace TddXt.XFluentAssert.TypeReflection.ImplementationDetails
       _method = method;
     }
 
-    public object Evaluate(object instance1, object instance2)
+    public object Evaluate(object? instance1, object? instance2)
     {
       return _method.Invoke(null, new[] { instance1, instance2 });
     }

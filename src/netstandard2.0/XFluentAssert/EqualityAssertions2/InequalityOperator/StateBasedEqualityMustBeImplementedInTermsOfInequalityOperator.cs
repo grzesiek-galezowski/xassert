@@ -1,31 +1,33 @@
-﻿using TddXt.XFluentAssert.AssertionConstraints;
-using TddXt.XFluentAssert.ValueActivation;
+﻿using System;
+using TddXt.XFluentAssert.AssertionConstraints;
 
 namespace TddXt.XFluentAssert.EqualityAssertions2.InequalityOperator
 {
-  public class StateBasedEqualityMustBeImplementedInTermsOfInequalityOperator : IConstraint
+  public class StateBasedEqualityMustBeImplementedInTermsOfInequalityOperator<T> : IConstraint
   {
-    private readonly ValueObjectActivator _activator;
+    private readonly Func<T>[] _equalInstances;
 
-    public StateBasedEqualityMustBeImplementedInTermsOfInequalityOperator(
-      ValueObjectActivator activator)
+    public StateBasedEqualityMustBeImplementedInTermsOfInequalityOperator(Func<T>[] equalInstances)
     {
-      _activator = activator;
+      _equalInstances = equalInstances;
     }
 
     public void CheckAndRecord(ConstraintsViolations violations)
     {
-      var instance1 = _activator.CreateInstanceAsValueObjectWithFreshParameters();
-      var instance2 = _activator.CreateInstanceAsValueObjectWithPreviousParameters();
+      foreach (var factory in _equalInstances)
+      {
+        var instance1 = factory();
+        var instance2 = factory();
 
-      RecordedAssertions.DoesNotThrow(() =>
-        RecordedAssertions.False(Are.NotEqualInTermsOfInEqualityOperator(_activator.TargetType, instance1, instance2),
-          "a != b should return false if both are created with the same arguments", violations),
-          "a != b should return false if both are created with the same arguments", violations);
-      RecordedAssertions.DoesNotThrow(() =>
-        RecordedAssertions.False(Are.NotEqualInTermsOfInEqualityOperator(_activator.TargetType, instance2, instance1),
-          "b != a should return false if both are created with the same arguments", violations),
-          "b != a should return false if both are created with the same arguments", violations);
+        RecordedAssertions.DoesNotThrow(() =>
+          RecordedAssertions.False(Are.NotEqualInTermsOfInEqualityOperator(typeof(T), instance1, instance2),
+            "a != b should return false for equal values", violations),
+            "a != b should return false for equal values", violations);
+        RecordedAssertions.DoesNotThrow(() =>
+          RecordedAssertions.False(Are.NotEqualInTermsOfInEqualityOperator(typeof(T), instance2, instance1),
+            "b != a should return false for equal values", violations),
+            "b != a should return false for equal values", violations);
+      }
     }
   }
 }

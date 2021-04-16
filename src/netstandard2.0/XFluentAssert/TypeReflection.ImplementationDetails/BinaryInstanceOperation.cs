@@ -12,7 +12,7 @@ namespace TddXt.XFluentAssert.TypeReflection.ImplementationDetails
       _equalsMethod = equalsMethod;
     }
 
-    public object Evaluate(object instance1, object instance2)
+    public object Evaluate(object? instance1, object? instance2)
     {
       return _equalsMethod.Invoke(instance1, new[] { instance2 });
     }

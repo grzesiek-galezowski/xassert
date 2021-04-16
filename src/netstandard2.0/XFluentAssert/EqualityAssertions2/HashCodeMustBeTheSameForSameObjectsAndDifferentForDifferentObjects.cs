@@ -1,57 +1,63 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using TddXt.XFluentAssert.AssertionConstraints;
 using TddXt.XFluentAssert.ValueActivation;
 
 namespace TddXt.XFluentAssert.EqualityAssertions2
 {
-  public class HashCodeMustBeTheSameForSameObjectsAndDifferentForDifferentObjects : IConstraint
+  public class HashCodeMustBeTheSameForSameObjectsAndDifferentForDifferentObjects<T> : IConstraint
   {
-    private readonly ValueObjectActivator _activator;
-    private readonly int[] _indexesOfConstructorArgumentsToSkip;
+    private readonly Func<T>[] _equalInstances;
+    private readonly Func<T>[] _otherInstances;
 
     public HashCodeMustBeTheSameForSameObjectsAndDifferentForDifferentObjects(
-      ValueObjectActivator activator,
-      int[] indexesOfConstructorArgumentsToSkip)
+      Func<T>[] equalInstances, 
+      Func<T>[] otherInstances)
     {
-      _activator = activator;
-      _indexesOfConstructorArgumentsToSkip = indexesOfConstructorArgumentsToSkip;
+      _equalInstances = equalInstances;
+      _otherInstances = otherInstances;
     }
 
     public void CheckAndRecord(ConstraintsViolations violations)
     {
-      var instance1 = _activator.CreateInstanceAsValueObjectWithFreshParameters();
-      var instance3 = _activator.CreateInstanceAsValueObjectWithPreviousParameters();
-      for (var i = 0; i < _activator.GetConstructorParametersCount(); ++i)
+      foreach (var factory1 in _equalInstances)
       {
-        if (ArgumentIsPartOfValueIdentity(i))
+        foreach (var factory2 in _otherInstances)
         {
-          var instance2 = _activator.CreateInstanceAsValueObjectWithModifiedParameter(i);
           RecordedAssertions.DoesNotThrow(() =>
-            RecordedAssertions.NotEqual(instance1.GetHashCode(), instance2.GetHashCode(),
-              "b.GetHashCode() and b.GetHashCode() should return different values when both are created with different argument" + i, violations),
-              "b.GetHashCode() and b.GetHashCode() should return different values when both are created with different argument" + i, violations);
+            RecordedAssertions.NotEqual(factory1().GetHashCode(), factory2().GetHashCode(),
+              "b.GetHashCode() and b.GetHashCode() should return different values for not equal objects", violations),
+              "b.GetHashCode() and b.GetHashCode() should return different values for not equal objects", violations);
         }
       }
 
-      RecordedAssertions.DoesNotThrow(() =>
-          RecordedAssertions.Equal(instance1.GetHashCode(), instance1.GetHashCode(),
-            "a.GetHashCode() should consistently return the same value", violations),
-        "a.GetHashCode() should consistently return the same value", violations);
+      foreach (var factory in _equalInstances.Concat(_otherInstances))
+      {
+        var instance = factory();
+        RecordedAssertions.DoesNotThrow(() =>
+            RecordedAssertions.Equal(instance.GetHashCode(), instance.GetHashCode(),
+              "a.GetHashCode() should consistently return the same value", violations),
+          "a.GetHashCode() should consistently return the same value", violations);
+      }
 
-
-      RecordedAssertions.DoesNotThrow(() =>
-        RecordedAssertions.Equal(instance1.GetHashCode(), instance3.GetHashCode(),
-          "a.GetHashCode() and b.GetHashCode() should return same values when both are created with same arguments", violations),
-          "a.GetHashCode() and b.GetHashCode() should return same values when both are created with same arguments", violations);
-      RecordedAssertions.DoesNotThrow(() =>
-        RecordedAssertions.Equal(instance1.GetHashCode(), instance3.GetHashCode(),
-          "a.GetHashCode() and b.GetHashCode() should return same values when both are created with same arguments", violations),
-          "a.GetHashCode() and b.GetHashCode() should return same values when both are created with same arguments", violations);
-    }
-
-    private bool ArgumentIsPartOfValueIdentity(int i)
-    {
-      return !_indexesOfConstructorArgumentsToSkip.Contains(i);
+      foreach (var factory1 in _equalInstances)
+      {
+        foreach (var factory2 in _equalInstances)
+        {
+          RecordedAssertions.DoesNotThrow(() =>
+              RecordedAssertions.Equal(factory1().GetHashCode(), factory2().GetHashCode(),
+                "a.GetHashCode() and b.GetHashCode() should be equal for equal objects",
+                violations),
+            "a.GetHashCode() and b.GetHashCode() should be equal for equal objects",
+            violations);
+          RecordedAssertions.DoesNotThrow(() =>
+              RecordedAssertions.Equal(factory1().GetHashCode(), factory2().GetHashCode(),
+                "a.GetHashCode() and b.GetHashCode() should be equal for equal objects",
+                violations),
+            "a.GetHashCode() and b.GetHashCode() should be equal for equal objects",
+            violations);
+        }
+      }
     }
   }
 }
