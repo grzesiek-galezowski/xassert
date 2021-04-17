@@ -1,26 +1,34 @@
-﻿using TddXt.XFluentAssert.AssertionConstraints;
-using TddXt.XFluentAssert.ValueActivation;
+﻿using System;
+using System.Linq;
+using TddXt.XFluentAssert.AssertionConstraints;
 
 namespace TddXt.XFluentAssert.EqualityAssertions.InequalityOperator
 {
-  public class StateBasedEqualityWithItselfMustBeImplementedInTermsOfInequalityOperator
+  public class StateBasedEqualityWithItselfMustBeImplementedInTermsOfInequalityOperator<T>
     : IConstraint
   {
-    private readonly ValueObjectActivator _activator;
+    private readonly Func<T>[] _equalInstances;
+    private readonly Func<T>[] _otherInstances;
 
     public StateBasedEqualityWithItselfMustBeImplementedInTermsOfInequalityOperator(
-      ValueObjectActivator activator)
+      Func<T>[] equalInstances, 
+      Func<T>[] otherInstances)
     {
-      _activator = activator;
+      _equalInstances = equalInstances;
+      _otherInstances = otherInstances;
     }
 
     public void CheckAndRecord(ConstraintsViolations violations)
     {
-      var instance1 = _activator.CreateInstanceAsValueObjectWithFreshParameters();
-      RecordedAssertions.DoesNotThrow(() =>
-        RecordedAssertions.False(Are.NotEqualInTermsOfInEqualityOperator(_activator.TargetType, instance1, instance1),
-          "a != a should return false", violations),
-          "a != a should return false", violations);
+      foreach (var factory in _equalInstances.Concat(_otherInstances))
+      {
+        var instance = factory();
+        RecordedAssertions.DoesNotThrow(() =>
+          RecordedAssertions.False(Are.NotEqualInTermsOfInEqualityOperator(typeof(T), instance, instance),
+            "a != a should return false", violations),
+            "a != a should return false", violations);
+        
+      }
     }
   }
 }

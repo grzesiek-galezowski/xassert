@@ -2,9 +2,8 @@
 using System.Linq;
 using TddXt.XFluentAssert.AssertionConstraints;
 using TddXt.XFluentAssert.TypeReflection;
-using TddXt.XFluentAssert.ValueActivation;
 
-namespace TddXt.XFluentAssert.EqualityAssertions2
+namespace TddXt.XFluentAssert.EqualityAssertions
 {
   public class InequalityWithNullMustBeImplementedInTermsOfEqualsMethod<T> : IConstraint
   {

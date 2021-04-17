@@ -7,9 +7,13 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using FluentAssertions;
 using Functional.Maybe;
+using Functional.Maybe.Just;
+using TddXt.AnyRoot;
+using TddXt.AnyRoot.Collections;
+using TddXt.AnyRoot.Numbers;
 using TddXt.AnyRoot.Strings;
 using TddXt.TypeReflection;
-using TddXt.XFluentAssert.EqualityAssertions2;
+using TddXt.XFluentAssert.EqualityAssertions;
 using TddXt.XFluentAssert.TypeReflection.ImplementationDetails;
 using Xunit;
 using Xunit.Abstractions;
@@ -46,67 +50,131 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
     [Fact]
     public void ShouldPassValueTypeAssertionForProperValueType()
     {
-      typeof(ProperValueType).Should().HaveValueSemantics();
+      var integer = Any.Integer();
+      var anArray = Any.Array<int>();
+      typeof(ProperValueType).Should().HaveValueSemantics(
+        new Func<ProperValueType>[]
+        {
+          () => new(integer, anArray)
+        },
+        new Func<ProperValueType>[]
+        {
+          () => new(Any.OtherThan(integer), anArray),
+          () => new(integer, Any.OtherThan<int[]>(anArray))
+        });
     }
 
     [Fact]
     public void ShouldPassValueTypeAssertionForProperValueTypeDerivedFromValueLibrary()
     {
-      typeof(ProperValueTypeDerivedFromLibrary).Should().HaveValueSemantics();
+      var integer = Any.Integer();
+      var str = Any.String();
+      typeof(ProperValueTypeDerivedFromLibrary).Should().HaveValueSemantics(
+        new Func<ProperValueTypeDerivedFromLibrary>[]
+        {
+          () => new(integer, str)
+        },
+        new Func<ProperValueTypeDerivedFromLibrary>[]
+        {
+          () => new(Any.OtherThan(integer), str),
+          () => new(integer, Any.OtherThan(str))
+        });
     }
 
     [Fact]
     public void ShouldPassValueTypeAssertionForProperValueTypeWithInternalConstructor()
     {
-      typeof(FileExtension).Should().HaveValueSemantics();
+      var str = Any.String();
+      typeof(FileExtension).Should().HaveValueSemantics(
+        new Func<FileExtension>[]
+        {
+          () => new(str)
+        },
+        new Func<FileExtension>[]
+        {
+          () => new(Any.OtherThan(str))
+        });
     }
     [Fact]
     public void ShouldPassValueTypeAssertionForProperValueTypeWithNonGenericSuperclass()
     {
-      typeof(RelativeFilePath).Should().HaveValueSemantics();
-    }
-
-    [Fact]
-    public void ShouldPreferInternalNonRecursiveConstructorsToPublicRecursiveOnes()
-    {
-      new Action(() => Any.Instance<DirectoryPath>()).Should().NotThrow();
-      new Action(() => typeof(DirectoryPath).Should().HaveValueSemantics()).Should().NotThrow();
-    }
-
-    [Fact]
-    public void ShouldBeAbleToChooseInternalConstructorWhenThereisNoPublicOne()
-    {
-      new Action(() => Any.Instance<FileNameWithoutExtension>()).Should().NotThrow();
-      new Action(() => typeof(FileNameWithoutExtension).Should().HaveValueSemantics()).Should().NotThrow();
+      var str = Any.String();
+      typeof(RelativeFilePath).Should().HaveValueSemantics(
+        new Func<RelativeFilePath>[]
+        {
+          () => RelativeFilePath.Value(str)
+        },
+        new Func<RelativeFilePath>[]
+        {
+          () => RelativeFilePath.Value(Any.OtherThan(str))
+        });
     }
 
     [Fact]
     public void ShouldAllowSpecifyingConstructorArgumentsNotTakenIntoAccountDuringValueBehaviorCheck()
     {
+      var enumerable = Any.Enumerable<int>();
+      var enumerable2 = Any.Enumerable<int>();
+      var integer = Any.Integer();
       typeof(ProperValueTypeWithOneArgumentIdentity)
-        .Should().HaveValueSemantics(ValueTypeTraits.Custom.SkipConstructorArgument(0));
-
-      new Action(() => typeof(ProperValueTypeWithOneArgumentIdentity).Should().HaveValueSemantics()).Should().ThrowExactly<XunitException>();
+        .Should().HaveValueSemantics(
+          new Func<ProperValueTypeWithOneArgumentIdentity>[]
+          {
+            () => new(enumerable, integer),
+            () => new(enumerable2, integer),
+          },
+          new Func<ProperValueTypeWithOneArgumentIdentity>[]
+          {
+            () => new(enumerable, Any.OtherThan(integer)),
+            () => new(enumerable2, Any.OtherThan(integer)),
+          });
     }
 
     [Fact]
     public void ShouldAcceptProperFullValueTypesAndRejectBadOnes()
     {
-      typeof(ProperValueType).Should().HaveValueSemantics();
-      new Action(() => typeof(ProperValueTypeWithoutEqualityOperator).Should().HaveValueSemantics()).Should().ThrowExactly<XunitException>()
+      int integer = Any.Integer();
+      new Action(() => typeof(ProperValueTypeWithoutEqualityOperator).Should().HaveValueSemantics(
+        new Func<ProperValueTypeWithoutEqualityOperator>[]
+        {
+          () => new(integer)
+        },
+        new Func<ProperValueTypeWithoutEqualityOperator>[]
+        {
+          () => new(Any.OtherThan(integer))
+        })).Should().ThrowExactly<XunitException>()
         .Which.Message.Should().Contain("equality operator");
     }
 
     [Fact]
     public void ShouldWorkForStructuresWithDefaultEquality()
     {
-      typeof(Maybe<string>).Should().HaveValueSemantics();
+      var str = Any.String();
+      typeof(Maybe<string>).Should().HaveValueSemantics(
+        new Func<Maybe<string>>[]
+        {
+          () => str.Just()
+        },
+        new Func<Maybe<string>>[]
+        {
+          () => Maybe<string>.Nothing, 
+          () => Any.OtherThan(str).Just(), 
+        });
     }
 
     [Fact]
     public void ShouldWorkForPrimitves()
     {
-      typeof(int).Should().HaveValueSemantics();
+      typeof(int).Should().HaveValueSemantics(
+        new Func<int>[]
+        {
+          () => 1
+        },
+        new Func<int>[]
+        {
+          () => 2, 
+          () => 3, 
+        });
     }
 
     [Fact]

@@ -3,7 +3,7 @@ using System.Linq;
 using FluentAssertions;
 using Functional.Maybe;
 
-namespace TddXt.XFluentAssert.EqualityAssertions2
+namespace TddXt.XFluentAssert.EqualityAssertions
 {
   public static class ___NewValueAssertions
   {

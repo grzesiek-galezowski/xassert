@@ -9,7 +9,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
     {
       if (ReferenceEquals(null, other)) return false;
       if (ReferenceEquals(this, other)) return true;
-      return Equals(_anArray, other._anArray);
+      return Equals(_a, other._a);
     }
 
     public override bool Equals(object obj)
@@ -24,7 +24,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
     {
       unchecked
       {
-        return (_anArray != null ? _anArray.GetHashCode() : 0);
+        return (_a != null ? _a.GetHashCode() : 0);
       }
     }
 
@@ -51,13 +51,13 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
       return !Equals(left, right);
     }
 
-    private readonly int _a;
     private readonly IEnumerable<int> _anArray;
+    private readonly int _a;
 
-    public ProperValueTypeWithOneArgumentIdentity(int a, IEnumerable<int> anArray)
+    public ProperValueTypeWithOneArgumentIdentity(IEnumerable<int> anArray, int a)
     {
-      _a = a;
       _anArray = anArray;
+      _a = a;
     }
   }
 }

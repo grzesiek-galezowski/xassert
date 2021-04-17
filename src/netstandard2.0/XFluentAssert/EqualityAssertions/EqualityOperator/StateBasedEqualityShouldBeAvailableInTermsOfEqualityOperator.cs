@@ -1,5 +1,4 @@
 ﻿using System;
-
 using TddXt.XFluentAssert.AssertionConstraints;
 
 namespace TddXt.XFluentAssert.EqualityAssertions.EqualityOperator

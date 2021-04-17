@@ -18,14 +18,6 @@ namespace TddXt.XFluentAssert.Api
 
   public static class FluentAssertionsTypeExtensions
   {
-
-    public static AndConstraint<TypeAssertions> HaveValueSemantics(this TypeAssertions o)
-    {
-      o.Subject.Should().HaveValueSemantics(
-        ValueTypeTraits.Default());
-      return new AndConstraint<TypeAssertions>(o);
-    }
-
     public static AndConstraint<TypeAssertions> HaveNullProtectedConstructors(
       this TypeAssertions o)
     {
@@ -40,14 +32,31 @@ namespace TddXt.XFluentAssert.Api
       return new AndConstraint<TypeAssertions>(o);
     }
 
-    public static AndConstraint<TypeAssertions> HaveValueSemantics(this TypeAssertions o,
+    public static AndConstraint<TypeAssertions> HaveValueSemantics<T>(
+      this TypeAssertions o,
+      Func<T>[] equalInstances, 
+      Func<T>[] otherInstances)
+    {
+      o.Subject.Should().HaveValueSemantics<T>(
+        equalInstances, 
+        otherInstances, 
+        ValueTypeTraits.Default());
+      return new AndConstraint<TypeAssertions>(o);
+    }
+
+    public static AndConstraint<TypeAssertions> HaveValueSemantics<T>(
+      this TypeAssertions o,
+      Func<T>[] equalInstances, 
+      Func<T>[] otherInstances,
       IKnowWhatValueTraitsToCheck traits)
     {
+      equalInstances.Should().NotBeNullOrEmpty();
+      otherInstances.Should().NotBeNullOrEmpty();
       Type type = o.Subject;
+      type.Should().Be<T>();
       if (!ValueObjectWhiteList.Contains(type))
       {
-        var activator = ValueObjectActivator.FreshInstance(type, Root.Any.InstanceAsObject);
-        var constraints = ValueObjectConstraints.AssertionConstraints.ForValueSemantics(type, traits, activator);
+        var constraints = ValueObjectConstraints.AssertionConstraints.ForValueSemantics(type, equalInstances, otherInstances, traits);
         AssertionConstraintsEngine.TypeAdheresTo(constraints);
       }
 

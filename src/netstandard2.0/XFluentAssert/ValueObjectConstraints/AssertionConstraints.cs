@@ -11,14 +11,11 @@ namespace TddXt.XFluentAssert.ValueObjectConstraints
   public class AssertionConstraints
   {
     //todo move elsewhere (but has troublesome dependency on ValueTraits which is public...)
-    public static IEnumerable<IConstraint> ForValueSemantics(
-      Type type, IKnowWhatValueTraitsToCheck traits,
-      ValueObjectActivator activator)
+    public static IEnumerable<IConstraint> ForValueSemantics<T>(Type type, Func<T>[] equalInstances,
+      Func<T>[] otherInstances,
+      IKnowWhatValueTraitsToCheck traits)
     {
-
       var constraints = new List<IConstraint>();
-      var smartType = TypeReflection.SmartType.For(type);
-
       constraints.Add(new HasToBeAConcreteClass(type));
 
       if (traits.RequireAllFieldsReadOnly)
@@ -30,46 +27,33 @@ namespace TddXt.XFluentAssert.ValueObjectConstraints
       constraints.Add(new ThereMustBeNoPublicPropertySetters(type));
       constraints.Add(new MustBeSealed(type));
 
-      constraints.Add(new StateBasedEqualityWithItselfMustBeImplementedInTermsOfEqualsMethod(activator, smartType));
-      constraints.Add(new StateBasedEqualityMustBeImplementedInTermsOfEqualsMethod(activator, smartType));
+      constraints.Add(new StateBasedEqualityWithItselfMustBeImplementedInTermsOfEqualsMethod<T>(equalInstances, otherInstances));
+      constraints.Add(new StateBasedEqualityMustBeImplementedInTermsOfEqualsMethod<T>(equalInstances));
 
-      constraints.Add(new StateBasedUnEqualityMustBeImplementedInTermsOfEqualsMethod(activator,
-        traits.IndexesOfConstructorArgumentsIndexesThatDoNotConstituteAValueIdentify.ToArray(),
-        smartType));
+      constraints.Add(new StateBasedInequalityMustBeImplementedInTermsOfEqualsMethod<T>(equalInstances, otherInstances));
 
-      constraints.Add(new HashCodeMustBeTheSameForSameObjectsAndDifferentForDifferentObjects(activator,
-        traits.IndexesOfConstructorArgumentsIndexesThatDoNotConstituteAValueIdentify.ToArray()));
+      constraints.Add(new HashCodeMustBeTheSameForSameObjectsAndDifferentForDifferentObjects<T>(equalInstances, otherInstances));
 
       if (traits.RequireSafeInequalityToNull)
       {
-        constraints.Add(new UnEqualityWithNullMustBeImplementedInTermsOfEqualsMethod(activator, smartType));
+        constraints.Add(new InequalityWithNullMustBeImplementedInTermsOfEqualsMethod<T>(equalInstances, otherInstances));
       }
 
       if (traits.RequireEqualityAndInequalityOperatorImplementation)
       {
         //equality operator
         constraints.Add(new StateBasedEqualityShouldBeAvailableInTermsOfEqualityOperator(type));
-        constraints.Add(new StateBasedEqualityMustBeImplementedInTermsOfEqualityOperator(activator));
-        constraints.Add(new StateBasedEqualityWithItselfMustBeImplementedInTermsOfEqualityOperator(activator));
-        constraints.Add(new StateBasedInequalityMustBeImplementedInTermsOfEqualityOperator(activator,
-          traits.IndexesOfConstructorArgumentsIndexesThatDoNotConstituteAValueIdentify.ToArray()));
-        constraints.Add(new InequalityWithNullMustBeImplementedInTermsOfEqualityOperator(
-          activator));
+        constraints.Add(new StateBasedEqualityMustBeImplementedInTermsOfEqualityOperator<T>(equalInstances));
+        constraints.Add(new StateBasedEqualityWithItselfMustBeImplementedInTermsOfEqualityOperator<T>(equalInstances, otherInstances));
+        constraints.Add(new StateBasedInequalityMustBeImplementedInTermsOfEqualityOperator<T>(equalInstances, otherInstances));
+        constraints.Add(new InequalityWithNullMustBeImplementedInTermsOfEqualityOperator<T>(equalInstances, otherInstances));
 
         //inequality operator
-        constraints.Add(new StateBasedEqualityShouldBeAvailableInTermsOfInequalityOperator(
-          type));
-        constraints.Add(new StateBasedEqualityMustBeImplementedInTermsOfInequalityOperator(
-          activator));
-        constraints.Add(new StateBasedEqualityWithItselfMustBeImplementedInTermsOfInequalityOperator(
-          activator));
-        constraints.Add(new StateBasedUnEqualityMustBeImplementedInTermsOfInequalityOperator(
-          activator,
-          traits.IndexesOfConstructorArgumentsIndexesThatDoNotConstituteAValueIdentify.ToArray()));
-        constraints.Add(new InequalityWithNullMustBeImplementedInTermsOfInequalityOperator(
-          activator));
-
-
+        constraints.Add(new StateBasedEqualityShouldBeAvailableInTermsOfInequalityOperator(type));
+        constraints.Add(new StateBasedEqualityMustBeImplementedInTermsOfInequalityOperator<T>(equalInstances));
+        constraints.Add(new StateBasedEqualityWithItselfMustBeImplementedInTermsOfInequalityOperator<T>(equalInstances, otherInstances));
+        constraints.Add(new StateBasedInequalityMustBeImplementedInTermsOfInequalityOperator<T>(equalInstances, otherInstances));
+        constraints.Add(new InequalityWithNullMustBeImplementedInTermsOfInequalityOperator<T>(equalInstances, otherInstances));
       }
       return constraints;
     }

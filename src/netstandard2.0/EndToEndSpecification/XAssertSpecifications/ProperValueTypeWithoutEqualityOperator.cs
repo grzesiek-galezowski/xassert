@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 
 namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
 {
@@ -9,7 +8,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
     {
       if (ReferenceEquals(null, other)) return false;
       if (ReferenceEquals(this, other)) return true;
-      return _a == other._a && Equals(_anArray, other._anArray);
+      return _a == other._a;
     }
 
     public override bool Equals(object obj)
@@ -22,19 +21,14 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
 
     public override int GetHashCode()
     {
-      unchecked
-      {
-        return (_a * 397) ^ (_anArray != null ? _anArray.GetHashCode() : 0);
-      }
+      return _a.GetHashCode();
     }
 
     private readonly int _a;
-    private readonly IEnumerable<int> _anArray;
 
-    public ProperValueTypeWithoutEqualityOperator(int a, IEnumerable<int> anArray)
+    public ProperValueTypeWithoutEqualityOperator(int a)
     {
       _a = a;
-      _anArray = anArray;
     }
   }
 }

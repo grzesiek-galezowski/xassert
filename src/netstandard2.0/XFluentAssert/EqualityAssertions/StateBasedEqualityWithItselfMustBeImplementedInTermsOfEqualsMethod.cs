@@ -1,44 +1,47 @@
-﻿using TddXt.XFluentAssert.TypeReflection;
+﻿using System;
+using System.Linq;
 using TddXt.XFluentAssert.AssertionConstraints;
-using TddXt.XFluentAssert.ValueActivation;
+using TddXt.XFluentAssert.TypeReflection;
 
 namespace TddXt.XFluentAssert.EqualityAssertions
 {
-  public class StateBasedEqualityWithItselfMustBeImplementedInTermsOfEqualsMethod : IConstraint
+  public class StateBasedEqualityWithItselfMustBeImplementedInTermsOfEqualsMethod<T> : IConstraint
   {
-    private readonly ValueObjectActivator _activator;
-    private readonly ISmartType _smartType;
+    private readonly Func<T>[] _equalInstances;
+    private readonly Func<T>[] _otherInstances;
 
     public StateBasedEqualityWithItselfMustBeImplementedInTermsOfEqualsMethod(
-      ValueObjectActivator activator,
-      ISmartType smartType)
+      Func<T>[] equalInstances, 
+      Func<T>[] otherInstances)
     {
-      _activator = activator;
-      _smartType = smartType;
+      _equalInstances = equalInstances;
+      _otherInstances = otherInstances;
     }
 
     public void CheckAndRecord(ConstraintsViolations violations)
     {
-      RecordedAssertions.DoesNotThrow(() =>
+      foreach (var factory in _equalInstances.Concat(_otherInstances))
       {
-        var instance1 = _activator.CreateInstanceAsValueObjectWithFreshParameters();
         RecordedAssertions.DoesNotThrow(() =>
-          RecordedAssertions.True(instance1.Equals(instance1),
-            "a.Equals(object a) should return true", violations),
+        {
+          var instance1 = factory();
+
+          RecordedAssertions.DoesNotThrow(() =>
+              RecordedAssertions.True(instance1.Equals(instance1),
+                "a.Equals(object a) should return true", violations),
             "a.Equals(object a) should return true", violations);
-      }, "Should be able to create an object of type " + _activator.TargetType, violations);
+        }, "Should be able to create an object of type " + typeof(T), violations);
 
-      var equatableEquals = _smartType.EquatableEquality();
-      if (equatableEquals.HasValue)
-      {
-        var instance1 = _activator.CreateInstanceAsValueObjectWithFreshParameters();
-        RecordedAssertions.DoesNotThrow(() =>
-            RecordedAssertions.True((bool)equatableEquals.Value.Evaluate(instance1, instance1),
-              "a.Equals(a) should return true", violations),
-          "a.Equals(a) should return true", violations);
-
+        var equatableEquals = TypeOf<T>.EquatableEquality();
+        if (equatableEquals.HasValue)
+        {
+          var instance1 = factory();
+          RecordedAssertions.DoesNotThrow(() =>
+              RecordedAssertions.True((bool)equatableEquals.Value.Evaluate(instance1, instance1),
+                "a.Equals(a) should return true", violations),
+            "a.Equals(a) should return true", violations);
+        }
       }
-
     }
   }
 }

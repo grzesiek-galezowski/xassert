@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Linq;
 using TddXt.XFluentAssert.AssertionConstraints;
-using TddXt.XFluentAssert.ValueActivation;
 
-namespace TddXt.XFluentAssert.EqualityAssertions2.InequalityOperator
+namespace TddXt.XFluentAssert.EqualityAssertions.InequalityOperator
 {
   public class StateBasedInequalityMustBeImplementedInTermsOfInequalityOperator<T>
     : IConstraint
