@@ -1,52 +1,50 @@
-﻿using TddXt.XFluentAssert.AssertionConstraints;
+﻿using System;
+using TddXt.XFluentAssert.AssertionConstraints;
 using TddXt.XFluentAssert.TypeReflection;
-using TddXt.XFluentAssert.ValueActivation;
 
 namespace TddXt.XFluentAssert.EqualityAssertions2
 {
-  public class StateBasedEqualityMustBeImplementedInTermsOfEqualsMethod : IConstraint
+  public class StateBasedEqualityMustBeImplementedInTermsOfEqualsMethod<T> : IConstraint
   {
-    private readonly ValueObjectActivator _activator;
-    private readonly ISmartType _type;
+    private readonly Func<T>[] _equalInstances;
 
-    public StateBasedEqualityMustBeImplementedInTermsOfEqualsMethod(
-      ValueObjectActivator activator,
-      ISmartType type)
+    public StateBasedEqualityMustBeImplementedInTermsOfEqualsMethod(Func<T>[] equalInstances)
     {
-      _activator = activator;
-      _type = type;
+      _equalInstances = equalInstances;
     }
 
     public void CheckAndRecord(ConstraintsViolations violations)
     {
       RecordedAssertions.DoesNotThrow(() =>
       {
-        var instance1 = _activator.CreateInstanceAsValueObjectWithFreshParameters();
-        var instance2 = _activator.CreateInstanceAsValueObjectWithPreviousParameters();
-
-        var equatableEquality = _type.EquatableEquality();
+        var equatableEquality = TypeOf<T>.EquatableEquality();
         if (equatableEquality.HasValue)
         {
-          RecordedAssertions.DoesNotThrow(() =>
-              RecordedAssertions.True((bool)equatableEquality.Value.Evaluate(instance1, instance2),
-            "a.Equals(b) should return true if both are created with the same arguments", violations),
-          "a.Equals(b) should return true if both are created with the same arguments", violations);
-          RecordedAssertions.DoesNotThrow(() =>
-              RecordedAssertions.True((bool)equatableEquality.Value.Evaluate(instance2, instance1),
-                "b.Equals(a) should return true if both are created with the same arguments", violations),
-            "b.Equals(a) should return true if both are created with the same arguments", violations);
-          //end of bug
-        }
+          foreach (var factory1 in _equalInstances)
+          {
+            foreach (var factory2 in _equalInstances)
+            {
+              RecordedAssertions.DoesNotThrow(() =>
+                  RecordedAssertions.True((bool) equatableEquality.Value.Evaluate(factory1(), factory2()),
+                    "a.Equals(T b) should return true for equal objects", violations),
+                "a.Equals(T b) should return true for equal objects", violations);
+              RecordedAssertions.DoesNotThrow(() =>
+                  RecordedAssertions.True((bool) equatableEquality.Value.Evaluate(factory2(), factory1()),
+                    "b.Equals<T>(a) should return true for equal objects", violations),
+                "b.Equals(T a) should return true for equal objects", violations);
 
-        RecordedAssertions.DoesNotThrow(() =>
-          RecordedAssertions.True(instance1.Equals(instance2),
-          "a.Equals(object b) should return true if both are created with the same arguments", violations),
-          "a.Equals(object b) should return true if both are created with the same arguments", violations);
-        RecordedAssertions.DoesNotThrow(() =>
-          RecordedAssertions.True(instance2.Equals(instance1),
-          "b.Equals(object a) should return true if both are created with the same arguments", violations),
-          "b.Equals(object a) should return true if both are created with the same arguments", violations);
-      }, "Should be able to create an object of type " + _activator.TargetType, violations);
+              RecordedAssertions.DoesNotThrow(() =>
+                  RecordedAssertions.True(factory1().Equals(factory2()),
+                    "a.Equals(object b) should return true for equal objects", violations),
+                "a.Equals(object b) should return true for equal objects", violations);
+              RecordedAssertions.DoesNotThrow(() =>
+                  RecordedAssertions.True(factory2().Equals(factory1()),
+                    "b.Equals(object a) should return true for equal objects", violations),
+                "b.Equals(object a) should return true for equal objects", violations);
+            }
+          }
+        }
+      }, "Should be able to create an object of type " + typeof(T), violations);
     }
   }
 }
