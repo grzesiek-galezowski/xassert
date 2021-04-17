@@ -8,7 +8,6 @@ namespace TddXt.XFluentAssert.TypeReflection.ImplementationDetails
   public class CreationMethodParameters
   {
     private readonly ParameterInfo[] _parameters;
-    private readonly bool _hasAbstractOrInterfaceArguments;
     private readonly IEnumerable<TypeInfo> _parameterTypes;
 
     public CreationMethodParameters(ParameterInfo[] parameters)
@@ -16,9 +15,6 @@ namespace TddXt.XFluentAssert.TypeReflection.ImplementationDetails
       _parameters = parameters;
       _parameterTypes =
         parameters.Select(p => IntrospectionExtensions.GetTypeInfo(p.ParameterType));
-      _hasAbstractOrInterfaceArguments =
-        parameters.Select(p => p.ParameterType.GetTypeInfo())
-          .Any(type => type.IsAbstract || type.IsInterface);
     }
 
     public bool ContainAnyPointer()
@@ -34,14 +30,6 @@ namespace TddXt.XFluentAssert.TypeReflection.ImplementationDetails
     public int Count()
     {
       return _parameters.Length;
-    }
-
-    public void FillWithGeneratedValues(Func<Type, object> instanceGenerator, List<object> constructorValues)
-    {
-      foreach (var constructorParam in _parameterTypes)
-      {
-        constructorValues.Add(instanceGenerator(constructorParam));
-      }
     }
 
     public string GetDescriptionFor(int i)

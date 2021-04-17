@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 
 using TddXt.XFluentAssert.TypeReflection.Interfaces;
@@ -66,23 +64,6 @@ namespace TddXt.XFluentAssert.TypeReflection.ImplementationDetails
     public int GetParametersCount()
     {
       return _creationMethodParameters.Count();
-    }
-
-    public List<object> GenerateAnyParameterValues(Func<Type, object> instanceGenerator)
-    {
-      var constructorValues = new List<object>();
-      _creationMethodParameters.FillWithGeneratedValues(instanceGenerator, constructorValues);
-      return constructorValues;
-    }
-
-    public string GetDescriptionForParameter(int i)
-    {
-      return _creationMethodParameters.GetDescriptionFor(i);
-    }
-
-    public object InvokeWith(IEnumerable<object> constructorParameters)
-    {
-      return _invocation(constructorParameters.ToArray());
     }
 
     public override string ToString()

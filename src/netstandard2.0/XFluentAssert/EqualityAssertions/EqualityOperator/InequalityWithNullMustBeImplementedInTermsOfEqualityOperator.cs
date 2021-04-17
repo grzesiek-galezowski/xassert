@@ -18,18 +18,21 @@ namespace TddXt.XFluentAssert.EqualityAssertions.EqualityOperator
 
     public void CheckAndRecord(ConstraintsViolations violations)
     {
-      foreach (var factory in _equalInstances.Concat(_otherInstances))
+      if (!typeof(T).IsValueType)
       {
-        var instance1 = factory();
-        RecordedAssertions.DoesNotThrow(() =>
-            RecordedAssertions.False(Are.EqualInTermsOfEqualityOperator(typeof(T), instance1, null),
-              "a == null should return false", violations),
-          "a == null should return false", violations);
+        foreach (var factory in _equalInstances.Concat(_otherInstances))
+        {
+          var instance1 = factory();
+          RecordedAssertions.DoesNotThrow(() =>
+              RecordedAssertions.False(Are.EqualInTermsOfEqualityOperator(typeof(T), instance1, null),
+                "a == null should return false", violations),
+            "a == null should return false", violations);
 
-        RecordedAssertions.DoesNotThrow(() =>
-            RecordedAssertions.False(Are.EqualInTermsOfEqualityOperator(typeof(T), null, instance1),
-              "null == a should return false", violations),
-          "null == a should return false", violations);
+          RecordedAssertions.DoesNotThrow(() =>
+              RecordedAssertions.False(Are.EqualInTermsOfEqualityOperator(typeof(T), null, instance1),
+                "null == a should return false", violations),
+            "null == a should return false", violations);
+        }
       }
     }
   }

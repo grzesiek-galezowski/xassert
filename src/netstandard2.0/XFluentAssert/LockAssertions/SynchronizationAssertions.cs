@@ -115,8 +115,6 @@ namespace TddXt.XFluentAssert.LockAssertions
       }
     }
 
-
-
     private static void LockShouldBeReleasedAfterACall<T, TReturn>(
       T wrappingObject,
       T wrappedObjectMock,

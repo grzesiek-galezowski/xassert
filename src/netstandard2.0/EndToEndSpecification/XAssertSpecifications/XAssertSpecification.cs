@@ -32,22 +32,6 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
     }
 
     [Fact]
-    public void ShouldThrowAssertionExceptionWhenTypeIsNotGuardedAgainstNullConstructorParameters()
-    {
-      new Action(() => typeof(NotGuardedObject).Should().HaveNullProtectedConstructors())
-        .Should().ThrowExactly<XunitException>()
-        .Which.Message.Should().ContainAll("Not guarded parameter: String b", "Not guarded parameter: String dede")
-        .And.NotContain("Not guarded parameter: Int32 a");
-    }
-
-    [Fact]
-    public void ShouldNotThrowAssertionExceptionWhenTypeIsGuardedAgainstNullConstructorParameters()
-    {
-      new Action(() => typeof(GuardedObject).Should().HaveNullProtectedConstructors())
-        .Should().NotThrow();
-    }
-
-    [Fact]
     public void ShouldPassValueTypeAssertionForProperValueType()
     {
       var integer = Any.Integer();
@@ -302,26 +286,6 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
     // todo circular dependencies
 
   }
-
-  public class PlaygroundForNewValueAssertions //bug
-  {
-    [Fact]
-    public void Lol() //bug
-    {
-      ___NewValueAssertions.AssertIsProperValueObject(
-        new Func<ProperValueType>[]
-        {
-          () => new ProperValueType(1, new[] {1,2,3})
-        },
-        new Func<ProperValueType>[]
-        {
-          () => new ProperValueType(2, new[] {1,2,3}),
-          () => new ProperValueType(1, new[] {1,2}),
-          () => new ProperValueType(1, null)
-        });
-    }
-  }
-
 
   class A1
   {

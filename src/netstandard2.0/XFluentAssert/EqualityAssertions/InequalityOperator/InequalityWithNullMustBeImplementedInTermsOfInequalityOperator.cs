@@ -19,19 +19,22 @@ namespace TddXt.XFluentAssert.EqualityAssertions.InequalityOperator
 
     public void CheckAndRecord(ConstraintsViolations violations)
     {
-      foreach (var factory in _equalInstances.Concat(_otherInstances))
+      if (!typeof(T).IsValueType)
       {
-        var instance1 = factory();
-        RecordedAssertions.DoesNotThrow(() =>
-          RecordedAssertions.True(
-            Are.NotEqualInTermsOfInEqualityOperator(typeof(T), instance1, null),
-            "a != null should return true", violations),
+        foreach (var factory in _equalInstances.Concat(_otherInstances))
+        {
+          var instance1 = factory();
+          RecordedAssertions.DoesNotThrow(() =>
+              RecordedAssertions.True(
+                Are.NotEqualInTermsOfInEqualityOperator(typeof(T), instance1, null),
+                "a != null should return true", violations),
             "a != null should return true", violations);
-        RecordedAssertions.DoesNotThrow(() =>
-          RecordedAssertions.True(
-            Are.NotEqualInTermsOfInEqualityOperator(typeof(T), null, instance1),
-            "null != a should return true", violations),
-          "null != a should return true", violations);
+          RecordedAssertions.DoesNotThrow(() =>
+              RecordedAssertions.True(
+                Are.NotEqualInTermsOfInEqualityOperator(typeof(T), null, instance1),
+                "null != a should return true", violations),
+            "null != a should return true", violations);
+        }
       }
     }
   }

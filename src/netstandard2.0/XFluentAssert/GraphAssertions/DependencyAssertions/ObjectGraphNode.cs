@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using FluentAssertions;
-using TddXt.XFluentAssert.ValueActivation;
 
 namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
 {
