@@ -6,7 +6,7 @@ using TddXt.XFluentAssert.TypeReflection;
 
 namespace TddXt.XFluentAssert.ValueObjectConstraints
 {
-  public class AllFieldsMustBeReadOnly : IConstraint
+  internal class AllFieldsMustBeReadOnly : IConstraint
   {
     private readonly Type _type;
 

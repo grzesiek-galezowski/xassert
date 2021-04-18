@@ -7,10 +7,11 @@ using NSubstitute;
 using NSubstitute.Exceptions;
 
 using TddXt.AnyRoot;
+using TddXt.XFluentAssert.Api.LockAssertions;
 
 namespace TddXt.XFluentAssert.LockAssertions
 {
-  public static class SynchronizationAssertions
+  internal static class SynchronizationAssertions
   {
     private static void LockShouldBeReleasedWhenCallThrowsException<T>(
       ILockAssertions lockAssertions,

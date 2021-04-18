@@ -1,18 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace TddXt.XFluentAssert.ValueObjectConstraints
+﻿namespace TddXt.XFluentAssert.Api.ValueAssertions
 {
   public interface IKnowWhatValueTraitsToCheck
   {
-    List<int> IndexesOfConstructorArgumentsIndexesThatDoNotConstituteAValueIdentify
-    {
-      get;
-      // ReSharper disable once MemberCanBePrivate.Global
-      // ReSharper disable once AutoPropertyCanBeMadeGetOnly.Global
-      // ReSharper disable once UnusedMemberInSuper.Global
-      set;
-    }
-
     bool RequireEqualityAndInequalityOperatorImplementation
     {
       get;
@@ -38,7 +27,5 @@ namespace TddXt.XFluentAssert.ValueObjectConstraints
       // ReSharper disable once UnusedMemberInSuper.Global
       set;
     }
-
-    IKnowWhatValueTraitsToCheck SkipConstructorArgument(int constructorArgumentIndex);
   }
 }

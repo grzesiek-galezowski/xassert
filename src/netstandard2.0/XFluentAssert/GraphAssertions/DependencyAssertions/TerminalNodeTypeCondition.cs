@@ -1,11 +1,11 @@
 namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
 {
-  public interface ITerminalNodeCondition
+  internal interface ITerminalNodeCondition
   {
     bool Evaluate(object target);
   }
 
-  public class TerminalNodeTypeCondition<T> : ITerminalNodeCondition
+  internal class TerminalNodeTypeCondition<T> : ITerminalNodeCondition
   {
     public bool Evaluate(object target)
     {

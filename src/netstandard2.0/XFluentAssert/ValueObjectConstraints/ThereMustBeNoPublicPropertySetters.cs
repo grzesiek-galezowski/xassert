@@ -6,7 +6,7 @@ using TddXt.XFluentAssert.TypeReflection;
 
 namespace TddXt.XFluentAssert.ValueObjectConstraints
 {
-  public class ThereMustBeNoPublicPropertySetters : IConstraint
+  internal class ThereMustBeNoPublicPropertySetters : IConstraint
   {
     private readonly Type _type;
 

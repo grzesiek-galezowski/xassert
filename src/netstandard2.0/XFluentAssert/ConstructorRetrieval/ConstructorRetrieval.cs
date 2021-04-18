@@ -4,7 +4,7 @@ using TddXt.XFluentAssert.TypeReflection.Interfaces;
 
 namespace TddXt.XFluentAssert.ConstructorRetrieval
 {
-  public interface IConstructorRetrieval
+  internal interface IConstructorRetrieval
   {
     IEnumerable<ICreateObjects> RetrieveFrom(IConstructorQueries constructors);
   }

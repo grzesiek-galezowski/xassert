@@ -5,7 +5,7 @@ using TddXt.XFluentAssert.TypeReflection;
 
 namespace TddXt.XFluentAssert.EqualityAssertions
 {
-  public class StateBasedEqualityWithItselfMustBeImplementedInTermsOfEqualsMethod<T> : IConstraint
+  internal class StateBasedEqualityWithItselfMustBeImplementedInTermsOfEqualsMethod<T> : IConstraint
   {
     private readonly Func<T>[] _equalInstances;
     private readonly Func<T>[] _otherInstances;

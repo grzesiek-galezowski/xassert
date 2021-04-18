@@ -1,6 +1,6 @@
 ﻿namespace TddXt.XFluentAssert.TypeReflection.Interfaces
 {
-  public interface IAmProperty
+  internal interface IAmProperty
   {
     bool HasPublicSetter();
     string ShouldNotBeMutableButIs();

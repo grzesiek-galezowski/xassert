@@ -1,9 +1,10 @@
 using System;
 using System.Threading;
+using TddXt.XFluentAssert.Api.LockAssertions;
 
 namespace TddXt.XFluentAssert.LockAssertions
 {
-  public class MonitorAssertions : ILockAssertions
+  internal class MonitorAssertions : ILockAssertions
   {
     private readonly object _aLock;
 

@@ -5,7 +5,7 @@ using TddXt.XFluentAssert.TypeReflection.Interfaces;
 
 namespace TddXt.XFluentAssert.TypeReflection.ImplementationDetails
 {
-  public class CreationMethod : ICreateObjects
+  internal class CreationMethod : ICreateObjects
   {
     public static CreationMethod FromConstructorInfo(ConstructorInfo constructor)
     {

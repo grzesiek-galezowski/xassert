@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace TddXt.XFluentAssert.TypeReflection.ImplementationDetails
 {
-  public class CreationMethodParameters
+  internal class CreationMethodParameters
   {
     private readonly ParameterInfo[] _parameters;
     private readonly IEnumerable<TypeInfo> _parameterTypes;

@@ -6,7 +6,7 @@ using TddXt.XFluentAssert.TypeReflection.Interfaces;
 
 namespace TddXt.XFluentAssert.TypeReflection.ImplementationDetails
 {
-  public class Event : IAmEvent
+  internal class Event : IAmEvent
   {
     private readonly EventInfo _eventInfo;
 

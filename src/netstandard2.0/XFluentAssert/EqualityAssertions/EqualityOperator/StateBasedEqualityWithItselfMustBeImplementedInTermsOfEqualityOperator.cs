@@ -4,7 +4,7 @@ using TddXt.XFluentAssert.AssertionConstraints;
 
 namespace TddXt.XFluentAssert.EqualityAssertions.EqualityOperator
 {
-  public class StateBasedEqualityWithItselfMustBeImplementedInTermsOfEqualityOperator<T>
+  internal class StateBasedEqualityWithItselfMustBeImplementedInTermsOfEqualityOperator<T>
     : IConstraint
   {
     private readonly Func<T>[] _equalInstances;

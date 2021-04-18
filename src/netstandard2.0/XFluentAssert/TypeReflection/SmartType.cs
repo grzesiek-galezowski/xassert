@@ -11,11 +11,11 @@ using TddXt.XFluentAssert.TypeReflection.Interfaces;
 
 namespace TddXt.XFluentAssert.TypeReflection
 {
-  public interface ISmartType : IType, IConstructorQueries
+  internal interface ISmartType : IType, IConstructorQueries
   {
   }
 
-  public class SmartType : ISmartType
+  internal class SmartType : ISmartType
   {
     private readonly Type _type;
     private readonly IConstructorRetrieval _constructorRetrieval;

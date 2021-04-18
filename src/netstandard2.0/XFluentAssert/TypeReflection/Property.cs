@@ -6,7 +6,7 @@ using Functional.Maybe.Just;
 
 namespace TddXt.XFluentAssert.TypeReflection
 {
-  public class Property
+  internal class Property
   {
     public static Maybe<Property> FromUnaryExpression<T>(Expression<Func<T, object>> expression)
     {

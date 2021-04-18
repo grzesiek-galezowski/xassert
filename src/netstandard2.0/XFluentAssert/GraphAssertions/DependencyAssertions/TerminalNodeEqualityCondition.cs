@@ -1,6 +1,6 @@
 namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
 {
-  public class TerminalNodeEqualityCondition : ITerminalNodeCondition
+  internal class TerminalNodeEqualityCondition : ITerminalNodeCondition
   {
     private readonly object _instance;
 

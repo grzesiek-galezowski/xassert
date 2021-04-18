@@ -17,7 +17,7 @@ namespace TddXt.XFluentAssert.Api
       };
     }
 
-    public IList<ITerminalNodeCondition> TerminalNodeConditions { get; } = DefaultTerminalNodeConditions();
+    internal IList<ITerminalNodeCondition> TerminalNodeConditions { get; } = DefaultTerminalNodeConditions();
 
     public DependsOnAssertionsOptions SkipType<T1>()
     {

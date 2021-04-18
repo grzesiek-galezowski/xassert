@@ -1,10 +1,8 @@
 ﻿using AtmaFileSystem;
 using TddXt.XFluentAssert.Api;
-using TddXt.XFluentAssert.Api.ValueAssertions;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using FluentAssertions;
 using Functional.Maybe;
 using Functional.Maybe.Just;
@@ -12,8 +10,6 @@ using TddXt.AnyRoot;
 using TddXt.AnyRoot.Collections;
 using TddXt.AnyRoot.Numbers;
 using TddXt.AnyRoot.Strings;
-using TddXt.TypeReflection;
-using TddXt.XFluentAssert.EqualityAssertions;
 using TddXt.XFluentAssert.TypeReflection.ImplementationDetails;
 using Xunit;
 using Xunit.Abstractions;
@@ -36,7 +32,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
     {
       var integer = Any.Integer();
       var anArray = Any.Array<int>();
-      typeof(ProperValueType).Should().HaveValueSemantics(
+      ObjectsOfType<ProperValueType>.ShouldHaveValueSemantics(
         new Func<ProperValueType>[]
         {
           () => new(integer, anArray)
@@ -53,7 +49,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
     {
       var integer = Any.Integer();
       var str = Any.String();
-      typeof(ProperValueTypeDerivedFromLibrary).Should().HaveValueSemantics(
+      ObjectsOfType<ProperValueTypeDerivedFromLibrary>.ShouldHaveValueSemantics(
         new Func<ProperValueTypeDerivedFromLibrary>[]
         {
           () => new(integer, str)
@@ -69,7 +65,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
     public void ShouldPassValueTypeAssertionForProperValueTypeWithInternalConstructor()
     {
       var str = Any.String();
-      typeof(FileExtension).Should().HaveValueSemantics(
+      ObjectsOfType<FileExtension>.ShouldHaveValueSemantics(
         new Func<FileExtension>[]
         {
           () => new(str)
@@ -83,7 +79,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
     public void ShouldPassValueTypeAssertionForProperValueTypeWithNonGenericSuperclass()
     {
       var str = Any.String();
-      typeof(RelativeFilePath).Should().HaveValueSemantics(
+      ObjectsOfType<RelativeFilePath>.ShouldHaveValueSemantics(
         new Func<RelativeFilePath>[]
         {
           () => RelativeFilePath.Value(str)
@@ -100,8 +96,8 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
       var enumerable = Any.Enumerable<int>();
       var enumerable2 = Any.Enumerable<int>();
       var integer = Any.Integer();
-      typeof(ProperValueTypeWithOneArgumentIdentity)
-        .Should().HaveValueSemantics(
+      ObjectsOfType<ProperValueTypeWithOneArgumentIdentity>
+        .ShouldHaveValueSemantics(
           new Func<ProperValueTypeWithOneArgumentIdentity>[]
           {
             () => new(enumerable, integer),
@@ -118,7 +114,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
     public void ShouldAcceptProperFullValueTypesAndRejectBadOnes()
     {
       int integer = Any.Integer();
-      new Action(() => typeof(ProperValueTypeWithoutEqualityOperator).Should().HaveValueSemantics(
+      new Action(() => ObjectsOfType<ProperValueTypeWithoutEqualityOperator>.ShouldHaveValueSemantics(
         new Func<ProperValueTypeWithoutEqualityOperator>[]
         {
           () => new(integer)
@@ -134,7 +130,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
     public void ShouldWorkForStructuresWithDefaultEquality()
     {
       var str = Any.String();
-      typeof(Maybe<string>).Should().HaveValueSemantics(
+      ObjectsOfType<Maybe<string>>.ShouldHaveValueSemantics(
         new Func<Maybe<string>>[]
         {
           () => str.Just()
@@ -149,7 +145,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
     [Fact]
     public void ShouldWorkForPrimitves()
     {
-      typeof(int).Should().HaveValueSemantics(
+      ObjectsOfType<int>.ShouldHaveValueSemantics(
         new Func<int>[]
         {
           () => 1
@@ -181,16 +177,16 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
     public void ShouldFailUpperCaseAssertionOnLowerCaseCharAndPassOnUpperCaseChar()
     {
       var c = Any.AlphaChar();
-      new Action(() => FluentAssertionsCharExtensions.Should(char.ToLower(c)).BeUppercase()).Should().ThrowExactly<XunitException>();
-      new Action(() => FluentAssertionsCharExtensions.Should(char.ToUpper(c)).BeUppercase()).Should().NotThrow();
+      new Action(() => char.ToLower(c).Should().BeUppercase()).Should().ThrowExactly<XunitException>();
+      new Action(() => char.ToUpper(c).Should().BeUppercase()).Should().NotThrow();
     }
 
     [Fact]
     public void ShouldFailLowerCaseAssertionOnUpperCaseCharAndPassOnLowerCaseChar()
     {
       var c = Any.AlphaChar();
-      new Action(() => FluentAssertionsCharExtensions.Should(char.ToUpper(c)).BeLowercase()).Should().ThrowExactly<XunitException>();
-      new Action(() => FluentAssertionsCharExtensions.Should(char.ToLower(c)).BeLowercase()).Should().NotThrow();
+      new Action(() => char.ToUpper(c).Should().BeLowercase()).Should().ThrowExactly<XunitException>();
+      new Action(() => char.ToLower(c).Should().BeLowercase()).Should().NotThrow();
     }
 
     [Fact]

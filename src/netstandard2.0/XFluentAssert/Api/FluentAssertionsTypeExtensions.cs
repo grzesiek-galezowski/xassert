@@ -15,37 +15,6 @@ namespace TddXt.XFluentAssert.Api
 
   public static class FluentAssertionsTypeExtensions
   {
-    public static AndConstraint<TypeAssertions> HaveValueSemantics<T>(
-      this TypeAssertions o,
-      Func<T>[] equalInstances, 
-      Func<T>[] otherInstances)
-    {
-      o.Subject.Should().HaveValueSemantics<T>(
-        equalInstances, 
-        otherInstances, 
-        ValueTypeTraits.Default());
-      return new AndConstraint<TypeAssertions>(o);
-    }
-
-    public static AndConstraint<TypeAssertions> HaveValueSemantics<T>(
-      this TypeAssertions o,
-      Func<T>[] equalInstances, 
-      Func<T>[] otherInstances,
-      IKnowWhatValueTraitsToCheck traits)
-    {
-      equalInstances.Should().NotBeNullOrEmpty();
-      otherInstances.Should().NotBeNullOrEmpty();
-      Type type = o.Subject;
-      type.Should().Be<T>();
-      if (!ValueObjectWhiteList.Contains(type))
-      {
-        var constraints = ValueObjectConstraints.AssertionConstraints.ForValueSemantics(type, equalInstances, otherInstances, traits);
-        AssertionConstraintsEngine.TypeAdheresTo(constraints);
-      }
-
-      return new AndConstraint<TypeAssertions>(o);
-    }
-
     public static AndConstraint<TypeAssertions> HaveEventWithShortName(this TypeAssertions assertions,
       string eventName)
     {
@@ -81,6 +50,35 @@ namespace TddXt.XFluentAssert.Api
         .BeEmpty("SmartType " + type + " should not contain static fields, but: " + Environment.NewLine +
                  ReflectionElementsList.Format(staticFields));
       return new AndConstraint<TypeAssertions>(assertions);
+    }
+  }
+
+  public static class ObjectsOfType<T>
+  {
+    public static void ShouldHaveValueSemantics(
+      Func<T>[] equalInstances, 
+      Func<T>[] otherInstances)
+    {
+      ShouldHaveValueSemantics(equalInstances, 
+        otherInstances, 
+        ValueTypeTraits.Default());
+    }
+
+    public static void ShouldHaveValueSemantics(
+      Func<T>[] equalInstances,
+      Func<T>[] otherInstances,
+      IKnowWhatValueTraitsToCheck traits)
+    {
+      equalInstances.Should().NotBeNullOrEmpty();
+      otherInstances.Should().NotBeNullOrEmpty();
+      var type = typeof(T);
+      if (!ValueObjectWhiteList.Contains(type))
+      {
+        var constraints = ValueObjectConstraints
+          .AssertionConstraints
+          .ForValueSemantics(type, equalInstances, otherInstances, traits);
+        AssertionConstraintsEngine.TypeAdheresTo(constraints);
+      }
     }
   }
 }

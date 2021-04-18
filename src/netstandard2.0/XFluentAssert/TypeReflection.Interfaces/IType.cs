@@ -4,7 +4,7 @@ using Functional.Maybe;
 
 namespace TddXt.XFluentAssert.TypeReflection.Interfaces
 {
-  public interface IType
+  internal interface IType
   {
     IEnumerable<IAmField> GetAllInstanceFields();
 

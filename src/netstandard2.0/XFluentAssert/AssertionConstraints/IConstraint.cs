@@ -1,6 +1,6 @@
 ﻿namespace TddXt.XFluentAssert.AssertionConstraints
 {
-  public interface IConstraint
+  internal interface IConstraint
   {
     void CheckAndRecord(ConstraintsViolations violations);
   }

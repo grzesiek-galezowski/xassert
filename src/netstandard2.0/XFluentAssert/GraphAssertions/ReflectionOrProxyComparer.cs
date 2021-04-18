@@ -5,7 +5,7 @@ using KellermanSoftware.CompareNetObjects.TypeComparers;
 
 namespace TddXt.XFluentAssert.GraphAssertions
 {
-  public class ReflectionOrProxyComparer : BaseTypeComparer
+  internal class ReflectionOrProxyComparer : BaseTypeComparer
   {
     public ReflectionOrProxyComparer()
       : base(null)

@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
 {
-  public class ObjectGraphNodeFactory
+  internal class ObjectGraphNodeFactory
   {
     private readonly IEnumerable<ITerminalNodeCondition> _terminalNodeConditions;
 

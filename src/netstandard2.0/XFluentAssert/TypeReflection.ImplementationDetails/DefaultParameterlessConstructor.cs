@@ -6,7 +6,7 @@ using TddXt.XFluentAssert.TypeReflection.Interfaces;
 
 namespace TddXt.XFluentAssert.TypeReflection.ImplementationDetails
 {
-  public class DefaultParameterlessConstructor : ICreateObjects
+  internal class DefaultParameterlessConstructor : ICreateObjects
   {
     private readonly Func<object> _creation;
 

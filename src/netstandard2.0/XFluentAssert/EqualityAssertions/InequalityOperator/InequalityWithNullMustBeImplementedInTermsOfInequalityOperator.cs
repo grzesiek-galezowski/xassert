@@ -4,7 +4,7 @@ using TddXt.XFluentAssert.AssertionConstraints;
 
 namespace TddXt.XFluentAssert.EqualityAssertions.InequalityOperator
 {
-  public class InequalityWithNullMustBeImplementedInTermsOfInequalityOperator<T> : IConstraint
+  internal class InequalityWithNullMustBeImplementedInTermsOfInequalityOperator<T> : IConstraint
   {
     private readonly Func<T>[] _equalInstances;
     private readonly Func<T>[] _otherInstances;

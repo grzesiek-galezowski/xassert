@@ -4,7 +4,7 @@ using TddXt.XFluentAssert.TypeReflection.Interfaces;
 
 namespace TddXt.XFluentAssert.TypeReflection
 {
-  public static class TypeOf<T>
+  internal static class TypeOf<T>
   {
     private static readonly IType Type;
 

@@ -3,7 +3,7 @@ using TddXt.XFluentAssert.AssertionConstraints;
 
 namespace TddXt.XFluentAssert.EqualityAssertions
 {
-  public class MustBeSealed : IConstraint
+  internal class MustBeSealed : IConstraint
   {
     private readonly Type _type;
 

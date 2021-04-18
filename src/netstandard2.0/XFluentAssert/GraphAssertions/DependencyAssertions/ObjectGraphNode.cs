@@ -7,7 +7,7 @@ using FluentAssertions;
 
 namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
 {
-  public interface IObjectGraphNode
+  internal interface IObjectGraphNode
   {
     void CollectPathsInto(ObjectGraphPaths objectGraphPaths);
     bool IsOf(Type type);
@@ -15,7 +15,7 @@ namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
     bool ValueIsSameAs(object value);
   }
 
-  public class ObjectGraphNode : IObjectGraphNode
+  internal class ObjectGraphNode : IObjectGraphNode
   {
     private readonly object _target;
     private readonly IReadOnlyList<IObjectGraphNode> _path;

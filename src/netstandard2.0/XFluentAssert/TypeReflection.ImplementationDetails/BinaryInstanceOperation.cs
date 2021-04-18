@@ -3,7 +3,7 @@ using TddXt.XFluentAssert.TypeReflection.Interfaces;
 
 namespace TddXt.XFluentAssert.TypeReflection.ImplementationDetails
 {
-  public class BinaryInstanceOperation : IAmBinaryOperator
+  internal class BinaryInstanceOperation : IAmBinaryOperator
   {
     private readonly MethodInfo _equalsMethod;
 

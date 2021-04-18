@@ -6,7 +6,7 @@ using TddXt.XFluentAssert.TypeReflection.Interfaces;
 
 namespace TddXt.XFluentAssert.ReflectionAssertions
 {
-  public class ReflectionElementsList
+  internal class ReflectionElementsList
   {
     public static string Format(IEnumerable<IAmField> staticFields)
     {

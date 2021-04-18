@@ -2,7 +2,7 @@
 
 namespace TddXt.XFluentAssert.AssertionConstraints
 {
-  public class RecordedAssertions
+  internal class RecordedAssertions
   {
     public static void True(bool condition, string message, IConstraintsViolations errors)
     {

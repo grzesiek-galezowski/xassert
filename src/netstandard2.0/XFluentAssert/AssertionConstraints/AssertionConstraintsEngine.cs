@@ -2,9 +2,9 @@ using System.Collections.Generic;
 
 namespace TddXt.XFluentAssert.AssertionConstraints
 {
-  public static class AssertionConstraintsEngine
+  internal static class AssertionConstraintsEngine
   {
-    public static void TypeAdheresTo(IEnumerable<IConstraint> constraints)
+    internal static void TypeAdheresTo(IEnumerable<IConstraint> constraints)
     {
       var violations = ConstraintsViolations.Empty();
       foreach (var constraint in constraints)

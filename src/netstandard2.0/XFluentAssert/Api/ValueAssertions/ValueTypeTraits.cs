@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using TddXt.XFluentAssert.ValueObjectConstraints;
+﻿using TddXt.XFluentAssert.ValueObjectConstraints;
 
 namespace TddXt.XFluentAssert.Api.ValueAssertions
 {
@@ -16,21 +15,12 @@ namespace TddXt.XFluentAssert.Api.ValueAssertions
 
     private ValueTypeTraits()
     {
-      IndexesOfConstructorArgumentsIndexesThatDoNotConstituteAValueIdentify = new List<int>();
       RequireAllFieldsReadOnly = true;
       RequireSafeInequalityToNull = true;
       RequireEqualityAndInequalityOperatorImplementation = true;
     }
 
     public static IKnowWhatValueTraitsToCheck Custom => new ValueTypeTraits();
-
-    public List<int> IndexesOfConstructorArgumentsIndexesThatDoNotConstituteAValueIdentify
-    {
-      get;
-      // ReSharper disable once MemberCanBePrivate.Global
-      // ReSharper disable once AutoPropertyCanBeMadeGetOnly.Global
-      set;
-    }
 
     public bool RequireEqualityAndInequalityOperatorImplementation
     {
@@ -58,12 +48,5 @@ namespace TddXt.XFluentAssert.Api.ValueAssertions
     {
       return Full();
     }
-
-    public IKnowWhatValueTraitsToCheck SkipConstructorArgument(int constructorArgumentIndex)
-    {
-      IndexesOfConstructorArgumentsIndexesThatDoNotConstituteAValueIdentify.Add(constructorArgumentIndex);
-      return this;
-    }
-
   }
 }

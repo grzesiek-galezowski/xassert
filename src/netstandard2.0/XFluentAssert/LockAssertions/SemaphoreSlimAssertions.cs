@@ -1,9 +1,10 @@
 ﻿using System.Threading;
 using FluentAssertions;
+using TddXt.XFluentAssert.Api.LockAssertions;
 
 namespace TddXt.XFluentAssert.LockAssertions
 {
-  public class SemaphoreSlimAssertions : ILockAssertions
+  internal class SemaphoreSlimAssertions : ILockAssertions
   {
     private readonly SemaphoreSlim _semaphore;
 

@@ -4,10 +4,11 @@ using TddXt.XFluentAssert.EqualityAssertions.EqualityOperator;
 using TddXt.XFluentAssert.EqualityAssertions.InequalityOperator;
 using System;
 using System.Collections.Generic;
+using TddXt.XFluentAssert.Api.ValueAssertions;
 
 namespace TddXt.XFluentAssert.ValueObjectConstraints
 {
-  public class AssertionConstraints
+  internal class AssertionConstraints
   {
     //todo move elsewhere (but has troublesome dependency on ValueTraits which is public...)
     public static IEnumerable<IConstraint> ForValueSemantics<T>(Type type, Func<T>[] equalInstances,

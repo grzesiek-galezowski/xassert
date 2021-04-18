@@ -1,6 +1,6 @@
 namespace TddXt.XFluentAssert.TypeReflection.Interfaces
 {
-  public interface ICreateObjects
+  internal interface ICreateObjects
   {
     bool HasNonPointerArgumentsOnly();
     bool HasLessParametersThan(int numberOfParams);

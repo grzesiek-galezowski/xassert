@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
 {
-  public class ObjectGraphPath
+  internal class ObjectGraphPath
   {
     //TODO support for recursion (direct or indirect) or reference to this
     //TODO  UT
@@ -67,7 +67,7 @@ namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
     }
   }
 
-  public class NodeToTypeComparer : IEqualityComparer<object>
+  internal class NodeToTypeComparer : IEqualityComparer<object>
   {
     public new bool Equals(object x, object y)
     {
@@ -80,7 +80,7 @@ namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
     }
   }
 
-  public class NodeToObjectComparer : IEqualityComparer<object>
+  internal class NodeToObjectComparer : IEqualityComparer<object>
   {
     public new bool Equals(object x, object y)
     {

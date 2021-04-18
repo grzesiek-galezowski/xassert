@@ -10,7 +10,7 @@ using Property = TddXt.XFluentAssert.TypeReflection.Property;
 
 namespace TddXt.XFluentAssert.GraphAssertions
 {
-  public static class ObjectGraph
+  internal static class ObjectGraph
   {
     public static CompareLogic Comparison()
     {

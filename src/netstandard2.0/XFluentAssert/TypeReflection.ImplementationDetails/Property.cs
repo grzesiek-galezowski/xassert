@@ -4,7 +4,7 @@ using TddXt.XFluentAssert.TypeReflection.Interfaces;
 
 namespace TddXt.XFluentAssert.TypeReflection.ImplementationDetails
 {
-  public class Property : IAmProperty //bug there's another Property class in this sln
+  internal class Property : IAmProperty //bug there's another Property class in this sln
   {
     private readonly PropertyInfo _propertyInfo;
 

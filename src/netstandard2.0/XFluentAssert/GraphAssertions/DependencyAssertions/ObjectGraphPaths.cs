@@ -6,7 +6,7 @@ using static System.Environment;
 
 namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
 {
-  public class ObjectGraphPaths
+  internal class ObjectGraphPaths
   {
     private readonly List<ObjectGraphPath> _paths = new();
 

@@ -5,7 +5,7 @@ using TddXt.XFluentAssert.TypeReflection.Interfaces.Exceptions;
 
 namespace TddXt.XFluentAssert.TypeReflection.ImplementationDetails
 {
-  public class BinaryOperator<T, TResult> : IAmBinaryOperator<T, TResult>
+  internal class BinaryOperator<T, TResult> : IAmBinaryOperator<T, TResult>
   {
     private readonly IAmBinaryOperator _method;
 
@@ -25,7 +25,7 @@ namespace TddXt.XFluentAssert.TypeReflection.ImplementationDetails
     }
   }
 
-  public class BinaryOperator : IAmBinaryOperator
+  internal class BinaryOperator : IAmBinaryOperator
   {
     private readonly MethodInfo _method;
 

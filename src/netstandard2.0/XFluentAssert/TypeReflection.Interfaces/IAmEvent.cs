@@ -1,6 +1,6 @@
 ﻿namespace TddXt.XFluentAssert.TypeReflection.Interfaces
 {
-  public interface IAmEvent
+  internal interface IAmEvent
   {
     string GenerateNonPublicExistenceMessage();
 

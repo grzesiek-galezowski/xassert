@@ -1,6 +1,5 @@
 ﻿using TddXt.XFluentAssert.Api;
 using System;
-using AutoFixture;
 using FluentAssertions;
 using Functional.Maybe;
 using NSubstitute;

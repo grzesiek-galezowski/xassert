@@ -4,7 +4,7 @@ using TddXt.XFluentAssert.AssertionConstraints;
 
 namespace TddXt.XFluentAssert.ValueObjectConstraints
 {
-  public class HasToBeAConcreteClass : IConstraint
+  internal class HasToBeAConcreteClass : IConstraint
   {
     private readonly Type _type;
 

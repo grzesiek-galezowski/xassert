@@ -6,7 +6,7 @@ using FluentAssertions;
 
 namespace TddXt.XFluentAssert.AssertionConstraints
 {
-  public class ConstraintsViolations : IConstraintsViolations
+  internal class ConstraintsViolations : IConstraintsViolations
   {
     private readonly List<string> _violations = new List<string>();
 

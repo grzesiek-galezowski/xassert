@@ -3,7 +3,7 @@ using TddXt.XFluentAssert.AssertionConstraints;
 
 namespace TddXt.XFluentAssert.EqualityAssertions.InequalityOperator
 {
-  public class StateBasedEqualityMustBeImplementedInTermsOfInequalityOperator<T> : IConstraint
+  internal class StateBasedEqualityMustBeImplementedInTermsOfInequalityOperator<T> : IConstraint
   {
     private readonly Func<T>[] _equalInstances;
 

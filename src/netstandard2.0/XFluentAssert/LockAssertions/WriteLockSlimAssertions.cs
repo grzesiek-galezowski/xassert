@@ -1,10 +1,11 @@
 using System.Threading;
 
 using FluentAssertions;
+using TddXt.XFluentAssert.Api.LockAssertions;
 
 namespace TddXt.XFluentAssert.LockAssertions
 {
-  public class WriteLockSlimAssertions : ILockAssertions
+  internal class WriteLockSlimAssertions : ILockAssertions
   {
     private readonly ReaderWriterLockSlim _aLock;
 

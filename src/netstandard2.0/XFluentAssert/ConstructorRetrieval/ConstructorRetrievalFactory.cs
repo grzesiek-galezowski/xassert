@@ -1,6 +1,6 @@
 namespace TddXt.XFluentAssert.ConstructorRetrieval
 {
-  public class ConstructorRetrievalFactory
+  internal class ConstructorRetrievalFactory
   {
     private readonly IConstructorRetrieval _constructorQuery;
 

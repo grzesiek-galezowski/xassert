@@ -10,7 +10,7 @@ using TddXt.XFluentAssert.TypeReflection.Interfaces;
 
 namespace TddXt.XFluentAssert.TypeReflection
 {
-  public class Field : IAmField
+  internal class Field : IAmField
   {
     private readonly FieldInfo _fieldInfo;
 

@@ -3,7 +3,7 @@ using TddXt.XFluentAssert.TypeReflection;
 
 namespace TddXt.XFluentAssert.EqualityAssertions
 {
-  public static class Are
+  internal static class Are
   {
     public static bool EqualInTermsOfEqualityOperator(Type type, object? instance1, object? instance2)
     {

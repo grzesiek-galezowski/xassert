@@ -2,7 +2,7 @@
 
 namespace TddXt.XFluentAssert.TypeReflection.Interfaces
 {
-  public interface IAmField
+  internal interface IAmField
   {
     bool IsNotDeveloperDefinedReadOnlyField();
     string ShouldNotBeMutableButIs();

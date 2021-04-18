@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace TddXt.XFluentAssert.ValueObjectConstraints
 {
-  public static class ValueObjectWhiteList
+  internal static class ValueObjectWhiteList
   {
     private static readonly Type[] WellKnownValueTypesList =
       {
