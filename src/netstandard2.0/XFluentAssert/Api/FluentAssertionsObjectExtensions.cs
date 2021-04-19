@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using FluentAssertions;
 using FluentAssertions.Primitives;
-using TddXt.XFluentAssert.Api.LockAssertions;
+using TddXt.XFluentAssert.Api.LockAssertions.Interfaces;
 using TddXt.XFluentAssert.GraphAssertions;
 using TddXt.XFluentAssert.LockAssertions;
 

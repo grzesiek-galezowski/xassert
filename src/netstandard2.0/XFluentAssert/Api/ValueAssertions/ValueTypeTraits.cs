@@ -1,6 +1,4 @@
-﻿using TddXt.XFluentAssert.ValueObjectConstraints;
-
-namespace TddXt.XFluentAssert.Api.ValueAssertions
+﻿namespace TddXt.XFluentAssert.Api.ValueAssertions
 {
   public class ValueTypeTraits : IKnowWhatValueTraitsToCheck
   {

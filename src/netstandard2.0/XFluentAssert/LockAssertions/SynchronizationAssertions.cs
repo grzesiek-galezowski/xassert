@@ -7,7 +7,7 @@ using NSubstitute;
 using NSubstitute.Exceptions;
 
 using TddXt.AnyRoot;
-using TddXt.XFluentAssert.Api.LockAssertions;
+using TddXt.XFluentAssert.Api.LockAssertions.Interfaces;
 
 namespace TddXt.XFluentAssert.LockAssertions
 {

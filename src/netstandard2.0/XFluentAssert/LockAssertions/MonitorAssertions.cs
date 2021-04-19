@@ -1,6 +1,6 @@
 using System;
 using System.Threading;
-using TddXt.XFluentAssert.Api.LockAssertions;
+using TddXt.XFluentAssert.Api.LockAssertions.Interfaces;
 
 namespace TddXt.XFluentAssert.LockAssertions
 {
