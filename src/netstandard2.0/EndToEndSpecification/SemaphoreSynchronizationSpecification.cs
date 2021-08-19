@@ -108,41 +108,41 @@ namespace TddXt.XFluentAssert.EndToEndSpecification
             var service = new SemaphoreSynchronizedMyService(wrappedObjectMock, Semaphore());
 
             //WHEN - THEN
-            service.Awaiting(s => s.Should()
-                    .SynchronizeAsyncAccessTo(
-                        s => s.AsyncCallNotEntered(1), 
-                        Blocking.On(service.Lock), 
-                        wrappedObjectMock))
-                .Should().ThrowExactly<XunitException>();
+            await service.Awaiting(s => s.Should()
+                .SynchronizeAsyncAccessTo(
+                  s => s.AsyncCallNotEntered(1), 
+                  Blocking.On(service.Lock), 
+                  wrappedObjectMock))
+              .Should().ThrowExactlyAsync<XunitException>();
         }
 
         //
         [Fact]
-        public void ShouldThrowWhenAsyncMethodDoesNotExitSynchronization()
+        public async Task ShouldThrowWhenAsyncMethodDoesNotExitSynchronization()
         {
             //GIVEN
             var wrappedObjectMock = Substitute.For<IMyService>();
             var service = new SemaphoreSynchronizedMyService(wrappedObjectMock, Semaphore());
 
             //WHEN - THEN
-            service.Awaiting(s => s.Should()
+            await service.Awaiting(s => s.Should()
                     .SynchronizeAsyncAccessTo(
                         s => s.AsyncCallNotExited(1), 
                         Blocking.On(service.Lock), 
                         wrappedObjectMock))
-                .Should().ThrowExactly<XunitException>();
+                .Should().ThrowExactlyAsync<XunitException>();
         }
 
         [Fact]
-        public void ShouldThrowWhenAsyncMethodDoesNotExitSynchronizationOnException()
+        public async Task ShouldThrowWhenAsyncMethodDoesNotExitSynchronizationOnException()
         {
             //GIVEN
             var wrappedObjectMock = Substitute.For<IMyService>();
             var service = new SemaphoreSynchronizedMyService(wrappedObjectMock, Semaphore());
 
             //WHEN - THEN
-            service.Awaiting(s => s.Should().SynchronizeAsyncAccessTo(s => s.AsyncCallNotExitedOnException(1), Blocking.On(service.Lock), wrappedObjectMock))
-                .Should().ThrowExactly<XunitException>();
+            await service.Awaiting(s => s.Should().SynchronizeAsyncAccessTo(s => s.AsyncCallNotExitedOnException(1), Blocking.On(service.Lock), wrappedObjectMock))
+                .Should().ThrowExactlyAsync<XunitException>();
         }
 
         //bug add for tasks returning something

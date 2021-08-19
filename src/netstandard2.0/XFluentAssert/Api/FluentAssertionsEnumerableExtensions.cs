@@ -7,25 +7,25 @@ namespace TddXt.XFluentAssert.Api
   public static class FluentAssertionsEnumerableExtensions
   {
     public static AndConstraint<TAssertions> Be<TAssertions, TElement>(
-        this CollectionAssertions<IEnumerable<TElement>, TAssertions> assertions, params TElement[] expected)
-        where TAssertions : CollectionAssertions<IEnumerable<TElement>, TAssertions>
+        this GenericCollectionAssertions<IEnumerable<TElement>, TElement, TAssertions> assertions, params TElement[] expected)
+        where TAssertions : GenericCollectionAssertions<IEnumerable<TElement>, TElement, TAssertions>
     {
       return assertions.BeEquivalentTo(expected, options => options.WithStrictOrdering());
     }
 
     public static AndConstraint<TAssertions> Be<TAssertions, TElement>(
-        this CollectionAssertions<IEnumerable<TElement>, TAssertions> assertions, IEnumerable<TElement> expected,
+        this GenericCollectionAssertions<IEnumerable<TElement>, TElement, TAssertions> assertions, IEnumerable<TElement> expected,
         string because = "",
         params object[] becauseArgs)
-        where TAssertions : CollectionAssertions<IEnumerable<TElement>, TAssertions>
+        where TAssertions : GenericCollectionAssertions<IEnumerable<TElement>, TElement, TAssertions>
     {
       return assertions.BeEquivalentTo(expected, options => options
           .WithStrictOrdering(), because, becauseArgs);
     }
 
     public static AndConstraint<TAssertions> BeDeeplyEqualTo<TAssertions, TElement>(
-        this CollectionAssertions<IEnumerable<TElement>, TAssertions> assertions, params TElement[] expected)
-        where TAssertions : CollectionAssertions<IEnumerable<TElement>, TAssertions>
+        this GenericCollectionAssertions<IEnumerable<TElement>, TElement, TAssertions> assertions, params TElement[] expected)
+        where TAssertions : GenericCollectionAssertions<IEnumerable<TElement>, TElement, TAssertions>
     {
       return assertions.BeEquivalentTo(expected, options => options
           .WithStrictOrdering()
@@ -33,10 +33,10 @@ namespace TddXt.XFluentAssert.Api
     }
 
     public static AndConstraint<TAssertions> BeDeeplyEqualTo<TAssertions, TElement>(
-        this CollectionAssertions<IEnumerable<TElement>, TAssertions> assertions, IEnumerable<TElement> expected,
+        this GenericCollectionAssertions<IEnumerable<TElement>, TElement, TAssertions> assertions, IEnumerable<TElement> expected,
         string because = "",
         params object[] becauseArgs)
-        where TAssertions : CollectionAssertions<IEnumerable<TElement>, TAssertions>
+        where TAssertions : GenericCollectionAssertions<IEnumerable<TElement>, TElement, TAssertions>
     {
       return assertions.BeEquivalentTo(expected, options => options
           .WithStrictOrdering()
