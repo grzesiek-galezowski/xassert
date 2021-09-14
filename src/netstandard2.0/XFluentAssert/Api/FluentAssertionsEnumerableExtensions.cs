@@ -29,7 +29,8 @@ namespace TddXt.XFluentAssert.Api
     {
       return assertions.BeEquivalentTo(expected, options => options
           .WithStrictOrdering()
-          .IncludingNestedObjects());
+          .IncludingNestedObjects()
+          .RespectingRuntimeTypes());
     }
 
     public static AndConstraint<TAssertions> BeDeeplyEqualTo<TAssertions, TElement>(
@@ -40,7 +41,8 @@ namespace TddXt.XFluentAssert.Api
     {
       return assertions.BeEquivalentTo(expected, options => options
           .WithStrictOrdering()
-          .IncludingNestedObjects(), because, becauseArgs);
+          .IncludingNestedObjects()
+          .RespectingRuntimeTypes(), because, becauseArgs);
     }
   }
 }
