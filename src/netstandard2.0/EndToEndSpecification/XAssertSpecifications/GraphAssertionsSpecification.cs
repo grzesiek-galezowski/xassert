@@ -7,7 +7,6 @@ using FluentAssertions;
 using Functional.Maybe;
 using NSubstitute;
 using TddXt.XFluentAssert.Api;
-using TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.Records;
 using Xunit;
 using Xunit.Abstractions;
 using Xunit.Sdk;

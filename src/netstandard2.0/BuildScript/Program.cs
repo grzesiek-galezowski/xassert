@@ -18,6 +18,11 @@ var srcNetStandardDir = srcDir.AddDirectoryName("netstandard2.0");
 var nugetPath = root.AddDirectoryName("nuget");
 var version="7.1.0";
 
+if (!nugetPath.Exists())
+{
+  nugetPath.Create();
+}
+
 //////////////////////////////////////////////////////////////////////
 // HELPER FUNCTIONS
 //////////////////////////////////////////////////////////////////////

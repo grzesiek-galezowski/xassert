@@ -350,18 +350,11 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
 
   }
 
-  namespace Records
-  {
-      record A1Record(A2Record A2, B2Record B2);
-
-      record B2Record(B3Record B3);
-
-      record A2Record(A3Record A3, B3Record B3, string S, int I);
-
-      record B3Record;
-
-      record A3Record;
-  }
+  record A1Record(A2Record A2, B2Record B2);
+  record B2Record(B3Record B3);
+  record A2Record(A3Record A3, B3Record B3, string S, int I);
+  record B3Record;
+  record A3Record;
 
   class TypeWithStaticField
   {
