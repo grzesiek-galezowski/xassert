@@ -114,6 +114,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
       var a1 = new A1Record(a2, b2);
 
       a1.Should().DependOn(a2);
+      a1.Should().DependOn<A2Record>();
       a1.Should().DependOn(b2);
       a1.Should().DependOn(b3);
       a1.Should().DependOn(abc);
