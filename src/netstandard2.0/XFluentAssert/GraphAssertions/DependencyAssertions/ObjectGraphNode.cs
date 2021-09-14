@@ -81,9 +81,16 @@ namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
 
     private static object PropertyValueOrThrow(object o, PropertyInfo propertyInfo)
     {
-      object? propertyValue = null;
-      propertyInfo.Invoking(p => propertyValue = p.GetValue(o)).Should().NotThrow();
-      return propertyValue;
+      try
+      {
+        object? propertyValue = null;
+        propertyValue = propertyInfo.GetValue(o);
+        return propertyValue;
+      }
+      catch (TargetInvocationException e)
+      {
+        throw new CouldNotReadPropertyValueException(propertyInfo, e, o);
+      }
     }
 
     public override string ToString()
@@ -111,5 +118,14 @@ namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
       return ReferenceEquals(_target, value);
     }
 
+  }
+
+  public class CouldNotReadPropertyValueException : Exception
+  {
+    public CouldNotReadPropertyValueException(PropertyInfo propertyInfo, TargetInvocationException cause, object o)
+    : base($"Could not read property {propertyInfo.Name} of type {propertyInfo.DeclaringType} on object {o}", cause)
+    {
+      
+    }
   }
 }

@@ -87,6 +87,7 @@ namespace TddXt.XFluentAssert.Api
       {
         new TerminalNodeNamespaceCondition("Castle.Proxies"),
         new TerminalNodeTypeCondition<DateTime>(),
+        new TerminalNodeTypeCondition<Type>(),
         new TerminalNodeTypeCondition<TimeSpan>(),
         new TerminalNodeTypeCondition<string>()
       };

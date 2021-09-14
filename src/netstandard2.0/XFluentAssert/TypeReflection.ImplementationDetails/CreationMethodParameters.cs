@@ -14,7 +14,7 @@ namespace TddXt.XFluentAssert.TypeReflection.ImplementationDetails
     {
       _parameters = parameters;
       _parameterTypes =
-        parameters.Select(p => IntrospectionExtensions.GetTypeInfo(p.ParameterType));
+        parameters.Select(p => p.ParameterType.GetTypeInfo());
     }
 
     public bool ContainAnyPointer()

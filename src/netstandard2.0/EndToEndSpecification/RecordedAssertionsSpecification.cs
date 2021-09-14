@@ -6,6 +6,7 @@ using NSubstitute;
 using TddXt.AnyRoot;
 using TddXt.AnyRoot.Strings;
 using TddXt.XFluentAssert.AssertionConstraints;
+using TddXt.XFluentAssert.GraphAssertions.DependencyAssertions;
 using Xunit;
 using Xunit.Sdk;
 
@@ -90,7 +91,7 @@ namespace TddXt.XFluentAssert.EndToEndSpecification
     public void ShouldSupportEmptyMaybe()
     {
       new ObjectWithMaybe().Invoking(o => o.Should().DependOn(Maybe<string>.Nothing))
-        .Should().Throw<XunitException>();
+        .Should().Throw<CouldNotReadPropertyValueException>();
     }
 
     public class Lol2

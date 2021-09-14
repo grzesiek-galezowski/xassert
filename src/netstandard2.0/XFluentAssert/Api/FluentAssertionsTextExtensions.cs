@@ -13,14 +13,14 @@ namespace TddXt.XFluentAssert.Api
     public static AndConstraint<CharAssertions> BeUppercase(this CharAssertions assertions)
     {
       char c = assertions.CharSubject;
-      FluentAssertionsCharExtensions.Should(c).Be(Char.ToUpperInvariant(c));
+      c.Should().Be(Char.ToUpperInvariant(c));
       return new AndConstraint<CharAssertions>(assertions);
     }
 
     public static AndConstraint<CharAssertions> BeLowercase(this CharAssertions assertions)
     {
       char c = assertions.CharSubject;
-      FluentAssertionsCharExtensions.Should(c).Be(Char.ToLowerInvariant(c));
+      c.Should().Be(Char.ToLowerInvariant(c));
       return new AndConstraint<CharAssertions>(assertions);
     }
 
