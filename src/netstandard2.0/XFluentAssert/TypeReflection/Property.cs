@@ -1,8 +1,7 @@
 using System;
 using System.Linq.Expressions;
 using System.Reflection;
-using Functional.Maybe;
-using Functional.Maybe.Just;
+using Core.Maybe;
 
 namespace TddXt.XFluentAssert.TypeReflection
 {

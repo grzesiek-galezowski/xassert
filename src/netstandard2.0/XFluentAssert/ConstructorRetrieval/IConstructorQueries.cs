@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Functional.Maybe;
+using Core.Maybe;
 using TddXt.XFluentAssert.TypeReflection.Interfaces;
 
 namespace TddXt.XFluentAssert.ConstructorRetrieval

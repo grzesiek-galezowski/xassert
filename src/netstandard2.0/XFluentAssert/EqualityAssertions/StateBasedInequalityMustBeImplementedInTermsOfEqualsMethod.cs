@@ -37,11 +37,11 @@ namespace TddXt.XFluentAssert.EqualityAssertions
           if (equatableEquals.HasValue)
           {
             RecordedAssertions.DoesNotThrow(() =>
-                RecordedAssertions.False((bool)equatableEquals.Value.Evaluate(factory1(), factory2()),
+                RecordedAssertions.False((bool)equatableEquals.Value().Evaluate(factory1(), factory2()),
                   "a.Equals(T b) should return false if they are not equal", violations),
               "a.Equals(T b) should return false if they are not equal", violations);
             RecordedAssertions.DoesNotThrow(() =>
-                RecordedAssertions.False((bool)equatableEquals.Value.Evaluate(factory2(), factory1()),
+                RecordedAssertions.False((bool)equatableEquals.Value().Evaluate(factory2(), factory1()),
                   "b.Equals(T a) should return false if they are not equal", violations),
               "b.Equals(T a) should return false if they are not equal", violations);
           }

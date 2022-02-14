@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Functional.Maybe;
+using Core.Maybe;
 using KellermanSoftware.CompareNetObjects;
 
 using TddXt.XFluentAssert.TypeReflection;
@@ -56,13 +56,13 @@ namespace TddXt.XFluentAssert.GraphAssertions
 
     private static void Ignore(Maybe<Field> field, ICompareLogic comparison)
     {
-      comparison.Config.MembersToIgnore.Add(field.Value.Name);
+      comparison.Config.MembersToIgnore.Add(field.Value().Name);
     }
 
     private static void Ignore(Maybe<Property> property, ICompareLogic comparison)
     {
-      comparison.Config.MembersToIgnore.Add(property.Value.Name);
-      comparison.Config.MembersToIgnore.Add($"<{property.Value.Name}>k__BackingField");
+      comparison.Config.MembersToIgnore.Add(property.Value().Name);
+      comparison.Config.MembersToIgnore.Add($"<{property.Value().Name}>k__BackingField");
     }
   }
 }

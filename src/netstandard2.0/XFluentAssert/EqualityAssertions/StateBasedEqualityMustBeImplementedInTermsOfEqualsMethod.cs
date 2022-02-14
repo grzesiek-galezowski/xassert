@@ -25,11 +25,11 @@ namespace TddXt.XFluentAssert.EqualityAssertions
             foreach (var factory2 in _equalInstances)
             {
               RecordedAssertions.DoesNotThrow(() =>
-                  RecordedAssertions.True((bool) equatableEquality.Value.Evaluate(factory1(), factory2()),
+                  RecordedAssertions.True((bool) equatableEquality.Value().Evaluate(factory1(), factory2()),
                     "a.Equals(T b) should return true for equal objects", violations),
                 "a.Equals(T b) should return true for equal objects", violations);
               RecordedAssertions.DoesNotThrow(() =>
-                  RecordedAssertions.True((bool) equatableEquality.Value.Evaluate(factory2(), factory1()),
+                  RecordedAssertions.True((bool) equatableEquality.Value().Evaluate(factory2(), factory1()),
                     "b.Equals<T>(a) should return true for equal objects", violations),
                 "b.Equals(T a) should return true for equal objects", violations);
 

@@ -34,7 +34,7 @@ namespace TddXt.XFluentAssert.EqualityAssertions
           if (equatableEquals.HasValue)
           {
             RecordedAssertions.DoesNotThrow(() =>
-                RecordedAssertions.False((bool) equatableEquals.Value.Evaluate(instance1, null),
+                RecordedAssertions.False((bool) equatableEquals.Value().Evaluate(instance1, null),
                   "a.Equals(null) should return false", violations),
               "a.Equals(null) should return false", violations);
           }

@@ -1,4 +1,4 @@
-using Functional.Maybe;
+using Core.Maybe;
 using TddXt.XFluentAssert.TypeReflection.ImplementationDetails;
 using TddXt.XFluentAssert.TypeReflection.Interfaces;
 

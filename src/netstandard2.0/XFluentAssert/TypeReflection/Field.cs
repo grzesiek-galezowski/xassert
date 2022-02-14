@@ -3,8 +3,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
-using Functional.Maybe;
-using Functional.Maybe.Just;
+using Core.Maybe;
 using TddXt.XFluentAssert.TypeReflection.ImplementationDetails;
 using TddXt.XFluentAssert.TypeReflection.Interfaces;
 

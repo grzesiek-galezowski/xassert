@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Functional.Maybe;
+using Core.Maybe;
 
 namespace TddXt.XFluentAssert.TypeReflection.Interfaces
 {

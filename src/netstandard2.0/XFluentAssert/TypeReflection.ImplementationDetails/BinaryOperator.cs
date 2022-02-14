@@ -1,5 +1,5 @@
 ﻿using System.Reflection;
-using Functional.Maybe;
+using Core.Maybe;
 using TddXt.XFluentAssert.TypeReflection.Interfaces;
 using TddXt.XFluentAssert.TypeReflection.Interfaces.Exceptions;
 
@@ -46,7 +46,7 @@ namespace TddXt.XFluentAssert.TypeReflection.ImplementationDetails
     {
       if (maybeOperator.Or(() => maybeFallbackOperator).HasValue)
       {
-        return new BinaryOperator(maybeOperator.Or(maybeFallbackOperator).Value);
+        return new BinaryOperator(maybeOperator.Or(maybeFallbackOperator).Value());
       }
       else
       {
