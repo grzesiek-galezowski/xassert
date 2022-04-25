@@ -1,57 +1,56 @@
 using System;
 using System.IO;
 
-namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
+namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications;
+
+public sealed class DirectoryPath : IEquatable<DirectoryPath>
 {
-  public sealed class DirectoryPath : IEquatable<DirectoryPath>
+  private readonly string _path;
+
+  internal DirectoryPath(string path)
   {
-    private readonly string _path;
+    _path = path;
+  }
 
-    internal DirectoryPath(string path)
-    {
-      _path = path;
-    }
-
-    public DirectoryPath(DirectoryPath path, string directoryName)
-      : this(Path.Combine(path.ToString(), directoryName.ToString()))
-    {
-
-    }
-
-    public override string ToString()
-    {
-      return _path;
-    }
-
-    public bool Equals(DirectoryPath other)
-    {
-      if (ReferenceEquals(null, other)) return false;
-      if (ReferenceEquals(this, other)) return true;
-      return string.Equals(_path, other._path);
-    }
-
-    public override bool Equals(object obj)
-    {
-      if (ReferenceEquals(null, obj)) return false;
-      if (ReferenceEquals(this, obj)) return true;
-      if (obj.GetType() != GetType()) return false;
-      return Equals((DirectoryPath)obj);
-    }
-
-    public override int GetHashCode()
-    {
-      return _path.GetHashCode();
-    }
-
-    public static bool operator ==(DirectoryPath left, DirectoryPath right)
-    {
-      return Equals(left, right);
-    }
-
-    public static bool operator !=(DirectoryPath left, DirectoryPath right)
-    {
-      return !Equals(left, right);
-    }
+  public DirectoryPath(DirectoryPath path, string directoryName)
+    : this(Path.Combine(path.ToString(), directoryName.ToString()))
+  {
 
   }
+
+  public override string ToString()
+  {
+    return _path;
+  }
+
+  public bool Equals(DirectoryPath other)
+  {
+    if (ReferenceEquals(null, other)) return false;
+    if (ReferenceEquals(this, other)) return true;
+    return string.Equals(_path, other._path);
+  }
+
+  public override bool Equals(object obj)
+  {
+    if (ReferenceEquals(null, obj)) return false;
+    if (ReferenceEquals(this, obj)) return true;
+    if (obj.GetType() != GetType()) return false;
+    return Equals((DirectoryPath)obj);
+  }
+
+  public override int GetHashCode()
+  {
+    return _path.GetHashCode();
+  }
+
+  public static bool operator ==(DirectoryPath left, DirectoryPath right)
+  {
+    return Equals(left, right);
+  }
+
+  public static bool operator !=(DirectoryPath left, DirectoryPath right)
+  {
+    return !Equals(left, right);
+  }
+
 }

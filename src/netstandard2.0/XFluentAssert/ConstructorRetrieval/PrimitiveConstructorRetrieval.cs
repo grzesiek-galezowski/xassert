@@ -2,13 +2,12 @@ using System.Collections.Generic;
 
 using TddXt.XFluentAssert.TypeReflection.Interfaces;
 
-namespace TddXt.XFluentAssert.ConstructorRetrieval
+namespace TddXt.XFluentAssert.ConstructorRetrieval;
+
+internal class PrimitiveConstructorRetrieval : IConstructorRetrieval
 {
-  internal class PrimitiveConstructorRetrieval : IConstructorRetrieval
+  public IEnumerable<ICreateObjects> RetrieveFrom(IConstructorQueries constructors)
   {
-    public IEnumerable<ICreateObjects> RetrieveFrom(IConstructorQueries constructors)
-    {
-      return constructors.TryToObtainPrimitiveTypeConstructor();
-    }
+    return constructors.TryToObtainPrimitiveTypeConstructor();
   }
 }

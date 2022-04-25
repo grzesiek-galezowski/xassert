@@ -1,6 +1,5 @@
-namespace TddXt.XFluentAssert.EndToEndSpecification.Fixtures
+namespace TddXt.XFluentAssert.EndToEndSpecification.Fixtures;
+
+public interface IGeometry
 {
-  public interface IGeometry
-  {
-  }
 }

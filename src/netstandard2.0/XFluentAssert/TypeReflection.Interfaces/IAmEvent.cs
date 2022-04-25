@@ -1,11 +1,10 @@
-﻿namespace TddXt.XFluentAssert.TypeReflection.Interfaces
+﻿namespace TddXt.XFluentAssert.TypeReflection.Interfaces;
+
+internal interface IAmEvent
 {
-  internal interface IAmEvent
-  {
-    string GenerateNonPublicExistenceMessage();
+  string GenerateNonPublicExistenceMessage();
 
-    bool HasName(string eventName);
+  bool HasName(string eventName);
 
-    string Name();
-  }
+  string Name();
 }

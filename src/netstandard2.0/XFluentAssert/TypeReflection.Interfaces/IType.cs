@@ -2,39 +2,37 @@ using System;
 using System.Collections.Generic;
 using Core.Maybe;
 
-namespace TddXt.XFluentAssert.TypeReflection.Interfaces
+namespace TddXt.XFluentAssert.TypeReflection.Interfaces;
+
+internal interface IType
 {
-  internal interface IType
-  {
-    IEnumerable<IAmField> GetAllInstanceFields();
+  IEnumerable<IAmField> GetAllInstanceFields();
 
-    IEnumerable<IAmField> GetAllStaticFields();
+  IEnumerable<IAmField> GetAllStaticFields();
 
-    IEnumerable<IAmField> GetAllConstants();
+  IEnumerable<IAmField> GetAllConstants();
 
-    IEnumerable<IAmProperty> GetAllPublicInstanceProperties();
+  IEnumerable<IAmProperty> GetAllPublicInstanceProperties();
 
-    Maybe<ICreateObjects> PickConstructorWithLeastNonPointersParameters();
+  Maybe<ICreateObjects> PickConstructorWithLeastNonPointersParameters();
 
-    IAmBinaryOperator EqualityOperator();
+  IAmBinaryOperator EqualityOperator();
 
-    IAmBinaryOperator InequalityOperator();
+  IAmBinaryOperator InequalityOperator();
 
-    IEnumerable<IAmEvent> GetAllNonPublicEventsWithoutExplicitlyImplemented();
+  IEnumerable<IAmEvent> GetAllNonPublicEventsWithoutExplicitlyImplemented();
 
-    IEnumerable<ICreateObjects> GetAllPublicConstructors();
+  IEnumerable<ICreateObjects> GetAllPublicConstructors();
 
-    bool HasConstructorWithParameters();
+  bool HasConstructorWithParameters();
 
-    bool CanBeAssignedNullValue();
+  bool CanBeAssignedNullValue();
 
-    Type ToClrType();
+  Type ToClrType();
 
-    bool IsException();
+  bool IsException();
 
-    IEnumerable<IAmEvent> GetAllEvents();
+  IEnumerable<IAmEvent> GetAllEvents();
 
-    Maybe<IAmBinaryOperator> EquatableEquality();
-  }
-
+  Maybe<IAmBinaryOperator> EquatableEquality();
 }

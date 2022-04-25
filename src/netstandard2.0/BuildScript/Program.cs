@@ -3,7 +3,7 @@ using AtmaFileSystem;
 using AtmaFileSystem.IO;
 using BuildScript;
 using FluentAssertions;
-using NScan.Adapter.NotifyingSupport;
+using NScan.Adapters.Secondary.NotifyingSupport;
 using NScan.SharedKernel.WritingProgramOutput.Ports;
 using TddXt.NScan;
 using static Bullseye.Targets;
@@ -12,11 +12,11 @@ using static SimpleExec.Command;
 var configuration = "Release";
 
 // Define directories.
-var root = AbsoluteFilePath.OfThisFile().ParentDirectory(3).Value;
+var root = AbsoluteFilePath.OfThisFile().ParentDirectory(3).Value();
 var srcDir = root.AddDirectoryName("src");
 var srcNetStandardDir = srcDir.AddDirectoryName("netstandard2.0");
 var nugetPath = root.AddDirectoryName("nuget");
-var version="7.2.0";
+var version="8.0.0";
 
 if (!nugetPath.Exists())
 {
@@ -70,7 +70,7 @@ Target((string) "NScan", DependsOn("Build"), () =>
       SolutionPath = srcNetStandardDir.AddFileName("XFluentAssert.sln").AsAnyFilePath()
     },
     new ConsoleOutput(),
-    new ConsoleSupport()
+    new ConsoleSupport(Console.WriteLine)
   ).Should().Be(0);
 });
 
@@ -101,7 +101,7 @@ Target("Push", DependsOn("Clean", "Pack"), () =>
 
 Target("default", DependsOn("Pack"));
 
-RunTargetsAndExit(args);
+await RunTargetsAndExitAsync(args);
 
 namespace BuildScript
 {

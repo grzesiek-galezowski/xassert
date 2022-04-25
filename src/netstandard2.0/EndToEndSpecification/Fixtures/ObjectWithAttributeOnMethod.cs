@@ -1,20 +1,19 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace TddXt.XFluentAssert.EndToEndSpecification.Fixtures
+namespace TddXt.XFluentAssert.EndToEndSpecification.Fixtures;
+
+class AttributeFixture
 {
-  class AttributeFixture
+  [Description("AnyCulture")]
+  public object DecoratedMethod(int p1, int p2)
   {
-    [Description("AnyCulture")]
-    public object DecoratedMethod(int p1, int p2)
-    {
-      throw new NotImplementedException();
-    }
-
-    public object NonDecoratedMethod(int p1, int p2)
-    {
-      throw new NotImplementedException();
-    }
-
+    throw new NotImplementedException();
   }
+
+  public object NonDecoratedMethod(int p1, int p2)
+  {
+    throw new NotImplementedException();
+  }
+
 }

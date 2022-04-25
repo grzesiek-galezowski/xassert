@@ -3,83 +3,82 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
+namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions;
+
+internal class ArrayNode : IObjectGraphNode
 {
-  internal class ArrayNode : IObjectGraphNode
+  private readonly object _target;
+  private readonly string _fieldName;
+  private readonly IReadOnlyList<IObjectGraphNode> _path;
+  private readonly ObjectGraphNodeFactory _objectGraphNodeFactory;
+
+  public ArrayNode(
+    object target,
+    string fieldName,
+    IEnumerable<IObjectGraphNode> path,
+    ObjectGraphNodeFactory objectGraphNodeFactory)
   {
-    private readonly object _target;
-    private readonly string _fieldName;
-    private readonly IReadOnlyList<IObjectGraphNode> _path;
-    private readonly ObjectGraphNodeFactory _objectGraphNodeFactory;
+    _target = target;
+    _fieldName = fieldName;
+    _path = path.Concat(new[] { this }).ToList();
+    _objectGraphNodeFactory = objectGraphNodeFactory;
+  }
 
-    public ArrayNode(
-      object target,
-      string fieldName,
-      IEnumerable<IObjectGraphNode> path,
-      ObjectGraphNodeFactory objectGraphNodeFactory)
+  public void CollectPathsInto(ObjectGraphPaths objectGraphPaths)
+  {
+    //todo consider extracting the items before passing them to this class instance
+    var list = ToObjectsList();
+    var items = list.Select((o, i) => _objectGraphNodeFactory.From(_path, o, "array element[" + i + "]"));
+
+    if (items.Any())
     {
-      _target = target;
-      _fieldName = fieldName;
-      _path = path.Concat(new[] { this }).ToList();
-      _objectGraphNodeFactory = objectGraphNodeFactory;
-    }
-
-    public void CollectPathsInto(ObjectGraphPaths objectGraphPaths)
-    {
-      //todo consider extracting the items before passing them to this class instance
-      var list = ToObjectsList();
-      var items = list.Select((o, i) => _objectGraphNodeFactory.From(_path, o, "array element[" + i + "]"));
-
-      if (items.Any())
+      foreach (var item in items)
       {
-        foreach (var item in items)
-        {
-          item.CollectPathsInto(objectGraphPaths);
-        }
-      }
-      else
-      {
-        objectGraphPaths.Add(new ObjectGraphPath(_path));
+        item.CollectPathsInto(objectGraphPaths);
       }
     }
-
-    private List<object> ToObjectsList()
+    else
     {
-      var list = new List<object>();
-      foreach (var o in (IEnumerable)_target)
-      {
-        list.Add(o);
-      }
+      objectGraphPaths.Add(new ObjectGraphPath(_path));
+    }
+  }
 
-      return list;
+  private List<object> ToObjectsList()
+  {
+    var list = new List<object>();
+    foreach (var o in (IEnumerable)_target)
+    {
+      list.Add(o);
     }
 
-    public bool IsOf(Type type)
-    {
-      return _target.GetType() == type;
-    }
+    return list;
+  }
 
-    public bool ValueIsEqualTo<T>(T value)
-    {
-      //todo what if both are null?
-      if ((object)value is object[] expectedArray && _target is object[] targetArray)
-      {
-        return expectedArray.SequenceEqual(targetArray);
-      }
-      else
-      {
-        return Equals(value, _target);
-      }
-    }
+  public bool IsOf(Type type)
+  {
+    return _target.GetType() == type;
+  }
 
-    public bool ValueIsSameAs(object value)
+  public bool ValueIsEqualTo<T>(T value)
+  {
+    //todo what if both are null?
+    if ((object)value is object[] expectedArray && _target is object[] targetArray)
     {
-      return ReferenceEquals(_target, value);
+      return expectedArray.SequenceEqual(targetArray);
     }
+    else
+    {
+      return Equals(value, _target);
+    }
+  }
 
-    public override string ToString()
-    {
-      return ObjectGraphNode.FormatFieldAndTypeName(_fieldName, _target);
-    }
+  public bool ValueIsSameAs(object value)
+  {
+    return ReferenceEquals(_target, value);
+  }
+
+  public override string ToString()
+  {
+    return ObjectGraphNode.FormatFieldAndTypeName(_fieldName, _target);
   }
 }

@@ -3,55 +3,54 @@ using Core.Maybe;
 using TddXt.XFluentAssert.TypeReflection.Interfaces;
 using TddXt.XFluentAssert.TypeReflection.Interfaces.Exceptions;
 
-namespace TddXt.XFluentAssert.TypeReflection.ImplementationDetails
+namespace TddXt.XFluentAssert.TypeReflection.ImplementationDetails;
+
+internal class BinaryOperator<T, TResult> : IAmBinaryOperator<T, TResult>
 {
-  internal class BinaryOperator<T, TResult> : IAmBinaryOperator<T, TResult>
+  private readonly IAmBinaryOperator _method;
+
+  private BinaryOperator(IAmBinaryOperator binaryOperator)
   {
-    private readonly IAmBinaryOperator _method;
-
-    private BinaryOperator(IAmBinaryOperator binaryOperator)
-    {
-      _method = binaryOperator;
-    }
-
-    public TResult Evaluate(T? instance1, T? instance2)
-    {
-      return (TResult)_method.Evaluate(instance1, instance2);
-    }
-
-    public static IAmBinaryOperator<T, bool> Wrap(IAmBinaryOperator binaryOperator)
-    {
-      return new BinaryOperator<T, bool>(binaryOperator);
-    }
+    _method = binaryOperator;
   }
 
-  internal class BinaryOperator : IAmBinaryOperator
+  public TResult Evaluate(T? instance1, T? instance2)
   {
-    private readonly MethodInfo _method;
+    return (TResult)_method.Evaluate(instance1, instance2);
+  }
 
-    public BinaryOperator(MethodInfo method)
+  public static IAmBinaryOperator<T, bool> Wrap(IAmBinaryOperator binaryOperator)
+  {
+    return new BinaryOperator<T, bool>(binaryOperator);
+  }
+}
+
+internal class BinaryOperator : IAmBinaryOperator
+{
+  private readonly MethodInfo _method;
+
+  public BinaryOperator(MethodInfo method)
+  {
+    _method = method;
+  }
+
+  public object Evaluate(object? instance1, object? instance2)
+  {
+    return _method.Invoke(null, new[] { instance1, instance2 });
+  }
+
+  public static IAmBinaryOperator Wrap(
+    Maybe<MethodInfo> maybeOperator,
+    Maybe<MethodInfo> maybeFallbackOperator,
+    string op)
+  {
+    if (maybeOperator.Or(() => maybeFallbackOperator).HasValue)
     {
-      _method = method;
+      return new BinaryOperator(maybeOperator.Or(maybeFallbackOperator).Value());
     }
-
-    public object Evaluate(object? instance1, object? instance2)
+    else
     {
-      return _method.Invoke(null, new[] { instance1, instance2 });
-    }
-
-    public static IAmBinaryOperator Wrap(
-      Maybe<MethodInfo> maybeOperator,
-      Maybe<MethodInfo> maybeFallbackOperator,
-      string op)
-    {
-      if (maybeOperator.Or(() => maybeFallbackOperator).HasValue)
-      {
-        return new BinaryOperator(maybeOperator.Or(maybeFallbackOperator).Value());
-      }
-      else
-      {
-        throw new NoSuchOperatorInTypeException("No method " + op);
-      }
+      throw new NoSuchOperatorInTypeException("No method " + op);
     }
   }
 }

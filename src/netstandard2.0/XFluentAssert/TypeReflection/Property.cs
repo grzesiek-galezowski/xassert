@@ -3,33 +3,32 @@ using System.Linq.Expressions;
 using System.Reflection;
 using Core.Maybe;
 
-namespace TddXt.XFluentAssert.TypeReflection
+namespace TddXt.XFluentAssert.TypeReflection;
+
+internal class Property
 {
-  internal class Property
+  public static Maybe<Property> FromUnaryExpression<T>(Expression<Func<T, object>> expression)
   {
-    public static Maybe<Property> FromUnaryExpression<T>(Expression<Func<T, object>> expression)
+    var unaryExpression = expression.Body as UnaryExpression;
+    var propertyUsageExppression = unaryExpression.Operand as MemberExpression;
+    if (propertyUsageExppression != null)
     {
-      var unaryExpression = expression.Body as UnaryExpression;
-      var propertyUsageExppression = unaryExpression.Operand as MemberExpression;
-      if (propertyUsageExppression != null)
+      var propertyInfo = propertyUsageExppression.Member as PropertyInfo;
+      if (propertyInfo != null)
       {
-        var propertyInfo = propertyUsageExppression.Member as PropertyInfo;
-        if (propertyInfo != null)
-        {
-          return new Property(propertyInfo).Just();
-        }
+        return new Property(propertyInfo).Just();
       }
-      return Maybe<Property>.Nothing;
     }
-
-
-    public string Name => _propertyInfo.Name;
-
-    private Property(PropertyInfo property)
-    {
-      _propertyInfo = property;
-    }
-
-    private readonly PropertyInfo _propertyInfo;
+    return Maybe<Property>.Nothing;
   }
+
+
+  public string Name => _propertyInfo.Name;
+
+  private Property(PropertyInfo property)
+  {
+    _propertyInfo = property;
+  }
+
+  private readonly PropertyInfo _propertyInfo;
 }

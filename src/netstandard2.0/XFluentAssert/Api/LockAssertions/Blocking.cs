@@ -2,28 +2,27 @@ using System.Threading;
 using TddXt.XFluentAssert.Api.LockAssertions.Interfaces;
 using TddXt.XFluentAssert.LockAssertions;
 
-namespace TddXt.XFluentAssert.Api.LockAssertions
+namespace TddXt.XFluentAssert.Api.LockAssertions;
+
+public static class Blocking
 {
-  public static class Blocking
+  public static ILockAssertions ReadOn(ReaderWriterLockSlim @lock)
   {
-    public static ILockAssertions ReadOn(ReaderWriterLockSlim @lock)
-    {
-      return new ReadLockSlimAssertions(@lock);
-    }
+    return new ReadLockSlimAssertions(@lock);
+  }
 
-    public static ILockAssertions WriteOn(ReaderWriterLockSlim @lock)
-    {
-      return new WriteLockSlimAssertions(@lock);
-    }
+  public static ILockAssertions WriteOn(ReaderWriterLockSlim @lock)
+  {
+    return new WriteLockSlimAssertions(@lock);
+  }
 
-    public static ILockAssertions MonitorOn(object @lock)
-    {
-      return new MonitorAssertions(@lock);
-    }
+  public static ILockAssertions MonitorOn(object @lock)
+  {
+    return new MonitorAssertions(@lock);
+  }
 
-    public static ILockAssertions On(SemaphoreSlim semaphore)
-    {
-      return new SemaphoreSlimAssertions(semaphore);
-    }
+  public static ILockAssertions On(SemaphoreSlim semaphore)
+  {
+    return new SemaphoreSlimAssertions(semaphore);
   }
 }

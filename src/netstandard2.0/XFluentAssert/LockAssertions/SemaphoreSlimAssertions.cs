@@ -2,25 +2,24 @@
 using FluentAssertions;
 using TddXt.XFluentAssert.Api.LockAssertions.Interfaces;
 
-namespace TddXt.XFluentAssert.LockAssertions
+namespace TddXt.XFluentAssert.LockAssertions;
+
+internal class SemaphoreSlimAssertions : ILockAssertions
 {
-  internal class SemaphoreSlimAssertions : ILockAssertions
+  private readonly SemaphoreSlim _semaphore;
+
+  public SemaphoreSlimAssertions(SemaphoreSlim semaphore)
   {
-    private readonly SemaphoreSlim _semaphore;
+    _semaphore = semaphore;
+  }
 
-    public SemaphoreSlimAssertions(SemaphoreSlim semaphore)
-    {
-      _semaphore = semaphore;
-    }
+  public void AssertUnlocked()
+  {
+    _semaphore.CurrentCount.Should().Be(1);
+  }
 
-    public void AssertUnlocked()
-    {
-      _semaphore.CurrentCount.Should().Be(1);
-    }
-
-    public void AssertLocked()
-    {
-      _semaphore.CurrentCount.Should().Be(0);
-    }
+  public void AssertLocked()
+  {
+    _semaphore.CurrentCount.Should().Be(0);
   }
 }

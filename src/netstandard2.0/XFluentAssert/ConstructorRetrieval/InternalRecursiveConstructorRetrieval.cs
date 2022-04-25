@@ -3,28 +3,27 @@ using System.Linq;
 
 using TddXt.XFluentAssert.TypeReflection.Interfaces;
 
-namespace TddXt.XFluentAssert.ConstructorRetrieval
+namespace TddXt.XFluentAssert.ConstructorRetrieval;
+
+internal class InternalRecursiveConstructorRetrieval : IConstructorRetrieval
 {
-  internal class InternalRecursiveConstructorRetrieval : IConstructorRetrieval
+  private readonly IConstructorRetrieval _next;
+
+  public InternalRecursiveConstructorRetrieval(IConstructorRetrieval next)
   {
-    private readonly IConstructorRetrieval _next;
+    _next = next;
+  }
 
-    public InternalRecursiveConstructorRetrieval(IConstructorRetrieval next)
+  public IEnumerable<ICreateObjects> RetrieveFrom(IConstructorQueries constructors)
+  {
+    var foundConstructors = constructors.TryToObtainInternalConstructorsWithRecursiveArguments();
+    if (foundConstructors.Any())
     {
-      _next = next;
+      return foundConstructors.ToArray();
     }
-
-    public IEnumerable<ICreateObjects> RetrieveFrom(IConstructorQueries constructors)
+    else
     {
-      var foundConstructors = constructors.TryToObtainInternalConstructorsWithRecursiveArguments();
-      if (foundConstructors.Any())
-      {
-        return foundConstructors.ToArray();
-      }
-      else
-      {
-        return _next.RetrieveFrom(constructors);
-      }
+      return _next.RetrieveFrom(constructors);
     }
   }
 }

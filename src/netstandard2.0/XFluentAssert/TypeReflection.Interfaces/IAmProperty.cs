@@ -1,8 +1,7 @@
-﻿namespace TddXt.XFluentAssert.TypeReflection.Interfaces
+﻿namespace TddXt.XFluentAssert.TypeReflection.Interfaces;
+
+internal interface IAmProperty
 {
-  internal interface IAmProperty
-  {
-    bool HasPublicSetter();
-    string ShouldNotBeMutableButIs();
-  }
+  bool HasPublicSetter();
+  string ShouldNotBeMutableButIs();
 }

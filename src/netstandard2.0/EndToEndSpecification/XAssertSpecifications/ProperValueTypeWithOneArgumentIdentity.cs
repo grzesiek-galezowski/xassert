@@ -1,63 +1,62 @@
 using System;
 using System.Collections.Generic;
 
-namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications
+namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications;
+
+public sealed class ProperValueTypeWithOneArgumentIdentity : IEquatable<ProperValueTypeWithOneArgumentIdentity>
 {
-  public sealed class ProperValueTypeWithOneArgumentIdentity : IEquatable<ProperValueTypeWithOneArgumentIdentity>
+  public bool Equals(ProperValueTypeWithOneArgumentIdentity other)
   {
-    public bool Equals(ProperValueTypeWithOneArgumentIdentity other)
-    {
-      if (ReferenceEquals(null, other)) return false;
-      if (ReferenceEquals(this, other)) return true;
-      return Equals(_a, other._a);
-    }
+    if (ReferenceEquals(null, other)) return false;
+    if (ReferenceEquals(this, other)) return true;
+    return Equals(_a, other._a);
+  }
 
-    public override bool Equals(object obj)
-    {
-      if (ReferenceEquals(null, obj)) return false;
-      if (ReferenceEquals(this, obj)) return true;
-      if (obj.GetType() != GetType()) return false;
-      return Equals((ProperValueTypeWithOneArgumentIdentity)obj);
-    }
+  public override bool Equals(object obj)
+  {
+    if (ReferenceEquals(null, obj)) return false;
+    if (ReferenceEquals(this, obj)) return true;
+    if (obj.GetType() != GetType()) return false;
+    return Equals((ProperValueTypeWithOneArgumentIdentity)obj);
+  }
 
-    public override int GetHashCode()
+  public override int GetHashCode()
+  {
+    unchecked
     {
-      unchecked
-      {
-        return (_a != null ? _a.GetHashCode() : 0);
-      }
+      return (_a != null ? _a.GetHashCode() : 0);
     }
+  }
 
-    public static bool operator ==(
-      ProperValueTypeWithOneArgumentIdentity left, ProperValueTypeWithOneArgumentIdentity right)
+  public static bool operator ==(
+    ProperValueTypeWithOneArgumentIdentity left, ProperValueTypeWithOneArgumentIdentity right)
+  {
+    if (ReferenceEquals(left, null) && ReferenceEquals(right, null))
     {
-      if (ReferenceEquals(left, null) && ReferenceEquals(right, null))
-      {
-        return true;
-      }
-      else if (ReferenceEquals(left, null))
-      {
-        return false;
-      }
-      else
-      {
-        return left.Equals(right);
-      }
+      return true;
     }
-
-    public static bool operator !=(
-      ProperValueTypeWithOneArgumentIdentity left, ProperValueTypeWithOneArgumentIdentity right)
+    else if (ReferenceEquals(left, null))
     {
-      return !Equals(left, right);
+      return false;
     }
-
-    private readonly IEnumerable<int> _anArray;
-    private readonly int _a;
-
-    public ProperValueTypeWithOneArgumentIdentity(IEnumerable<int> anArray, int a)
+    else
     {
-      _anArray = anArray;
-      _a = a;
+      return left.Equals(right);
     }
+  }
+
+  public static bool operator !=(
+    ProperValueTypeWithOneArgumentIdentity left, ProperValueTypeWithOneArgumentIdentity right)
+  {
+    return !Equals(left, right);
+  }
+
+  private readonly IEnumerable<int> _anArray;
+  private readonly int _a;
+
+  public ProperValueTypeWithOneArgumentIdentity(IEnumerable<int> anArray, int a)
+  {
+    _anArray = anArray;
+    _a = a;
   }
 }

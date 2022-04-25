@@ -2,10 +2,9 @@ using System.Collections.Generic;
 
 using TddXt.XFluentAssert.TypeReflection.Interfaces;
 
-namespace TddXt.XFluentAssert.ConstructorRetrieval
+namespace TddXt.XFluentAssert.ConstructorRetrieval;
+
+internal interface IConstructorRetrieval
 {
-  internal interface IConstructorRetrieval
-  {
-    IEnumerable<ICreateObjects> RetrieveFrom(IConstructorQueries constructors);
-  }
+  IEnumerable<ICreateObjects> RetrieveFrom(IConstructorQueries constructors);
 }

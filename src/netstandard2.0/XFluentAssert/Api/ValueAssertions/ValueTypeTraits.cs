@@ -1,50 +1,49 @@
-﻿namespace TddXt.XFluentAssert.Api.ValueAssertions
+﻿namespace TddXt.XFluentAssert.Api.ValueAssertions;
+
+public class ValueTypeTraits : IKnowWhatValueTraitsToCheck
 {
-  public class ValueTypeTraits : IKnowWhatValueTraitsToCheck
+  public static IKnowWhatValueTraitsToCheck Full()
   {
-    public static IKnowWhatValueTraitsToCheck Full()
+    var result = new ValueTypeTraits
     {
-      var result = new ValueTypeTraits
-      {
-        RequireEqualityAndInequalityOperatorImplementation = true
-      };
-      return result;
-    }
+      RequireEqualityAndInequalityOperatorImplementation = true
+    };
+    return result;
+  }
 
-    private ValueTypeTraits()
-    {
-      RequireAllFieldsReadOnly = true;
-      RequireSafeInequalityToNull = true;
-      RequireEqualityAndInequalityOperatorImplementation = true;
-    }
+  private ValueTypeTraits()
+  {
+    RequireAllFieldsReadOnly = true;
+    RequireSafeInequalityToNull = true;
+    RequireEqualityAndInequalityOperatorImplementation = true;
+  }
 
-    public static IKnowWhatValueTraitsToCheck Custom => new ValueTypeTraits();
+  public static IKnowWhatValueTraitsToCheck Custom => new ValueTypeTraits();
 
-    public bool RequireEqualityAndInequalityOperatorImplementation
-    {
-      get;
-      // ReSharper disable once MemberCanBePrivate.Global
-      set;
-    }
+  public bool RequireEqualityAndInequalityOperatorImplementation
+  {
+    get;
+    // ReSharper disable once MemberCanBePrivate.Global
+    set;
+  }
 
-    public bool RequireSafeInequalityToNull
-    {
-      get;
-      // ReSharper disable once MemberCanBePrivate.Global
-      // ReSharper disable once AutoPropertyCanBeMadeGetOnly.Global
-      set;
-    }
+  public bool RequireSafeInequalityToNull
+  {
+    get;
+    // ReSharper disable once MemberCanBePrivate.Global
+    // ReSharper disable once AutoPropertyCanBeMadeGetOnly.Global
+    set;
+  }
 
-    public bool RequireAllFieldsReadOnly
-    {
-      // ReSharper disable once MemberCanBePrivate.Global
-      // ReSharper disable once AutoPropertyCanBeMadeGetOnly.Global
-      get; set;
-    }
+  public bool RequireAllFieldsReadOnly
+  {
+    // ReSharper disable once MemberCanBePrivate.Global
+    // ReSharper disable once AutoPropertyCanBeMadeGetOnly.Global
+    get; set;
+  }
 
-    public static IKnowWhatValueTraitsToCheck Default()
-    {
-      return Full();
-    }
+  public static IKnowWhatValueTraitsToCheck Default()
+  {
+    return Full();
   }
 }

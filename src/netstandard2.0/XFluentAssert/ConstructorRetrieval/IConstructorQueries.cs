@@ -2,24 +2,23 @@ using System.Collections.Generic;
 using Core.Maybe;
 using TddXt.XFluentAssert.TypeReflection.Interfaces;
 
-namespace TddXt.XFluentAssert.ConstructorRetrieval
+namespace TddXt.XFluentAssert.ConstructorRetrieval;
+
+internal interface IConstructorQueries
 {
-  internal interface IConstructorQueries
-  {
-    Maybe<ICreateObjects> GetNonPublicParameterlessConstructorInfo();
+  Maybe<ICreateObjects> GetNonPublicParameterlessConstructorInfo();
 
-    Maybe<ICreateObjects> GetPublicParameterlessConstructor();
+  Maybe<ICreateObjects> GetPublicParameterlessConstructor();
 
-    List<ICreateObjects> GetInternalConstructorsWithoutRecursiveParameters();
+  List<ICreateObjects> GetInternalConstructorsWithoutRecursiveParameters();
 
-    IEnumerable<ICreateObjects> TryToObtainPublicConstructorsWithoutRecursiveArguments();
+  IEnumerable<ICreateObjects> TryToObtainPublicConstructorsWithoutRecursiveArguments();
 
-    IEnumerable<ICreateObjects> TryToObtainPublicConstructorsWithRecursiveArguments();
+  IEnumerable<ICreateObjects> TryToObtainPublicConstructorsWithRecursiveArguments();
 
-    IEnumerable<ICreateObjects> TryToObtainInternalConstructorsWithRecursiveArguments();
+  IEnumerable<ICreateObjects> TryToObtainInternalConstructorsWithRecursiveArguments();
 
-    IEnumerable<ICreateObjects> TryToObtainPrimitiveTypeConstructor();
+  IEnumerable<ICreateObjects> TryToObtainPrimitiveTypeConstructor();
 
-    IEnumerable<ICreateObjects> TryToObtainPublicStaticFactoryMethodWithoutRecursion();
-  }
+  IEnumerable<ICreateObjects> TryToObtainPublicStaticFactoryMethodWithoutRecursion();
 }

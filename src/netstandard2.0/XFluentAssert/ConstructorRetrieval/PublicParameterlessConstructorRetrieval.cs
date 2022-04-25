@@ -2,28 +2,27 @@ using System.Collections.Generic;
 
 using TddXt.XFluentAssert.TypeReflection.Interfaces;
 
-namespace TddXt.XFluentAssert.ConstructorRetrieval
+namespace TddXt.XFluentAssert.ConstructorRetrieval;
+
+internal class PublicParameterlessConstructorRetrieval : IConstructorRetrieval
 {
-  internal class PublicParameterlessConstructorRetrieval : IConstructorRetrieval
+  private readonly IConstructorRetrieval _next;
+
+  public PublicParameterlessConstructorRetrieval(IConstructorRetrieval next)
   {
-    private readonly IConstructorRetrieval _next;
+    _next = next;
+  }
 
-    public PublicParameterlessConstructorRetrieval(IConstructorRetrieval next)
+  public IEnumerable<ICreateObjects> RetrieveFrom(IConstructorQueries constructors)
+  {
+    var constructor = constructors.GetPublicParameterlessConstructor();
+    if (constructor.HasValue)
     {
-      _next = next;
+      return new List<ICreateObjects> { constructor.Value() };
     }
-
-    public IEnumerable<ICreateObjects> RetrieveFrom(IConstructorQueries constructors)
+    else
     {
-      var constructor = constructors.GetPublicParameterlessConstructor();
-      if (constructor.HasValue)
-      {
-        return new List<ICreateObjects> { constructor.Value() };
-      }
-      else
-      {
-        return _next.RetrieveFrom(constructors);
-      }
+      return _next.RetrieveFrom(constructors);
     }
   }
 }

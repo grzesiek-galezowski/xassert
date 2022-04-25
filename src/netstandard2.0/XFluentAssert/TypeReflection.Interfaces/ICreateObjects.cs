@@ -1,11 +1,10 @@
-namespace TddXt.XFluentAssert.TypeReflection.Interfaces
+namespace TddXt.XFluentAssert.TypeReflection.Interfaces;
+
+internal interface ICreateObjects
 {
-  internal interface ICreateObjects
-  {
-    bool HasNonPointerArgumentsOnly();
-    bool HasLessParametersThan(int numberOfParams);
-    int GetParametersCount();
-    bool IsNotRecursive();
-    bool IsRecursive();
-  }
+  bool HasNonPointerArgumentsOnly();
+  bool HasLessParametersThan(int numberOfParams);
+  int GetParametersCount();
+  bool IsNotRecursive();
+  bool IsRecursive();
 }

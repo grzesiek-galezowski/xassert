@@ -6,56 +6,55 @@ using System;
 using System.Collections.Generic;
 using TddXt.XFluentAssert.Api.ValueAssertions;
 
-namespace TddXt.XFluentAssert.ValueObjectConstraints
+namespace TddXt.XFluentAssert.ValueObjectConstraints;
+
+internal class AssertionConstraints
 {
-  internal class AssertionConstraints
+  //todo move elsewhere (but has troublesome dependency on ValueTraits which is public...)
+  public static IEnumerable<IConstraint> ForValueSemantics<T>(Type type, Func<T>[] equalInstances,
+    Func<T>[] otherInstances,
+    IKnowWhatValueTraitsToCheck traits)
   {
-    //todo move elsewhere (but has troublesome dependency on ValueTraits which is public...)
-    public static IEnumerable<IConstraint> ForValueSemantics<T>(Type type, Func<T>[] equalInstances,
-      Func<T>[] otherInstances,
-      IKnowWhatValueTraitsToCheck traits)
+    var constraints = new List<IConstraint>();
+    constraints.Add(new HasToBeAConcreteClass(type));
+
+    if (traits.RequireAllFieldsReadOnly)
     {
-      var constraints = new List<IConstraint>();
-      constraints.Add(new HasToBeAConcreteClass(type));
-
-      if (traits.RequireAllFieldsReadOnly)
-      {
-        constraints.Add(new AllFieldsMustBeReadOnly(type));
-      }
-
-      //bug add sealed constraint
-      constraints.Add(new ThereMustBeNoPublicPropertySetters(type));
-      constraints.Add(new MustBeSealed(type));
-
-      constraints.Add(new StateBasedEqualityWithItselfMustBeImplementedInTermsOfEqualsMethod<T>(equalInstances, otherInstances));
-      constraints.Add(new StateBasedEqualityMustBeImplementedInTermsOfEqualsMethod<T>(equalInstances));
-
-      constraints.Add(new StateBasedInequalityMustBeImplementedInTermsOfEqualsMethod<T>(equalInstances, otherInstances));
-
-      constraints.Add(new HashCodeMustBeTheSameForSameObjectsAndDifferentForDifferentObjects<T>(equalInstances, otherInstances));
-
-      if (traits.RequireSafeInequalityToNull)
-      {
-        constraints.Add(new InequalityWithNullMustBeImplementedInTermsOfEqualsMethod<T>(equalInstances, otherInstances));
-      }
-
-      if (traits.RequireEqualityAndInequalityOperatorImplementation)
-      {
-        //equality operator
-        constraints.Add(new StateBasedEqualityShouldBeAvailableInTermsOfEqualityOperator(type));
-        constraints.Add(new StateBasedEqualityMustBeImplementedInTermsOfEqualityOperator<T>(equalInstances));
-        constraints.Add(new StateBasedEqualityWithItselfMustBeImplementedInTermsOfEqualityOperator<T>(equalInstances, otherInstances));
-        constraints.Add(new StateBasedInequalityMustBeImplementedInTermsOfEqualityOperator<T>(equalInstances, otherInstances));
-        constraints.Add(new InequalityWithNullMustBeImplementedInTermsOfEqualityOperator<T>(equalInstances, otherInstances));
-
-        //inequality operator
-        constraints.Add(new StateBasedEqualityShouldBeAvailableInTermsOfInequalityOperator(type));
-        constraints.Add(new StateBasedEqualityMustBeImplementedInTermsOfInequalityOperator<T>(equalInstances));
-        constraints.Add(new StateBasedEqualityWithItselfMustBeImplementedInTermsOfInequalityOperator<T>(equalInstances, otherInstances));
-        constraints.Add(new StateBasedInequalityMustBeImplementedInTermsOfInequalityOperator<T>(equalInstances, otherInstances));
-        constraints.Add(new InequalityWithNullMustBeImplementedInTermsOfInequalityOperator<T>(equalInstances, otherInstances));
-      }
-      return constraints;
+      constraints.Add(new AllFieldsMustBeReadOnly(type));
     }
+
+    //bug add sealed constraint
+    constraints.Add(new ThereMustBeNoPublicPropertySetters(type));
+    constraints.Add(new MustBeSealed(type));
+
+    constraints.Add(new StateBasedEqualityWithItselfMustBeImplementedInTermsOfEqualsMethod<T>(equalInstances, otherInstances));
+    constraints.Add(new StateBasedEqualityMustBeImplementedInTermsOfEqualsMethod<T>(equalInstances));
+
+    constraints.Add(new StateBasedInequalityMustBeImplementedInTermsOfEqualsMethod<T>(equalInstances, otherInstances));
+
+    constraints.Add(new HashCodeMustBeTheSameForSameObjectsAndDifferentForDifferentObjects<T>(equalInstances, otherInstances));
+
+    if (traits.RequireSafeInequalityToNull)
+    {
+      constraints.Add(new InequalityWithNullMustBeImplementedInTermsOfEqualsMethod<T>(equalInstances, otherInstances));
+    }
+
+    if (traits.RequireEqualityAndInequalityOperatorImplementation)
+    {
+      //equality operator
+      constraints.Add(new StateBasedEqualityShouldBeAvailableInTermsOfEqualityOperator(type));
+      constraints.Add(new StateBasedEqualityMustBeImplementedInTermsOfEqualityOperator<T>(equalInstances));
+      constraints.Add(new StateBasedEqualityWithItselfMustBeImplementedInTermsOfEqualityOperator<T>(equalInstances, otherInstances));
+      constraints.Add(new StateBasedInequalityMustBeImplementedInTermsOfEqualityOperator<T>(equalInstances, otherInstances));
+      constraints.Add(new InequalityWithNullMustBeImplementedInTermsOfEqualityOperator<T>(equalInstances, otherInstances));
+
+      //inequality operator
+      constraints.Add(new StateBasedEqualityShouldBeAvailableInTermsOfInequalityOperator(type));
+      constraints.Add(new StateBasedEqualityMustBeImplementedInTermsOfInequalityOperator<T>(equalInstances));
+      constraints.Add(new StateBasedEqualityWithItselfMustBeImplementedInTermsOfInequalityOperator<T>(equalInstances, otherInstances));
+      constraints.Add(new StateBasedInequalityMustBeImplementedInTermsOfInequalityOperator<T>(equalInstances, otherInstances));
+      constraints.Add(new InequalityWithNullMustBeImplementedInTermsOfInequalityOperator<T>(equalInstances, otherInstances));
+    }
+    return constraints;
   }
 }

@@ -3,25 +3,24 @@ using System.Linq;
 
 using TddXt.XFluentAssert.TypeReflection.Interfaces;
 
-namespace TddXt.XFluentAssert.ConstructorRetrieval
+namespace TddXt.XFluentAssert.ConstructorRetrieval;
+
+internal class PublicStaticFactoryMethodRetrieval : IConstructorRetrieval
 {
-  internal class PublicStaticFactoryMethodRetrieval : IConstructorRetrieval
+  private readonly IConstructorRetrieval _next;
+
+  public PublicStaticFactoryMethodRetrieval(IConstructorRetrieval next)
   {
-    private readonly IConstructorRetrieval _next;
+    _next = next;
+  }
 
-    public PublicStaticFactoryMethodRetrieval(IConstructorRetrieval next)
+  public IEnumerable<ICreateObjects> RetrieveFrom(IConstructorQueries constructors)
+  {
+    var methods = constructors.TryToObtainPublicStaticFactoryMethodWithoutRecursion();
+    if (!methods.Any())
     {
-      _next = next;
+      return _next.RetrieveFrom(constructors);
     }
-
-    public IEnumerable<ICreateObjects> RetrieveFrom(IConstructorQueries constructors)
-    {
-      var methods = constructors.TryToObtainPublicStaticFactoryMethodWithoutRecursion();
-      if (!methods.Any())
-      {
-        return _next.RetrieveFrom(constructors);
-      }
-      return methods;
-    }
+    return methods;
   }
 }

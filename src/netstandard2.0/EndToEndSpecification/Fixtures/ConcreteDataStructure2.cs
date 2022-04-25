@@ -1,7 +1,6 @@
-namespace TddXt.XFluentAssert.EndToEndSpecification.Fixtures
+namespace TddXt.XFluentAssert.EndToEndSpecification.Fixtures;
+
+public class ConcreteDataStructure2
 {
-  public class ConcreteDataStructure2
-  {
-    public string Text { get; set; }
-  }
+  public string Text { get; set; }
 }

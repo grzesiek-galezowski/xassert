@@ -1,8 +1,7 @@
-namespace TddXt.XFluentAssert.Api.LockAssertions.Interfaces
+namespace TddXt.XFluentAssert.Api.LockAssertions.Interfaces;
+
+public interface ILockAssertions
 {
-  public interface ILockAssertions
-  {
-    void AssertUnlocked();
-    void AssertLocked();
-  }
+  void AssertUnlocked();
+  void AssertLocked();
 }

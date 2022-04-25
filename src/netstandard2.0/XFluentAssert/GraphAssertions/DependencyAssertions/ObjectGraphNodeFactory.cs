@@ -3,78 +3,77 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions
+namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions;
+
+internal class ObjectGraphNodeFactory
 {
-  internal class ObjectGraphNodeFactory
+  private readonly IEnumerable<ITerminalNodeCondition> _terminalNodeConditions;
+
+  public ObjectGraphNodeFactory(
+    Action<string> log,
+    IEnumerable<ITerminalNodeCondition> terminalNodeConditions)
   {
-    private readonly IEnumerable<ITerminalNodeCondition> _terminalNodeConditions;
+    _terminalNodeConditions = terminalNodeConditions;
+  }
 
-    public ObjectGraphNodeFactory(
-      Action<string> log,
-      IEnumerable<ITerminalNodeCondition> terminalNodeConditions)
+  public IObjectGraphNode From(
+    IReadOnlyList<IObjectGraphNode> path,
+    object target,
+    string targetHolderName)
+  {
+    if (target == null)
     {
-      _terminalNodeConditions = terminalNodeConditions;
+      return new NullNode(path);
     }
 
-    public IObjectGraphNode From(
-      IReadOnlyList<IObjectGraphNode> path,
-      object target,
-      string targetHolderName)
+    if (target.GetType().GetTypeInfo().IsArray)
     {
-      if (target == null)
-      {
-        return new NullNode(path);
-      }
-
-      if (target.GetType().GetTypeInfo().IsArray)
-      {
-        return new ArrayNode(
-          target,
-          targetHolderName,
-          path, this);
-      }
-
-      if (IsSpecialTerminalCase(target, path, _terminalNodeConditions))
-      {
-        return new SpecialCaseTerminalNode(target, targetHolderName, path);
-      }
-
-      return new ObjectGraphNode(target, targetHolderName, path, this);
+      return new ArrayNode(
+        target,
+        targetHolderName,
+        path, this);
     }
 
-    private static bool IsSpecialTerminalCase(
-      object target,
-      IEnumerable<IObjectGraphNode> path,
-      IEnumerable<ITerminalNodeCondition> terminalNodeConditions)
+    if (IsSpecialTerminalCase(target, path, _terminalNodeConditions))
     {
-      if (CycleDetected(target, path))
+      return new SpecialCaseTerminalNode(target, targetHolderName, path);
+    }
+
+    return new ObjectGraphNode(target, targetHolderName, path, this);
+  }
+
+  private static bool IsSpecialTerminalCase(
+    object target,
+    IEnumerable<IObjectGraphNode> path,
+    IEnumerable<ITerminalNodeCondition> terminalNodeConditions)
+  {
+    if (CycleDetected(target, path))
+    {
+      return true;
+    }
+
+    foreach (var condition in terminalNodeConditions)
+    {
+      if (condition.Evaluate(target))
       {
         return true;
       }
-
-      foreach (var condition in terminalNodeConditions)
-      {
-        if (condition.Evaluate(target))
-        {
-          return true;
-        }
-      }
-
-      return false;
     }
 
-    private static bool CycleDetected(object target, IEnumerable<IObjectGraphNode> path)
-    {
-      return !target.GetType().IsValueType && path.Any(node => node.ValueIsSameAs(target));
-    }
+    return false;
+  }
 
-    public ObjectGraphNode Root(object subject)
-    {
-      return new ObjectGraphNode(
-        subject,
-        "Root",
-        new List<ObjectGraphNode>(),
-        this);
-    }
+  private static bool CycleDetected(object target, IEnumerable<IObjectGraphNode> path)
+  {
+    return !target.GetType().IsValueType && path.Any(node => node.ValueIsSameAs(target));
+  }
+
+  public ObjectGraphNode Root(object subject)
+  {
+    return new ObjectGraphNode(
+      subject,
+      "Root",
+      new List<ObjectGraphNode>(),
+      this);
   }
 }

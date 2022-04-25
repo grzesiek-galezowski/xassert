@@ -1,33 +1,32 @@
 ﻿using System;
 using TddXt.XFluentAssert.AssertionConstraints;
 
-namespace TddXt.XFluentAssert.EqualityAssertions.InequalityOperator
+namespace TddXt.XFluentAssert.EqualityAssertions.InequalityOperator;
+
+internal class StateBasedEqualityMustBeImplementedInTermsOfInequalityOperator<T> : IConstraint
 {
-  internal class StateBasedEqualityMustBeImplementedInTermsOfInequalityOperator<T> : IConstraint
+  private readonly Func<T>[] _equalInstances;
+
+  public StateBasedEqualityMustBeImplementedInTermsOfInequalityOperator(Func<T>[] equalInstances)
   {
-    private readonly Func<T>[] _equalInstances;
+    _equalInstances = equalInstances;
+  }
 
-    public StateBasedEqualityMustBeImplementedInTermsOfInequalityOperator(Func<T>[] equalInstances)
+  public void CheckAndRecord(ConstraintsViolations violations)
+  {
+    foreach (var factory in _equalInstances)
     {
-      _equalInstances = equalInstances;
-    }
+      var instance1 = factory();
+      var instance2 = factory();
 
-    public void CheckAndRecord(ConstraintsViolations violations)
-    {
-      foreach (var factory in _equalInstances)
-      {
-        var instance1 = factory();
-        var instance2 = factory();
-
-        RecordedAssertions.DoesNotThrow(() =>
+      RecordedAssertions.DoesNotThrow(() =>
           RecordedAssertions.False(Are.NotEqualInTermsOfInEqualityOperator(typeof(T), instance1, instance2),
             "a != b should return false for equal values", violations),
-            "a != b should return false for equal values", violations);
-        RecordedAssertions.DoesNotThrow(() =>
+        "a != b should return false for equal values", violations);
+      RecordedAssertions.DoesNotThrow(() =>
           RecordedAssertions.False(Are.NotEqualInTermsOfInEqualityOperator(typeof(T), instance2, instance1),
             "b != a should return false for equal values", violations),
-            "b != a should return false for equal values", violations);
-      }
+        "b != a should return false for equal values", violations);
     }
   }
 }

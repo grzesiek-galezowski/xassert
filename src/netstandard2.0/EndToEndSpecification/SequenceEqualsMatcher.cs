@@ -2,40 +2,39 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace TddXt.XFluentAssert.EndToEndSpecification
+namespace TddXt.XFluentAssert.EndToEndSpecification;
+
+public class SequenceEqualsMatcher
 {
-  public class SequenceEqualsMatcher
+  private readonly List<int> _expected;
+  private readonly List<string> _failures = new List<string>();
+
+  public SequenceEqualsMatcher(List<int> expected)
   {
-    private readonly List<int> _expected;
-    private readonly List<string> _failures = new List<string>();
+    _expected = expected;
+  }
 
-    public SequenceEqualsMatcher(List<int> expected)
+  public bool Matches(IEnumerable<int> actual)
+  {
+    var sequenceEqual = actual.SequenceEqual(_expected);
+    if (!sequenceEqual)
     {
-      _expected = expected;
+      _failures.Add(EnumerableToString(actual) + " does not match " + EnumerableToString(_expected));
     }
+    return sequenceEqual;
+  }
 
-    public bool Matches(IEnumerable<int> actual)
+  private string EnumerableToString(IEnumerable<int> enumerable)
+  {
+    if (!enumerable.Any())
     {
-      var sequenceEqual = actual.SequenceEqual(_expected);
-      if (!sequenceEqual)
-      {
-        _failures.Add(EnumerableToString(actual) + " does not match " + EnumerableToString(_expected));
-      }
-      return sequenceEqual;
+      return "EMPTY";
     }
+    return "{" + string.Join(", ", enumerable) + "}";
+  }
 
-    private string EnumerableToString(IEnumerable<int> enumerable)
-    {
-      if (!enumerable.Any())
-      {
-        return "EMPTY";
-      }
-      return "{" + string.Join(", ", enumerable) + "}";
-    }
-
-    public override string ToString()
-    {
-      return string.Join(Environment.NewLine, _failures);
-    }
+  public override string ToString()
+  {
+    return string.Join(Environment.NewLine, _failures);
   }
 }

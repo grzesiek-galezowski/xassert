@@ -1,12 +1,11 @@
 ﻿using System;
 
-namespace TddXt.XFluentAssert.TypeReflection.Interfaces.Exceptions
+namespace TddXt.XFluentAssert.TypeReflection.Interfaces.Exceptions;
+
+internal class NoSuchOperatorInTypeException : Exception
 {
-  internal class NoSuchOperatorInTypeException : Exception
+  public NoSuchOperatorInTypeException(string s)
+    : base(s)
   {
-    public NoSuchOperatorInTypeException(string s)
-      : base(s)
-    {
-    }
   }
 }

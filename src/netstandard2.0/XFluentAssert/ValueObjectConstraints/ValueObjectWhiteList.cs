@@ -1,35 +1,34 @@
 using System;
 using System.Linq;
 
-namespace TddXt.XFluentAssert.ValueObjectConstraints
+namespace TddXt.XFluentAssert.ValueObjectConstraints;
+
+internal static class ValueObjectWhiteList
 {
-  internal static class ValueObjectWhiteList
+  private static readonly Type[] WellKnownValueTypesList =
   {
-    private static readonly Type[] WellKnownValueTypesList =
-      {
-        typeof(object),
-        typeof(string),
-        typeof(Guid)
-      };
+    typeof(object),
+    typeof(string),
+    typeof(Guid)
+  };
 
-    public static bool Contains(Type type)
+  public static bool Contains(Type type)
+  {
+    if (WellKnownValueTypesList.Contains(type))
     {
-      if (WellKnownValueTypesList.Contains(type))
-      {
-        return true;
-      }
-
-      if (type.IsEnum)
-      {
-        return true;
-      }
-
-      if (type.IsPrimitive)
-      {
-        return true;
-      }
-
-      return false;
+      return true;
     }
+
+    if (type.IsEnum)
+    {
+      return true;
+    }
+
+    if (type.IsPrimitive)
+    {
+      return true;
+    }
+
+    return false;
   }
 }

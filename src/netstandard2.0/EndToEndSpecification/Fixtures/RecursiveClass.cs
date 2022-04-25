@@ -1,10 +1,9 @@
-namespace TddXt.XFluentAssert.EndToEndSpecification.Fixtures
+namespace TddXt.XFluentAssert.EndToEndSpecification.Fixtures;
+
+public class RecursiveClass
 {
-  public class RecursiveClass
-  {
-    public RecursiveClass Same { get; set; }
-    public string Whatever { get; set; }
-    public RecursiveClass2 Other { get; set; }
-    public RecursiveClass2[] Others { get; set; }
-  }
+  public RecursiveClass Same { get; set; }
+  public string Whatever { get; set; }
+  public RecursiveClass2 Other { get; set; }
+  public RecursiveClass2[] Others { get; set; }
 }

@@ -1,42 +1,41 @@
 ﻿using System;
 
-namespace TddXt.XFluentAssert.AssertionConstraints
+namespace TddXt.XFluentAssert.AssertionConstraints;
+
+internal class RecordedAssertions
 {
-  internal class RecordedAssertions
+  public static void True(bool condition, string message, IConstraintsViolations errors)
   {
-    public static void True(bool condition, string message, IConstraintsViolations errors)
+    if (!condition)
     {
-      if (!condition)
-      {
-        errors.Add(message);
-      }
+      errors.Add(message);
     }
+  }
 
-    public static void False(bool condition, string message, ConstraintsViolations errors)
+  public static void False(bool condition, string message, ConstraintsViolations errors)
+  {
+    True(!condition, message, errors);
+  }
+
+  public static void NotEqual<T>(T i, T i2, string message, ConstraintsViolations errors)
+  {
+    False(Equals(i, i2), message, errors);
+  }
+
+  public static void Equal<T>(T i, T i2, string message, ConstraintsViolations errors)
+  {
+    True(Equals(i, i2), message, errors);
+  }
+
+  public static void DoesNotThrow(Action action, string message, ConstraintsViolations errors)
+  {
+    try
     {
-      True(!condition, message, errors);
+      action();
     }
-
-    public static void NotEqual<T>(T i, T i2, string message, ConstraintsViolations errors)
+    catch (Exception e)
     {
-      False(Equals(i, i2), message, errors);
-    }
-
-    public static void Equal<T>(T i, T i2, string message, ConstraintsViolations errors)
-    {
-      True(Equals(i, i2), message, errors);
-    }
-
-    public static void DoesNotThrow(Action action, string message, ConstraintsViolations errors)
-    {
-      try
-      {
-        action();
-      }
-      catch (Exception e)
-      {
-        errors.Add(message + ", but instead caught: " + e);
-      }
+      errors.Add(message + ", but instead caught: " + e);
     }
   }
 }

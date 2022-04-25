@@ -10,137 +10,136 @@ using TddXt.XFluentAssert.EndToEndSpecification.Fixtures;
 using Xunit;
 using Xunit.Sdk;
 
-namespace TddXt.XFluentAssert.EndToEndSpecification
-{
-  public class MonitorSynchronizationSpecification
-  {
-    [Fact]
-    public void ShouldNotThrowWhenVoidMethodIsMonitorSynchronizedCorrectly()
-    {
-      //GIVEN
-      var wrappedObjectMock = Substitute.For<IMyService>();
-      var service = new MonitorSynchronizedMyService(wrappedObjectMock, new object());
+ namespace TddXt.XFluentAssert.EndToEndSpecification; 
 
-      //WHEN - THEN
-      service.Should().SynchronizeAccessTo(
-        s => s.VoidCall(1),
-        Blocking.MonitorOn(service.Lock),
-        wrappedObjectMock);
-    }
+ public class MonitorSynchronizationSpecification
+ {
+   [Fact]
+   public void ShouldNotThrowWhenVoidMethodIsMonitorSynchronizedCorrectly()
+   {
+     //GIVEN
+     var wrappedObjectMock = Substitute.For<IMyService>();
+     var service = new MonitorSynchronizedMyService(wrappedObjectMock, new object());
 
-    [Fact]
-    public void ShouldNotThrowWhenNonVoidMethodIsMonitorSynchronizedCorrectly()
-    {
-      //GIVEN
-      var wrappedObjectMock = Substitute.For<IMyService>();
-      var service = new MonitorSynchronizedMyService(wrappedObjectMock, new object());
+     //WHEN - THEN
+     service.Should().SynchronizeAccessTo(
+       s => s.VoidCall(1),
+       Blocking.MonitorOn(service.Lock),
+       wrappedObjectMock);
+   }
 
-      //WHEN - THEN
-      service.Should().SynchronizeAccessTo(s => s.CallWithResult("alabama"), Blocking.MonitorOn(service.Lock), wrappedObjectMock);
-    }
+   [Fact]
+   public void ShouldNotThrowWhenNonVoidMethodIsMonitorSynchronizedCorrectly()
+   {
+     //GIVEN
+     var wrappedObjectMock = Substitute.For<IMyService>();
+     var service = new MonitorSynchronizedMyService(wrappedObjectMock, new object());
 
-    [Fact]
-    public void ShouldThrowWhenVoidMethodDoesNotEnterMonitorAtAll()
-    {
-      //GIVEN
-      var wrappedObjectMock = Substitute.For<IMyService>();
-      var service = new MonitorSynchronizedMyService(wrappedObjectMock, new object());
+     //WHEN - THEN
+     service.Should().SynchronizeAccessTo(s => s.CallWithResult("alabama"), Blocking.MonitorOn(service.Lock), wrappedObjectMock);
+   }
 
-      //WHEN - THEN
-      new Action(() =>
-        service.Should().SynchronizeAccessTo(s => s.VoidCallNotEntered(1), Blocking.MonitorOn(service.Lock), wrappedObjectMock))
-      .Should().ThrowExactly<ReceivedCallsException>();
-    }
+   [Fact]
+   public void ShouldThrowWhenVoidMethodDoesNotEnterMonitorAtAll()
+   {
+     //GIVEN
+     var wrappedObjectMock = Substitute.For<IMyService>();
+     var service = new MonitorSynchronizedMyService(wrappedObjectMock, new object());
 
-    [Fact]
-    public void ShouldThrowWhenVoidMethodDoesNotExitMonitor()
-    {
-      //GIVEN
-      var wrappedObjectMock = Substitute.For<IMyService>();
-      var service = new MonitorSynchronizedMyService(wrappedObjectMock, new object());
+     //WHEN - THEN
+     new Action(() =>
+         service.Should().SynchronizeAccessTo(s => s.VoidCallNotEntered(1), Blocking.MonitorOn(service.Lock), wrappedObjectMock))
+       .Should().ThrowExactly<ReceivedCallsException>();
+   }
 
-      //WHEN - THEN
-      new Action(() =>
-        service.Should().SynchronizeAccessTo(s => s.VoidCallNotExited(1), Blocking.MonitorOn(service.Lock), wrappedObjectMock))
-        .Should().ThrowExactly<Exception>();
-    }
+   [Fact]
+   public void ShouldThrowWhenVoidMethodDoesNotExitMonitor()
+   {
+     //GIVEN
+     var wrappedObjectMock = Substitute.For<IMyService>();
+     var service = new MonitorSynchronizedMyService(wrappedObjectMock, new object());
 
-    [Fact]
-    public void ShouldThrowWhenVoidMethodDoesNotExitMonitorOnException()
-    {
-      //GIVEN
-      var wrappedObjectMock = Substitute.For<IMyService>();
-      var service = new MonitorSynchronizedMyService(wrappedObjectMock, new object());
+     //WHEN - THEN
+     new Action(() =>
+         service.Should().SynchronizeAccessTo(s => s.VoidCallNotExited(1), Blocking.MonitorOn(service.Lock), wrappedObjectMock))
+       .Should().ThrowExactly<Exception>();
+   }
 
-      //WHEN - THEN
-      new Action(() =>
-        service.Should().SynchronizeAccessTo(s => s.VoidCallNotExitedOnException(1), Blocking.MonitorOn(service.Lock), wrappedObjectMock))
-      .Should().ThrowExactly<ReceivedCallsException>();
-    }
+   [Fact]
+   public void ShouldThrowWhenVoidMethodDoesNotExitMonitorOnException()
+   {
+     //GIVEN
+     var wrappedObjectMock = Substitute.For<IMyService>();
+     var service = new MonitorSynchronizedMyService(wrappedObjectMock, new object());
 
-    [Fact]
-    public void ShouldThrowWhenNonVoidMethodDoesNotEnterMonitorAtAll()
-    {
-      //GIVEN
-      var wrappedObjectMock = Substitute.For<IMyService>();
-      var service = new MonitorSynchronizedMyService(wrappedObjectMock, new object());
+     //WHEN - THEN
+     new Action(() =>
+         service.Should().SynchronizeAccessTo(s => s.VoidCallNotExitedOnException(1), Blocking.MonitorOn(service.Lock), wrappedObjectMock))
+       .Should().ThrowExactly<ReceivedCallsException>();
+   }
 
-      //WHEN - THEN
-      new Action(() =>
-        service.Should().SynchronizeAccessTo(s => s.CallWithResultNotEntered("alabama"), Blocking.MonitorOn(service.Lock), wrappedObjectMock))
-        .Should().ThrowExactly<XunitException>();
-    }
+   [Fact]
+   public void ShouldThrowWhenNonVoidMethodDoesNotEnterMonitorAtAll()
+   {
+     //GIVEN
+     var wrappedObjectMock = Substitute.For<IMyService>();
+     var service = new MonitorSynchronizedMyService(wrappedObjectMock, new object());
 
-    [Fact]
-    public void ShouldThrowWhenNonVoidMethodDoesNotExitMonitor()
-    {
-      //GIVEN
-      var wrappedObjectMock = Substitute.For<IMyService>();
-      var service = new MonitorSynchronizedMyService(wrappedObjectMock, new object());
+     //WHEN - THEN
+     new Action(() =>
+         service.Should().SynchronizeAccessTo(s => s.CallWithResultNotEntered("alabama"), Blocking.MonitorOn(service.Lock), wrappedObjectMock))
+       .Should().ThrowExactly<XunitException>();
+   }
 
-      //WHEN - THEN
-      new Action(() =>
-        service.Should().SynchronizeAccessTo(s => s.CallWithResultNotExited("alabama"), Blocking.MonitorOn(service.Lock), wrappedObjectMock))
-        .Should().ThrowExactly<Exception>();
-    }
-    [Fact]
-    public void ShouldThrowWhenNonVoidMethodDoesNotExitMonitorOnException()
-    {
-      //GIVEN
-      var wrappedObjectMock = Substitute.For<IMyService>();
-      var service = new MonitorSynchronizedMyService(wrappedObjectMock, new object());
+   [Fact]
+   public void ShouldThrowWhenNonVoidMethodDoesNotExitMonitor()
+   {
+     //GIVEN
+     var wrappedObjectMock = Substitute.For<IMyService>();
+     var service = new MonitorSynchronizedMyService(wrappedObjectMock, new object());
 
-      //WHEN - THEN
-      new Action(() =>
-        service.Should().SynchronizeAccessTo(s => s.CallWithResultNotExitedOnException("alabama"), Blocking.MonitorOn(service.Lock), wrappedObjectMock))
-        .Should().ThrowExactly<XunitException>();
-    }
-  }
+     //WHEN - THEN
+     new Action(() =>
+         service.Should().SynchronizeAccessTo(s => s.CallWithResultNotExited("alabama"), Blocking.MonitorOn(service.Lock), wrappedObjectMock))
+       .Should().ThrowExactly<Exception>();
+   }
+   [Fact]
+   public void ShouldThrowWhenNonVoidMethodDoesNotExitMonitorOnException()
+   {
+     //GIVEN
+     var wrappedObjectMock = Substitute.For<IMyService>();
+     var service = new MonitorSynchronizedMyService(wrappedObjectMock, new object());
 
-  class MonitorSynchronizedMyService : SynchronizedMyService<object>
-  {
-    public MonitorSynchronizedMyService(IMyService innerInstance, object aLock) : base(innerInstance, aLock)
-    {
-    }
+     //WHEN - THEN
+     new Action(() =>
+         service.Should().SynchronizeAccessTo(s => s.CallWithResultNotExitedOnException("alabama"), Blocking.MonitorOn(service.Lock), wrappedObjectMock))
+       .Should().ThrowExactly<XunitException>();
+   }
+ }
 
-    protected override void ExitLock()
-    {
-      Monitor.Exit(Lock);
-    }
+ class MonitorSynchronizedMyService : SynchronizedMyService<object>
+ {
+   public MonitorSynchronizedMyService(IMyService innerInstance, object aLock) : base(innerInstance, aLock)
+   {
+   }
 
-    protected override Task EnterLockAsync()
-    {
-      throw new NotImplementedException();
-    }
+   protected override void ExitLock()
+   {
+     Monitor.Exit(Lock);
+   }
 
-    protected override Task ExitLockAsync()
-    {
-      throw new NotImplementedException();
-    }
+   protected override Task EnterLockAsync()
+   {
+     throw new NotImplementedException();
+   }
 
-    protected override void EnterLock()
-    {
-      Monitor.Enter(Lock);
-    }
-  }
-}
+   protected override Task ExitLockAsync()
+   {
+     throw new NotImplementedException();
+   }
+
+   protected override void EnterLock()
+   {
+     Monitor.Enter(Lock);
+   }
+ }
