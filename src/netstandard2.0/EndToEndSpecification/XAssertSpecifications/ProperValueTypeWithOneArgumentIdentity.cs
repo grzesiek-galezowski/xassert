@@ -3,7 +3,8 @@ using System.Collections.Generic;
 
 namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications;
 
-public sealed class ProperValueTypeWithOneArgumentIdentity : IEquatable<ProperValueTypeWithOneArgumentIdentity>
+public sealed class ProperValueTypeWithOneArgumentIdentity(IEnumerable<int> anArray, int a)
+  : IEquatable<ProperValueTypeWithOneArgumentIdentity>
 {
   public bool Equals(ProperValueTypeWithOneArgumentIdentity other)
   {
@@ -51,12 +52,6 @@ public sealed class ProperValueTypeWithOneArgumentIdentity : IEquatable<ProperVa
     return !Equals(left, right);
   }
 
-  private readonly IEnumerable<int> _anArray;
-  private readonly int _a;
-
-  public ProperValueTypeWithOneArgumentIdentity(IEnumerable<int> anArray, int a)
-  {
-    _anArray = anArray;
-    _a = a;
-  }
+  private readonly IEnumerable<int> _anArray = anArray;
+  private readonly int _a = a;
 }

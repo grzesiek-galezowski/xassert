@@ -6,14 +6,9 @@ using TddXt.XFluentAssert.TypeReflection.Interfaces;
 
 namespace TddXt.XFluentAssert.TypeReflection.ImplementationDetails;
 
-internal class DefaultParameterlessConstructor : ICreateObjects
+internal class DefaultParameterlessConstructor(Func<object> creation) : ICreateObjects
 {
-  private readonly Func<object> _creation;
-
-  public DefaultParameterlessConstructor(Func<object> creation)
-  {
-    _creation = creation;
-  }
+  private readonly Func<object> _creation = creation;
 
   public bool HasNonPointerArgumentsOnly()
   {

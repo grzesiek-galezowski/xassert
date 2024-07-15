@@ -3,18 +3,11 @@ using TddXt.XFluentAssert.AssertionConstraints;
 
 namespace TddXt.XFluentAssert.EqualityAssertions.InequalityOperator;
 
-internal class StateBasedEqualityMustBeImplementedInTermsOfInequalityOperator<T> : IConstraint
+internal class StateBasedEqualityMustBeImplementedInTermsOfInequalityOperator<T>(Func<T>[] equalInstances) : IConstraint
 {
-  private readonly Func<T>[] _equalInstances;
-
-  public StateBasedEqualityMustBeImplementedInTermsOfInequalityOperator(Func<T>[] equalInstances)
-  {
-    _equalInstances = equalInstances;
-  }
-
   public void CheckAndRecord(ConstraintsViolations violations)
   {
-    foreach (var factory in _equalInstances)
+    foreach (var factory in equalInstances)
     {
       var instance1 = factory();
       var instance2 = factory();

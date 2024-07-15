@@ -5,14 +5,8 @@ using KellermanSoftware.CompareNetObjects.TypeComparers;
 
 namespace TddXt.XFluentAssert.GraphAssertions;
 
-internal class ReflectionOrProxyComparer : BaseTypeComparer
+internal class ReflectionOrProxyComparer() : BaseTypeComparer(null)
 {
-  public ReflectionOrProxyComparer()
-    : base(null)
-  {
-
-  }
-
   public override bool IsTypeMatch(Type type1, Type type2)
   {
     return ((IsPartOfReflectionApi(type1) && IsPartOfReflectionApi(type2))

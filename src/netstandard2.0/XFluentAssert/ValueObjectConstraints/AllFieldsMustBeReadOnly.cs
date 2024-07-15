@@ -6,19 +6,11 @@ using TddXt.XFluentAssert.TypeReflection;
 
 namespace TddXt.XFluentAssert.ValueObjectConstraints;
 
-internal class AllFieldsMustBeReadOnly : IConstraint
+internal class AllFieldsMustBeReadOnly(Type type) : IConstraint
 {
-  private readonly Type _type;
-
-  public AllFieldsMustBeReadOnly(Type type)
-  {
-    _type = type;
-  }
-
-
   public void CheckAndRecord(ConstraintsViolations violations)
   {
-    CheckImmutability(violations, _type);
+    CheckImmutability(violations, type);
   }
 
   private void CheckImmutability(ConstraintsViolations violations, Type type)

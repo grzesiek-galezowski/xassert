@@ -1,8 +1,10 @@
 ﻿
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Castle.DynamicProxy.Internal;
 using FluentAssertions;
 
 namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions;
@@ -56,9 +58,29 @@ internal class ObjectGraphNode : IObjectGraphNode
   private List<IObjectGraphNode> RetrievePropertiesAndFields(object o)
   {
     var fieldNodes = FieldNodes(o);
-    var propertyNodes = PropertyNodes(o);
+      IEnumerable<IObjectGraphNode> propertyNodes;
+    if (IsLanguageExtCollection(o))
+    {
+      propertyNodes = [];
+    }
+    else
+    {
+      propertyNodes = PropertyNodes(o);
+    }
+
 
     return fieldNodes.Concat(propertyNodes).ToList();
+  }
+
+  /// <summary>
+  /// LanguageExt collections throw exceptions when accessing some of their properties
+  /// when they are empty.
+  /// </summary>
+  /// <param name="o"></param>
+  /// <returns></returns>
+  private static bool IsLanguageExtCollection(object o)
+  {
+    return o.GetType().GetAllInterfaces().Contains(typeof(IEnumerable)) && o.GetType().Namespace.Contains("LanguageExt");
   }
 
   private IEnumerable<IObjectGraphNode> FieldNodes(object o)
@@ -75,11 +97,18 @@ internal class ObjectGraphNode : IObjectGraphNode
     var enumerable = propertyInfos
       .Where(p => !p.GetIndexParameters().Any()).ToList();
     var objectGraphNodes = enumerable
-      .Select(propertyInfo => _objectGraphNodeFactory.From(_path.ToList(), PropertyValueOrThrow(o, propertyInfo), propertyInfo.Name)).ToList();
+      .Select(propertyInfo =>
+      {
+        var propertyValue = PropertyValueOrThrow(o, propertyInfo);
+        return _objectGraphNodeFactory.From(_path.ToList(),
+          propertyValue,
+          propertyInfo.Name);
+      })
+      .ToList();
     return objectGraphNodes;
   }
 
-  private static object PropertyValueOrThrow(object o, PropertyInfo propertyInfo)
+  private static object? PropertyValueOrThrow(object o, PropertyInfo propertyInfo)
   {
     try
     {
@@ -120,11 +149,5 @@ internal class ObjectGraphNode : IObjectGraphNode
 
 }
 
-public class CouldNotReadPropertyValueException : Exception
-{
-  public CouldNotReadPropertyValueException(PropertyInfo propertyInfo, TargetInvocationException cause, object o)
-    : base($"Could not read property {propertyInfo.Name} of type {propertyInfo.DeclaringType} on object {o}", cause)
-  {
-      
-  }
-}
+public class CouldNotReadPropertyValueException(PropertyInfo propertyInfo, TargetInvocationException cause, object o)
+  : Exception($"Could not read property {propertyInfo.Name} of type {propertyInfo.DeclaringType} on object {o}", cause);

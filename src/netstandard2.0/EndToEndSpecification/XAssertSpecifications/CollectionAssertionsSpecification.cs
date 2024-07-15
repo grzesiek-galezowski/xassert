@@ -28,14 +28,9 @@ public class CollectionAssertionsSpecification
     coll1.Invoking(c => FluentAssertionsEnumerableExtensions.Be(c.Should(), coll2)).Should().Throw<Exception>();
   }
 
-  private class AlwaysNotEqual
+  private class AlwaysNotEqual(int a)
   {
-    private int _a;
-
-    public AlwaysNotEqual(int a)
-    {
-      this._a = a;
-    }
+    private int _a = a;
 
     public override bool Equals(object obj)
     {

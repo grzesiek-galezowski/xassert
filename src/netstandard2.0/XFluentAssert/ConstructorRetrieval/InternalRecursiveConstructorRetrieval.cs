@@ -5,15 +5,8 @@ using TddXt.XFluentAssert.TypeReflection.Interfaces;
 
 namespace TddXt.XFluentAssert.ConstructorRetrieval;
 
-internal class InternalRecursiveConstructorRetrieval : IConstructorRetrieval
+internal class InternalRecursiveConstructorRetrieval(IConstructorRetrieval next) : IConstructorRetrieval
 {
-  private readonly IConstructorRetrieval _next;
-
-  public InternalRecursiveConstructorRetrieval(IConstructorRetrieval next)
-  {
-    _next = next;
-  }
-
   public IEnumerable<ICreateObjects> RetrieveFrom(IConstructorQueries constructors)
   {
     var foundConstructors = constructors.TryToObtainInternalConstructorsWithRecursiveArguments();
@@ -23,7 +16,7 @@ internal class InternalRecursiveConstructorRetrieval : IConstructorRetrieval
     }
     else
     {
-      return _next.RetrieveFrom(constructors);
+      return next.RetrieveFrom(constructors);
     }
   }
 }

@@ -4,17 +4,11 @@ using System.Linq;
 
 namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions;
 
-internal class ObjectGraphPath
+internal class ObjectGraphPath(IReadOnlyList<IObjectGraphNode> path)
 {
   //TODO support for recursion (direct or indirect) or reference to this
   //TODO  UT
-  private readonly IReadOnlyList<IObjectGraphNode> _path;
-  private IReadOnlyList<IObjectGraphNode> PathWithoutRoot => _path.Skip(1).ToList();
-
-  public ObjectGraphPath(IReadOnlyList<IObjectGraphNode> path)
-  {
-    _path = path;
-  }
+  private IReadOnlyList<IObjectGraphNode> PathWithoutRoot => path.Skip(1).ToList();
 
   public bool ContainsNonRootInstanceOf(Type type)
   {
@@ -29,7 +23,7 @@ internal class ObjectGraphPath
 
   public override string ToString()
   {
-    return string.Join("->", _path.Select(p => "[" + p + "]"));
+    return string.Join("->", path.Select(p => "[" + p + "]"));
   }
 
   public bool ContainsNonRootSubpath(object[] values)

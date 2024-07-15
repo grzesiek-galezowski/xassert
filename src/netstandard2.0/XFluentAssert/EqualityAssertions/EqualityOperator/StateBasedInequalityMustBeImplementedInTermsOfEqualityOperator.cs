@@ -3,25 +3,15 @@ using TddXt.XFluentAssert.AssertionConstraints;
 
 namespace TddXt.XFluentAssert.EqualityAssertions.EqualityOperator;
 
-internal class StateBasedInequalityMustBeImplementedInTermsOfEqualityOperator<T>
-  : IConstraint
+internal class StateBasedInequalityMustBeImplementedInTermsOfEqualityOperator<T>(
+  Func<T>[] equalInstances,
+  Func<T>[] otherInstances) : IConstraint
 {
-  private readonly Func<T>[] _equalInstances;
-  private readonly Func<T>[] _otherInstances;
-
-  public StateBasedInequalityMustBeImplementedInTermsOfEqualityOperator(
-    Func<T>[] equalInstances, 
-    Func<T>[] otherInstances)
-  {
-    _equalInstances = equalInstances;
-    _otherInstances = otherInstances;
-  }
-
   public void CheckAndRecord(ConstraintsViolations violations)
   {
-    foreach (var factory1 in _equalInstances)
+    foreach (var factory1 in equalInstances)
     {
-      foreach (var factory2 in _otherInstances)
+      foreach (var factory2 in otherInstances)
       {
         RecordedAssertions.DoesNotThrow(() =>
             RecordedAssertions.False(Are.EqualInTermsOfEqualityOperator(typeof(T), factory1(), factory2()),

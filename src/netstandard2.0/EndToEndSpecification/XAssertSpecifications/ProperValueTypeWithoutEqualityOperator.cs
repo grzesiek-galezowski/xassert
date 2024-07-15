@@ -2,7 +2,7 @@ using System;
 
 namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications;
 
-public sealed class ProperValueTypeWithoutEqualityOperator : IEquatable<ProperValueTypeWithoutEqualityOperator>
+public sealed class ProperValueTypeWithoutEqualityOperator(int a) : IEquatable<ProperValueTypeWithoutEqualityOperator>
 {
   public bool Equals(ProperValueTypeWithoutEqualityOperator other)
   {
@@ -24,10 +24,5 @@ public sealed class ProperValueTypeWithoutEqualityOperator : IEquatable<ProperVa
     return _a.GetHashCode();
   }
 
-  private readonly int _a;
-
-  public ProperValueTypeWithoutEqualityOperator(int a)
-  {
-    _a = a;
-  }
+  private readonly int _a = a;
 }

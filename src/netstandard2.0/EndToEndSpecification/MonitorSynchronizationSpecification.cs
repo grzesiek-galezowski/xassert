@@ -117,12 +117,9 @@ using Xunit.Sdk;
    }
  }
 
- class MonitorSynchronizedMyService : SynchronizedMyService<object>
+ class MonitorSynchronizedMyService(IMyService innerInstance, object aLock)
+   : SynchronizedMyService<object>(innerInstance, aLock)
  {
-   public MonitorSynchronizedMyService(IMyService innerInstance, object aLock) : base(innerInstance, aLock)
-   {
-   }
-
    protected override void ExitLock()
    {
      Monitor.Exit(Lock);

@@ -4,20 +4,13 @@ using TddXt.XFluentAssert.Api.LockAssertions.Interfaces;
 
 namespace TddXt.XFluentAssert.LockAssertions;
 
-internal class MonitorAssertions : ILockAssertions
+internal class MonitorAssertions(object aLock) : ILockAssertions
 {
-  private readonly object _aLock;
-
-  public MonitorAssertions(object aLock)
-  {
-    _aLock = aLock;
-  }
-
   public void AssertUnlocked()
   {
     try
     {
-      Monitor.Exit(_aLock);
+      Monitor.Exit(aLock);
       throw new Exception("Expected lock not being held, but it is!");
     }
     catch (SynchronizationLockException)
@@ -27,7 +20,7 @@ internal class MonitorAssertions : ILockAssertions
 
   public void AssertLocked()
   {
-    Monitor.Exit(_aLock);
-    Monitor.Enter(_aLock);
+    Monitor.Exit(aLock);
+    Monitor.Enter(aLock);
   }
 }

@@ -1,16 +1,9 @@
 namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions;
 
-internal class TerminalNodeNamespaceCondition : ITerminalNodeCondition
+internal class TerminalNodeNamespaceCondition(string namespaceFragment) : ITerminalNodeCondition
 {
-  private readonly string _namespaceFragment;
-
-  public TerminalNodeNamespaceCondition(string namespaceFragment)
-  {
-    _namespaceFragment = namespaceFragment;
-  }
-
   public bool Evaluate(object target)
   {
-    return target.GetType().Namespace.Contains(_namespaceFragment);
+    return target.GetType().Namespace.Contains(namespaceFragment);
   }
 }

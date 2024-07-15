@@ -4,24 +4,15 @@ using TddXt.XFluentAssert.AssertionConstraints;
 
 namespace TddXt.XFluentAssert.EqualityAssertions;
 
-internal class HashCodeMustBeTheSameForSameObjectsAndDifferentForDifferentObjects<T> : IConstraint
+internal class HashCodeMustBeTheSameForSameObjectsAndDifferentForDifferentObjects<T>(
+  Func<T>[] equalInstances,
+  Func<T>[] otherInstances) : IConstraint
 {
-  private readonly Func<T>[] _equalInstances;
-  private readonly Func<T>[] _otherInstances;
-
-  public HashCodeMustBeTheSameForSameObjectsAndDifferentForDifferentObjects(
-    Func<T>[] equalInstances, 
-    Func<T>[] otherInstances)
-  {
-    _equalInstances = equalInstances;
-    _otherInstances = otherInstances;
-  }
-
   public void CheckAndRecord(ConstraintsViolations violations)
   {
-    foreach (var factory1 in _equalInstances)
+    foreach (var factory1 in equalInstances)
     {
-      foreach (var factory2 in _otherInstances)
+      foreach (var factory2 in otherInstances)
       {
         RecordedAssertions.DoesNotThrow(() =>
             RecordedAssertions.NotEqual(factory1().GetHashCode(), factory2().GetHashCode(),
@@ -30,7 +21,7 @@ internal class HashCodeMustBeTheSameForSameObjectsAndDifferentForDifferentObject
       }
     }
 
-    foreach (var factory in _equalInstances.Concat(_otherInstances))
+    foreach (var factory in equalInstances.Concat(otherInstances))
     {
       var instance = factory();
       RecordedAssertions.DoesNotThrow(() =>
@@ -39,9 +30,9 @@ internal class HashCodeMustBeTheSameForSameObjectsAndDifferentForDifferentObject
         "a.GetHashCode() should consistently return the same value", violations);
     }
 
-    foreach (var factory1 in _equalInstances)
+    foreach (var factory1 in equalInstances)
     {
-      foreach (var factory2 in _equalInstances)
+      foreach (var factory2 in equalInstances)
       {
         RecordedAssertions.DoesNotThrow(() =>
             RecordedAssertions.Equal(factory1().GetHashCode(), factory2().GetHashCode(),

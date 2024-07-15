@@ -186,12 +186,9 @@ public class SemaphoreSynchronizationSpecification
   }
 }
 
-class SemaphoreSynchronizedMyService : SynchronizedMyService<SemaphoreSlim>
+class SemaphoreSynchronizedMyService(IMyService innerInstance, SemaphoreSlim aLock)
+  : SynchronizedMyService<SemaphoreSlim>(innerInstance, aLock)
 {
-  public SemaphoreSynchronizedMyService(IMyService innerInstance, SemaphoreSlim aLock) : base(innerInstance, aLock)
-  {
-  }
-
   protected override void ExitLock()
   {
     Lock.Release();

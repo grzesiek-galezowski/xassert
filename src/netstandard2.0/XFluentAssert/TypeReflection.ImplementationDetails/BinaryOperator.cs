@@ -25,18 +25,11 @@ internal class BinaryOperator<T, TResult> : IAmBinaryOperator<T, TResult>
   }
 }
 
-internal class BinaryOperator : IAmBinaryOperator
+internal class BinaryOperator(MethodInfo method) : IAmBinaryOperator
 {
-  private readonly MethodInfo _method;
-
-  public BinaryOperator(MethodInfo method)
-  {
-    _method = method;
-  }
-
   public object Evaluate(object? instance1, object? instance2)
   {
-    return _method.Invoke(null, new[] { instance1, instance2 });
+    return method.Invoke(null, new[] { instance1, instance2 });
   }
 
   public static IAmBinaryOperator Wrap(

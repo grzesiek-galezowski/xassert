@@ -4,24 +4,15 @@ using TddXt.XFluentAssert.TypeReflection;
 
 namespace TddXt.XFluentAssert.EqualityAssertions;
 
-internal class StateBasedInequalityMustBeImplementedInTermsOfEqualsMethod<T> : IConstraint
+internal class StateBasedInequalityMustBeImplementedInTermsOfEqualsMethod<T>(
+  Func<T>[] equalInstances,
+  Func<T>[] otherInstances) : IConstraint
 {
-  private readonly Func<T>[] _equalInstances;
-  private readonly Func<T>[] _otherInstances;
-
-  public StateBasedInequalityMustBeImplementedInTermsOfEqualsMethod(
-    Func<T>[] equalInstances, 
-    Func<T>[] otherInstances)
-  {
-    _equalInstances = equalInstances;
-    _otherInstances = otherInstances;
-  }
-
   public void CheckAndRecord(ConstraintsViolations violations)
   {
-    foreach (var factory1 in _equalInstances)
+    foreach (var factory1 in equalInstances)
     {
-      foreach (var factory2 in _otherInstances)
+      foreach (var factory2 in otherInstances)
       {
         RecordedAssertions.DoesNotThrow(() =>
             RecordedAssertions.False(factory1().Equals(factory2()),

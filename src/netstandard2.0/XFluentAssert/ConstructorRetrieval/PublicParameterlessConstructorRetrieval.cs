@@ -4,15 +4,8 @@ using TddXt.XFluentAssert.TypeReflection.Interfaces;
 
 namespace TddXt.XFluentAssert.ConstructorRetrieval;
 
-internal class PublicParameterlessConstructorRetrieval : IConstructorRetrieval
+internal class PublicParameterlessConstructorRetrieval(IConstructorRetrieval next) : IConstructorRetrieval
 {
-  private readonly IConstructorRetrieval _next;
-
-  public PublicParameterlessConstructorRetrieval(IConstructorRetrieval next)
-  {
-    _next = next;
-  }
-
   public IEnumerable<ICreateObjects> RetrieveFrom(IConstructorQueries constructors)
   {
     var constructor = constructors.GetPublicParameterlessConstructor();
@@ -22,7 +15,7 @@ internal class PublicParameterlessConstructorRetrieval : IConstructorRetrieval
     }
     else
     {
-      return _next.RetrieveFrom(constructors);
+      return next.RetrieveFrom(constructors);
     }
   }
 }

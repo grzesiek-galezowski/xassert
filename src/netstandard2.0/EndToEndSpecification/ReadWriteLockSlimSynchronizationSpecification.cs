@@ -217,12 +217,9 @@ public class ReadWriteLockSlimSynchronizationSpecification
   }
 }
 
-class ReadSynchronizedMyService : SynchronizedMyService<ReaderWriterLockSlim>
+class ReadSynchronizedMyService(IMyService innerInstance, ReaderWriterLockSlim aLock)
+  : SynchronizedMyService<ReaderWriterLockSlim>(innerInstance, aLock)
 {
-  public ReadSynchronizedMyService(IMyService innerInstance, ReaderWriterLockSlim aLock) : base(innerInstance, aLock)
-  {
-  }
-
   protected override void ExitLock()
   {
     Lock.ExitReadLock();
@@ -244,12 +241,9 @@ class ReadSynchronizedMyService : SynchronizedMyService<ReaderWriterLockSlim>
   }
 }
 
-class WriteSynchronizedMyService : SynchronizedMyService<ReaderWriterLockSlim>
+class WriteSynchronizedMyService(IMyService innerInstance, ReaderWriterLockSlim aLock)
+  : SynchronizedMyService<ReaderWriterLockSlim>(innerInstance, aLock)
 {
-  public WriteSynchronizedMyService(IMyService innerInstance, ReaderWriterLockSlim aLock) : base(innerInstance, aLock)
-  {
-  }
-
   protected override void ExitLock()
   {
     Lock.ExitWriteLock();

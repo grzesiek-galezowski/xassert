@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications;
 
-public class GenericValueType<T> : IEquatable<GenericValueType<T>>
+public class GenericValueType<T>(T field) : IEquatable<GenericValueType<T>>
 {
   public bool Equals(GenericValueType<T> other)
   {
@@ -35,12 +35,5 @@ public class GenericValueType<T> : IEquatable<GenericValueType<T>>
     return !Equals(left, right);
   }
 
-  private readonly T _field;
-
-  public GenericValueType(T field)
-  {
-    _field = field;
-  }
-
-
+  private readonly T _field = field;
 }

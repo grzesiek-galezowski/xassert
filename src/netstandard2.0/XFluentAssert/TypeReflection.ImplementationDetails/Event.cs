@@ -6,26 +6,18 @@ using TddXt.XFluentAssert.TypeReflection.Interfaces;
 
 namespace TddXt.XFluentAssert.TypeReflection.ImplementationDetails;
 
-internal class Event : IAmEvent
+internal class Event(EventInfo eventInfo) : IAmEvent
 {
-  private readonly EventInfo _eventInfo;
-
-  private readonly string _shortName;
-
-  public Event(EventInfo eventInfo)
-  {
-    _eventInfo = eventInfo;
-    _shortName = eventInfo.Name.Split('.').Last();
-  }
+  private readonly string _shortName = eventInfo.Name.Split('.').Last();
 
   public string GenerateNonPublicExistenceMessage()
   {
     return new StringBuilder("SmartType: ")
-      .Append(_eventInfo.DeclaringType)
+      .Append(eventInfo.DeclaringType)
       .Append(" contains non public event ")
-      .Append(_eventInfo.Name)
+      .Append(eventInfo.Name)
       .Append(" of type ")
-      .Append(_eventInfo.EventHandlerType).ToString();
+      .Append(eventInfo.EventHandlerType).ToString();
   }
 
   public bool HasName(string eventName)

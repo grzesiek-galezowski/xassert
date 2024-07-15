@@ -4,24 +4,15 @@ using TddXt.XFluentAssert.AssertionConstraints;
 
 namespace TddXt.XFluentAssert.EqualityAssertions.InequalityOperator;
 
-internal class InequalityWithNullMustBeImplementedInTermsOfInequalityOperator<T> : IConstraint
+internal class InequalityWithNullMustBeImplementedInTermsOfInequalityOperator<T>(
+  Func<T>[] equalInstances,
+  Func<T>[] otherInstances) : IConstraint
 {
-  private readonly Func<T>[] _equalInstances;
-  private readonly Func<T>[] _otherInstances;
-
-  public InequalityWithNullMustBeImplementedInTermsOfInequalityOperator(
-    Func<T>[] equalInstances, 
-    Func<T>[] otherInstances)
-  {
-    _equalInstances = equalInstances;
-    _otherInstances = otherInstances;
-  }
-
   public void CheckAndRecord(ConstraintsViolations violations)
   {
     if (!typeof(T).IsValueType)
     {
-      foreach (var factory in _equalInstances.Concat(_otherInstances))
+      foreach (var factory in equalInstances.Concat(otherInstances))
       {
         var instance1 = factory();
         RecordedAssertions.DoesNotThrow(() =>

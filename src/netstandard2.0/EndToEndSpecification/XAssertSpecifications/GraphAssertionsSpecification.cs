@@ -5,6 +5,7 @@ using System.Security.Permissions;
 using System.Threading;
 using FluentAssertions;
 using Core.Maybe;
+using LanguageExt;
 using NSubstitute;
 using TddXt.XFluentAssert.Api;
 using Xunit;
@@ -400,14 +401,9 @@ public class GraphAssertionsSpecification : IDisposable
   //todo add Should().NotDependOn();
   //todo add Should().DependOn(Func matchCriteria)
 
-  private class MyObjectImpl
+  private class MyObjectImpl(IEnumerable<int> s)
   {
-    private readonly IEnumerable<int> _s;
-
-    public MyObjectImpl(IEnumerable<int> s)
-    {
-      _s = s;
-    }
+    private readonly IEnumerable<int> _s = s;
   }
 
   public void Dispose()
@@ -416,54 +412,59 @@ public class GraphAssertionsSpecification : IDisposable
   }
 }
 
+public class LanguageExtSpecification
+{
+  [Fact]
+  public void ShouldSupportCollections()
+  {
+    Seq.create(1, 2, 3, 4).Should().DependOn(4);
+    ((IEnumerable<int>)(Arr.create(1, 2, 3, 4))).Should().DependOn(4);
+    HashMap.empty<int, int>().Add(1,2).Add(3,4).Should().DependOn(4);
+    ((IEnumerable<int>)Set.create<int>().Add(1).Add(2).Add(3).Add(4)).Should().DependOn(4);
+  }
+
+  [Fact]
+  public void ShouldSupportCollections2()
+  {
+    this.Invoking(_ => ((IEnumerable<int>)(Arr.create(1, 2, 3, 4))).Should().DependOn(5))
+      .Should().Throw<XunitException>();
+    this.Invoking(_ => Seq.create(1, 2, 3, 4).Should().DependOn(5))
+      .Should().Throw<XunitException>();
+    this.Invoking(_ => HashMap.empty<int, int>().Add(1, 2).Add(3, 4).Should().DependOn(5))
+      .Should().Throw<XunitException>();
+    this.Invoking(_ => ((IEnumerable<int>)Set.create<int>().Add(1).Add(2).Add(3).Add(4)).Should().DependOn(5))
+      .Should().Throw<XunitException>();
+  }
+}
 
 
 public interface IObjectWithReadOnlyDictionary
 {
 }
 
-public class ObjectWithReadOnlyDictionary : IObjectWithReadOnlyDictionary
+public class ObjectWithReadOnlyDictionary(IReadOnlyDictionary<string, string> readOnlyDictionary)
+  : IObjectWithReadOnlyDictionary
 {
-  private readonly IReadOnlyDictionary<string, string> _readOnlyDictionary;
-
-  public ObjectWithReadOnlyDictionary(IReadOnlyDictionary<string, string> readOnlyDictionary)
-  {
-    _readOnlyDictionary = readOnlyDictionary;
-  }
+  private readonly IReadOnlyDictionary<string, string> _readOnlyDictionary = readOnlyDictionary;
 }
 
 public class Decorator4 : IDecorator
 {
 }
 
-public class Decorator3 : IDecorator
+public class Decorator3(IDecorator decorator4) : IDecorator
 {
-  private readonly IDecorator _decorator4;
-
-  public Decorator3(IDecorator decorator4)
-  {
-    _decorator4 = decorator4;
-  }
+  private readonly IDecorator _decorator4 = decorator4;
 }
 
-public class Decorator2 : IDecorator
+public class Decorator2(IDecorator decorator3) : IDecorator
 {
-  private readonly IDecorator _decorator3;
-
-  public Decorator2(IDecorator decorator3)
-  {
-    _decorator3 = decorator3;
-  }
+  private readonly IDecorator _decorator3 = decorator3;
 }
 
-public class Decorator1 : IDecorator
+public class Decorator1(IDecorator decorator) : IDecorator
 {
-  private readonly IDecorator _decorator;
-
-  public Decorator1(IDecorator decorator)
-  {
-    _decorator = decorator;
-  }
+  private readonly IDecorator _decorator = decorator;
 }
 
 public interface IDecorator

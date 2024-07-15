@@ -2,10 +2,4 @@
 
 namespace TddXt.XFluentAssert.TypeReflection.ImplementationDetails;
 
-internal class DuplicateConstantException : Exception
-{
-  public DuplicateConstantException(string message) : base(message)
-  {
-
-  }
-}
+internal class DuplicateConstantException(string message) : Exception(message);

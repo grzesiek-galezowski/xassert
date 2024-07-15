@@ -17,14 +17,9 @@ using static TddXt.AnyRoot.Root;
 
 namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications;
 
-public class XAssertSpecification
+public class XAssertSpecification(ITestOutputHelper output)
 {
-  private readonly ITestOutputHelper _output;
-
-  public XAssertSpecification(ITestOutputHelper output)
-  {
-    _output = output;
-  }
+  private readonly ITestOutputHelper _output = output;
 
   [Fact]
   public void ShouldPassValueTypeAssertionForProperValueType()
@@ -282,60 +277,34 @@ public class XAssertSpecification
 
 }
 
-class A1
+class A1(A2 a2, B2 b2)
 {
-  A2 _a2;
-  B2 _b2;
+  A2 _a2 = a2;
+  B2 _b2 = b2;
 
-  public A1()
+  public A1() : this(new A2(), new B2())
   {
-    _a2 = new A2();
-    _b2 = new B2();
-  }
-
-  public A1(A2 a2, B2 b2)
-  {
-    _a2 = a2;
-    _b2 = b2;
   }
 }
 
-class B2
+class B2(B3 b3)
 {
-  B3 _b3;
+  B3 _b3 = b3;
 
-  public B2()
+  public B2() : this(new B3())
   {
-    _b3 = new B3();
-  }
-
-  public B2(B3 b3)
-  {
-    _b3 = b3;
   }
 }
 
-class A2
+class A2(A3 a3, B3 b3, string s, int i)
 {
-  private A3 _a3;
-  private B3 _b3;
-  private string _str;
-  private int _num;
+  private A3 _a3 = a3;
+  private B3 _b3 = b3;
+  private string _str = s;
+  private int _num = i;
 
-  public A2()
+  public A2() : this(new A3(), new B3(), ";p;", 123)
   {
-    _a3 = new A3();
-    _b3 = new B3();
-    _str = ";p;";
-    _num = 123;
-  }
-
-  public A2(A3 a3, B3 b3, string s, int i)
-  {
-    _a3 = a3;
-    _b3 = b3;
-    _str = s;
-    _num = i;
   }
 }
 
@@ -395,3 +364,5 @@ public class ConstsWithRepeatingValues
   public const int Val2 = Val1 + 1;
   public const int Val3 = Val1;
 }
+
+

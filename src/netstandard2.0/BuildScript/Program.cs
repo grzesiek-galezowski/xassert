@@ -16,7 +16,7 @@ var root = AbsoluteFilePath.OfThisFile().ParentDirectory(3).Value();
 var srcDir = root.AddDirectoryName("src");
 var srcNetStandardDir = srcDir.AddDirectoryName("netstandard2.0");
 var nugetPath = root.AddDirectoryName("nuget");
-var version="8.0.0";
+var version="9.0.0";
 
 if (!nugetPath.Exists())
 {

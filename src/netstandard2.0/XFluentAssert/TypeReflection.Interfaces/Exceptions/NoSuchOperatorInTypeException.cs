@@ -2,10 +2,4 @@
 
 namespace TddXt.XFluentAssert.TypeReflection.Interfaces.Exceptions;
 
-internal class NoSuchOperatorInTypeException : Exception
-{
-  public NoSuchOperatorInTypeException(string s)
-    : base(s)
-  {
-  }
-}
+internal class NoSuchOperatorInTypeException(string s) : Exception(s);

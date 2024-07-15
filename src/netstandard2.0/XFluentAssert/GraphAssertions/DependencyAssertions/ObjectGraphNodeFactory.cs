@@ -18,7 +18,7 @@ internal class ObjectGraphNodeFactory
 
   public IObjectGraphNode From(
     IReadOnlyList<IObjectGraphNode> path,
-    object target,
+    object? target,
     string targetHolderName)
   {
     if (target == null)

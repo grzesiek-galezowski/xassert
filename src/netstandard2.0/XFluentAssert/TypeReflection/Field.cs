@@ -9,16 +9,9 @@ using TddXt.XFluentAssert.TypeReflection.Interfaces;
 
 namespace TddXt.XFluentAssert.TypeReflection;
 
-internal class Field : IAmField
+internal class Field(FieldInfo fieldInfo) : IAmField
 {
-  private readonly FieldInfo _fieldInfo;
-
-  public Field(FieldInfo fieldInfo)
-  {
-    _fieldInfo = fieldInfo;
-  }
-
-  public string Name => _fieldInfo.Name;
+  public string Name => fieldInfo.Name;
 
   public static Maybe<Field> FromUnaryExpression<T>(Expression<Func<T, object>> expression)
   {
@@ -37,47 +30,47 @@ internal class Field : IAmField
 
   public bool IsNotDeveloperDefinedReadOnlyField()
   {
-    return !_fieldInfo.IsInitOnly && !_fieldInfo.IsDefined(typeof(CompilerGeneratedAttribute), true);
+    return !fieldInfo.IsInitOnly && !fieldInfo.IsDefined(typeof(CompilerGeneratedAttribute), true);
   }
 
   public bool IsConstant()
   {
-    return _fieldInfo.IsLiteral && IsNotDeveloperDefinedReadOnlyField();
+    return fieldInfo.IsLiteral && IsNotDeveloperDefinedReadOnlyField();
   }
 
   public string ShouldNotBeMutableButIs()
   {
     return "Value objects are immutable, but field "
-           + _fieldInfo.Name
-           + " of type " + _fieldInfo.DeclaringType + " is mutable. Make this field readonly to pass the check.";
+           + fieldInfo.Name
+           + " of type " + fieldInfo.DeclaringType + " is mutable. Make this field readonly to pass the check.";
   }
 
   public string GenerateExistenceMessage()
   {
-    return "SmartType: " + _fieldInfo.DeclaringType +
-           " contains static field " + _fieldInfo.Name +
-           " of type " + _fieldInfo.FieldType;
+    return "SmartType: " + fieldInfo.DeclaringType +
+           " contains static field " + fieldInfo.Name +
+           " of type " + fieldInfo.FieldType;
 
   }
 
   private bool HasTheSameNameAs(IAmField otherConstant)
   {
-    return otherConstant.HasName(_fieldInfo.Name);
+    return otherConstant.HasName(fieldInfo.Name);
   }
 
   public bool HasName(string name)
   {
-    return _fieldInfo.Name == name;
+    return fieldInfo.Name == name;
   }
 
   private bool HasTheSameValueAs(IAmField otherConstant)
   {
-    return otherConstant.HasValue(_fieldInfo.GetValue(null));
+    return otherConstant.HasValue(fieldInfo.GetValue(null));
   }
 
   public bool HasValue(object name)
   {
-    return _fieldInfo.GetValue(null).Equals(name);
+    return fieldInfo.GetValue(null).Equals(name);
   }
 
   public void AssertNotDuplicateOf(IAmField otherConstant)
@@ -97,11 +90,11 @@ internal class Field : IAmField
 
   public void AddNameTo(StringBuilder builder)
   {
-    builder.Append(_fieldInfo.Name + " <" + _fieldInfo.GetValue(null) + ">");
+    builder.Append(fieldInfo.Name + " <" + fieldInfo.GetValue(null) + ">");
   }
 
   public bool IsNotSpecialCase()
   {
-    return !_fieldInfo.DeclaringType.Namespace.Equals("Value");
+    return !fieldInfo.DeclaringType.Namespace.Equals("Value");
   }
 }

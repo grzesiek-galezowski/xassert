@@ -5,14 +5,10 @@ using System.Linq;
 
 namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications;
 
-public sealed class StructByValue<T> : IEquatable<StructByValue<T>> where T : struct
+public sealed class StructByValue<T>(T element) : IEquatable<StructByValue<T>>
+  where T : struct
 {
-  private readonly T _element;
-
-  public StructByValue(T element)
-  {
-    _element = element;
-  }
+  private readonly T _element = element;
 
   public bool Equals(StructByValue<T>? other)
   {
@@ -42,7 +38,7 @@ public sealed class StructByValue<T> : IEquatable<StructByValue<T>> where T : st
   }
 }
 
-public sealed class ProperValueType : IEquatable<ProperValueType>
+public sealed class ProperValueType(int a, int[] anArray) : IEquatable<ProperValueType>
 {
   public bool Equals(ProperValueType other)
   {
@@ -81,31 +77,15 @@ public sealed class ProperValueType : IEquatable<ProperValueType>
     return !Equals(left, right);
   }
 
-  private readonly int _a;
-  private readonly int[] _anArray;
-
-  public ProperValueType(int a, int[] anArray)
-  {
-    _a = a;
-    _anArray = anArray;
-  }
+  private readonly int _a = a;
+  private readonly int[] _anArray = anArray;
 }
 
-public sealed class ProperValueTypeDerivedFromLibrary : ValueType<ProperValueTypeDerivedFromLibrary>
+public sealed class ProperValueTypeDerivedFromLibrary(int a, string str) : ValueType<ProperValueTypeDerivedFromLibrary>
 {
-
-  private readonly int _a;
-  private readonly string _str;
-
-  public ProperValueTypeDerivedFromLibrary(int a, string str)
-  {
-    _a = a;
-    _str = str;
-  }
-
   protected override IEnumerable<object> GetAllAttributesToBeUsedForEquality()
   {
-    yield return _a;
-    yield return _str;
+    yield return a;
+    yield return str;
   }
 }
