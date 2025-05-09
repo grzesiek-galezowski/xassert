@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="XFluentAssert" Version="8.0.0" />
+    <PackageReference Include="XFluentAssert" Version="9.0.0" />
   </ItemGroup>
 
 </Project>

@@ -123,7 +123,7 @@ public class GraphAssertionsSpecification : IDisposable
 
     new Action(() => a1.Should().DependOn(new A2()))
       .Should().ThrowExactly<XunitException>().WithMessage(
-        @"Could not find the particular instance: TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.A2 anywhere in dependency graph. Paths created when searching: 
+        @"Could not find the particular instance: TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.A2 anywhere in dependency graph. Paths created when searching:
 [Root(A1Record)]->[<A2>k__BackingField(A2Record)]->[<A3>k__BackingField(A3Record)]->[EqualityContract(RuntimeType)]
 [Root(A1Record)]->[<A2>k__BackingField(A2Record)]->[<B3>k__BackingField(B3Record)]->[EqualityContract(RuntimeType)]
 [Root(A1Record)]->[<A2>k__BackingField(A2Record)]->[<S>k__BackingField(String)]
@@ -151,7 +151,7 @@ public class GraphAssertionsSpecification : IDisposable
 [Root(A1Record)]->[B2(B2Record)]->[B3(B3Record)]->[EqualityContract(RuntimeType)]");
     new Action(() => a1.Should().DependOn(new B2()))
       .Should().ThrowExactly<XunitException>().WithMessage(
-        @"Could not find the particular instance: TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.B2 anywhere in dependency graph. Paths created when searching: 
+        @"Could not find the particular instance: TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.B2 anywhere in dependency graph. Paths created when searching:
 [Root(A1Record)]->[<A2>k__BackingField(A2Record)]->[<A3>k__BackingField(A3Record)]->[EqualityContract(RuntimeType)]
 [Root(A1Record)]->[<A2>k__BackingField(A2Record)]->[<B3>k__BackingField(B3Record)]->[EqualityContract(RuntimeType)]
 [Root(A1Record)]->[<A2>k__BackingField(A2Record)]->[<S>k__BackingField(String)]
@@ -179,7 +179,7 @@ public class GraphAssertionsSpecification : IDisposable
 [Root(A1Record)]->[B2(B2Record)]->[B3(B3Record)]->[EqualityContract(RuntimeType)]");
     new Action(() => a1.Should().DependOn(new B3()))
       .Should().ThrowExactly<XunitException>().WithMessage(
-        @"Could not find the particular instance: TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.B3 anywhere in dependency graph. Paths created when searching: 
+        @"Could not find the particular instance: TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications.B3 anywhere in dependency graph. Paths created when searching:
 [Root(A1Record)]->[<A2>k__BackingField(A2Record)]->[<A3>k__BackingField(A3Record)]->[EqualityContract(RuntimeType)]
 [Root(A1Record)]->[<A2>k__BackingField(A2Record)]->[<B3>k__BackingField(B3Record)]->[EqualityContract(RuntimeType)]
 [Root(A1Record)]->[<A2>k__BackingField(A2Record)]->[<S>k__BackingField(String)]

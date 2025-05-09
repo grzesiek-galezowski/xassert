@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using FluentAssertions;
-using FluentAssertions.Reflection;
+using FluentAssertions.Types;
 using TddXt.XFluentAssert.ReflectionAssertions;
 using TddXt.XFluentAssert.TypeReflection;
 using TddXt.XFluentAssert.TypeReflection.Interfaces;

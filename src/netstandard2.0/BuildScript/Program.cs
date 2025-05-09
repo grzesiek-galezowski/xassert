@@ -61,7 +61,7 @@ Target("Build", () =>
     $"-p:VersionPrefix={version}",
     workingDirectory: srcNetStandardDir.ToString());
 });
-Target((string) "NScan", DependsOn("Build"), () =>
+Target((string) "NScan", dependsOn: ["Build"], () =>
 {
   NScanMain.Run(
     new InputArgumentsDto
@@ -74,7 +74,7 @@ Target((string) "NScan", DependsOn("Build"), () =>
   ).Should().Be(0);
 });
 
-Target("Test", DependsOn("Build"), () =>
+Target("Test", dependsOn: ["Build"], () =>
 {
   Run($"dotnet",
     "test" +
@@ -85,12 +85,12 @@ Target("Test", DependsOn("Build"), () =>
     workingDirectory: srcNetStandardDir.ToString());
 });
 
-Target("Pack", DependsOn("Test", (string) "NScan"), () =>
+Target("Pack", dependsOn: ["Test", (string) "NScan"], () =>
 {
   Pack(nugetPath, srcNetStandardDir, "XFluentAssert");
 });
 
-Target("Push", DependsOn("Clean", "Pack"), () =>
+Target("Push", dependsOn: ["Clean", "Pack"], () =>
 {
     foreach (var nupkgPath in nugetPath.GetFiles("*.nupkg"))
     {
@@ -99,7 +99,7 @@ Target("Push", DependsOn("Clean", "Pack"), () =>
     }
 });
 
-Target("default", DependsOn("Pack"));
+Target("default", dependsOn: ["Pack"]);
 
 await RunTargetsAndExitAsync(args);
 

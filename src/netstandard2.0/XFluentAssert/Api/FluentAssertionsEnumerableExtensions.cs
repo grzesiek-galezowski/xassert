@@ -29,8 +29,7 @@ public static class FluentAssertionsEnumerableExtensions
   {
     return assertions.BeEquivalentTo(expected, options => options
       .WithStrictOrdering()
-      .IncludingNestedObjects()
-      .RespectingRuntimeTypes());
+      .IncludingNestedObjects());
   }
 
   public static AndConstraint<TAssertions> BeDeeplyEqualTo<TAssertions, TElement>(
@@ -41,7 +40,6 @@ public static class FluentAssertionsEnumerableExtensions
   {
     return assertions.BeEquivalentTo(expected, options => options
       .WithStrictOrdering()
-      .IncludingNestedObjects()
-      .RespectingRuntimeTypes(), because, becauseArgs);
+      .IncludingNestedObjects(), because, becauseArgs);
   }
 }

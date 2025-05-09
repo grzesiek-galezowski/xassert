@@ -8,9 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AtmaFileSystem" Version="6.1.0" />
-    <PackageReference Include="Bullseye" Version="5.0.0" />
-    <PackageReference Include="FluentAssertions" Version="6.12.0" />
+    <PackageReference Include="AtmaFileSystem" Version="7.4.0" />
+    <PackageReference Include="AwesomeAssertions" Version="8.2.0" />
+    <PackageReference Include="AwesomeAssertions.Analyzers" Version="8.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Bullseye" Version="6.0.0" />
     <PackageReference Include="NScan" Version="0.201.0" />
     <PackageReference Include="SimpleExec" Version="12.0.0" />
   </ItemGroup>

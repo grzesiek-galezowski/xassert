@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29324.140
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35931.197 d17.13
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EndToEndSpecification", "EndToEndSpecification\EndToEndSpecification.csproj", "{1897702A-E831-4ECC-B016-85F6C4FACBE6}"
 EndProject
@@ -13,7 +13,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 	ProjectSection(SolutionItems) = preProject
 		..\..\LICENSE = ..\..\LICENSE
 		..\..\README.md = ..\..\README.md
-		..\..\XFluentAssert.nuspec = ..\..\XFluentAssert.nuspec
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestApps", "TestApps", "{AEA2CC44-C28C-44B9-8973-FAFE8195992E}"

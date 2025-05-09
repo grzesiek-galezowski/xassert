@@ -1,2 +1,2 @@
 # xassert
-Set of helpful assertions, mainly as extensions to FluentAssertions library
+Set of helpful assertions, mainly as extensions to AwesomeAssertions library

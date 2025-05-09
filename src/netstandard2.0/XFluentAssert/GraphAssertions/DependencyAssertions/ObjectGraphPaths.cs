@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions.Common;
+using FluentAssertions.Execution;
 using static System.Environment;
 
 namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions;
@@ -19,7 +20,7 @@ internal class ObjectGraphPaths
   {
     if (!FindAllPathsContainingNonRootInstanceOf(type).Any())
     {
-      Services.ThrowException("Could not find " + type + " anywhere in dependency graph"); //TODO
+      AssertionChain.GetOrCreate().FailWith("Could not find " + type + " anywhere in dependency graph");
     }
   }
 
@@ -38,7 +39,7 @@ internal class ObjectGraphPaths
       }
     }
 
-    Services.ThrowException(WithMessageThatCouldNotFind(value,
+    AssertionChain.GetOrCreate().FailWith(WithMessageThatCouldNotFind(value,
       FindAllPathsContainingNonRootInstanceOf(typeof(T)))); //TODO
 
   }
@@ -52,7 +53,7 @@ internal class ObjectGraphPaths
       }
     }
 
-    Services.ThrowException(WithMessageThatCouldNotFindMultiple(values, _paths));
+    AssertionChain.GetOrCreate().FailWith(WithMessageThatCouldNotFindMultiple(values, _paths));
   }
 
   public void AssertContainNonRootTypeSubPath(Type[] types)
@@ -65,7 +66,7 @@ internal class ObjectGraphPaths
       }
     }
 
-    Services.ThrowException(WithMessageThatCouldNotFindMultiple(types, _paths)); //bug
+    AssertionChain.GetOrCreate().FailWith(WithMessageThatCouldNotFindMultiple(types, _paths)); //bug
 
   }
 
