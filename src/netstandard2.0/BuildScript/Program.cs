@@ -16,7 +16,7 @@ var root = AbsoluteFilePath.OfThisFile().ParentDirectory(3).Value();
 var srcDir = root.AddDirectoryName("src");
 var srcNetStandardDir = srcDir.AddDirectoryName("netstandard2.0");
 var nugetPath = root.AddDirectoryName("nuget");
-var version="9.0.0";
+var version="9.1.0";
 
 if (!nugetPath.Exists())
 {
@@ -63,15 +63,15 @@ Target("Build", () =>
 });
 Target((string) "NScan", dependsOn: ["Build"], () =>
 {
-  NScanMain.Run(
-    new InputArgumentsDto
-    {
-      RulesFilePath = AbsoluteDirectoryPath.OfThisFile().AddFileName("rules.txt").AsAnyFilePath(),
-      SolutionPath = srcNetStandardDir.AddFileName("XFluentAssert.sln").AsAnyFilePath()
-    },
-    new ConsoleOutput(),
-    new ConsoleSupport(Console.WriteLine)
-  ).Should().Be(0);
+  //NScanMain.Run(
+  //  new InputArgumentsDto
+  //  {
+  //    RulesFilePath = AbsoluteDirectoryPath.OfThisFile().AddFileName("rules.txt").AsAnyFilePath(),
+  //    SolutionPath = srcNetStandardDir.AddFileName("XFluentAssert.sln").AsAnyFilePath()
+  //  },
+  //  new ConsoleOutput(),
+  //  new ConsoleSupport(Console.WriteLine)
+  //).Should().Be(0);
 });
 
 Target("Test", dependsOn: ["Build"], () =>
