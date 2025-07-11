@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using FluentAssertions.Common;
-using FluentAssertions.Execution;
+using AwesomeAssertions.Common;
+using AwesomeAssertions.Execution;
 using static System.Environment;
 
 namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions;

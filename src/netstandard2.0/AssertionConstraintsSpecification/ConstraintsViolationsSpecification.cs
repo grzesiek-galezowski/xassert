@@ -1,5 +1,5 @@
 ﻿using System;
-using FluentAssertions;
+using AwesomeAssertions;
 using TddXt.AnyRoot.Strings;
 using TddXt.XFluentAssert.AssertionConstraints;
 using Xunit;

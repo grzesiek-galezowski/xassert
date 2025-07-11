@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using FluentAssertions;
-using FluentAssertions.Types;
+using AwesomeAssertions;
+using AwesomeAssertions.Types;
 using TddXt.XFluentAssert.Api.ValueAssertions;
 using TddXt.XFluentAssert.AssertionConstraints;
 using TddXt.XFluentAssert.ReflectionAssertions;

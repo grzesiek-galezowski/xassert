@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using FluentAssertions;
-using FluentAssertions.Primitives;
+using AwesomeAssertions;
+using AwesomeAssertions.Primitives;
 using TddXt.XFluentAssert.GraphAssertions.DependencyAssertions;
 
 namespace TddXt.XFluentAssert.Api;

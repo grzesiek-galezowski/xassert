@@ -3,7 +3,7 @@ using TddXt.XFluentAssert.Api.LockAssertions;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using FluentAssertions;
+using AwesomeAssertions;
 using NSubstitute;
 using NSubstitute.Exceptions;
 using TddXt.XFluentAssert.EndToEndSpecification.Fixtures;

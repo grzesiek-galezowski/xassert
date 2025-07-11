@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Security.Permissions;
 using System.Threading;
-using FluentAssertions;
+using AwesomeAssertions;
 using Core.Maybe;
 using LanguageExt;
 using NSubstitute;

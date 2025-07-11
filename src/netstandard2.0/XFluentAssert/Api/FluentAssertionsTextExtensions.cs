@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using FluentAssertions;
-using FluentAssertions.Primitives;
+using AwesomeAssertions;
+using AwesomeAssertions.Primitives;
 using TddXt.XFluentAssert.Api.SimpleAssertions;
 
 namespace TddXt.XFluentAssert.Api;

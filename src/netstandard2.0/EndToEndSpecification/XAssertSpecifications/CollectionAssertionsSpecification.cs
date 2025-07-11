@@ -1,7 +1,8 @@
 ﻿using System;
-using FluentAssertions;
+using AwesomeAssertions;
+using TddXt.XFluentAssert.Api;
 using Xunit;
-using FluentAssertionsEnumerableExtensions = TddXt.XFluentAssert.Api.FluentAssertionsEnumerableExtensions;
+using AwesomeAssertionsEnumerableExtensions = TddXt.XFluentAssert.Api.FluentAssertionsEnumerableExtensions;
 
 namespace TddXt.XFluentAssert.EndToEndSpecification.XAssertSpecifications;
 
@@ -15,8 +16,8 @@ public class CollectionAssertionsSpecification
     var coll2 = new[] { 3, 2, 1 };
     var coll3 = new[] { 1, 2, 3 };
 
-    FluentAssertionsEnumerableExtensions.Be(coll1.Should(), coll3);
-    coll1.Invoking(c => FluentAssertionsEnumerableExtensions.Be(c.Should(), coll2)).Should().Throw<Exception>();
+    coll1.Should().Be(coll3);
+    coll1.Invoking(c => c.Should().Be(coll2)).Should().Throw<Exception>();
   }
 
   [Fact]
@@ -25,7 +26,7 @@ public class CollectionAssertionsSpecification
     var coll1 = new[] { new AlwaysNotEqual(1) };
     var coll2 = new[] { new AlwaysNotEqual(1) };
 
-    coll1.Invoking(c => FluentAssertionsEnumerableExtensions.Be(c.Should(), coll2)).Should().Throw<Exception>();
+    coll1.Invoking(c => c.Should().Be(coll2)).Should().Throw<Exception>();
   }
 
   private class AlwaysNotEqual(int a)

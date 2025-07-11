@@ -1,4 +1,4 @@
-﻿using FluentAssertions.Execution;
+﻿using AwesomeAssertions.Execution;
 using TddXt.XFluentAssert.Api.SimpleAssertions;
 
 namespace TddXt.XFluentAssert.Api;

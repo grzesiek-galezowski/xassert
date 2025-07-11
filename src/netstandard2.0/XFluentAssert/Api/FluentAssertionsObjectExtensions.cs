@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using FluentAssertions;
-using FluentAssertions.Primitives;
+using AwesomeAssertions;
+using AwesomeAssertions.Primitives;
 using TddXt.XFluentAssert.Api.LockAssertions.Interfaces;
 using TddXt.XFluentAssert.GraphAssertions;
 using TddXt.XFluentAssert.LockAssertions;

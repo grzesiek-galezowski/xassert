@@ -1,6 +1,6 @@
 ﻿using TddXt.XFluentAssert.Api;
 using System;
-using FluentAssertions;
+using AwesomeAssertions;
 using Core.Maybe;
 using NSubstitute;
 using TddXt.AnyRoot;

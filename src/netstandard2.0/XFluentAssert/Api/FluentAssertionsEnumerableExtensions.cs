@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using FluentAssertions;
-using FluentAssertions.Collections;
+using AwesomeAssertions;
+using AwesomeAssertions.Collections;
 
 namespace TddXt.XFluentAssert.Api;
 

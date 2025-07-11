@@ -2,7 +2,7 @@
 using AtmaFileSystem;
 using AtmaFileSystem.IO;
 using BuildScript;
-using FluentAssertions;
+using AwesomeAssertions;
 using NScan.Adapters.Secondary.NotifyingSupport;
 using NScan.SharedKernel.WritingProgramOutput.Ports;
 using TddXt.NScan;
@@ -16,7 +16,7 @@ var root = AbsoluteFilePath.OfThisFile().ParentDirectory(3).Value();
 var srcDir = root.AddDirectoryName("src");
 var srcNetStandardDir = srcDir.AddDirectoryName("netstandard2.0");
 var nugetPath = root.AddDirectoryName("nuget");
-var version="9.1.0";
+var version="10.0.0";
 
 if (!nugetPath.Exists())
 {

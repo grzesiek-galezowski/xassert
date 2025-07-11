@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using FluentAssertions;
-using FluentAssertions.Types;
+using AwesomeAssertions;
+using AwesomeAssertions.Types;
 using TddXt.XFluentAssert.ReflectionAssertions;
 using TddXt.XFluentAssert.TypeReflection;
 using TddXt.XFluentAssert.TypeReflection.Interfaces;

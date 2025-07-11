@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Castle.DynamicProxy.Internal;
-using FluentAssertions;
+using AwesomeAssertions;
 
 namespace TddXt.XFluentAssert.GraphAssertions.DependencyAssertions;
 

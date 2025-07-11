@@ -1,5 +1,5 @@
-﻿using FluentAssertions.Execution;
-using FluentAssertions.Numeric;
+﻿using AwesomeAssertions.Execution;
+using AwesomeAssertions.Numeric;
 
 namespace TddXt.XFluentAssert.Api.SimpleAssertions;
 
